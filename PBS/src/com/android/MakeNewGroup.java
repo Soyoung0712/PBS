@@ -3,10 +3,10 @@ package com.android;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -44,13 +44,18 @@ public class MakeNewGroup extends Activity {
 	CheckBox ch1;
 	CheckBox ch2;
 
+	
+	Editable etable;
+	String result;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.makenewgroup);
  
 		groupNameFix = (EditText)findViewById(R.id.editText1);
-		
+		    etable = groupNameFix.getText();
+		    result = etable.toString();
+		  
 		groupname = (EditText) findViewById(R.id.editText7);
 		groupnumber = (EditText) findViewById(R.id.editText8);
 		plus = (Button) findViewById(R.id.button2);
@@ -69,7 +74,7 @@ public class MakeNewGroup extends Activity {
 
 		plus2.setEnabled(false);
 		
-		
+	 
 		 
 	}
 	@Override
@@ -91,7 +96,7 @@ public class MakeNewGroup extends Activity {
 			}
 		});
 
-		
+	
 		
 		
 		// 그룹생성 완료버튼 눌렀을떄
@@ -100,7 +105,11 @@ public class MakeNewGroup extends Activity {
 				Intent intent = new Intent(MakeNewGroup.this,
 						GroupActivity.class);
 				intent.putExtra("groupname", groupNameFix.getText());
-				startActivity(intent);
+			
+				
+				 
+					startActivity(intent);
+			 
 			}
 		});
 

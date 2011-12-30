@@ -66,15 +66,16 @@
                     android:textSize="18dp" />
 
                 
-                
+       
                 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:text="{그룹명}의 KEY, PASSWORD가"
+                    android:text="KEY, PASSWORD가"
                     android:textSize="18dp" />
 
+                
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -112,5 +113,5 @@
                         android:textSize="18dp" />
                 </LinearLayout>
             </LinearLayout>
-
 </LinearLayout>
+ 
