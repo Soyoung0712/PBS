@@ -127,12 +127,12 @@
                     android:layout_height="wrap_content"
                     android:text="그룹원 관리" />
 
-              <EditText
-                        android:id="@+id/editText5"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:hint="홍길동 외 35명" />
+                <EditText
+                    android:id="@+id/editText5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="홍길동 외 35명" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"

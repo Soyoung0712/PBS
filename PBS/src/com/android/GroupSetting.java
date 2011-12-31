@@ -1,10 +1,9 @@
 package com.android;
 
-import android.app.TabActivity;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,11 +13,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-import android.widget.TabHost;
-import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 
-public class GroupSetting extends TabActivity
+public class GroupSetting extends Activity
 {
 
 	EditText groupname;
@@ -28,7 +25,8 @@ public class GroupSetting extends TabActivity
 	EditText passwordresult;
 
 	EditText mMember;
-
+	EditText mMemberSet;
+	
 	Button numberUrl;
 	Button plus;
 	Button plus2;
@@ -44,11 +42,8 @@ public class GroupSetting extends TabActivity
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-
-		TabHost tabHost = getTabHost();
-		LayoutInflater inflater = LayoutInflater.from(this);
-		inflater.inflate(R.layout.groupstting, tabHost.getTabContentView(), true);
-
+		setContentView(R.layout.groupstting);
+		
 		groupname = (EditText) findViewById(R.id.editText7);
 		groupnumber = (EditText) findViewById(R.id.editText8);
 
@@ -66,14 +61,8 @@ public class GroupSetting extends TabActivity
 		mCancel = (Button) findViewById(R.id.button7);
 
 		mMember = (EditText) findViewById(R.id.editText5);
-
-		TabSpec tabSpec1 = tabHost.newTabSpec("tab1").setIndicator("내 그룹");
-		tabSpec1.setContent(R.id.tab2); 
-		tabHost.addTab(tabSpec1);
-
-		TabSpec tabSpec2 = tabHost.newTabSpec("tab2").setIndicator("새 그룹 만들기");
-		tabSpec2.setContent(new Intent(this, MakeNewGroup.class));
-		tabHost.addTab(tabSpec2);
+		mMemberSet = (EditText)findViewById(R.id.editText7);
+ 
 
 		password.setEnabled(false);
 		passwordresult.setEnabled(false);
@@ -186,7 +175,7 @@ public class GroupSetting extends TabActivity
 			
 			public boolean onTouch(View arg0, MotionEvent event)
 			{
-				// 그룬원 관리  EditText 를 눌렀을때 발생되는 이벤트 처리 // 이벤트 발생후 수신인 편집 화면으로 이동
+				// 그룬원 EditText 를 눌렀을때 발생되는 이벤트 처리 // 이벤트 발생후 수신인 편집 화면으로 이동
 				if(event.getAction() == KeyEvent.ACTION_UP)
 				{
 					 
@@ -198,7 +187,23 @@ public class GroupSetting extends TabActivity
 			}
 		});
 
-	
+		mMemberSet.setOnTouchListener(new OnTouchListener()
+		{
+			
+			
+			public boolean onTouch(View arg0, MotionEvent event)
+			{
+				// 그룬원 관리자   EditText 를 눌렀을때 발생되는 이벤트 처리 // 이벤트 발생후 수신인 편집 화면으로 이동
+				if(event.getAction() == KeyEvent.ACTION_UP)
+				{
+					 
+					Intent intent = new Intent(GroupSetting.this, PhoneList.class); //일단 PhoneList 가져옴
+					startActivity(intent);
+					 
+				}
+				 return false;
+			}
+		});
 		
 		
 	}
