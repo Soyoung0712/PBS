@@ -1,8 +1,6 @@
 package com.android;
 
-import android.app.AlertDialog;
 import android.app.TabActivity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -70,7 +68,7 @@ public class GroupSetting extends TabActivity
 		mMember = (EditText) findViewById(R.id.editText5);
 
 		TabSpec tabSpec1 = tabHost.newTabSpec("tab1").setIndicator("내 그룹");
-		tabSpec1.setContent(R.id.tab2);
+		tabSpec1.setContent(R.id.tab2); 
 		tabHost.addTab(tabSpec1);
 
 		TabSpec tabSpec2 = tabHost.newTabSpec("tab2").setIndicator("새 그룹 만들기");
