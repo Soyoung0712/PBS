@@ -164,7 +164,7 @@ public class GroupList extends ListActivity {
 
 	}
 
-	// 그룹 추가 버튼 클릭 이벤트   
+	// 그룹 공유 버튼 클릭 이벤트   
 	private void showGroupAdd()	{
 		
 		LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);

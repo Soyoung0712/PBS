@@ -57,14 +57,22 @@ public class Intro extends Activity {
 					AlertShow("단말기의 네트워크 상태를 확인해주세요.");
 				
 				}
-				
-				
-				
+							
 			}
 		};
 
-		handler.sendEmptyMessageDelayed(0, 1500); // ms, 1.5초후 종료시킴
+		handler.sendEmptyMessageDelayed(0, 1000); // ms, 1.5초후 종료시킴		
 	}
+	
+	@Override
+	public void onRestart()
+	{
+		super.onRestart();
+		
+		finish();
+		
+	}
+	
 	public boolean Network_State()
 	{
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
