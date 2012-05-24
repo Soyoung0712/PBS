@@ -32,7 +32,7 @@ public class PBSActivity extends TabActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				showGroupAdd();
-			}
+			} 
 		});
 	}
 	
