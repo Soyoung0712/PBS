@@ -36,6 +36,7 @@ public class PBSActivity extends TabActivity {
 		});
 	}
 	
+	//그룹 추가
 	private void showGroupAdd() {
 		LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		LinearLayout add_group_layout = (LinearLayout)vi.inflate(R.layout.addgroup, null);
