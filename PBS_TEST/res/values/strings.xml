@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, PBS_TESTActivity!</string>
+    <string name="app_name">(그룹명)의 그룹설정</string>
+
+</resources>
