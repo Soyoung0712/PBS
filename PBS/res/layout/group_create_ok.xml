@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <LinearLayout
+                android:id="@+id/tab1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical" >
+
+                <TextView                    
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:height="20dp"
+                    android:text="" />
+
+                <TextView                    
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="{그룹명}"
+                    android:textSize="25dp" />
+
+                <TextView                    
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="그룹이 생성 되었습니다."
+                    android:textSize="25dp" />
+
+                <TextView                    
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:height="10dp"
+                    android:text="" />
+
+                <TextView                    
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"                    
+                    android:gravity="left"
+                    android:textSize="20dp"
+                    android:text="그룹 KEY      :  4156454214" />
+
+                <TextView                    
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:gravity="left"
+                    android:textSize="20dp"
+                    android:text="PASSWORD :  124567" />
+
+                <TextView                    
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:height="120dp"
+                    android:text="" />
+
+                <TextView                    
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textSize="18dp"
+                    android:text="* 초대하기 : 선택한 그룹원들에게" />
+
+                <TextView                    
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textSize="18dp"
+                    android:text="{그룹명}의 KEY, PASSWORD가" />
+
+                <TextView                    
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textSize="18dp"
+                    android:text="SMS로 발송됩니다." />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:height="20dp"
+                    android:text="" />
+
+                <LinearLayout                    
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <Button                        
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textSize="18dp"
+                        android:text="확인" />
+
+                    <Button                        
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="18dp"
+                        android:text="초대하기" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tab2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="tab2" />
+        </FrameLayout>
+    </LinearLayout>
+
+</TabHost>
