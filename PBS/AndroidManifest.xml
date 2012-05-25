@@ -27,6 +27,13 @@
                 <category android:name="android.intent.category.SAMPLE_CODE" />
             </intent-filter>
         </activity>
+        <activity android:name="GroupMemberList"></activity>
+        <activity android:name="MakeNewGroup"></activity>
+        <activity android:name="MyGroupList"></activity>
+        <activity android:name="Download"></activity>
+        <activity android:name="GetPhoneList"></activity>
+        <activity android:name="GroupCheckList"></activity>
+        <activity android:name="InviteMember"></activity>
         
     </application>
 

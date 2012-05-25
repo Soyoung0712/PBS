@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="title">내 그룹</string>
+    <string name="title">PBS</string>
     <string name="title_group_create_ok">{그룹명} 생성완료</string>
     <string name="app_name">PBS</string>
 
