@@ -2,6 +2,8 @@ package com.android;
 
 
 
+import java.util.List;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -18,18 +20,29 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pbs.client.model.TbGroup;
+import com.pbs.client.util.UserGson;
+
 public class MyGroupList extends ListActivity {
 
 	// 내 그룹 리스트
+	/*
 	String[] grouplist = { "안드로이드 3기", "화이팅 자전거 동호회", "디아블로3 파티팀",
 			"생산성본부 회사 관리팀", "OK JSP" };
 	String[] groupnotice = {"안드로이드 3기 화이팅", "신사임당이 추가 되었습니다", "저녁 7시에 모입니다", "신입사원 강희우님이 들어오셨습니다", "게시판 정리 부탁드립니다"};
+	*/
+	List<TbGroup> tbGroupList = null;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		UserGson userGson = new UserGson();
+		tbGroupList = userGson.getMyGroupList("01077778888");
+		
 		setContentView(R.layout.mygrouplist);
+				
 
 		// 리스트뷰에 리스트 적용
 		setListAdapter(new NewArrayAdapter(this));
@@ -74,7 +87,7 @@ public class MyGroupList extends ListActivity {
 
 		@SuppressWarnings("unchecked")
 		NewArrayAdapter(Activity context) {
-			super(context, R.layout.grouprow, grouplist);
+			super(context, R.layout.grouprow, tbGroupList);
 
 			this.context = context;
 		}
@@ -85,9 +98,9 @@ public class MyGroupList extends ListActivity {
 			View row = inflater.inflate(R.layout.grouprow, null);
 
 			TextView textView = (TextView) row.findViewById(R.id.name);
-			textView.setText(grouplist[position]);
+			textView.setText(tbGroupList.get(position).getFd_group_name());
 			TextView textView2 = (TextView) row.findViewById(R.id.notice);
-			textView2.setText(groupnotice[position]);
+			textView2.setText(tbGroupList.get(position).getFd_group_notice());
 
 			return row;
 		}
