@@ -25,7 +25,8 @@ public class GsonSampleActivity extends Activity {
 		((TextView)findViewById(R.id.gsonSample)).setText("hello");
 		
 		UserGson userGson = new UserGson();
-		/*		
+		
+		/*
 		// 그룹원 리스트 가져오기		
 		List<TbMember> tbMemberList = userGson.getMemeberList(7L, "01082052802" );
 		for (TbMember tbMember : tbMemberList) {			
@@ -66,6 +67,24 @@ public class GsonSampleActivity extends Activity {
 			Log.d("createTbGroup", "Create Fail");
 		}
 		*/
+		
+		// 그룹 추가
+		//http://14.63.223.82:8080/pbs/accessUser/insertByPwd.json?pk_group=5&fd_group_password=1234&fd_access_phone=01082052802
+		boolean addGroupResult = userGson.addGroup(5L, "1234", "01082052802" );
+		if( addGroupResult ) {
+			Log.d("addGroupResult", "그룹 추가 성공");
+		}else {
+			Log.d("addGroupResult", "그룹 추가 실패");
+		}
+		
+		// 그룹 감추기
+		boolean hiddenGroupResult = userGson.hiddenGroup(5L, "01082052802" );
+		if( hiddenGroupResult ) {
+			Log.d("hiddenGroupResult", "그룹 감추기 성공");
+		}else {
+			Log.d("hiddenGroupResult", "그룹 감추기 실패");		
+		}				
+		
 		
 	}
 	

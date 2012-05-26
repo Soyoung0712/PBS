@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.pbs.client.model.BoardResult;
 import com.pbs.client.model.CommonResult;
 import com.pbs.client.model.TbAccessUser;
 import com.pbs.client.model.TbGroup;
@@ -331,10 +332,98 @@ public class UserGson {
 	}
 	
 	
-	public boolean insertGroup() { return true;}
+	/**
+	 * 내그룹 > 그룹추가
+	 * @param groupKey : 그룹 키
+	 * @param groupPassword : 그룹 비밀번호
+	 * @param accessPhone : 그룹 비밀번호
+	 * @return
+	 */
+	public boolean addGroup(long groupKey, String groupPassword, String accessPhone ) {				
+
+		boolean result = false;		
+		
+		// 인자값 체크
+		if( 	groupKey > 0L 
+			&& groupPassword != null && groupPassword.length() > 0
+			&& accessPhone   != null && accessPhone.length()   > 0 ) {
+						
+			// 전화번호에 "-" 제거
+			accessPhone = accessPhone.replaceAll("-", "");
+			
+			// 웹서버에서 그룹정보를 Json형식으로 가져온다.
+			String url = urlGroupAdd + "?pk_group=" + groupKey + "&fd_group_password=" + groupPassword + "&fd_access_phone=" + accessPhone;									
+			try {				
+				
+				JSONObject item = new JSONObject(getStringFromUrl(url));
+				JSONObject groupJson = item.getJSONObject("insert");
+				
+				// 그룹 상세정보 저장
+				if( item != null ) {	
+					
+					String jsonResult     = groupJson.getString("result");
+					if( jsonResult != null && jsonResult.equals(BoardResult.SUCCESS) ) {
+						result =  true;
+					}
+				}								
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			
+		}
+		
+		return result;
+	}
+	
 	public boolean updateGroup() { return true;}
 	public boolean deleteGroup() { return true;}
-	public boolean hiddenGroup() { return true;}
+	
+	
+	/**
+	 * 내그룹 > 그룹감추기
+	 * @param groupKey : 그룹 키
+	 * @param accessPhone : 그룹 비밀번호
+	 * @return
+	 */
+	public boolean hiddenGroup(long groupKey, String accessPhone ) {
+		
+		boolean result = false;		
+		
+		// 인자값 체크
+		if( 	groupKey > 0L
+			&& accessPhone   != null && accessPhone.length()   > 0 ) {
+						
+			// 전화번호에 "-" 제거
+			accessPhone = accessPhone.replaceAll("-", "");
+
+			// 웹서버에서 그룹정보를 Json형식으로 가져온다.
+			String url = urlGroupHidden + "?fk_group=" + groupKey + "&fd_access_phone=" + accessPhone;									
+			try {				
+				
+				JSONObject item = new JSONObject(getStringFromUrl(url));
+				JSONObject groupJson = item.getJSONObject("delete");
+				
+				// 그룹 상세정보 저장
+				if( item != null ) {	
+					
+					String jsonResult     = groupJson.getString("result");
+					if( jsonResult != null && jsonResult.equals(BoardResult.SUCCESS) ) {
+						result =  true;
+					}
+				}								
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			
+		}
+		
+		return result;
+		
+	}
 	
 	
 	
