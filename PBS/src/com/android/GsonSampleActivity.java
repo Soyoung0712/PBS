@@ -26,13 +26,18 @@ public class GsonSampleActivity extends Activity {
 		
 		UserGson userGson = new UserGson();
 		
-		/*
+		
 		// 그룹원 리스트 가져오기		
 		List<TbMember> tbMemberList = userGson.getMemeberList(7L, "01082052802" );
-		for (TbMember tbMember : tbMemberList) {			
-			Log.d("TbMemberList", tbMember.toString());			
-		}	
+		for( int i=0 ; i<tbMemberList.size(); i++ ) {
+			TbMember tbMember = tbMemberList.get(i);
+			
+			// 그룹원 이름
+			Log.d("[" + i + "]번째 그룹원 이름: ", tbMember.getFd_member_name());
+			Log.d("[" + i + "]번째 그룹원 이름: ", tbMember.getFd_member_phone());
+		}		
 		
+		/*
 		// 그룹 관리자 리스트 가져오기
 		List<TbAccessUser> tbAccessUserList = userGson.getAdminList(1L, "01082052802" );
 		for (TbAccessUser tbAccessUser : tbAccessUserList) {			
