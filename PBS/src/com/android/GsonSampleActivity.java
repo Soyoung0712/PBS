@@ -49,13 +49,15 @@ public class GsonSampleActivity extends Activity {
 		}	
 		*/
 		
-		//그룹 생성하기
-		String groupName = "Test Group";
+		/*
+		// 한글 사용시 Tomcat에 Server.xml에 UTF-8인코딩 옵션을 준다
+		// 그룹 생성하기
+		String groupName = "한글 그룹999";
 		String groupPassword = "1234";
-		String groupNotice = "Test Group Success"; 
+		String groupNotice = "한글Group Success999"; 
 		String groupCreatorPhone = "01022225555"; 
-		String[] users = {"Tester:010123456","Tester2:01033335555","Tester3:01077778888","Tester4:01099995555"};
-		String[] admins = {"Tester3:01077778888","Tester4:01099995555"};
+		String[] users = {"강희우1:010123456","강희우2:01033335555","강희우3:01077778888","강희우4:01099995555"};
+		String[] admins = {"송영석1:01077778888","송영석2:01099995555"};
 		
 		TbGroup createTbGroup = userGson.createGroup(groupName, groupPassword, groupNotice, groupCreatorPhone, users, admins);
 		if( createTbGroup != null ) {
@@ -63,6 +65,7 @@ public class GsonSampleActivity extends Activity {
 		}else {
 			Log.d("createTbGroup", "Create Fail");
 		}
+		*/
 		
 	}
 	

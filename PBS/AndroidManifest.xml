@@ -11,7 +11,8 @@
         android:icon="@drawable/ic_launcher" 
         android:label="@string/app_name" >        
         
-        <!-- 내 그룹 Activity -->         
+        <!-- 내 그룹 Activity -->    
+        <!--      
         <activity
             android:name=".PBSActivity"
             android:label="@string/title" >
@@ -20,10 +21,10 @@
                 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>         
+        </activity>
+         -->         
         
-        <!-- Json 파싱 샘플 Activity -->
-        <!-- 
+        <!-- Json 파싱 샘플 Activity -->         
         <activity
             android:name=".GsonSampleActivity"
             android:label="@string/title" >
@@ -32,8 +33,7 @@
                 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-         -->
+        </activity>         
         
         <!-- Activity Samples -->
         <activity android:name=".GroupActivity" android:label="@string/title_group_create_ok">

@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
@@ -272,26 +271,28 @@ public class UserGson {
 			if( users != null ) {
 				for (String user : users) {
 					strUsers +=  user + ",";
-				}
+				}				
 			}
 			
 			String strAdmins = "";
 			if( admins != null ) {
 				for (String admin : admins) {
 					strAdmins +=  admin + ",";
-				}
+				}				
 			}
 			
-			// 웹서버에서 그룹정보를 Json형식으로 가져온다.
-			String url = urlGroupCreate 
-					+ "?fd_group_name="		+ groupName 
-					+ "&fd_group_password=" + groupPassword
-					+ "&fd_group_notice=" 	+ groupNotice
-					+ "&fd_group_creator=" 	+ groupCreatorPhone
-					+ "&users=" 			+ strUsers
-					+ "&admins=" 			+ strAdmins;
-			
-			try {				
+			try {
+				
+				// 웹서버에서 그룹정보를 Json형식으로 가져온다.
+				String url = urlGroupCreate 
+						+ "?fd_group_name="		+ URLEncoder.encode(groupName, "UTF-8") 
+						+ "&fd_group_password=" + URLEncoder.encode(groupPassword, "UTF-8")
+						+ "&fd_group_notice=" 	+ URLEncoder.encode(groupNotice, "UTF-8")
+						+ "&fd_group_creator=" 	+ URLEncoder.encode(groupCreatorPhone, "UTF-8")
+						+ "&users=" 			+ URLEncoder.encode(strUsers, "UTF-8")
+						+ "&admins=" 			+ URLEncoder.encode(strAdmins, "UTF-8");
+				
+				Log.d("url >> ",url);
 				
 				JSONObject item = new JSONObject(getStringFromUrl(url));
 				JSONObject resultJson  = item.getJSONObject("commonResult");				
@@ -370,27 +371,10 @@ public class UserGson {
 		InputStream contentStream = null;
 		
 		try {
-			// HttpClient를 사용해서 주어진 URL에 대한 입력 스트림을 얻는다.
-			/*
-			String strUrl = url;
-			String params = "";
-			int paramIndex = strUrl.lastIndexOf("?");
-			if( paramIndex > 0 ) {
-				strUrl = strUrl.substring(0, paramIndex);
-				params = strUrl.substring(paramIndex, strUrl.length()-1);
-				Log.d("strUrl > ", strUrl);
-				Log.d("params > ", params);
-				params = URLEncoder.encode(params);
-			}
-			*/
-			HttpClient httpclient = new DefaultHttpClient();
-			
-			//HttpPost httpPost = new HttpPost(strUrl + params);			
-			HttpResponse response = httpclient.execute(new HttpGet(url));
-			//HttpResponse response = httpclient.execute(httpPost);
+			// HttpClient를 사용해서 주어진 URL에 대한 입력 스트림을 얻는다.			
+			HttpClient httpclient = new DefaultHttpClient();					
+			HttpResponse response = httpclient.execute(new HttpPost(url));
 			contentStream = response.getEntity().getContent();
-			
-		// 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
