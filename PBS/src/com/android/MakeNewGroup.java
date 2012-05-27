@@ -85,6 +85,7 @@ public class MakeNewGroup extends TabActivity
 			}
 		});
 		
+		//그룹생성 완료버튼 눌렀을떄
 		mGroupResult.setOnClickListener(new OnClickListener()
 		{			
 			public void onClick(View arg0)
@@ -93,6 +94,9 @@ public class MakeNewGroup extends TabActivity
 				startActivity(intent);
 			}
 		});
+		
+		
+		
   
 		// 그룹원 관리 에서 가져오기 버튼을 눌렀을때 전화번호 목록 가져오기//
 		plus.setOnClickListener(new OnClickListener()

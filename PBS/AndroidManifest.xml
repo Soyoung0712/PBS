@@ -23,8 +23,30 @@
             </intent-filter>
         </activity>
                
-       
- 
+      <!-- Json 파싱 샘플 Activity -->         
+     
+        <activity
+            android:name=".GsonSampleActivity"
+            android:label="@string/title" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>         
+      
+        
+        <!-- Activity Samples -->
+         
+        <activity android:name=".GroupActivity" android:label="@string/title_group_create_ok">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+  	 	 
+  	 	
+  	 	
         <activity android:name="GroupMemberList"></activity>
         <activity android:name="MakeNewGroup"></activity>
         <activity android:name=".PbsMain"></activity>

@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="그룹 추가" />
-
+ 
                 <ListView
                     android:id="@+id/tab2"
                     android:layout_width="fill_parent"
