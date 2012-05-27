@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Download extends ListActivity {
 
@@ -25,8 +27,36 @@ public class Download extends ListActivity {
 
 		// 리스트뷰에 리스트 적용
 		setListAdapter(new NewArrayAdapter(this));
+		
+		Button mSave = (Button)findViewById(R.id.sendmessage);
+		Button mCancle = (Button)findViewById(R.id.cancle);
+		
+		
+		//저장 버튼을 눌렸을때 
+		mSave.setOnClickListener(new View.OnClickListener()
+		{			
+			public void onClick(View arg0)
+			{
+				Toast.makeText(Download.this, "저장 완료", Toast.LENGTH_SHORT).show();
+				finish();
+			}
+		});
+		
+		//취소 버튼을 눌렸을때
+		mCancle.setOnClickListener(new View.OnClickListener()
+		{			
+			public void onClick(View arg0)
+			{
+				Toast.makeText(Download.this, "취소", Toast.LENGTH_SHORT).show();
+				finish();
+			}
+		});
+	
+		
 	}
 
+ 
+	
 	class NewArrayAdapter extends ArrayAdapter {
 		Activity context;
 

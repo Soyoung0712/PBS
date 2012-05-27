@@ -2,11 +2,13 @@ package com.android;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +32,34 @@ public class GroupMemberList extends ListActivity {
 		// 리스트뷰에 리스트 적용
 		setListAdapter(new NewArrayAdapter(this));
 
+		Button mPhoneMove = (Button)findViewById(R.id.button1);
+		Button mSMSMove= (Button)findViewById(R.id.button2);
+		Button mCancel = (Button)findViewById(R.id.button3);
+		mPhoneMove.setOnClickListener(new View.OnClickListener()
+		{			
+			public void onClick(View arg0)
+			{
+				
+				Intent intent = new Intent(GroupMemberList.this,Download.class)	;
+				startActivity(intent);
+			}
+		});
+		mSMSMove.setOnClickListener(new View.OnClickListener()
+		{			
+			public void onClick(View arg0)
+			{
+				Intent intent1 = new Intent(GroupMemberList.this,InviteMember.class)	;
+				startActivity(intent1);
+			}
+		});
+		mCancel.setOnClickListener(new View.OnClickListener()
+		{			
+			public void onClick(View arg0)
+			{
+				finish();
+			}
+		});
+		
 	}
 
 	class NewArrayAdapter extends ArrayAdapter {

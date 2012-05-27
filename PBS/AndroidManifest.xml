@@ -12,7 +12,7 @@
         android:label="@string/app_name" >        
         
         <!-- 내 그룹 Activity -->    
-        <!--      
+  
         <activity
             android:name=".PBSActivity"
             android:label="@string/title" >
@@ -22,33 +22,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-         -->         
-        
-        <!-- Json 파싱 샘플 Activity -->         
-        <activity
-            android:name=".GsonSampleActivity"
-            android:label="@string/title" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>         
-        
-        <!-- Activity Samples -->
-        <activity android:name=".GroupActivity" android:label="@string/title_group_create_ok">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.SAMPLE_CODE" />
-            </intent-filter>
-        </activity>
+               
+       
+ 
         <activity android:name="GroupMemberList"></activity>
         <activity android:name="MakeNewGroup"></activity>
-        <activity android:name="MyGroupList"></activity>
+        <activity android:name=".PbsMain"></activity>
         <activity android:name="Download"></activity>
         <activity android:name="GetPhoneList"></activity>
         <activity android:name="GroupCheckList"></activity>
         <activity android:name="InviteMember"></activity>
+        <activity android:name="GroupSetting"></activity>
+        <activity android:name="GroupActivity"></activity>
         
     </application>
 

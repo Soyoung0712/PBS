@@ -16,15 +16,17 @@ public class PBSActivity extends TabActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-              
+ 
         // 상단 탭
         TabHost tabHost = getTabHost();
         
         tabHost.addTab(tabHost.newTabSpec("Tab1")
         		.setIndicator("내 그룹")
-        		.setContent(new Intent(this, MyGroupList.class)));
+        		.setContent(new Intent(this, PbsMain.class)));
         tabHost.addTab(tabHost.newTabSpec("Tab2")
         		.setIndicator("새 그룹 만들기")
         		.setContent(new Intent(this, MakeNewGroup.class)));
+        
+     
     }
 }

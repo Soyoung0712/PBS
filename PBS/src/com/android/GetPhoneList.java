@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class GetPhoneList extends ListActivity {
 
@@ -21,10 +23,38 @@ public class GetPhoneList extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.groupmemberlist);
+		setContentView(R.layout.getphonelist);
 
 		// 리스트뷰에 리스트 적용
 		setListAdapter(new NewArrayAdapter(this));
+		
+		Button mGroupRestul =  (Button)findViewById(R.id.sendmessage);
+		Button mGroupCancel = (Button)findViewById(R.id.cancle);
+		
+		
+		//자신의 전화번호 목록에서 전화번호 가져오기 확인 누를떄
+		mGroupRestul.setOnClickListener(new View.OnClickListener()
+		{
+			public void onClick(View arg0)
+			{
+				
+				Toast.makeText(GetPhoneList.this, "가져오기 완료", Toast.LENGTH_SHORT).show();
+				finish();
+			}
+		});
+		
+		//자신의 전화번호 목록에서 전화번호 가져오기 취소 누를때
+		mGroupCancel.setOnClickListener(new View.OnClickListener()
+		{
+			public void onClick(View arg0)
+			{
+				Toast.makeText(GetPhoneList.this, "취소", Toast.LENGTH_SHORT).show();
+				finish();
+			}
+		});
+		
+		
+		
 	}
 
 	class NewArrayAdapter extends ArrayAdapter {
