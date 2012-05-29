@@ -96,6 +96,7 @@ public class TbGroup {
 		sb.append("[fd_group_creator ] : " + fd_group_creator + "\n");
 		sb.append("[fd_mod_date      ] : " + fd_mod_date      + "\n");
 		sb.append("[fd_group_modifier] : " + fd_group_modifier+ "\n");
+		sb.append("[fd_admin_yn] :       " + fd_admin_yn	  + "\n");		
 		return sb.toString();
 	}
 

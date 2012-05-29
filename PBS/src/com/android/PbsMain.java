@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,128 +18,184 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.R.layout;
 import com.pbs.client.model.TbGroup;
 import com.pbs.client.util.UserGson;
 
-public class PbsMain extends ListActivity
-{
+/**
+ * 내 그룹 리스트
+ * @author Administrator
+ *
+ */
+public class PbsMain extends ListActivity {
 
-	// 내 그룹 리스트
-	/*
-	 * String[] grouplist = { "안드로이드 3기", "화이팅 자전거 동호회", "디아블로3 파티팀",
-	 * "생산성본부 회사 관리팀", "OK JSP" }; String[] groupnotice = {"안드로이드 3기 화이팅",
-	 * "신사임당이 추가 되었습니다", "저녁 7시에 모입니다", "신입사원 강희우님이 들어오셨습니다", "게시판 정리 부탁드립니다"};
-	 */
-	List<TbGroup> tbGroupList = null;
+	private String myPhoneNum = "01077778888";
+	private List<TbGroup> tbGroupList = null;
+	private NewArrayAdapter newArrayAdapter = null;
+	private UserGson userGson = new UserGson();	
 
 	/** Called when the activity is first created. */
 	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
+	public void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
-
-		UserGson userGson = new UserGson();
-		tbGroupList = userGson.getMyGroupList("01077778888");
-
 		setContentView(R.layout.mygrouplist);
-		Button addgroup = (Button) findViewById(R.id.button1);
-
 		
-		
+		// 내그룹 리스트 가져오기		
+		tbGroupList = userGson.getMyGroupList(myPhoneNum);
+				
 		// 리스트뷰에 리스트 적용
-		setListAdapter(new NewArrayAdapter(this));
+		newArrayAdapter = new NewArrayAdapter(this);
+		setListAdapter(newArrayAdapter);
+		//newArrayAdapter.notifyDataSetChanged();
+		
+		// 그룹 추가 버튼		
+		Button addgroup = (Button) findViewById(R.id.button1);
+		addgroup.setOnClickListener(new View.OnClickListener() {
 
-		// 그룹 추가 버튼
-
-		addgroup.setOnClickListener(new View.OnClickListener()
-		{
-
-			public void onClick(View v)
-			{
+			public void onClick(View v) {
 				showGroupAdd();
 			}
-		});
+		});		
 
 	}
 
 	// 그룹 추가 버튼 클릭 이벤트
-	private void showGroupAdd()
-	{
+	
+	private void showGroupAdd() {
+		
 		LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		LinearLayout addgrouplayout = (LinearLayout) vi.inflate(R.layout.addgroup, null);
 
 		final EditText key = (EditText) addgrouplayout.findViewById(R.id.key);
-		final EditText pwd = (EditText) addgrouplayout.findViewById(R.id.pwd);
+		final EditText pwd = (EditText) addgrouplayout.findViewById(R.id.pwd);		
+		
+		// "그룹추가" 다이얼로그 생성
+		Builder builder = new AlertDialog.Builder(this).setTitle("그룹 추가").setView(addgrouplayout);
+		
+		// "추가" 버튼 리슨너 생성		
+		DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
 
-		new AlertDialog.Builder(this).setTitle("그룹 추가").setView(addgrouplayout).setNeutralButton("추가", new DialogInterface.OnClickListener()
-		{
-
-			public void onClick(DialogInterface dialog, int which)
-			{
-				// TODO Auto-generated method stub
-				Toast.makeText(PbsMain.this, "그룹 KEY : " + key.getText().toString() + "\nPASSWORD : " + pwd.getText().toString(), Toast.LENGTH_LONG).show();
+			// 레이어 팝업의 "추가" 버큰 클릭시 이벤트
+			public void onClick(DialogInterface dialog, int which) {					
+				
+				// 그룹키, 패스워드, 내폰번호
+				Long groupKey = 0L;
+				String groupPassword = pwd.getText().toString();
+				String accessPhone = myPhoneNum;			
+				
+				// 그룹키 Long형으로 변환
+				try {
+					groupKey = Long.parseLong(key.getText().toString());
+				} catch (Exception e) {
+					Log.d("MyGroupList", "groupKey Input Error [groupKey]:" + groupKey);
+					Toast.makeText(PbsMain.this, "그룹키를 잘못 입력하셨습니다",Toast.LENGTH_LONG).show();
+				}				
+				
+				//boolean hiddenGroupResult = userGson.hiddenGroup(groupKey, myPhoneNum );
+				// 그룹키 추가
+				boolean addGroupResult = userGson.addGroup(groupKey, groupPassword, myPhoneNum );
+				
+				// 그룹키 추가 성공
+				if( addGroupResult ) {										
+					tbGroupList.clear();
+					tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));					
+					newArrayAdapter.notifyDataSetChanged();
+					Toast.makeText(PbsMain.this, "그룹이 추가 되었습니다.",Toast.LENGTH_LONG).show();
+					
+				// 그룹키 추가 실패
+				}else {					
+					Toast.makeText(PbsMain.this, "잘못된 그룹입니다.",Toast.LENGTH_LONG).show();
+				}				
+								
 			}
-		}).show();
-	}
+			
+		};
+				
+		// 다이얼로그 SHOW
+		builder.setNeutralButton("추가", onClickListener).show();
+		
+	}	
+	
+	
+	public void onListItemClick(ListView parent, View v, int position, long id) {
+		
+		Log.d("MyGroupList", "onListItemClick Click");
+		//Toast.makeText(PbsMain.this, tbGroupList.get(position).getFd_group_name(),Toast.LENGTH_LONG).show();		
+		Intent intent = new Intent(PbsMain.this, GroupMemberList.class);
+		startActivity(intent);		
+    }
 
-	class NewArrayAdapter extends ArrayAdapter
-	{
+	class NewArrayAdapter extends ArrayAdapter {
+		
 		Activity context;
 
 		@SuppressWarnings("unchecked")
-		NewArrayAdapter(Activity context)
-		{
+		NewArrayAdapter(Activity context) {
 			super(context, R.layout.grouprow, tbGroupList);
-
-			this.context = context;
+			this.context = context;			
 		}
 
-		public View getView(int position, View convertView, ViewGroup parent)
-		{
-			final int pos = position;
+		/**
+		 * 리스트를 한 row씩 출력해준다
+		 */
+		public View getView(int position, View convertView, ViewGroup parent) {			
 			
- 
-				
 			LayoutInflater inflater = context.getLayoutInflater();
 			View row = inflater.inflate(R.layout.grouprow, null);
 			
+			// 현재 출력중인 Group 정보
+			final TbGroup curTbGroup = tbGroupList.get(position);
 			
-			
-			TextView textView = (TextView) row.findViewById(R.id.name);
-			textView.setText(tbGroupList.get(position).getFd_group_name());
-			TextView textView2 = (TextView) row.findViewById(R.id.notice);
+			// 그룹명
+			TextView textView = (TextView) row.findViewById(R.id.groupName);
+			textView.setText(tbGroupList.get(position).getFd_group_name());			
+			// 그룹 공지사항
+			TextView textView2 = (TextView) row.findViewById(R.id.groupNotice);
 			textView2.setText(tbGroupList.get(position).getFd_group_notice());
-			Button mGroupIn = (Button)row.findViewById(R.id.groupin);
-			Button mGroupSetting = (Button) row.findViewById(R.id.setting);
-			Log.i("tag", "오류체크");
+			// 그룹 설정/삭제 버튼 노출 (관리자는 "설정", 일반사용자는 "삭제" 버튼이 노출)
+			Button mGroupSetting = (Button) row.findViewById(R.id.groupSetting);
+			Button mGroupHidden = (Button) row.findViewById(R.id.groupHidden);
+			Log.d("MyGroupList", curTbGroup.toString());
+			if( !curTbGroup.getFd_admin_yn().equals("Y") ) {
+				mGroupSetting.setVisibility(View.INVISIBLE);
+			}else{
+				mGroupHidden.setVisibility(View.INVISIBLE);
+			}
 			
 			
 			
-			mGroupSetting.setOnClickListener(new View.OnClickListener()
-			{
-				public void onClick(View v)
-				{
+			// 그룹 설정 클릭 이벤트
+			mGroupSetting.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
 					Intent intent = new Intent(PbsMain.this, GroupSetting.class);
 					startActivity(intent);
 				}
 
 			});
-			
-			// 입장 버튼 클릭시 그룹 전화번호 목록 불러오기
-			mGroupIn.setOnClickListener(new View.OnClickListener()
-			{
-				
-				public void onClick(View arg0)
-				{
-					Intent intent = new Intent(PbsMain.this,GroupMemberList.class)	;
-					startActivity(intent);
-				}
+
+			// 그룹 감추기 클릭 이벤트
+			mGroupHidden.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+					
+					// 그룹 감추기
+					boolean hiddenGroupResult = userGson.hiddenGroup(curTbGroup.getPk_group(), myPhoneNum );
+					
+					// 그룹 리스트 Refresh
+					if( hiddenGroupResult ) {					
+						tbGroupList.clear();
+						tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));					
+						newArrayAdapter.notifyDataSetChanged();						
+						Toast.makeText(PbsMain.this, "그룹이 삭제 되었습니다.",Toast.LENGTH_LONG).show();
+					}
+										
+				}				
 			});
 			
+
 			return row;
 		}
 
