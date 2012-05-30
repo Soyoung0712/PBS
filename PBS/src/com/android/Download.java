@@ -43,7 +43,8 @@ public class Download extends ListActivity {
 		// "모두선택" 버튼 설정
 		CheckBox allchoice = (CheckBox) findViewById(R.id.checkBoxAll);
 		allchoice.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
 
 				// 전체 해제
 				if (allClickStatuFlag) {
@@ -52,8 +53,8 @@ public class Download extends ListActivity {
 					}
 					allClickStatuFlag = false;
 
-				// 전체 선택
-				} else {				
+					// 전체 선택
+				} else {
 					for (int i = 0; i < tbMemberList.size(); i++) {
 						tbMemberList.get(i).setChecked(true);
 					}
@@ -68,7 +69,8 @@ public class Download extends ListActivity {
 		Button mSave = (Button) findViewById(R.id.sendmessage);
 		mSave.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
-				Toast.makeText(Download.this, "저장 완료", Toast.LENGTH_SHORT).show();
+				Toast.makeText(Download.this, "저장 완료", Toast.LENGTH_SHORT)
+						.show();
 				finish();
 			}
 		});
@@ -83,14 +85,15 @@ public class Download extends ListActivity {
 		});
 
 	}
-	
+
 	/**
-	 * ListView Adapter 
+	 * ListView Adapter
+	 * 
 	 * @author Administrator
-	 *
+	 * 
 	 */
 	class NewArrayAdapter extends ArrayAdapter {
-		
+
 		Activity context;
 
 		@SuppressWarnings("unchecked")
@@ -98,19 +101,19 @@ public class Download extends ListActivity {
 			super(context, R.layout.downloadrow, tbMemberList);
 			this.context = context;
 		}
-		
+
 		/**
 		 * 멤버 리스트의 갯수만큼 호출되는 함수
 		 */
-		public View getView(int position, View convertView, ViewGroup parent) {			
-			
+		public View getView(int position, View convertView, ViewGroup parent) {
+
 			// 멤버 정보
 			TbMember tbMember = tbMemberList.get(position);
-			
+
 			LayoutInflater inflater = context.getLayoutInflater();
 			View row = inflater.inflate(R.layout.downloadrow, null);
-			
-			/// 이름
+
+			// / 이름
 			TextView textView = (TextView) row.findViewById(R.id.name);
 			textView.setText(tbMember.getFd_member_name());
 			// 전화번호
@@ -119,14 +122,15 @@ public class Download extends ListActivity {
 			// 체크박스 상태
 			final int pos = position;
 			CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkBox);
-			checkBox.setChecked(tbMember.isChecked());			
+			checkBox.setChecked(tbMember.isChecked());
 			checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				// 클릭할때 마다 상태 저장
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					tbMemberList.get(pos).setChecked(isChecked);					
+				public void onCheckedChanged(CompoundButton buttonView,
+						boolean isChecked) {
+					tbMemberList.get(pos).setChecked(isChecked);
 				}
-				
-			}); 
+
+			});
 
 			return row;
 		}
