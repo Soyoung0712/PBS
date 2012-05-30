@@ -121,9 +121,9 @@ public class PbsMain extends ListActivity {
 	
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		
-		Log.d("MyGroupList", "onListItemClick Click");
-		//Toast.makeText(PbsMain.this, tbGroupList.get(position).getFd_group_name(),Toast.LENGTH_LONG).show();		
-		Intent intent = new Intent(PbsMain.this, GroupMemberList.class);
+		Log.d("MyGroupList", "onListItemClick Click");				
+		Intent intent = new Intent(PbsMain.this, GroupMemberList.class);		
+		intent.putExtra("pk_group", tbGroupList.get(position).getPk_group());
 		startActivity(intent);		
     }
 
