@@ -84,5 +84,15 @@ public class TbMember {
 
 		return true;
 	}
+	
+	//-- USER TODO --//
+	private boolean checked = false;
+	public boolean isChecked() {
+		return checked;
+	}
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
+	
 
 }
