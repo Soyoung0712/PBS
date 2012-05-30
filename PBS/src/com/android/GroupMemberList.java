@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +37,21 @@ public class GroupMemberList extends ListActivity {
 		Button mPhoneMove = (Button)findViewById(R.id.button1);
 		Button mSMSMove= (Button)findViewById(R.id.button2);
 		Button mCancel = (Button)findViewById(R.id.button3);
+		/*
+		ImageButton mPhone= (ImageButton)findViewById(R.id.phone);
+
+		mPhone.setOnClickListener(new View.OnClickListener()
+		{			
+			public void onClick(View arg0)
+			{
+				Log.d("GroupMemberList", "mPhone start");
+				//Intent intent = new Intent(GroupMemberList.this,Download.class)	;
+				//startActivity(intent);
+			}
+		});
+		*/
+		
+		
 		mPhoneMove.setOnClickListener(new View.OnClickListener()
 		{			
 			public void onClick(View arg0)

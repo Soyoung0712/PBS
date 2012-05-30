@@ -63,8 +63,7 @@ public class PbsMain extends ListActivity {
 
 	}
 
-	// 그룹 추가 버튼 클릭 이벤트
-	
+	// 그룹 추가 버튼 클릭 이벤트	
 	private void showGroupAdd() {
 		
 		LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -94,8 +93,7 @@ public class PbsMain extends ListActivity {
 					Log.d("MyGroupList", "groupKey Input Error [groupKey]:" + groupKey);
 					Toast.makeText(PbsMain.this, "그룹키를 잘못 입력하셨습니다",Toast.LENGTH_LONG).show();
 				}				
-				
-				//boolean hiddenGroupResult = userGson.hiddenGroup(groupKey, myPhoneNum );
+			
 				// 그룹키 추가
 				boolean addGroupResult = userGson.addGroup(groupKey, groupPassword, myPhoneNum );
 				
@@ -164,9 +162,7 @@ public class PbsMain extends ListActivity {
 				mGroupSetting.setVisibility(View.INVISIBLE);
 			}else{
 				mGroupHidden.setVisibility(View.INVISIBLE);
-			}
-			
-			
+			}			
 			
 			// 그룹 설정 클릭 이벤트
 			mGroupSetting.setOnClickListener(new View.OnClickListener() {

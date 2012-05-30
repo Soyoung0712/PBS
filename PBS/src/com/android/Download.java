@@ -1,81 +1,125 @@
 package com.android;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pbs.client.model.TbMember;
+import com.pbs.client.util.UserGson;
+
 public class Download extends ListActivity {
 
-	// ³» ±×·ì ¸®½ºÆ®
-	String[] name = { "È«±æµ¿1", "È«±æµ¿2", "È«±æµ¿3", "È«±æµ¿4", "È«±æµ¿5", "È«±æµ¿6", "È«±æµ¿7",
-			"È«±æµ¿8", "È«±æµ¿9" };
-	String[] number = { "010-1234-1234", "010-1234-1234", "010-1234-1234",
-			"010-1234-1234", "010-1234-1234", "010-1234-1234", "010-1234-1234",
-			"010-1234-1234", "010-1234-1234", "010-1234-1234", };
+	private String myPhoneNum = "01077778888";
+	private List<TbMember> tbMemberList = null;
+	private NewArrayAdapter newArrayAdapter = null;
+	private UserGson userGson = new UserGson();
+	// ëª¨ë‘ì„ íƒ Flag (ì´ˆê¸° ì„¤ì •ì€ ëª¨ë‘ì„ íƒì´ í•´ì§€ëœ ìƒíƒœ)
+	boolean allClickStatuFlag = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.downloadlist);
 
-		// ¸®½ºÆ®ºä¿¡ ¸®½ºÆ® Àû¿ë
-		setListAdapter(new NewArrayAdapter(this));
-		
-		Button mSave = (Button)findViewById(R.id.sendmessage);
-		Button mCancle = (Button)findViewById(R.id.cancle);
-		
-		
-		//ÀúÀå ¹öÆ°À» ´­·ÈÀ»¶§ 
-		mSave.setOnClickListener(new View.OnClickListener()
-		{			
-			public void onClick(View arg0)
-			{
-				Toast.makeText(Download.this, "ÀúÀå ¿Ï·á", Toast.LENGTH_SHORT).show();
-				finish();
-			}
-		});
-		
-		//Ãë¼Ò ¹öÆ°À» ´­·ÈÀ»¶§
-		mCancle.setOnClickListener(new View.OnClickListener()
-		{			
-			public void onClick(View arg0)
-			{
-				Toast.makeText(Download.this, "Ãë¼Ò", Toast.LENGTH_SHORT).show();
-				finish();
-			}
-		});
-	
-		
-	}
+		// ì„ íƒí•œ ê·¸ë£¹ì˜ ë§´ë²„ ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
+		tbMemberList = userGson.getMemeberList(5L, myPhoneNum);
 
- 
+		// ë¦¬ìŠ¤íŠ¸ë·°ì— ë¦¬ìŠ¤íŠ¸ ì ìš©
+		newArrayAdapter = new NewArrayAdapter(this);
+		setListAdapter(newArrayAdapter);
+
+		// "ëª¨ë‘ì„ íƒ" ë²„íŠ¼ ì„¤ì •
+		CheckBox allchoice = (CheckBox) findViewById(R.id.checkBoxAll);
+		allchoice.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+				// ì „ì²´ í•´ì œ
+				if (allClickStatuFlag) {
+					for (int i = 0; i < tbMemberList.size(); i++) {
+						tbMemberList.get(i).setChecked(false);
+					}
+					allClickStatuFlag = false;
+
+				// ì „ì²´ ì„ íƒ
+				} else {				
+					for (int i = 0; i < tbMemberList.size(); i++) {
+						tbMemberList.get(i).setChecked(true);
+					}
+					allClickStatuFlag = true;
+				}
+				// List Refresh
+				newArrayAdapter.notifyDataSetChanged();
+			}
+		});
+
+		// "ì €ì¥" ë²„íŠ¼ ì„¤ì •
+		Button mSave = (Button) findViewById(R.id.sendmessage);
+		mSave.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View arg0) {
+				Toast.makeText(Download.this, "ì €ì¥ ì™„ë£Œ", Toast.LENGTH_SHORT).show();
+				finish();
+			}
+		});
+
+		// "ì·¨ì†Œ" ë²„íŠ¼ ì„¤ì •
+		Button mCancle = (Button) findViewById(R.id.cancle);
+		mCancle.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View arg0) {
+				Toast.makeText(Download.this, "ì·¨ì†Œ", Toast.LENGTH_SHORT).show();
+				finish();
+			}
+		});
+
+	}
 	
+	/**
+	 * ListView Adapter 
+	 * @author Administrator
+	 *
+	 */
 	class NewArrayAdapter extends ArrayAdapter {
+		
 		Activity context;
 
 		@SuppressWarnings("unchecked")
 		NewArrayAdapter(Activity context) {
-			super(context, R.layout.downloadrow, name);
-
+			super(context, R.layout.downloadrow, tbMemberList);
 			this.context = context;
 		}
-
+		
+		/**
+		 * ë©¤ë²„ ë¦¬ìŠ¤íŠ¸ì˜ ê°¯ìˆ˜ë§Œí¼ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
+		 */
 		public View getView(int position, View convertView, ViewGroup parent) {
+			
+			// ë©¤ë²„ ì •ë³´
+			TbMember tbMember = tbMemberList.get(position);
+			
 			LayoutInflater inflater = context.getLayoutInflater();
-
 			View row = inflater.inflate(R.layout.downloadrow, null);
-
+			
+			/// ì´ë¦„
 			TextView textView = (TextView) row.findViewById(R.id.name);
-			textView.setText(name[position]);
+			textView.setText(tbMember.getFd_member_name());
+			// ì „í™”ë²ˆí˜¸
 			TextView textView2 = (TextView) row.findViewById(R.id.number);
-			textView2.setText(number[position]);
+			textView2.setText(tbMember.getFd_member_phone());
+			// ì²´í¬ë°•ìŠ¤ ìƒíƒœ
+			CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkBox);
+			checkBox.setChecked(tbMember.isChecked());
 
 			return row;
 		}
