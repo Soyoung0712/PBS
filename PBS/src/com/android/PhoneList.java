@@ -4,7 +4,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.ListActivity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +18,11 @@ public class PhoneList extends ListActivity {
 	String[] name = { "È«±æµ¿1", "È«±æµ¿2", "È«±æµ¿3", "È«±æµ¿4", "È«±æµ¿5", "È«±æµ¿6", "È«±æµ¿7",
 			"È«±æµ¿8", "È«±æµ¿9" };
 	String[] number = { "016-1234-1234", "010-1234-1234", "010-1234-1234",
-			"010-1234-1234", "010-1234-1234", "010-1234-1234", "010-1234-1234",
-			"010-1234-1234", "010-1234-1234", "010-1234-1235", };
+								"010-1234-1234", "010-1234-1234", "010-1234-1234", "010-1234-1234",
+								"010-1234-1234",  "010-1234-1235" };
  
-	 
+    
+	private NewArrayAdapter newArrayAdapter = null;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,9 +31,12 @@ public class PhoneList extends ListActivity {
 
 		// ¸®½ºÆ®ºä¿¡ ¸®½ºÆ® Àû¿ë
 		 
-		setListAdapter(new NewArrayAdapter(PhoneList.this));
+		newArrayAdapter = new NewArrayAdapter(PhoneList.this);
+		setListAdapter(newArrayAdapter);
 		
+		 
 		
+	 
 		
 	}
 
@@ -50,18 +53,29 @@ public class PhoneList extends ListActivity {
 
 	  
  
-		public View getView(int position, View convertView, ViewGroup parent) {
+		public View getView(int position, final View convertView, ViewGroup parent) {
 			LayoutInflater inflater = context.getLayoutInflater();
-
+			  
 			View row = inflater.inflate(R.layout.phonelistrow, null);
 
-			TextView mName = (TextView) row.findViewById(R.id.name);
+			final TextView mName = (TextView) row.findViewById(R.id.name);
 			mName.setText(name[position]);
+			final TextView mPhone =(TextView) row.findViewById(R.id.number);
+			mPhone.setText(number[position]);
 			
-			TextView mPhone =(TextView) row.findViewById(R.id.phone);
-			mName.setText(number[position]);
+			Button mDelete =(Button)row.findViewById(R.id.delete);
 			
-			Button mDelete =(Button) row.findViewById(R.id.delete);
+			
+			
+			// »èÁ¦¹öÆ° ´©¸£¸é »èÁ¦ÇÏ±â
+			mDelete.setOnClickListener(new View.OnClickListener()
+			{
+				public void onClick(View arg0)
+				{
+				 
+				}
+			});
+			 
 			 
 			
 			return row;
