@@ -5,7 +5,6 @@ import java.util.List;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,7 +102,7 @@ public class Download extends ListActivity {
 		/**
 		 * 멤버 리스트의 갯수만큼 호출되는 함수
 		 */
-		public View getView(int position, View convertView, ViewGroup parent) {
+		public View getView(int position, View convertView, ViewGroup parent) {			
 			
 			// 멤버 정보
 			TbMember tbMember = tbMemberList.get(position);
@@ -118,8 +117,16 @@ public class Download extends ListActivity {
 			TextView textView2 = (TextView) row.findViewById(R.id.number);
 			textView2.setText(tbMember.getFd_member_phone());
 			// 체크박스 상태
+			final int pos = position;
 			CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkBox);
-			checkBox.setChecked(tbMember.isChecked());
+			checkBox.setChecked(tbMember.isChecked());			
+			checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				// 클릭할때 마다 상태 저장
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					tbMemberList.get(pos).setChecked(isChecked);					
+				}
+				
+			}); 
 
 			return row;
 		}
