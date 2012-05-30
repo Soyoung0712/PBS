@@ -36,6 +36,8 @@
                     android:id="@+id/tab2"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:orientation="vertical"
                     android:padding="30dp" >
 
@@ -241,10 +243,7 @@
                             android:text="가져오기" />
                     </LinearLayout>
 
-              
-                    
-                    
-                     <LinearLayout
+                    <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal" >
@@ -277,7 +276,6 @@
                             android:layout_weight="0.28"
                             android:text="삭제" />
                     </LinearLayout>
-                    
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
