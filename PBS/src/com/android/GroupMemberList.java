@@ -53,7 +53,7 @@ public class GroupMemberList extends ListActivity {
 		mSMSMove.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
 				Intent intent1 = new Intent(GroupMemberList.this,
-						InviteMember.class);
+						GroupCheckList.class);
 				startActivity(intent1);
 			}
 		});

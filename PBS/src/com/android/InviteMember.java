@@ -52,7 +52,7 @@ public class InviteMember extends ListActivity {
 				// 전체 해제
 				if (allClickStatuFlag) {
 					for (int i = 0; i < tbMemberList.size(); i++) {
-						tbMemberList.get(i).setChecked(true);
+						tbMemberList.get(i).setChecked(false);
 					}
 					allClickStatuFlag = false;
 
@@ -92,20 +92,24 @@ public class InviteMember extends ListActivity {
 	public void SendMessage() {
 		String phone = "";
 		Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-		// 문자 내용
+		// 문자 내용 입력
 		String smsBody = "Phone Book Share\n그룹 초대 알림\n==\nKEY:1234\nPASSWORD:123\n==\n다운로드:http://~~";
 		sendIntent.putExtra("sms_body", smsBody);
 		// 문자 받을 사람 추리기
 		for (int i = 0; i < tbMemberList.size(); i++) {
 			if (tbMemberList.get(i).isChecked()) {
-				phone += ";"+tbMemberList.get(i).getFd_member_phone();
+				phone += ";" + tbMemberList.get(i).getFd_member_phone();
 			}
 		}
-		phone = phone.substring(1);
-		// 문자 받는 사람들 번호
-		sendIntent.putExtra("address", phone);
+		// 문자 받는 사람들 번호 입력
+		if (phone.length() > 0) {
+			phone = phone.substring(1);
+			sendIntent.putExtra("address", phone);
+		} else {
+			sendIntent.putExtra("address", phone);
+		}
 		sendIntent.setType("vnd.android-dir/mms-sms");
-		
+
 		startActivity(sendIntent);
 	}
 
@@ -124,7 +128,7 @@ public class InviteMember extends ListActivity {
 			TbMember tbMember = tbMemberList.get(position);
 
 			LayoutInflater inflater = context.getLayoutInflater();
-			View row = inflater.inflate(R.layout.downloadrow, null);
+			View row = inflater.inflate(R.layout.invitememberrow, null);
 
 			// / 이름
 			TextView textView = (TextView) row.findViewById(R.id.name);
