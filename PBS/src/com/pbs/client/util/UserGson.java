@@ -377,7 +377,19 @@ public class UserGson {
 		return result;
 	}
 	
-	public boolean updateGroup() { return true;}
+//	http://14.63.223.82:8080/pbs/group/update.json?pk_group=100007&fd_group_name=Update Tester Group
+//	&fd_group_password=1234
+//	&fd_group_notice=Test Group Update Success
+//	&fd_group_creator=01022232802
+//	&users=Tester:010122802,Tester2:01033332802,Tester3:01077772802,Tester4:01099992802
+//	&admins=Tester3:01077772802,Tester4:01099992802
+	public boolean updateGroup(String groupName, 
+			String groupPassword,
+			String groupNotice, String groupCreatorPhone, String[] users,
+			String[] admins) {
+		return true;
+	}
+	
 	public boolean deleteGroup() { return true;}
 	
 	
