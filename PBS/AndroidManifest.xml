@@ -37,6 +37,7 @@
         <activity android:name="GroupSetting"></activity>
         <activity android:name="GroupActivity"></activity>
         <activity android:name="PhoneList"></activity>
+        <activity android:name="EditMember"></activity>
         
     </application>
 
