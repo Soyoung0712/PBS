@@ -1,5 +1,11 @@
 package com.android;
 
+import java.util.List;
+
+import com.android.Download.NewArrayAdapter;
+import com.pbs.client.model.TbMember;
+import com.pbs.client.util.UserGson;
+
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -14,16 +20,21 @@ import android.widget.Toast;
 
 public class EditMember extends ListActivity {
 
-	String[] number = { "010-1234-1234", "010-1234-1234", "010-1234-1234",
-			"010-1234-1234", "010-1234-1234", "010-1234-1234", "010-1234-1234",
-			"010-1234-1234", "010-1234-1234", "010-1234-1234" };
+	private String myPhoneNum = "01077778888";
+	private List<TbMember> tbMemberList = null;
+	private NewArrayAdapter newArrayAdapter = null;
+	private UserGson userGson = new UserGson();
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.editmemberlist);
 
+		// 선택한 그룹의 맴버 리스트 가져오기
+		tbMemberList = userGson.getMemeberList(5L, myPhoneNum);
+
 		// 리스트뷰에 리스트 적용
-		setListAdapter(new NewArrayAdapter(this));
+		newArrayAdapter = new NewArrayAdapter(this);
+		setListAdapter(newArrayAdapter);
 
 		// 편집완료 버튼 클릭 했을때
 		Button complete = (Button) findViewById(R.id.complete);
@@ -39,22 +50,26 @@ public class EditMember extends ListActivity {
 	}
 
 	class NewArrayAdapter extends ArrayAdapter {
+
 		Activity context;
 
 		@SuppressWarnings("unchecked")
 		NewArrayAdapter(Activity context) {
-			super(context, R.layout.editmemberrow, number);
+			super(context, R.layout.editmemberrow, tbMemberList);
 
 			this.context = context;
 		}
 
 		public View getView(int position, View convertView, ViewGroup parent) {
+			// 멤버 정보
+			TbMember tbMember = tbMemberList.get(position);
+
 			LayoutInflater inflater = context.getLayoutInflater();
 
 			View row = inflater.inflate(R.layout.editmemberrow, null);
 
-			EditText textView2 = (EditText) row.findViewById(R.id.number);
-			textView2.setText(number[position]);
+			EditText edit = (EditText) row.findViewById(R.id.number);
+			edit.setText(tbMember.getFd_member_phone());
 
 			return row;
 		}

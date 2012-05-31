@@ -4,7 +4,10 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Contacts;
+import android.provider.Contacts.People;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,15 +68,9 @@ public class Download extends ListActivity {
 			}
 		});
 
-		// "저장" 버튼 설정
+		// "저장" 버튼
 		Button mSave = (Button) findViewById(R.id.sendmessage);
-		mSave.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View arg0) {
-				Toast.makeText(Download.this, "저장 완료", Toast.LENGTH_SHORT)
-						.show();
-				finish();
-			}
-		});
+		StroeButton(mSave);
 
 		// "취소" 버튼 설정
 		Button mCancle = (Button) findViewById(R.id.cancle);
@@ -84,6 +81,31 @@ public class Download extends ListActivity {
 			}
 		});
 
+	}
+
+	// 저장 버튼 클릭했을 때
+	private void StroeButton(Button mSave) {
+		mSave.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View arg0) {
+				int count = 0;
+				for (int i = 0; i < tbMemberList.size(); i++) {
+					if (tbMemberList.get(i).isChecked()) {
+						count++;
+						Intent intent = new Intent(Intent.ACTION_INSERT,
+								People.CONTENT_URI);
+						intent.putExtra(Contacts.Intents.Insert.NAME,
+								tbMemberList.get(i).getFd_member_name());
+						intent.putExtra(Contacts.Intents.Insert.PHONE,
+								tbMemberList.get(i).getFd_member_phone());
+						startActivity(intent);
+					}
+				}
+				if (count == 0) {
+					Toast.makeText(Download.this, "저장할 멤버가 없습니다.",
+							Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
 	}
 
 	/**
