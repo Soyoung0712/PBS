@@ -1,8 +1,11 @@
 package com.android;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -11,8 +14,12 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 
+import com.pbs.client.model.AddressUser;
+
 public class MakeNewGroup extends Activity {
 
+	private final int CALLER_REQUEST = 1;
+	
 	EditText groupname;
 	EditText groupnumber;
 
@@ -49,7 +56,6 @@ public class MakeNewGroup extends Activity {
 		groupnumber.setEnabled(false);
 
 		plus2.setEnabled(false);
-
 	}
 
 	@Override
@@ -80,20 +86,19 @@ public class MakeNewGroup extends Activity {
 			}
 		});
 
-		// 그룹원 관리 에서 가져오기 버튼을 눌렀을때 전화번호 목록 가져오기//
+		// 그룹원 관리 > "가져오기" 버튼
 		plus.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				Intent intent = new Intent(MakeNewGroup.this,
-						GetPhoneList.class);
-				startActivity(intent);
+				Intent intent = new Intent(MakeNewGroup.this, GetPhoneList.class);				
+				startActivityForResult(intent, CALLER_REQUEST);
+				
 			}
 		});
 
-		// 관리자 번호 입력 에서 가져오기 버튼을 눌렀을때 전화번호 목록 가져오기//
+		// 관리자 번호 "가져오기" 버튼
 		plus2.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				Intent intent1 = new Intent(MakeNewGroup.this,
-						GetPhoneList.class);
+				Intent intent1 = new Intent(MakeNewGroup.this,GetPhoneList.class);
 				startActivity(intent1);
 			}
 		});
@@ -107,5 +112,25 @@ public class MakeNewGroup extends Activity {
 		});
 
 	}
+	
+	/**
+	 * 응답
+	 */	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		
+        if (requestCode == CALLER_REQUEST) {
+        	
+            if (resultCode == RESULT_OK) {           	
+            	
+            	ArrayList<AddressUser> addressUserList = (ArrayList<AddressUser>)intent.getSerializableExtra("addressUserList");
+            	for( int i=0; i<addressUserList.size(); i++ ) {
+            		Log.d("addressUserList", addressUserList.get(i).getName() );
+            	}
+            	
+            }
+        }
+    }
+   
 
 }

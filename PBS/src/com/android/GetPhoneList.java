@@ -1,18 +1,15 @@
 package com.android;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.ContentResolver;
-import android.content.ContentUris;
+import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +18,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
-import com.android.Download.NewArrayAdapter;
 import com.pbs.client.model.AddressUser;
 
 public class GetPhoneList extends ListActivity {
@@ -63,7 +59,7 @@ public class GetPhoneList extends ListActivity {
             addressUser.setName(name);
             
             // 전화 저장
-            List<String> dialList = new ArrayList<String>();
+            ArrayList<String> dialList = new ArrayList<String>();
             if (Integer.parseInt(c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
                 Cursor cp = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ? ", new String[] { id }, null);
                 while (cp.moveToNext()) {
@@ -125,7 +121,7 @@ public class GetPhoneList extends ListActivity {
 				}
 				// List Refresh
 				newArrayAdapter.notifyDataSetChanged();
-			}
+			}			
 		});
 		
 		// "확인" 버튼
@@ -135,17 +131,21 @@ public class GetPhoneList extends ListActivity {
 				Toast.makeText(GetPhoneList.this, "가져오기 완료", Toast.LENGTH_SHORT).show();
 				
 				// 선택한 전화번호만 저장
-				List<AddressUser> resultAddressUserList = new ArrayList<AddressUser>();						
+				ArrayList<AddressUser> resultAddressUserList = new ArrayList<AddressUser>();						
 				for(int i=0; i<addressUserList.size(); i++) {
 					if( addressUserList.get(i).isChecked()  ) {
 						resultAddressUserList.add(addressUserList.get(i));
 					}
 				}
 				
+				// 호출한 액티비티
+				Intent intent = getIntent();
+				intent.putExtra("addressUserList", resultAddressUserList);				
+				setResult(RESULT_OK, intent);
 				finish();
 			}
 		});
-
+		
 		// "취소" 버튼
 		Button mGroupCancel = (Button) findViewById(R.id.cancle);
 		mGroupCancel.setOnClickListener(new View.OnClickListener() {

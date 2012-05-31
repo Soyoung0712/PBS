@@ -1,15 +1,17 @@
 package com.pbs.client.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.graphics.Bitmap;
 
-public class AddressUser {
+public class AddressUser implements Serializable {
 	
 	private String id;
 	private String name;
 	private Bitmap icon;
-	private List<String> dialList;
+	private ArrayList<String> dialList;
 	private String selectedDial;
 	private String mail;
 	private boolean checked = false;	
@@ -32,10 +34,10 @@ public class AddressUser {
 	public void setIcon(Bitmap icon) {
 		this.icon = icon;
 	}
-	public List<String> getDialList() {
+	public ArrayList<String> getDialList() {
 		return dialList;
 	}
-	public void setDialList(List<String> dialList) {
+	public void setDialList(ArrayList<String> dialList) {
 		this.dialList = dialList;
 	}	
 	public String getSelectedDial() {
