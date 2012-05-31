@@ -72,7 +72,7 @@ public class GroupSetting extends TabActivity
 		tabHost.addTab(tabSpec1);
 
 		TabSpec tabSpec2 = tabHost.newTabSpec("tab2").setIndicator("새 그룹 만들기");
-		tabSpec2.setContent(R.id.tab1);
+		tabSpec2.setContent(new Intent(this, MakeNewGroup.class));
 		tabHost.addTab(tabSpec2);
 
 		password.setEnabled(false);
