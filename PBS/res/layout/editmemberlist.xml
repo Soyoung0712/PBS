@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:text="전체 삭제"/>
         <Button 
-            android:id="@+id/complelte"
+            android:id="@+id/complete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="편집 완료"/>
