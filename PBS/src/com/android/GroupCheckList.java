@@ -37,7 +37,9 @@ public class GroupCheckList extends ListActivity {
 		setContentView(R.layout.checkmemberlist);
 
 		// 선택한 그룹의 맴버 리스트 가져오기
-		tbMemberList = userGson.getMemeberList(5L, myPhoneNum);
+		Intent intent = getIntent();
+		long pk_group = intent.getExtras().getLong("pk_group");
+		tbMemberList = userGson.getMemeberList(pk_group, myPhoneNum);	
 
 		// 리스트뷰에 리스트 적용
 		newArrayAdapter = new NewArrayAdapter(this);

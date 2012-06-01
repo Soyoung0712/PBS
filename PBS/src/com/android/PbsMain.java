@@ -116,17 +116,9 @@ public class PbsMain extends ListActivity {
 		// 다이얼로그 SHOW
 		builder.setNeutralButton("추가", onClickListener).show();
 		
-	}	
+	}
 	
 	
-	public void onListItemClick(ListView parent, View v, int position, long id) {
-		
-		Log.d("MyGroupList", "onListItemClick Click");				
-		Intent intent = new Intent(PbsMain.this, GroupMemberList.class);		
-		intent.putExtra("pk_group", tbGroupList.get(position).getPk_group());
-		startActivity(intent);		
-    }
-
 	class NewArrayAdapter extends ArrayAdapter {
 		
 		Activity context;
@@ -150,13 +142,13 @@ public class PbsMain extends ListActivity {
 			
 			// 그룹명
 			TextView textView = (TextView) row.findViewById(R.id.groupName);
-			textView.setText(tbGroupList.get(position).getFd_group_name());			
+			textView.setText(tbGroupList.get(position).getFd_group_name());
+			
 			// 그룹 공지사항
 			TextView textView2 = (TextView) row.findViewById(R.id.groupNotice);
-			textView2.setText(tbGroupList.get(position).getFd_group_notice());
+			textView2.setText(tbGroupList.get(position).getFd_group_notice());			
 			
-			// (관리자는 "설정", 일반사용자는 "삭제" 버튼이 노출)
-			// 그룹 설정
+			// "설정" 버튼
 			Button mGroupSetting = (Button) row.findViewById(R.id.groupSetting);
 			mGroupSetting.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
@@ -166,18 +158,8 @@ public class PbsMain extends ListActivity {
 
 			});
 						
-			//  "감추기" 버튼 
+			//  "삭제" 버튼 
 			Button mGroupHidden = (Button) row.findViewById(R.id.groupHidden);
-			Log.d("MyGroupList", curTbGroup.toString());
-			if( !curTbGroup.getFd_admin_yn().equals("Y") ) {
-				mGroupSetting.setVisibility(View.INVISIBLE);
-			}else{
-				mGroupHidden.setVisibility(View.INVISIBLE);
-			}			
-			
-			
-
-			// 그룹 감추기 클릭 이벤트
 			mGroupHidden.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
 					
@@ -193,12 +175,28 @@ public class PbsMain extends ListActivity {
 					}
 										
 				}				
-			});
+			});			
 			
+			// (관리자는 "설정", 일반사용자는 "삭제" 버튼이 노출)
+			if( !curTbGroup.getFd_admin_yn().equals("Y") ) {
+				mGroupSetting.setVisibility(View.INVISIBLE);
+			}else{
+				mGroupHidden.setVisibility(View.INVISIBLE);
+			}
 
 			return row;
 		}
 
 	}
+	
+	/**
+	 * 리스트에서 "그룹" 클릭
+	 */
+	public void onListItemClick(ListView parent, View v, int position, long id) {								
+		Intent intent = new Intent(PbsMain.this, GroupMemberList.class);		
+		intent.putExtra("pk_group", tbGroupList.get(position).getPk_group());
+		startActivity(intent);		
+    }
+
 
 }
