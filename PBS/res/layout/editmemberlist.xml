@@ -22,10 +22,10 @@
         android:orientation="horizontal">
         
         <Button 
-            android:id="@+id/deleteall"
+            android:id="@+id/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="전체 삭제"/>
+            android:text="추가"/>
         <Button 
             android:id="@+id/complete"
             android:layout_width="wrap_content"

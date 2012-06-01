@@ -68,8 +68,10 @@ public class EditMember extends ListActivity {
 
 			View row = inflater.inflate(R.layout.editmemberrow, null);
 
-			EditText edit = (EditText) row.findViewById(R.id.number);
-			edit.setText(tbMember.getFd_member_phone());
+			EditText edit1 = (EditText) row.findViewById(R.id.name);
+			edit1.setText(tbMember.getFd_member_name());
+			EditText edit2 = (EditText) row.findViewById(R.id.number);
+			edit2.setText(tbMember.getFd_member_phone());
 
 			return row;
 		}
