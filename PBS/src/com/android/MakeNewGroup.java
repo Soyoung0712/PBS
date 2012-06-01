@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -32,6 +34,8 @@ public class MakeNewGroup extends Activity {
 	Button plus;
 	Button plus2;
 
+	EditText groupNameFix;
+	
 	Button mGroupResult;
 	Button mGroupCanclel;
 	EditText GroupList;    // 일반 그룹원 편집
@@ -44,7 +48,9 @@ public class MakeNewGroup extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.makenewgroup);
-
+ 
+		groupNameFix = (EditText)findViewById(R.id.editText1);
+		
 		groupname = (EditText) findViewById(R.id.editText7);
 		groupnumber = (EditText) findViewById(R.id.editText8);
 		plus = (Button) findViewById(R.id.button2);
@@ -62,8 +68,10 @@ public class MakeNewGroup extends Activity {
 		groupnumber.setEnabled(false);
 
 		plus2.setEnabled(false);
+		
+		
+		 
 	}
-
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -83,11 +91,15 @@ public class MakeNewGroup extends Activity {
 			}
 		});
 
+		
+		
+		
 		// 그룹생성 완료버튼 눌렀을떄
 		mGroupResult.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(MakeNewGroup.this,
 						GroupActivity.class);
+				intent.putExtra("groupname", groupNameFix.getText());
 				startActivity(intent);
 			}
 		});

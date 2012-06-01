@@ -1,32 +1,21 @@
 package com.android;
 
-import android.app.TabActivity;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TabHost;
-import android.widget.TabHost.TabSpec;
+import android.widget.TextView;
 
-public class GroupActivity extends TabActivity {
+public class GroupActivity extends Activity {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {			
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.group_create_ok);
 
-		TabHost tabHost = getTabHost();
-
-		TabSpec tabSpec1 = tabHost.newTabSpec("Tab1").setIndicator("내 그룹");
-		tabSpec1.setContent(R.id.tab1);
-		tabHost.addTab(tabSpec1);
-
-		TabSpec tabSpec2 = tabHost.newTabSpec("Tab2").setIndicator("새 그룹 만들기");
-		tabSpec2.setContent(R.id.tab2);
-		tabHost.addTab(tabSpec2);
-		
-		tabHost.setCurrentTab(1);
-		
+	 
+		TextView mGroupname = (TextView)findViewById(R.id.textView1);
 		Button mNewGroupComplete = (Button)findViewById(R.id.button1);
 		Button mMemberInvite = (Button)findViewById(R.id.button2);
 		
@@ -50,5 +39,11 @@ public class GroupActivity extends TabActivity {
 				startActivity(intent1);
 			}
 		});
+		
+		// 전달받은 그룹명 텍스트 뿌려주기
+		Intent intent = getIntent();
+		
+		String GroupName = intent.getExtras().get("groupname").toString();
+		mGroupname.setText(GroupName);
 	}	
 }
