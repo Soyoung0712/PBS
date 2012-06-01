@@ -33,6 +33,7 @@ public class GroupMemberList extends ListActivity {
 		// 선택한 그룹의 맴버 리스트 가져오기
 		Intent intent = getIntent();
 		final long pk_group = intent.getExtras().getLong("pk_group");
+		final String fd_group_name = intent.getExtras().getString("fd_group_name");		
 		tbMemberList = userGson.getMemeberList(pk_group, myPhoneNum);
 
 		// 리스트뷰에 리스트 적용
@@ -44,6 +45,7 @@ public class GroupMemberList extends ListActivity {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(GroupMemberList.this, Download.class);
 				intent.putExtra("pk_group", pk_group);
+				intent.putExtra("fd_group_name", fd_group_name);
 				startActivity(intent);
 			}
 		});

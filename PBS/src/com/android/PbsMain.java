@@ -195,6 +195,7 @@ public class PbsMain extends ListActivity {
 	public void onListItemClick(ListView parent, View v, int position, long id) {								
 		Intent intent = new Intent(PbsMain.this, GroupMemberList.class);		
 		intent.putExtra("pk_group", tbGroupList.get(position).getPk_group());
+		intent.putExtra("fd_group_name", tbGroupList.get(position).getFd_group_name());
 		startActivity(intent);		
     }
 
