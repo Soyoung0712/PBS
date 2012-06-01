@@ -9,7 +9,6 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,26 +47,30 @@ public class GetPhoneList extends ListActivity {
         addressUserList = new ArrayList<AddressUser>();
         while(c.moveToNext()) {
         	
-        	AddressUser addressUser = new AddressUser();
-        	
         	// ID 저장
             String id = c.getString(c.getColumnIndex(ContactsContract.Contacts._ID));
-            addressUser.setId(id);
-
             // 이름 저장
-            String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-            addressUser.setName(name);
+            String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));            
             
-            // 전화 저장
-            ArrayList<String> dialList = new ArrayList<String>();
+            // 전화번호 저장            
             if (Integer.parseInt(c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
                 Cursor cp = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ? ", new String[] { id }, null);
                 while (cp.moveToNext()) {
-                	dialList.add(cp.getString(cp.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA1)));
+                	String dial = cp.getString(cp.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA1));
+                	// 전화번호가 있는 경우만 전화번호부에 보여준다.
+					if( dial != null && dial.length() > 0 ){						
+						// 사용자 정보 저장
+						AddressUser addressUser = new AddressUser();
+						addressUser.setId(id);
+						addressUser.setName(name);
+						addressUser.setDial(dial);
+						// 주소록 명단에 추가
+						addressUserList.add(addressUser);
+					}
+							
                 }
                 cp.close();
-            }
-            addressUser.setDialList(dialList);
+            }            
             
             /*
              * 사진,메일은 사용하지 않으므로 주석처리
@@ -89,9 +92,7 @@ public class GetPhoneList extends ListActivity {
             }
             addressUser.setMail(mail);
             cm.close();
-            */            
-            // 추가            
-            addressUserList.add(addressUser);
+            */
         }        
         c.close();
         
@@ -163,7 +164,7 @@ public class GetPhoneList extends ListActivity {
 
 		@SuppressWarnings("unchecked")
 		NewArrayAdapter(Activity context) {
-			super(context, R.layout.checkmemberrow, addressUserList);
+			super(context, R.layout.getphonerow, addressUserList);
 			this.context = context;
 		}
 
@@ -171,14 +172,18 @@ public class GetPhoneList extends ListActivity {
 			
 			final int pos = position;
 			LayoutInflater inflater = context.getLayoutInflater();
-			View row = inflater.inflate(R.layout.checkmemberrow, null);
+			View row = inflater.inflate(R.layout.getphonerow, null);
 			
 			// 전화번호부
 			AddressUser addressUser =  addressUserList.get(pos);
 
 			// 이름
-			TextView textView = (TextView) row.findViewById(R.id.name);
-			textView.setText(addressUser.getName());
+			TextView nameTextView = (TextView) row.findViewById(R.id.name);
+			nameTextView.setText(addressUser.getName());
+			
+			// 전화번호
+			TextView dialTextView = (TextView) row.findViewById(R.id.dial);
+			dialTextView.setText(addressUser.getDial());
 			
 			// 체크박스 상태			
 			CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkBox);

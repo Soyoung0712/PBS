@@ -11,10 +11,9 @@ public class AddressUser implements Serializable {
 	private String id;
 	private String name;
 	private Bitmap icon;
-	private ArrayList<String> dialList;
-	private String selectedDial;
+	private String dial;	
 	private String mail;
-	private boolean checked = false;	
+	private boolean checked = false;
 	
 	public String getId() {
 		return id;
@@ -34,17 +33,11 @@ public class AddressUser implements Serializable {
 	public void setIcon(Bitmap icon) {
 		this.icon = icon;
 	}
-	public ArrayList<String> getDialList() {
-		return dialList;
+	public String getDial() {
+		return dial;
 	}
-	public void setDialList(ArrayList<String> dialList) {
-		this.dialList = dialList;
-	}	
-	public String getSelectedDial() {
-		return selectedDial;
-	}
-	public void setSelectedDial(String selectedDial) {
-		this.selectedDial = selectedDial;
+	public void setDial(String dial) {
+		this.dial = dial;
 	}
 	public String getMail() {
 		return mail;

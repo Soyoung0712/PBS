@@ -18,9 +18,9 @@
 
     <TextView
      	android:paddingLeft="20dp"
-        android:id="@+id/number"
+        android:id="@+id/dial"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="wrap_content"        
         android:textSize="20dp" />
 
 </LinearLayout>
