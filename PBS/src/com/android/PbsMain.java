@@ -154,8 +154,19 @@ public class PbsMain extends ListActivity {
 			// 그룹 공지사항
 			TextView textView2 = (TextView) row.findViewById(R.id.groupNotice);
 			textView2.setText(tbGroupList.get(position).getFd_group_notice());
-			// 그룹 설정/삭제 버튼 노출 (관리자는 "설정", 일반사용자는 "삭제" 버튼이 노출)
+			
+			// (관리자는 "설정", 일반사용자는 "삭제" 버튼이 노출)
+			// 그룹 설정
 			Button mGroupSetting = (Button) row.findViewById(R.id.groupSetting);
+			mGroupSetting.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+					Intent intent = new Intent(PbsMain.this, GroupSetting.class);
+					startActivity(intent);
+				}
+
+			});
+						
+			//  "감추기" 버튼 
 			Button mGroupHidden = (Button) row.findViewById(R.id.groupHidden);
 			Log.d("MyGroupList", curTbGroup.toString());
 			if( !curTbGroup.getFd_admin_yn().equals("Y") ) {
@@ -164,14 +175,7 @@ public class PbsMain extends ListActivity {
 				mGroupHidden.setVisibility(View.INVISIBLE);
 			}			
 			
-			// 그룹 설정 클릭 이벤트
-			mGroupSetting.setOnClickListener(new View.OnClickListener() {
-				public void onClick(View v) {
-					Intent intent = new Intent(PbsMain.this, GroupSetting.class);
-					startActivity(intent);
-				}
-
-			});
+			
 
 			// 그룹 감추기 클릭 이벤트
 			mGroupHidden.setOnClickListener(new View.OnClickListener() {
