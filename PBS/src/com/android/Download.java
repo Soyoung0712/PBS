@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pbs.client.model.TbMember;
+import com.pbs.client.util.AddressUtil;
 import com.pbs.client.util.UserGson;
 
 public class Download extends ListActivity {
@@ -77,7 +78,7 @@ public class Download extends ListActivity {
 
 		// "저장" 버튼
 		Button mSave = (Button) findViewById(R.id.sendmessage);
-		StroeButton(mSave);
+		StroeButton(this, mSave, fd_group_name);
 
 		// "취소" 버튼 설정
 		Button mCancle = (Button) findViewById(R.id.cancle);
@@ -91,25 +92,28 @@ public class Download extends ListActivity {
 	}
 
 	// 저장 버튼 클릭했을 때
-	private void StroeButton(Button mSave) {
+	private void StroeButton(final Activity activity, Button mSave, final String fd_group_name) {
 		mSave.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
-				int count = 0;
+				int cntSave = 0;
+				AddressUtil addressUtil = new AddressUtil();
+				
+				// 선택한 사용자를 주소록에 저장
 				for (int i = 0; i < tbMemberList.size(); i++) {
 					if (tbMemberList.get(i).isChecked()) {
-						count++;
-						Intent intent = new Intent(Intent.ACTION_INSERT,
-								People.CONTENT_URI);
-						intent.putExtra(Contacts.Intents.Insert.NAME,
-								tbMemberList.get(i).getFd_member_name());
-						intent.putExtra(Contacts.Intents.Insert.PHONE,
-								tbMemberList.get(i).getFd_member_phone());
-						startActivity(intent);
+						addressUtil.addContact(	activity, 
+												fd_group_name, 
+												tbMemberList.get(i).getFd_member_name(), 
+												tbMemberList.get(i).getFd_member_phone());
+						cntSave++;
 					}
 				}
-				if (count == 0) {
-					Toast.makeText(Download.this, "저장할 멤버가 없습니다.",
-							Toast.LENGTH_SHORT).show();
+				
+				if (cntSave > 0) {
+					Toast.makeText(Download.this, "정상적으로 저장되었습니다..", Toast.LENGTH_SHORT).show();
+					finish();
+				}else {
+					Toast.makeText(Download.this, "저장할 멤버가 없습니다.", Toast.LENGTH_SHORT).show();
 				}
 			}
 		});

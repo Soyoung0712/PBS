@@ -13,7 +13,13 @@ import android.util.Log;
 
 public class AddressUtil {
 
-	// 멤버 추가
+	/**
+	 * 멤버추가
+	 * @param activity
+	 * @param groupTitle : 그룹명
+	 * @param name : 이름
+	 * @param phoneNumber : 전화번호
+	 */
 	public void addContact(Activity activity, String groupTitle, String name, String phoneNumber) {
 		
 		String kGroupId = getGroupId(activity, groupTitle);
