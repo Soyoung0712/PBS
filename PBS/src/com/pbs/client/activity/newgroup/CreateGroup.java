@@ -25,6 +25,7 @@ import com.android.R.layout;
 import com.pbs.client.activity.edit.GetMemberList;
 import com.pbs.client.activity.edit.GetAddressList;
 import com.pbs.client.model.AddressUser;
+import com.pbs.client.util.UserGson;
 
 public class CreateGroup extends Activity {
 
@@ -33,114 +34,78 @@ public class CreateGroup extends Activity {
 	private final int ADMIN_GET_MEMBER_LIST_ACTIVITY 	= 3;
 	private final int ADMIN_GET_ADDRESS_LIST_ACTIVITY 	= 4;
 	
+	private String myPhoneNum = "01077778888";
+	private UserGson userGson = new UserGson();
+	
+	// 그룹명
 	private EditText groupname;	
-
+	// 비밀번호	
 	private EditText password;
-	private EditText passwordresult;
-
+	// 비밀번호 확인
+	private EditText passwordConfirm;
+	// 그룹 공지사항	
+	private EditText groupNotice;
 	
-	private Button plus3;
-	
-
-	private EditText groupNameFix;
-	
-	private Button mGroupResult;
-	private Button mGroupCanclel;
-	
-	// 그룹원 관리
-	private ArrayList<AddressUser> groupMemberList; // 그룹원 리스트
-	private EditText etGroupMemberListInfo;  // "홍길동 외3명" 텍스트 박스
-	private Button bGroupGetAddressList;     // "가져오기" 버튼
-	
+	// 그룹원 관리	
+	private ArrayList<AddressUser> groupMemberList; // 그룹원 리스트	
+	private EditText etGroupMemberListInfo;  		// "홍길동 외3명" 텍스트 박스
+	private Button bGroupGetAddressList;     		// "가져오기" 버튼
 	
 	// 관리자 관리
 	private ArrayList<AddressUser> adminMemberList; // 그룹원 리스트
-	private EditText etAdminMemberListInfo;  // "임꺽정 외3명" 텍스트 박스
-	private Button bAdminGetAddressList;     // "가져오기" 버튼
-
-	private CheckBox ch1;
-	private CheckBox ch2;
-
+	private CheckBox chAdmin;						// 관리자 관리 체크 박스
+	private EditText etAdminMemberListInfo;  		// "임꺽정 외3명" 텍스트 박스
+	private Button bAdminGetAddressList;     		// "가져오기" 버튼
 	
-	Editable etable;
-	String result;
+	// 생성완료
+	private Button bGroupResult;
+	// 취소
+	private Button bGroupCancel;	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_create_group);
 		
-		groupMemberList = new ArrayList<AddressUser>();
-		adminMemberList = new ArrayList<AddressUser>();
- 
-		groupNameFix = (EditText)findViewById(R.id.editText1);
-		    etable = groupNameFix.getText();
-		    result = etable.toString();
-		  
-		groupname = (EditText) findViewById(R.id.editText7);		
-		bGroupGetAddressList = (Button) findViewById(R.id.button2);
-		plus3 = (Button) findViewById(R.id.button3);
-		bAdminGetAddressList = (Button) findViewById(R.id.button4);
-
-		ch2 = (CheckBox) findViewById(R.id.checkBox2);
-		password = (EditText) findViewById(R.id.editText3);
-		passwordresult = (EditText) findViewById(R.id.editText4);
-		mGroupResult = (Button) findViewById(R.id.button5);
-		etGroupMemberListInfo = (EditText) findViewById(R.id.editText5);
-		etAdminMemberListInfo = (EditText) findViewById(R.id.editText7);
-
+		// 그룹명
+		groupname = (EditText) findViewById(R.id.etGroupName);				
 		
-		groupname.setEnabled(false);		
-
-		plus3.setEnabled(false);
+		// 비밀번호
+		password = (EditText) findViewById(R.id.etPassword);
+		// 비밀번호 확인
+		passwordConfirm = (EditText) findViewById(R.id.etPasswordConfirm);
+		
+		// 그룹 공지사항 
+		groupNotice = (EditText) findViewById(R.id.etGroupNotice);
+		
+		// 그룹원 관리
+		groupMemberList = new ArrayList<AddressUser>();
+		etGroupMemberListInfo = (EditText) findViewById(R.id.etGroupMemberListInfo);
+		bGroupGetAddressList = (Button) findViewById(R.id.bGroupGetAddressList);
+		
+		// 관리자 관리
+		adminMemberList = new ArrayList<AddressUser>();
+		chAdmin = (CheckBox) findViewById(R.id.chAdmin);
+		etAdminMemberListInfo = (EditText) findViewById(R.id.etAdminMemberListInfo);
+		etAdminMemberListInfo.setEnabled(false);
+		bAdminGetAddressList = (Button) findViewById(R.id.bAdminGetAddressList);
 		bAdminGetAddressList.setEnabled(false);
 		
-	 
+		// 생성완료
+		bGroupResult = (Button) findViewById(R.id.bGroupResult);
+		bGroupCancel = (Button) findViewById(R.id.bGroupCancel);		 
 		 
 	}
 	@Override
 	public void onResume() {
-		super.onResume();
+		super.onResume();	
 
-		ch2.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-				if (ch2.isChecked()) {
-					groupname.setEnabled(true);					
-					bGroupGetAddressList.setEnabled(true);
-					plus3.setEnabled(true);
-					bAdminGetAddressList.setEnabled(true);
-				} else {
-					groupname.setEnabled(false);
-					plus3.setEnabled(false);
-					bAdminGetAddressList.setEnabled(false);
-				}
-			}
-		});
-
-	
-		
-		
-		// 그룹생성 완료버튼 눌렀을떄
-		mGroupResult.setOnClickListener(new OnClickListener() {
-			public void onClick(View arg0) {
-				Intent intent = new Intent(CreateGroup.this,
-						CreateGroupComplete.class);
-				intent.putExtra("groupname", groupNameFix.getText());
-			
-				
-				 
-					startActivity(intent);
-			 
-			}
-		});
-
-		// "그룹원 관리" > "임꺽정 외3명" 텍스트 박스 클릭
+		// "그룹원 관리" > "그룹원 추가" 텍스트 박스 클릭
 		etGroupMemberListInfo.setOnTouchListener(new OnTouchListener() {
 			public boolean onTouch(View arg0, MotionEvent event) {			
 				if (event.getAction() == KeyEvent.ACTION_UP) {
-
 					Intent intent = new Intent(CreateGroup.this, GetMemberList.class);
 					startActivity(intent);
-
 				}
 				return false;
 			}
@@ -152,9 +117,22 @@ public class CreateGroup extends Activity {
 				Intent intent = new Intent(CreateGroup.this, GetAddressList.class);				
 				startActivityForResult(intent, MEMBER_GET_ADDRESS_LIST_ACTIVITY);				
 			}
-		});		
+		});
 		
-		// "관리자 관리" > "임꺽정 외3명" 텍스트 박스 클릭 
+		// "관리자 번호입력" 체크박스
+		chAdmin.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+				if (chAdmin.isChecked()) {
+					etAdminMemberListInfo.setEnabled(true);
+					bAdminGetAddressList.setEnabled(true);					
+				} else {									
+					etAdminMemberListInfo.setEnabled(false);
+					bAdminGetAddressList.setEnabled(false);
+				}
+			}
+		});	
+		
+		// "관리자 관리" > "관리자 추가" 텍스트 박스 클릭 
 		etAdminMemberListInfo.setOnTouchListener(new OnTouchListener() {
 			public boolean onTouch(View arg0, MotionEvent event) {
 				if (event.getAction() == KeyEvent.ACTION_UP) {					
@@ -173,6 +151,37 @@ public class CreateGroup extends Activity {
 				startActivityForResult(intent, ADMIN_GET_ADDRESS_LIST_ACTIVITY);
 			}
 		});	
+		
+		// "생성완료" 버튼 클릭
+		bGroupResult.setOnClickListener(new OnClickListener() {
+			public void onClick(View arg0) {
+				Intent intent = new Intent(CreateGroup.this,CreateGroupComplete.class);
+				intent.putExtra("groupname", groupname.getText().toString());				
+				
+				// 그룹원 정보를 "송영석:010123456" 형태로 배열로 저장
+				String[] users  = new String[groupMemberList.size()];				
+				for( int i=0; i<groupMemberList.size(); i++ ) {
+					String tmpData = groupMemberList.get(i).getName() + ":" + groupMemberList.get(i).getDial();
+					users[i] = tmpData;
+				}
+				
+				// 관리자 정보를  "송영석:010123456" 형태로 배열로 저장
+				String[] admins = new String[adminMemberList.size()];
+				for( int i=0; i<adminMemberList.size(); i++ ) {
+					String tmpData = adminMemberList.get(i).getName() + ":" + adminMemberList.get(i).getDial();
+					admins[i] = tmpData;
+				}
+				
+				Log.d("CreateGroup users: " , users.toString());
+				Log.d("CreateGroup admins: " , admins.toString());
+				
+				userGson.createGroup(	groupname.getText().toString(), 
+										password.getText().toString(), 
+										groupNotice.getText().toString(), 
+										myPhoneNum, users, admins);
+				startActivity(intent);
+			}
+		});
 
 	}
 	

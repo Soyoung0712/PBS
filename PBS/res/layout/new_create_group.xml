@@ -30,8 +30,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" >
 
-                    <TextView
-                        android:id="@+id/textView1"
+                    <TextView                        
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="그룹명" />
@@ -43,7 +42,7 @@
                     </LinearLayout>
 
                     <EditText
-                        android:id="@+id/editText1"
+                        android:id="@+id/etGroupName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -57,8 +56,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" >
 
-                    <TextView
-                        android:id="@+id/textView5"
+                    <TextView                        
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="비밀번호" />
@@ -70,7 +68,7 @@
                     </LinearLayout>
 
                     <EditText
-                        android:id="@+id/editText3"
+                        android:id="@+id/etPassword"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -82,8 +80,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" >
 
-                    <TextView
-                        android:id="@+id/textView6"
+                    <TextView                        
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="비밀번호 확인" />
@@ -95,7 +92,7 @@
                     </LinearLayout>
 
                     <EditText
-                        android:id="@+id/editText4"
+                        android:id="@+id/etPasswordConfirm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -108,21 +105,19 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical" >
 
-                    <TextView
-                        android:id="@+id/textView4"
+                    <TextView                        
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="그룹 공지사항" />
 
                     <EditText
-                        android:id="@+id/editText2"
+                        android:id="@+id/etGroupNotice"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:ems="10" />
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textView7"
+                <TextView                    
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="그룹원 관리" />               
@@ -132,31 +127,24 @@
                     android:layout_height="wrap_content" >
 
                     <EditText
-                        android:id="@+id/editText5"
+                        android:id="@+id/etGroupMemberListInfo"
                         android:layout_width="119dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.58"
                         android:ems="10"
                         android:textSize="16dp"                        
-                        android:hint="홍길동 외 35명"
-                        android:inputType="phone" />
+                        android:hint="그룹원 추가"
+                        android:inputType="phone" />                   
 
                     <Button
-                        android:id="@+id/button1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.40"
-                        android:text="+" />
-
-                    <Button
-                        android:id="@+id/button2"
+                        android:id="@+id/bGroupGetAddressList"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="가져오기" />
                 </LinearLayout>
 
-                <CheckBox
-                    android:id="@+id/checkBox2"
+                <CheckBox                    
+                    android:id="@+id/chAdmin"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:text="관리자 번호 입력" />
@@ -166,24 +154,17 @@
                     android:layout_height="wrap_content" >
 
                     <EditText
-                        android:id="@+id/editText7"
+                        android:id="@+id/etAdminMemberListInfo"
                         android:layout_width="119dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.58"
                         android:ems="10"
                         android:textSize="16dp"
-                        android:hint="임꺽정 외 3명"
-                        android:inputType="phone" />
+                        android:hint="관리자 추가"
+                        android:inputType="phone" />                   
 
                     <Button
-                        android:id="@+id/button3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.40"
-                        android:text="+" />
-
-                    <Button
-                        android:id="@+id/button4"
+                        android:id="@+id/bAdminGetAddressList"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="가져오기" />
@@ -195,14 +176,14 @@
                     android:gravity="center_horizontal" >
 
                     <Button
-                        android:id="@+id/button5"
+                        android:id="@+id/bGroupResult"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.24"
                         android:text="생성완료" />
 
                     <Button
-                        android:id="@+id/button6"
+                        android:id="@+id/bGroupCancel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.21"
