@@ -39,7 +39,7 @@ public class GetAddressList extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.getphonelist);
+		setContentView(R.layout.edit_get_address_list);
 		
 		// 전화번호 주소록 가져오기
 		ContentResolver cr = getContentResolver();
@@ -167,7 +167,7 @@ public class GetAddressList extends ListActivity {
 
 		@SuppressWarnings("unchecked")
 		NewArrayAdapter(Activity context) {
-			super(context, R.layout.getphonerow, addressUserList);
+			super(context, R.layout.edit_get_address_list_row, addressUserList);
 			this.context = context;
 		}
 
@@ -175,7 +175,7 @@ public class GetAddressList extends ListActivity {
 			
 			final int pos = position;
 			LayoutInflater inflater = context.getLayoutInflater();
-			View row = inflater.inflate(R.layout.getphonerow, null);
+			View row = inflater.inflate(R.layout.edit_get_address_list_row, null);
 			
 			// 전화번호부
 			AddressUser addressUser =  addressUserList.get(pos);

@@ -33,7 +33,7 @@ import com.pbs.client.util.UserGson;
  * @author Administrator
  *
  */
-public class MyGroupList extends ListActivity {
+public class GroupList extends ListActivity {
 
 	private String myPhoneNum = "01077778888";
 	private List<TbGroup> tbGroupList = null;
@@ -45,7 +45,7 @@ public class MyGroupList extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.mygrouplist);
+		setContentView(R.layout.my_group_list);
 		
 		// 내그룹 리스트 가져오기		
 		tbGroupList = userGson.getMyGroupList(myPhoneNum);
@@ -70,7 +70,7 @@ public class MyGroupList extends ListActivity {
 	private void showGroupAdd() {
 		
 		LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		LinearLayout addgrouplayout = (LinearLayout) vi.inflate(R.layout.addgroup, null);
+		LinearLayout addgrouplayout = (LinearLayout) vi.inflate(R.layout.dialog_add_group, null);
 
 		final EditText key = (EditText) addgrouplayout.findViewById(R.id.key);
 		final EditText pwd = (EditText) addgrouplayout.findViewById(R.id.pwd);		
@@ -94,7 +94,7 @@ public class MyGroupList extends ListActivity {
 					groupKey = Long.parseLong(key.getText().toString());
 				} catch (Exception e) {
 					Log.d("MyGroupList", "groupKey Input Error [groupKey]:" + groupKey);
-					Toast.makeText(MyGroupList.this, "그룹키를 잘못 입력하셨습니다",Toast.LENGTH_LONG).show();
+					Toast.makeText(GroupList.this, "그룹키를 잘못 입력하셨습니다",Toast.LENGTH_LONG).show();
 				}				
 			
 				// 그룹키 추가
@@ -105,11 +105,11 @@ public class MyGroupList extends ListActivity {
 					tbGroupList.clear();
 					tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));					
 					newArrayAdapter.notifyDataSetChanged();
-					Toast.makeText(MyGroupList.this, "그룹이 추가 되었습니다.",Toast.LENGTH_LONG).show();
+					Toast.makeText(GroupList.this, "그룹이 추가 되었습니다.",Toast.LENGTH_LONG).show();
 					
 				// 그룹키 추가 실패
 				}else {					
-					Toast.makeText(MyGroupList.this, "잘못된 그룹입니다.",Toast.LENGTH_LONG).show();
+					Toast.makeText(GroupList.this, "잘못된 그룹입니다.",Toast.LENGTH_LONG).show();
 				}				
 								
 			}
@@ -128,7 +128,7 @@ public class MyGroupList extends ListActivity {
 
 		@SuppressWarnings("unchecked")
 		NewArrayAdapter(Activity context) {
-			super(context, R.layout.grouprow, tbGroupList);
+			super(context, R.layout.my_group_list_row, tbGroupList);
 			this.context = context;			
 		}
 
@@ -138,7 +138,7 @@ public class MyGroupList extends ListActivity {
 		public View getView(int position, View convertView, ViewGroup parent) {			
 			
 			LayoutInflater inflater = context.getLayoutInflater();
-			View row = inflater.inflate(R.layout.grouprow, null);
+			View row = inflater.inflate(R.layout.my_group_list_row, null);
 			
 			// 현재 출력중인 Group 정보
 			final TbGroup curTbGroup = tbGroupList.get(position);
@@ -155,7 +155,7 @@ public class MyGroupList extends ListActivity {
 			Button mGroupSetting = (Button) row.findViewById(R.id.groupSetting);
 			mGroupSetting.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
-					Intent intent = new Intent(MyGroupList.this, GroupModify.class);
+					Intent intent = new Intent(GroupList.this, GroupModify.class);
 					startActivity(intent);
 				}
 
@@ -174,7 +174,7 @@ public class MyGroupList extends ListActivity {
 						tbGroupList.clear();
 						tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));					
 						newArrayAdapter.notifyDataSetChanged();						
-						Toast.makeText(MyGroupList.this, "그룹이 삭제 되었습니다.",Toast.LENGTH_LONG).show();
+						Toast.makeText(GroupList.this, "그룹이 삭제 되었습니다.",Toast.LENGTH_LONG).show();
 					}
 										
 				}				
@@ -196,7 +196,7 @@ public class MyGroupList extends ListActivity {
 	 * 리스트에서 "그룹" 클릭
 	 */
 	public void onListItemClick(ListView parent, View v, int position, long id) {								
-		Intent intent = new Intent(MyGroupList.this, MemberList.class);		
+		Intent intent = new Intent(GroupList.this, MemberList.class);		
 		intent.putExtra("pk_group", tbGroupList.get(position).getPk_group());
 		intent.putExtra("fd_group_name", tbGroupList.get(position).getFd_group_name());
 		startActivity(intent);		

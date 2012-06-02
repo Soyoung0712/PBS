@@ -37,7 +37,7 @@ public class InviteSms extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.invitememberlist);
+		setContentView(R.layout.new_invite_sms);
 
 		// 선택한 그룹의 맴버 리스트 가져오기
 		tbMemberList = userGson.getMemeberList(5L, myPhoneNum);
@@ -121,7 +121,7 @@ public class InviteSms extends ListActivity {
 
 		@SuppressWarnings("unchecked")
 		NewArrayAdapter(Activity context) {
-			super(context, R.layout.invitememberrow, tbMemberList);
+			super(context, R.layout.new_invite_sms_row, tbMemberList);
 
 			this.context = context;
 		}
@@ -131,7 +131,7 @@ public class InviteSms extends ListActivity {
 			TbMember tbMember = tbMemberList.get(position);
 
 			LayoutInflater inflater = context.getLayoutInflater();
-			View row = inflater.inflate(R.layout.invitememberrow, null);
+			View row = inflater.inflate(R.layout.new_invite_sms_row, null);
 
 			// / 이름
 			TextView textView = (TextView) row.findViewById(R.id.name);

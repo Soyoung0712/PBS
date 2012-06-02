@@ -1,11 +1,5 @@
 package com.pbs.client.activity.mygroup;
 
-import com.android.R;
-import com.android.R.id;
-import com.android.R.layout;
-import com.pbs.client.activity.edit.GetAddressList;
-import com.pbs.sample.PhoneList;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +14,10 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.android.R;
+import com.pbs.client.activity.edit.GetAddressList;
+import com.pbs.client.activity.edit.GetMemberList;
 
 public class GroupModify extends Activity
 {
@@ -48,7 +46,7 @@ public class GroupModify extends Activity
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.groupstting);
+		setContentView(R.layout.my_group_modify);
 		
 		groupname = (EditText) findViewById(R.id.editText7);
 		groupnumber = (EditText) findViewById(R.id.editText8);
@@ -172,44 +170,29 @@ public class GroupModify extends Activity
 				Toast.makeText(GroupModify.this, "취소", Toast.LENGTH_SHORT).show();
 				finish();
 			}
+		});		
+		
+		// 관리자 번호 "가져오기" 버튼
+		mMember.setOnClickListener(new OnClickListener() {
+			public void onClick(View arg0) {
+				Intent intent1 = new Intent(GroupModify.this,GetAddressList.class);
+				startActivity(intent1);
+			}
 		});
 
-		// 그룹원 관리에서 그룹원 선택시 (EditText 선택시) 편집할수 있도록 하기
-		mMember.setOnTouchListener(new OnTouchListener()
-		{
-			
-			
-			public boolean onTouch(View arg0, MotionEvent event)
-			{
+		// 그룹원 관리  명단 눌렀을때 편집 기능 ..
+		mMemberSet.setOnTouchListener(new OnTouchListener() {
+			public boolean onTouch(View arg0, MotionEvent event) {
 				// 그룬원 EditText 를 눌렀을때 발생되는 이벤트 처리 // 이벤트 발생후 수신인 편집 화면으로 이동
-				if(event.getAction() == KeyEvent.ACTION_UP)
-				{
-					 
-					Intent intent = new Intent(GroupModify.this, PhoneList.class);
-					startActivity(intent);
-					 
-				}
-				 return false;
-			}
-		});
+				if (event.getAction() == KeyEvent.ACTION_UP) {
 
-		mMemberSet.setOnTouchListener(new OnTouchListener()
-		{
-			
-			
-			public boolean onTouch(View arg0, MotionEvent event)
-			{
-				// 그룬원 관리자   EditText 를 눌렀을때 발생되는 이벤트 처리 // 이벤트 발생후 수신인 편집 화면으로 이동
-				if(event.getAction() == KeyEvent.ACTION_UP)
-				{
-					 
-					Intent intent = new Intent(GroupModify.this, PhoneList.class); //일단 PhoneList 가져옴
+					Intent intent = new Intent(GroupModify.this, GetMemberList.class);
 					startActivity(intent);
-					 
+
 				}
-				 return false;
+				return false;
 			}
-		});
+		});		
 		
 		
 	}

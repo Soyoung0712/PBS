@@ -26,7 +26,7 @@
         </activity>
   	 	
   	 	<!-- mygroup -->
-        <activity android:name="com.pbs.client.activity.mygroup.MyGroupList"></activity>
+        <activity android:name="com.pbs.client.activity.mygroup.GroupList"></activity>
         <activity android:name="com.pbs.client.activity.mygroup.GroupModify"></activity>
         <activity android:name="com.pbs.client.activity.mygroup.MemberList"></activity>
         <activity android:name="com.pbs.client.activity.mygroup.AddressDownload"></activity>
@@ -38,7 +38,7 @@
         <activity android:name="com.pbs.client.activity.newgroup.InviteSms"></activity>
                 
         <!-- edit -->
-        <activity android:name="com.pbs.client.activity.edit.EditMember"></activity>
+        <activity android:name="com.pbs.client.activity.edit.GetMemberList"></activity>
         <activity android:name="com.pbs.client.activity.edit.GetAddressList"></activity>
         
         <!-- sample -->

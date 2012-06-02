@@ -38,7 +38,7 @@ public class AddressDownload extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.downloadlist);
+		setContentView(R.layout.my_address_download);
 
 		// 선택한 그룹의 맴버 리스트 가져오기
 		Intent intent = getIntent();
@@ -134,7 +134,7 @@ public class AddressDownload extends ListActivity {
 
 		@SuppressWarnings("unchecked")
 		NewArrayAdapter(Activity context) {
-			super(context, R.layout.downloadrow, tbMemberList);
+			super(context, R.layout.my_address_download_row, tbMemberList);
 			this.context = context;
 		}
 
@@ -147,7 +147,7 @@ public class AddressDownload extends ListActivity {
 			TbMember tbMember = tbMemberList.get(position);
 
 			LayoutInflater inflater = context.getLayoutInflater();
-			View row = inflater.inflate(R.layout.downloadrow, null);
+			View row = inflater.inflate(R.layout.my_address_download_row, null);
 
 			// / 이름
 			TextView textView = (TextView) row.findViewById(R.id.name);

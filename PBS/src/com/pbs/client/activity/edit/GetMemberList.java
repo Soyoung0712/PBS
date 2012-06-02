@@ -19,7 +19,7 @@ import com.pbs.client.activity.newgroup.CreateGroup;
 import com.pbs.client.model.TbMember;
 import com.pbs.client.util.UserGson;
 
-public class EditMember extends ListActivity {
+public class GetMemberList extends ListActivity {
 
 	private String myPhoneNum = "01077778888";
 	private List<TbMember> tbMemberList = null;
@@ -28,7 +28,7 @@ public class EditMember extends ListActivity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.editmemberlist);
+		setContentView(R.layout.edit_get_member_list);
 
 		// 선택한 그룹의 맴버 리스트 가져오기
 		tbMemberList = userGson.getMemeberList(5L, myPhoneNum);
@@ -41,10 +41,10 @@ public class EditMember extends ListActivity {
 		Button complete = (Button) findViewById(R.id.complete);
 		complete.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Toast.makeText(EditMember.this, "편집 완료", Toast.LENGTH_SHORT)
+				Toast.makeText(GetMemberList.this, "편집 완료", Toast.LENGTH_SHORT)
 						.show();
 				finish();
-				Intent intent = new Intent(EditMember.this, CreateGroup.class);
+				Intent intent = new Intent(GetMemberList.this, CreateGroup.class);
 				startActivity(intent);
 			}
 		});
@@ -56,7 +56,7 @@ public class EditMember extends ListActivity {
 
 		@SuppressWarnings("unchecked")
 		NewArrayAdapter(Activity context) {
-			super(context, R.layout.editmemberrow, tbMemberList);
+			super(context, R.layout.edit_get_member_list_row, tbMemberList);
 
 			this.context = context;
 		}
@@ -67,7 +67,7 @@ public class EditMember extends ListActivity {
 
 			LayoutInflater inflater = context.getLayoutInflater();
 
-			View row = inflater.inflate(R.layout.editmemberrow, null);
+			View row = inflater.inflate(R.layout.edit_get_member_list_row, null);
 
 			EditText edit1 = (EditText) row.findViewById(R.id.name);
 			edit1.setText(tbMember.getFd_member_name());

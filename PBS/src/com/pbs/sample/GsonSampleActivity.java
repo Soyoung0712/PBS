@@ -23,7 +23,7 @@ public class GsonSampleActivity extends Activity {
 		
 		Log.d("GsonSampleActivity", "Call onCreate");
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.gson_sample);
+		setContentView(R.layout.sample_gson);
 		
 		((TextView)findViewById(R.id.gsonSample)).setText("hello");
 		

@@ -32,7 +32,7 @@ public class MemberList extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.groupmemberlist);
+		setContentView(R.layout.my_member_list);
 
 		// 선택한 그룹의 맴버 리스트 가져오기
 		Intent intent = getIntent();
@@ -80,7 +80,7 @@ public class MemberList extends ListActivity {
 
 		@SuppressWarnings("unchecked")
 		NewArrayAdapter(Activity context) {
-			super(context, R.layout.memberrow, tbMemberList);
+			super(context, R.layout.my_member_list_row, tbMemberList);
 			this.context = context;			
 		}
 
@@ -93,7 +93,7 @@ public class MemberList extends ListActivity {
 			TbMember tbMember = tbMemberList.get(pos);
 
 			LayoutInflater inflater = context.getLayoutInflater();
-			View row = inflater.inflate(R.layout.memberrow, null);
+			View row = inflater.inflate(R.layout.my_member_list_row, null);
 
 			// 이름
 			TextView textView = (TextView) row.findViewById(R.id.name);

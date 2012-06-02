@@ -17,7 +17,7 @@ public class CreateGroupComplete extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {			
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.group_create_ok);
+		setContentView(R.layout.new_create_group_complete);
 
 	 
 		TextView mGroupname = (TextView)findViewById(R.id.textView1);

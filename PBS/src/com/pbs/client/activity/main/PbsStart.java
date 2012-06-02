@@ -4,7 +4,7 @@
 
 package com.pbs.client.activity.main;
 
-import com.pbs.client.activity.mygroup.MyGroupList;
+import com.pbs.client.activity.mygroup.GroupList;
 import com.pbs.client.activity.newgroup.CreateGroup;
 
 import android.app.TabActivity;
@@ -25,7 +25,7 @@ public class PbsStart extends TabActivity {
         
         tabHost.addTab(tabHost.newTabSpec("Tab1")
         		.setIndicator("내 그룹")
-        		.setContent(new Intent(this, MyGroupList.class)));
+        		.setContent(new Intent(this, GroupList.class)));
         tabHost.addTab(tabHost.newTabSpec("Tab2")
         		.setIndicator("새 그룹 만들기")
         		.setContent(new Intent(this, CreateGroup.class)));

@@ -22,7 +22,7 @@ import android.widget.EditText;
 import com.android.R;
 import com.android.R.id;
 import com.android.R.layout;
-import com.pbs.client.activity.edit.EditMember;
+import com.pbs.client.activity.edit.GetMemberList;
 import com.pbs.client.activity.edit.GetAddressList;
 import com.pbs.client.model.AddressUser;
 
@@ -55,7 +55,7 @@ public class CreateGroup extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.makenewgroup);
+		setContentView(R.layout.new_create_group);
  
 		groupNameFix = (EditText)findViewById(R.id.editText1);
 		    etable = groupNameFix.getText();
@@ -136,48 +136,33 @@ public class CreateGroup extends Activity {
 		});
 
 		// 그룹원 관리  명단 눌렀을때 편집 기능 ..
-		GroupList.setOnTouchListener(new OnTouchListener()
-		{
-			
-			
-			public boolean onTouch(View arg0, MotionEvent event)
-			{
-				// 그룬원   EditText 를 눌렀을때 발생되는 이벤트 처리 // 이벤트 발생후 수신인 편집 화면으로 이동
-				if(event.getAction() == KeyEvent.ACTION_UP)
-				{
-					 
-					Intent intent = new Intent(CreateGroup.this, EditMember.class);
+		GroupList.setOnTouchListener(new OnTouchListener() {
+			public boolean onTouch(View arg0, MotionEvent event) {
+				// 그룬원 EditText 를 눌렀을때 발생되는 이벤트 처리 // 이벤트 발생후 수신인 편집 화면으로 이동
+				if (event.getAction() == KeyEvent.ACTION_UP) {
+
+					Intent intent = new Intent(CreateGroup.this, GetMemberList.class);
 					startActivity(intent);
-					 
+
 				}
-				 return false;
+				return false;
 			}
 		});
 		
-		
-		
-		
-		mGroupList.setOnTouchListener(new OnTouchListener()
-		{
-			
-			
-			public boolean onTouch(View arg0, MotionEvent event)
-			{
-				// 그룹원 관리자  EditText 를 눌렀을때 발생되는 이벤트 처리 // 이벤트 발생후 수신인 편집 화면으로 이동
-				if(event.getAction() == KeyEvent.ACTION_UP)
-				{
-					 
-					Intent intent = new Intent(CreateGroup.this, EditMember.class);  //일단 EditMember 클래스 로 해둠.;;
+		mGroupList.setOnTouchListener(new OnTouchListener() {
+
+			public boolean onTouch(View arg0, MotionEvent event) {
+				// 그룹원 관리자 EditText 를 눌렀을때 발생되는 이벤트 처리 // 이벤트 발생후 수신인 편집 화면으로 이동
+				if (event.getAction() == KeyEvent.ACTION_UP) {
+					
+					// 일단 EditMember 클래스 로 해둠.;;
+					Intent intent = new Intent(CreateGroup.this, GetMemberList.class); 
 					startActivity(intent);
-					 
+
 				}
-				 return false;
+				return false;
 			}
 		});
-		
-		
-		
-		
 
 	}
 	

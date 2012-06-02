@@ -37,7 +37,7 @@ public class SendSms extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.checkmemberlist);
+		setContentView(R.layout.my_send_sms);
 
 		// 선택한 그룹의 맴버 리스트 가져오기
 		Intent intent = getIntent();
@@ -120,7 +120,7 @@ public class SendSms extends ListActivity {
 
 		@SuppressWarnings("unchecked")
 		NewArrayAdapter(Activity context) {
-			super(context, R.layout.checkmemberrow, tbMemberList);
+			super(context, R.layout.my_send_sms_row, tbMemberList);
 
 			this.context = context;
 		}
@@ -130,7 +130,7 @@ public class SendSms extends ListActivity {
 			TbMember tbMember = tbMemberList.get(position);
 
 			LayoutInflater inflater = context.getLayoutInflater();
-			View row = inflater.inflate(R.layout.checkmemberrow, null);
+			View row = inflater.inflate(R.layout.my_send_sms_row, null);
 
 			// / 이름
 			TextView textView = (TextView) row.findViewById(R.id.name);
