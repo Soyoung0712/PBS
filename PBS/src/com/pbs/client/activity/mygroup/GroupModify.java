@@ -1,4 +1,10 @@
-package com.android;
+package com.pbs.client.activity.mygroup;
+
+import com.android.R;
+import com.android.R.id;
+import com.android.R.layout;
+import com.pbs.client.activity.edit.GetAddressList;
+import com.pbs.sample.PhoneList;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,7 +21,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class GroupSetting extends Activity
+public class GroupModify extends Activity
 {
 
 	EditText groupname;
@@ -131,7 +137,7 @@ public class GroupSetting extends Activity
 		{
 			public void onClick(View arg0)
 			{
-				Intent intent = new Intent(GroupSetting.this, GetPhoneList.class);
+				Intent intent = new Intent(GroupModify.this, GetAddressList.class);
 				startActivity(intent);
 			}
 		});
@@ -141,7 +147,7 @@ public class GroupSetting extends Activity
 		{
 			public void onClick(View arg0)
 			{
-				Intent intent1 = new Intent(GroupSetting.this, GetPhoneList.class);
+				Intent intent1 = new Intent(GroupModify.this, GetAddressList.class);
 				startActivity(intent1);
 			}
 		});
@@ -153,7 +159,7 @@ public class GroupSetting extends Activity
 			public void onClick(View arg0)
 			{
 
-				Toast.makeText(GroupSetting.this, "설정 완료", Toast.LENGTH_SHORT).show();
+				Toast.makeText(GroupModify.this, "설정 완료", Toast.LENGTH_SHORT).show();
 				finish();
 			}
 		});
@@ -163,7 +169,7 @@ public class GroupSetting extends Activity
 		{
 			public void onClick(View arg0)
 			{
-				Toast.makeText(GroupSetting.this, "취소", Toast.LENGTH_SHORT).show();
+				Toast.makeText(GroupModify.this, "취소", Toast.LENGTH_SHORT).show();
 				finish();
 			}
 		});
@@ -179,7 +185,7 @@ public class GroupSetting extends Activity
 				if(event.getAction() == KeyEvent.ACTION_UP)
 				{
 					 
-					Intent intent = new Intent(GroupSetting.this, PhoneList.class);
+					Intent intent = new Intent(GroupModify.this, PhoneList.class);
 					startActivity(intent);
 					 
 				}
@@ -197,7 +203,7 @@ public class GroupSetting extends Activity
 				if(event.getAction() == KeyEvent.ACTION_UP)
 				{
 					 
-					Intent intent = new Intent(GroupSetting.this, PhoneList.class); //일단 PhoneList 가져옴
+					Intent intent = new Intent(GroupModify.this, PhoneList.class); //일단 PhoneList 가져옴
 					startActivity(intent);
 					 
 				}

@@ -1,4 +1,4 @@
-package com.android;
+package com.pbs.client.activity.mygroup;
 
 import java.util.List;
 
@@ -14,11 +14,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.R;
+import com.android.R.drawable;
+import com.android.R.id;
+import com.android.R.layout;
 import com.pbs.client.model.TbMember;
 import com.pbs.client.util.IntentsUtil;
 import com.pbs.client.util.UserGson;
 
-public class GroupMemberList extends ListActivity {
+public class MemberList extends ListActivity {
 
 	private String myPhoneNum = "01077778888";
 	private List<TbMember> tbMemberList = null;	
@@ -43,7 +47,7 @@ public class GroupMemberList extends ListActivity {
 		Button mPhoneMove = (Button) findViewById(R.id.button1);
 		mPhoneMove.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
-				Intent intent = new Intent(GroupMemberList.this, Download.class);
+				Intent intent = new Intent(MemberList.this, AddressDownload.class);
 				intent.putExtra("pk_group", pk_group);
 				intent.putExtra("fd_group_name", fd_group_name);
 				startActivity(intent);
@@ -54,7 +58,7 @@ public class GroupMemberList extends ListActivity {
 		Button mSMSMove = (Button) findViewById(R.id.button2);
 		mSMSMove.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
-				Intent intent = new Intent(GroupMemberList.this, GroupCheckList.class);
+				Intent intent = new Intent(MemberList.this, SendSms.class);
 				intent.putExtra("pk_group", pk_group);
 				startActivity(intent);
 			}

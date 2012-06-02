@@ -1,4 +1,4 @@
-package com.android;
+package com.pbs.client.activity.mygroup;
 
 import java.util.List;
 
@@ -22,6 +22,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.R;
+import com.android.R.id;
+import com.android.R.layout;
 import com.pbs.client.model.TbGroup;
 import com.pbs.client.util.UserGson;
 
@@ -30,7 +33,7 @@ import com.pbs.client.util.UserGson;
  * @author Administrator
  *
  */
-public class PbsMain extends ListActivity {
+public class MyGroupList extends ListActivity {
 
 	private String myPhoneNum = "01077778888";
 	private List<TbGroup> tbGroupList = null;
@@ -91,7 +94,7 @@ public class PbsMain extends ListActivity {
 					groupKey = Long.parseLong(key.getText().toString());
 				} catch (Exception e) {
 					Log.d("MyGroupList", "groupKey Input Error [groupKey]:" + groupKey);
-					Toast.makeText(PbsMain.this, "그룹키를 잘못 입력하셨습니다",Toast.LENGTH_LONG).show();
+					Toast.makeText(MyGroupList.this, "그룹키를 잘못 입력하셨습니다",Toast.LENGTH_LONG).show();
 				}				
 			
 				// 그룹키 추가
@@ -102,11 +105,11 @@ public class PbsMain extends ListActivity {
 					tbGroupList.clear();
 					tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));					
 					newArrayAdapter.notifyDataSetChanged();
-					Toast.makeText(PbsMain.this, "그룹이 추가 되었습니다.",Toast.LENGTH_LONG).show();
+					Toast.makeText(MyGroupList.this, "그룹이 추가 되었습니다.",Toast.LENGTH_LONG).show();
 					
 				// 그룹키 추가 실패
 				}else {					
-					Toast.makeText(PbsMain.this, "잘못된 그룹입니다.",Toast.LENGTH_LONG).show();
+					Toast.makeText(MyGroupList.this, "잘못된 그룹입니다.",Toast.LENGTH_LONG).show();
 				}				
 								
 			}
@@ -152,7 +155,7 @@ public class PbsMain extends ListActivity {
 			Button mGroupSetting = (Button) row.findViewById(R.id.groupSetting);
 			mGroupSetting.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View v) {
-					Intent intent = new Intent(PbsMain.this, GroupSetting.class);
+					Intent intent = new Intent(MyGroupList.this, GroupModify.class);
 					startActivity(intent);
 				}
 
@@ -171,7 +174,7 @@ public class PbsMain extends ListActivity {
 						tbGroupList.clear();
 						tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));					
 						newArrayAdapter.notifyDataSetChanged();						
-						Toast.makeText(PbsMain.this, "그룹이 삭제 되었습니다.",Toast.LENGTH_LONG).show();
+						Toast.makeText(MyGroupList.this, "그룹이 삭제 되었습니다.",Toast.LENGTH_LONG).show();
 					}
 										
 				}				
@@ -193,7 +196,7 @@ public class PbsMain extends ListActivity {
 	 * 리스트에서 "그룹" 클릭
 	 */
 	public void onListItemClick(ListView parent, View v, int position, long id) {								
-		Intent intent = new Intent(PbsMain.this, GroupMemberList.class);		
+		Intent intent = new Intent(MyGroupList.this, MemberList.class);		
 		intent.putExtra("pk_group", tbGroupList.get(position).getPk_group());
 		intent.putExtra("fd_group_name", tbGroupList.get(position).getFd_group_name());
 		startActivity(intent);		

@@ -1,4 +1,4 @@
-package com.android;
+package com.pbs.client.activity.edit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +21,12 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.R;
+import com.android.R.id;
+import com.android.R.layout;
 import com.pbs.client.model.AddressUser;
 
-public class GetPhoneList extends ListActivity {
+public class GetAddressList extends ListActivity {
 
 	private NewArrayAdapter newArrayAdapter = null;
 	// 모두선택 Flag (초기 설정은 모두선택이 해지된 상태)
@@ -129,7 +132,7 @@ public class GetPhoneList extends ListActivity {
 		Button mGroupRestul = (Button) findViewById(R.id.sendmessage);
 		mGroupRestul.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
-				Toast.makeText(GetPhoneList.this, "가져오기 완료", Toast.LENGTH_SHORT).show();
+				Toast.makeText(GetAddressList.this, "가져오기 완료", Toast.LENGTH_SHORT).show();
 				
 				// 선택한 전화번호만 저장
 				ArrayList<AddressUser> resultAddressUserList = new ArrayList<AddressUser>();						
@@ -151,7 +154,7 @@ public class GetPhoneList extends ListActivity {
 		Button mGroupCancel = (Button) findViewById(R.id.cancle);
 		mGroupCancel.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
-				Toast.makeText(GetPhoneList.this, "취소", Toast.LENGTH_SHORT).show();
+				Toast.makeText(GetAddressList.this, "취소", Toast.LENGTH_SHORT).show();
 				finish();
 			}
 		});

@@ -1,10 +1,6 @@
-package com.android;
+package com.pbs.client.activity.edit;
 
 import java.util.List;
-
-import com.android.Download.NewArrayAdapter;
-import com.pbs.client.model.TbMember;
-import com.pbs.client.util.UserGson;
 
 import android.app.Activity;
 import android.app.ListActivity;
@@ -17,6 +13,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.android.R;
+import com.pbs.client.activity.newgroup.CreateGroup;
+import com.pbs.client.model.TbMember;
+import com.pbs.client.util.UserGson;
 
 public class EditMember extends ListActivity {
 
@@ -43,7 +44,7 @@ public class EditMember extends ListActivity {
 				Toast.makeText(EditMember.this, "편집 완료", Toast.LENGTH_SHORT)
 						.show();
 				finish();
-				Intent intent = new Intent(EditMember.this, MakeNewGroup.class);
+				Intent intent = new Intent(EditMember.this, CreateGroup.class);
 				startActivity(intent);
 			}
 		});

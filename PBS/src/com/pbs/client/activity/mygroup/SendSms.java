@@ -1,13 +1,19 @@
-package com.android;
+package com.pbs.client.activity.mygroup;
 
 import java.util.List;
 
+import com.android.R;
+import com.android.R.id;
+import com.android.R.layout;
+import com.pbs.client.model.TbGroup;
+import com.pbs.client.model.TbMember;
+import com.pbs.client.util.UserGson;
+
 import android.app.Activity;
+import android.app.LauncherActivity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Contacts;
-import android.provider.Contacts.People;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,56 +21,47 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
-import com.pbs.client.model.TbMember;
-import com.pbs.client.util.AddressUtil;
-import com.pbs.client.util.UserGson;
+public class SendSms extends ListActivity {
 
-public class Download extends ListActivity {
-
-	private String myPhoneNum = "01077778888";
 	private List<TbMember> tbMemberList = null;
-	private NewArrayAdapter newArrayAdapter = null;
 	private UserGson userGson = new UserGson();
-	// ëª¨ë‘ì„ íƒ Flag (ì´ˆê¸° ì„¤ì •ì€ ëª¨ë‘ì„ íƒì´ í•´ì§€ëœ ìƒíƒœ)
+	private NewArrayAdapter newArrayAdapter = null;
+	private String myPhoneNum = "01077778888";
+	// ¸ğµÎ¼±ÅÃ Flag (ÃÊ±â ¼³Á¤Àº ¸ğµÎ¼±ÅÃÀÌ ÇØÁöµÈ »óÅÂ)
 	boolean allClickStatuFlag = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.downloadlist);
+		setContentView(R.layout.checkmemberlist);
 
-		// ì„ íƒí•œ ê·¸ë£¹ì˜ ë§´ë²„ ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
+		// ¼±ÅÃÇÑ ±×·ìÀÇ ¸É¹ö ¸®½ºÆ® °¡Á®¿À±â
 		Intent intent = getIntent();
 		long pk_group = intent.getExtras().getLong("pk_group");
-		String fd_group_name = intent.getExtras().getString("fd_group_name");		
-		tbMemberList = userGson.getMemeberList(pk_group, myPhoneNum);
-		
-		// ê·¸ë£¹ëª…
-		TextView editgroupnameTextView = (TextView)findViewById(R.id.editgroupname);
-		editgroupnameTextView.setText(fd_group_name);
+		tbMemberList = userGson.getMemeberList(pk_group, myPhoneNum);	
 
-		// ë¦¬ìŠ¤íŠ¸ë·°ì— ë¦¬ìŠ¤íŠ¸ ì ìš©
+		// ¸®½ºÆ®ºä¿¡ ¸®½ºÆ® Àû¿ë
 		newArrayAdapter = new NewArrayAdapter(this);
 		setListAdapter(newArrayAdapter);
 
-		// "ëª¨ë‘ì„ íƒ" ë²„íŠ¼ ì„¤ì •
+		// "¸ğµÎ¼±ÅÃ" ¹öÆ° ¼³Á¤
 		CheckBox allchoice = (CheckBox) findViewById(R.id.checkBoxAll);
 		allchoice.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 
-				// ì „ì²´ í•´ì œ
+				// ÀüÃ¼ ÇØÁ¦
 				if (allClickStatuFlag) {
 					for (int i = 0; i < tbMemberList.size(); i++) {
 						tbMemberList.get(i).setChecked(false);
 					}
 					allClickStatuFlag = false;
 
-					// ì „ì²´ ì„ íƒ
+					// ÀüÃ¼ ¼±ÅÃ
 				} else {
 					for (int i = 0; i < tbMemberList.size(); i++) {
 						tbMemberList.get(i).setChecked(true);
@@ -76,93 +73,81 @@ public class Download extends ListActivity {
 			}
 		});
 
-		// "ì €ì¥" ë²„íŠ¼
 		Button mSave = (Button) findViewById(R.id.sendmessage);
-		StroeButton(this, mSave, fd_group_name);
-
-		// "ì·¨ì†Œ" ë²„íŠ¼ ì„¤ì •
 		Button mCancle = (Button) findViewById(R.id.cancle);
+
+		// ¹®ÀÚ º¸³»±â ¹öÆ°À» ´­·ÈÀ»¶§
+		mSave.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View arg0) {
+				SendMessage();
+			}
+		});
+
+		// Ãë¼Ò ¹öÆ°À» ´­·ÈÀ»¶§
 		mCancle.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
-				Toast.makeText(Download.this, "ì·¨ì†Œ", Toast.LENGTH_SHORT).show();
+				Toast.makeText(SendSms.this, "Ãë¼Ò", Toast.LENGTH_SHORT)
+						.show();
 				finish();
 			}
 		});
-
 	}
 
-	// ì €ì¥ ë²„íŠ¼ í´ë¦­í–ˆì„ ë•Œ
-	private void StroeButton(final Activity activity, Button mSave, final String fd_group_name) {
-		mSave.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View arg0) {
-				int cntSave = 0;
-				AddressUtil addressUtil = new AddressUtil();
-				
-				// ì„ íƒí•œ ì‚¬ìš©ìë¥¼ ì£¼ì†Œë¡ì— ì €ì¥
-				for (int i = 0; i < tbMemberList.size(); i++) {
-					if (tbMemberList.get(i).isChecked()) {
-						addressUtil.addContact(	activity, 
-												fd_group_name, 
-												tbMemberList.get(i).getFd_member_name(), 
-												tbMemberList.get(i).getFd_member_phone());
-						cntSave++;
-					}
-				}
-				
-				if (cntSave > 0) {
-					Toast.makeText(Download.this, "ì •ìƒì ìœ¼ë¡œ ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤..", Toast.LENGTH_SHORT).show();
-					finish();
-				}else {
-					Toast.makeText(Download.this, "ì €ì¥í•  ë©¤ë²„ê°€ ì—†ìŠµë‹ˆë‹¤.", Toast.LENGTH_SHORT).show();
-				}
+	// ¹®ÀÚ º¸³»±â ¹öÆ° Å¬¸¯ ÀÌº¥Æ®
+	public void SendMessage() {
+		String phone = "";
+		Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+		// ¹®ÀÚ ¹ŞÀ» »ç¶÷ Ãß¸®±â
+		for (int i = 0; i < tbMemberList.size(); i++) {
+			if (tbMemberList.get(i).isChecked()) {
+				phone += ";" + tbMemberList.get(i).getFd_member_phone();
 			}
-		});
+		}
+		// ¹®ÀÚ ¹Ş´Â »ç¶÷µé ¹øÈ£ ÀÔ·Â
+		if (phone.length() > 0) {
+			phone = phone.substring(1);
+			sendIntent.putExtra("address", phone);
+		} else {
+			sendIntent.putExtra("address", phone);
+		}
+		sendIntent.setType("vnd.android-dir/mms-sms");
+
+		startActivity(sendIntent);
 	}
 
-	/**
-	 * ListView Adapter
-	 * 
-	 * @author Administrator
-	 * 
-	 */
 	class NewArrayAdapter extends ArrayAdapter {
-
 		Activity context;
 
 		@SuppressWarnings("unchecked")
 		NewArrayAdapter(Activity context) {
-			super(context, R.layout.downloadrow, tbMemberList);
+			super(context, R.layout.checkmemberrow, tbMemberList);
+
 			this.context = context;
 		}
 
-		/**
-		 * ë©¤ë²„ ë¦¬ìŠ¤íŠ¸ì˜ ê°¯ìˆ˜ë§Œí¼ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
-		 */
 		public View getView(int position, View convertView, ViewGroup parent) {
-
-			// ë©¤ë²„ ì •ë³´
+			// ¸â¹ö Á¤º¸
 			TbMember tbMember = tbMemberList.get(position);
 
 			LayoutInflater inflater = context.getLayoutInflater();
-			View row = inflater.inflate(R.layout.downloadrow, null);
+			View row = inflater.inflate(R.layout.checkmemberrow, null);
 
-			// / ì´ë¦„
+			// / ÀÌ¸§
 			TextView textView = (TextView) row.findViewById(R.id.name);
 			textView.setText(tbMember.getFd_member_name());
-			// ì „í™”ë²ˆí˜¸
+			// ÀüÈ­¹øÈ£
 			TextView textView2 = (TextView) row.findViewById(R.id.number);
 			textView2.setText(tbMember.getFd_member_phone());
-			// ì²´í¬ë°•ìŠ¤ ìƒíƒœ
+			// Ã¼Å©¹Ú½º »óÅÂ
 			final int pos = position;
 			CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkBox);
 			checkBox.setChecked(tbMember.isChecked());
 			checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-				// í´ë¦­í• ë•Œ ë§ˆë‹¤ ìƒíƒœ ì €ì¥
+				// Å¬¸¯ÇÒ¶§ ¸¶´Ù »óÅÂ ÀúÀå
 				public void onCheckedChanged(CompoundButton buttonView,
 						boolean isChecked) {
 					tbMemberList.get(pos).setChecked(isChecked);
 				}
-
 			});
 
 			return row;

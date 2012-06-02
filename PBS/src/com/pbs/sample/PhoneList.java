@@ -1,6 +1,10 @@
-package com.android;
+package com.pbs.sample;
 
 import java.util.List;
+
+import com.android.R;
+import com.android.R.id;
+import com.android.R.layout;
 
 import android.app.Activity;
 import android.app.ListActivity;

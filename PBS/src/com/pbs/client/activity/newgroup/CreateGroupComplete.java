@@ -1,4 +1,9 @@
-package com.android;
+package com.pbs.client.activity.newgroup;
+
+import com.android.R;
+import com.android.R.id;
+import com.android.R.layout;
+import com.pbs.client.activity.main.PbsStart;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class GroupActivity extends Activity {
+public class CreateGroupComplete extends Activity {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {			
@@ -25,7 +30,7 @@ public class GroupActivity extends Activity {
 		{
 			public void onClick(View arg0)
 			{
-				Intent intent = new Intent(GroupActivity.this,PBSActivity.class);
+				Intent intent = new Intent(CreateGroupComplete.this,PbsStart.class);
 				startActivity(intent);
 			}
 		});
@@ -35,7 +40,7 @@ public class GroupActivity extends Activity {
 		{
 			public void onClick(View arg0)
 			{
-				Intent intent1 = new Intent(GroupActivity.this,InviteMember.class);
+				Intent intent1 = new Intent(CreateGroupComplete.this,InviteSms.class);
 				startActivity(intent1);
 			}
 		});

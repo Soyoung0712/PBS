@@ -1,7 +1,10 @@
-package com.android;
+package com.pbs.client.activity.newgroup;
 
 import java.util.List;
 
+import com.android.R;
+import com.android.R.id;
+import com.android.R.layout;
 import com.pbs.client.model.TbGroup;
 import com.pbs.client.model.TbMember;
 import com.pbs.client.util.UserGson;
@@ -22,7 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
-public class InviteMember extends ListActivity {
+public class InviteSms extends ListActivity {
 
 	private List<TbMember> tbMemberList = null;
 	private UserGson userGson = new UserGson();
@@ -81,7 +84,7 @@ public class InviteMember extends ListActivity {
 		// 취소 버튼을 눌렸을때
 		mCancle.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
-				Toast.makeText(InviteMember.this, "취소", Toast.LENGTH_SHORT)
+				Toast.makeText(InviteSms.this, "취소", Toast.LENGTH_SHORT)
 						.show();
 				finish();
 			}

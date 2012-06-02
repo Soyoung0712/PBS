@@ -14,10 +14,9 @@
         android:icon="@drawable/ic_launcher" 
         android:label="@string/app_name" >        
         
-        <!-- 내 그룹 Activity -->    
-  
+        <!-- 내 그룹 Activity -->  
         <activity
-            android:name=".PBSActivity"
+            android:name="com.pbs.client.activity.main.PbsStart"
             android:label="@string/title" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,21 +24,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-               
-     	 
   	 	
-  	 	
-        <activity android:name="GroupMemberList"></activity>
-        <activity android:name="MakeNewGroup"></activity>
-        <activity android:name=".PbsMain"></activity>
-        <activity android:name="Download"></activity>
-        <activity android:name="GetPhoneList"></activity>
-        <activity android:name="GroupCheckList"></activity>
-        <activity android:name="InviteMember"></activity>
-        <activity android:name="GroupSetting"></activity>
-        <activity android:name="GroupActivity"></activity>
-        <activity android:name="PhoneList"></activity>
-        <activity android:name="EditMember"></activity>
+  	 	<!-- mygroup -->
+        <activity android:name="com.pbs.client.activity.mygroup.MyGroupList"></activity>
+        <activity android:name="com.pbs.client.activity.mygroup.GroupModify"></activity>
+        <activity android:name="com.pbs.client.activity.mygroup.MemberList"></activity>
+        <activity android:name="com.pbs.client.activity.mygroup.AddressDownload"></activity>
+        <activity android:name="com.pbs.client.activity.mygroup.SendSms"></activity>
+        
+        <!-- newgroup -->
+        <activity android:name="com.pbs.client.activity.newgroup.CreateGroup"></activity>
+        <activity android:name="com.pbs.client.activity.newgroup.CreateGroupComplete"></activity>
+        <activity android:name="com.pbs.client.activity.newgroup.InviteSms"></activity>
+                
+        <!-- edit -->
+        <activity android:name="com.pbs.client.activity.edit.EditMember"></activity>
+        <activity android:name="com.pbs.client.activity.edit.GetAddressList"></activity>
+        
+        <!-- sample -->
+        <activity android:name="com.pbs.sample.PhoneList"></activity>        
         
     </application>
 

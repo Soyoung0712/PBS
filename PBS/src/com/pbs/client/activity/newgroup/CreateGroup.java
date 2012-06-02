@@ -1,4 +1,4 @@
-package com.android;
+package com.pbs.client.activity.newgroup;
 
 import java.util.ArrayList;
 
@@ -19,9 +19,14 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 
+import com.android.R;
+import com.android.R.id;
+import com.android.R.layout;
+import com.pbs.client.activity.edit.EditMember;
+import com.pbs.client.activity.edit.GetAddressList;
 import com.pbs.client.model.AddressUser;
 
-public class MakeNewGroup extends Activity {
+public class CreateGroup extends Activity {
 
 	private final int CALLER_REQUEST = 1;
 	
@@ -102,8 +107,8 @@ public class MakeNewGroup extends Activity {
 		// 그룹생성 완료버튼 눌렀을떄
 		mGroupResult.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				Intent intent = new Intent(MakeNewGroup.this,
-						GroupActivity.class);
+				Intent intent = new Intent(CreateGroup.this,
+						CreateGroupComplete.class);
 				intent.putExtra("groupname", groupNameFix.getText());
 			
 				
@@ -116,7 +121,7 @@ public class MakeNewGroup extends Activity {
 		// 그룹원 관리 > "가져오기" 버튼
 		plus.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				Intent intent = new Intent(MakeNewGroup.this, GetPhoneList.class);				
+				Intent intent = new Intent(CreateGroup.this, GetAddressList.class);				
 				startActivityForResult(intent, CALLER_REQUEST);
 				
 			}
@@ -125,7 +130,7 @@ public class MakeNewGroup extends Activity {
 		// 관리자 번호 "가져오기" 버튼
 		plus2.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				Intent intent1 = new Intent(MakeNewGroup.this,GetPhoneList.class);
+				Intent intent1 = new Intent(CreateGroup.this,GetAddressList.class);
 				startActivity(intent1);
 			}
 		});
@@ -141,7 +146,7 @@ public class MakeNewGroup extends Activity {
 				if(event.getAction() == KeyEvent.ACTION_UP)
 				{
 					 
-					Intent intent = new Intent(MakeNewGroup.this, EditMember.class);
+					Intent intent = new Intent(CreateGroup.this, EditMember.class);
 					startActivity(intent);
 					 
 				}
@@ -162,7 +167,7 @@ public class MakeNewGroup extends Activity {
 				if(event.getAction() == KeyEvent.ACTION_UP)
 				{
 					 
-					Intent intent = new Intent(MakeNewGroup.this, EditMember.class);  //일단 EditMember 클래스 로 해둠.;;
+					Intent intent = new Intent(CreateGroup.this, EditMember.class);  //일단 EditMember 클래스 로 해둠.;;
 					startActivity(intent);
 					 
 				}
