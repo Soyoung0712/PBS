@@ -30,24 +30,24 @@ public class CreateGroup extends Activity {
 
 	private final int CALLER_REQUEST = 1;
 	
-	EditText groupname;
-	EditText groupnumber;
+	private EditText groupname;	
 
-	EditText password;
-	EditText passwordresult;
+	private EditText password;
+	private EditText passwordresult;
 
-	Button plus;
-	Button plus2;
+	private Button plus2;
+	private Button plus3;
+	private Button plus4;
 
-	EditText groupNameFix;
+	private EditText groupNameFix;
 	
-	Button mGroupResult;
-	Button mGroupCanclel;
-	EditText GroupList;    // 일반 그룹원 편집
-	EditText mGroupList; //관리자 그룹원 편집
+	private Button mGroupResult;
+	private Button mGroupCanclel;
+	private EditText GroupList;    // 일반 그룹원 편집
+	private EditText mGroupList; //관리자 그룹원 편집
 
-	CheckBox ch1;
-	CheckBox ch2;
+	private CheckBox ch1;
+	private CheckBox ch2;
 
 	
 	Editable etable;
@@ -61,10 +61,10 @@ public class CreateGroup extends Activity {
 		    etable = groupNameFix.getText();
 		    result = etable.toString();
 		  
-		groupname = (EditText) findViewById(R.id.editText7);
-		groupnumber = (EditText) findViewById(R.id.editText8);
-		plus = (Button) findViewById(R.id.button2);
-		plus2 = (Button) findViewById(R.id.button4);
+		groupname = (EditText) findViewById(R.id.editText7);		
+		plus2 = (Button) findViewById(R.id.button2);
+		plus3 = (Button) findViewById(R.id.button3);
+		plus4 = (Button) findViewById(R.id.button4);
 
 		ch2 = (CheckBox) findViewById(R.id.checkBox2);
 		password = (EditText) findViewById(R.id.editText3);
@@ -74,10 +74,10 @@ public class CreateGroup extends Activity {
 		mGroupList = (EditText) findViewById(R.id.editText7);
 
 		
-		groupname.setEnabled(false);
-		groupnumber.setEnabled(false);
+		groupname.setEnabled(false);		
 
-		plus2.setEnabled(false);
+		plus3.setEnabled(false);
+		plus4.setEnabled(false);
 		
 	 
 		 
@@ -89,14 +89,14 @@ public class CreateGroup extends Activity {
 		ch2.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
 				if (ch2.isChecked()) {
-					groupname.setEnabled(true);
-					groupnumber.setEnabled(true);
-					plus.setEnabled(true);
+					groupname.setEnabled(true);					
 					plus2.setEnabled(true);
+					plus3.setEnabled(true);
+					plus4.setEnabled(true);
 				} else {
 					groupname.setEnabled(false);
-					groupnumber.setEnabled(false);
-					plus2.setEnabled(false);
+					plus3.setEnabled(false);
+					plus4.setEnabled(false);
 				}
 			}
 		});
@@ -119,7 +119,7 @@ public class CreateGroup extends Activity {
 		});
 
 		// 그룹원 관리 > "가져오기" 버튼
-		plus.setOnClickListener(new OnClickListener() {
+		plus2.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(CreateGroup.this, GetAddressList.class);				
 				startActivityForResult(intent, CALLER_REQUEST);
@@ -128,7 +128,7 @@ public class CreateGroup extends Activity {
 		});
 
 		// 관리자 번호 "가져오기" 버튼
-		plus2.setOnClickListener(new OnClickListener() {
+		plus4.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
 				Intent intent1 = new Intent(CreateGroup.this,GetAddressList.class);
 				startActivity(intent1);

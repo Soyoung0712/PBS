@@ -125,25 +125,20 @@
                     android:id="@+id/textView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="그룹원 관리" />
-
-                <EditText
-                    android:id="@+id/editText5"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="홍길동 외 35명" />
+                    android:text="그룹원 관리" />               
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" >
 
                     <EditText
-                        android:id="@+id/editText6"
+                        android:id="@+id/editText5"
                         android:layout_width="119dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.58"
                         android:ems="10"
+                        android:textSize="16dp"                        
+                        android:hint="홍길동 외 35명"
                         android:inputType="phone" />
 
                     <Button
@@ -165,24 +160,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:text="관리자 번호 입력" />
-
-                <EditText
-                    android:id="@+id/editText7"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="관리번호 : 임꺽정 외 3명" />
-
+                
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" >
 
                     <EditText
-                        android:id="@+id/editText8"
+                        android:id="@+id/editText7"
                         android:layout_width="119dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.58"
                         android:ems="10"
+                        android:textSize="16dp"
+                        android:hint="임꺽정 외 3명"
                         android:inputType="phone" />
 
                     <Button
