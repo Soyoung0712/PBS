@@ -1,50 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android"
+<manifest package="com.android"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-sdk android:minSdkVersion="7" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
-        android:icon="@drawable/ic_launcher" 
-        android:label="@string/app_name" >        
-        
-        <!-- 내 그룹 Activity -->  
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name" >
+
+        <!-- 내 그룹 Activity -->
         <activity
             android:name="com.pbs.client.activity.main.PbsStart"
-            android:label="@string/title" >
+            android:label="@string/title" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-  	 	
-  	 	<!-- mygroup -->
-        <activity android:name="com.pbs.client.activity.mygroup.GroupList"></activity>
-        <activity android:name="com.pbs.client.activity.mygroup.GroupModify"></activity>
-        <activity android:name="com.pbs.client.activity.mygroup.MemberList"></activity>
-        <activity android:name="com.pbs.client.activity.mygroup.AddressDownload"></activity>
-        <activity android:name="com.pbs.client.activity.mygroup.SendSms"></activity>
-        
+
+        <!-- mygroup -->
+        <activity android:name="com.pbs.client.activity.mygroup.GroupList" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.pbs.client.activity.mygroup.GroupModify" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.pbs.client.activity.mygroup.MemberList" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.pbs.client.activity.mygroup.AddressDownload" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.pbs.client.activity.mygroup.SendSms" android:screenOrientation="portrait">
+        </activity>
+
         <!-- newgroup -->
-        <activity android:name="com.pbs.client.activity.newgroup.CreateGroup"></activity>
-        <activity android:name="com.pbs.client.activity.newgroup.CreateGroupComplete"></activity>
-        <activity android:name="com.pbs.client.activity.newgroup.InviteSms"></activity>
-                
+        <activity android:name="com.pbs.client.activity.newgroup.CreateGroup" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.pbs.client.activity.newgroup.CreateGroupComplete" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.pbs.client.activity.newgroup.InviteSms" android:screenOrientation="portrait">
+        </activity>
+
         <!-- edit -->
-        <activity android:name="com.pbs.client.activity.edit.GetMemberList"></activity>
-        <activity android:name="com.pbs.client.activity.edit.GetAddressList"></activity>
-        
+        <activity android:name="com.pbs.client.activity.edit.GetMemberList" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.pbs.client.activity.edit.GetAddressList" android:screenOrientation="portrait">
+        </activity>
+
         <!-- sample -->
-        <activity android:name="com.pbs.sample.PhoneList"></activity>        
-        
     </application>
 
 </manifest>
