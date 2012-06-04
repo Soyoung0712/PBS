@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,19 +22,14 @@ import com.pbs.client.activity.edit.GetMemberList;
 
 public class GroupModify extends Activity
 {
-
-	EditText groupname;
-	EditText groupnumber;
-
 	EditText password;
 	EditText passwordresult;
 
-	EditText mMember;
-	EditText mMemberSet;
+	EditText member;
+	EditText manager;
 	
-	Button numberUrl;
-	Button plus;
-	Button plus2;
+	Button getMemberPhone;
+	Button getManagerPhone;
 	Button mResultOk;
 	Button mCancel;
 
@@ -47,35 +43,29 @@ public class GroupModify extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.my_group_modify);
-		
-		groupname = (EditText) findViewById(R.id.editText7);
-		groupnumber = (EditText) findViewById(R.id.editText8);
 
-		numberUrl = (Button) findViewById(R.id.button2);
-
-		plus = (Button) findViewById(R.id.button3);
-		plus2 = (Button) findViewById(R.id.button4);
+		getMemberPhone = (Button) findViewById(R.id.button2);  // 그룹원 가져오기 버튼
+		getManagerPhone = (Button) findViewById(R.id.button4); // 관리자 가져오기 버튼
 
 		ch1 = (CheckBox) findViewById(R.id.checkBox1);
 		ch2 = (CheckBox) findViewById(R.id.checkBox2);
-		password = (EditText) findViewById(R.id.editText3);
-		passwordresult = (EditText) findViewById(R.id.editText4);
+		password = (EditText) findViewById(R.id.editText3); // 비밀번호 에디트텍스트
+		passwordresult = (EditText) findViewById(R.id.editText4); // 비밀번호 확인 에디트텍스트
 
-		mResultOk = (Button) findViewById(R.id.button5);
-		mCancel = (Button) findViewById(R.id.button7);
+		mResultOk = (Button) findViewById(R.id.button5);  // 설정완료 버튼
+		mCancel = (Button) findViewById(R.id.button7);  // 취소 버튼
 
-		mMember = (EditText) findViewById(R.id.editText5);
-		mMemberSet = (EditText)findViewById(R.id.editText7);
+		member = (EditText) findViewById(R.id.editText5);  // 그룹원 클릭 에디트텍스트
+		manager = (EditText)findViewById(R.id.editText7);  // 관리자 클릭 에디트텍스트
  
 
+		// 관리자 번호 입력 체크박스 체크 전 기본 상태  
 		password.setEnabled(false);
 		passwordresult.setEnabled(false);
-		groupname.setEnabled(false);
-		groupnumber.setEnabled(false);
-		plus.setEnabled(false);
-		plus2.setEnabled(false);
+		getManagerPhone.setEnabled(false);
+		manager.setEnabled(false);
 
-		mMember.setInputType(0);
+		member.setInputType(0);
 
 	}
 
@@ -114,24 +104,20 @@ public class GroupModify extends Activity
 				// 체크 했을때 입력가능 하게
 				if (ch2.isChecked())
 				{
-					groupname.setEnabled(true);
-					groupnumber.setEnabled(true);
-					plus.setEnabled(true);
-					plus2.setEnabled(true);
+					getManagerPhone.setEnabled(true);
+					manager.setEnabled(true);
 				}
 				// 체크 안됫을때 입력 불가능
 				else
 				{
-					groupname.setEnabled(false);
-					groupnumber.setEnabled(false);
-					plus.setEnabled(false);
-					plus2.setEnabled(false);
+					getManagerPhone.setEnabled(false);
+					manager.setEnabled(false);
 				}
 			}
 		});
 
 		// 그룹원 관리 에서 가져오기 버튼을 눌렀을때 전화번호 목록 가져오기//
-		numberUrl.setOnClickListener(new OnClickListener()
+		getMemberPhone.setOnClickListener(new OnClickListener()
 		{
 			public void onClick(View arg0)
 			{
@@ -141,7 +127,7 @@ public class GroupModify extends Activity
 		});
 
 		// 관리자 번호 입력 에서 가져오기 버튼을 눌렀을때 전화번호 목록 가져오기//
-		plus2.setOnClickListener(new OnClickListener()
+		getManagerPhone.setOnClickListener(new OnClickListener()
 		{
 			public void onClick(View arg0)
 			{
@@ -172,19 +158,23 @@ public class GroupModify extends Activity
 			}
 		});		
 		
-		// 관리자 번호 "가져오기" 버튼
-		mMember.setOnClickListener(new OnClickListener() {
-			public void onClick(View arg0) {
-				Intent intent1 = new Intent(GroupModify.this,GetAddressList.class);
-				startActivity(intent1);
+		// 그룹원 에디트텍스트 눌렀을 때
+		member.setOnTouchListener(new OnTouchListener() {
+			public boolean onTouch(View v, MotionEvent event) {
+				if(event.getAction()==KeyEvent.ACTION_DOWN)
+				{
+					Intent intent = new Intent(GroupModify.this, GetMemberList.class);
+					startActivity(intent);
+				}
+				return false;
 			}
 		});
 
-		// 그룹원 관리  명단 눌렀을때 편집 기능 ..
-		mMemberSet.setOnTouchListener(new OnTouchListener() {
+		// 관리자 에디트텍스트 눌렀을 때
+		manager.setOnTouchListener(new OnTouchListener() {
 			public boolean onTouch(View arg0, MotionEvent event) {
 				// 그룬원 EditText 를 눌렀을때 발생되는 이벤트 처리 // 이벤트 발생후 수신인 편집 화면으로 이동
-				if (event.getAction() == KeyEvent.ACTION_UP) {
+				if (event.getAction() == KeyEvent.ACTION_DOWN) {
 
 					Intent intent = new Intent(GroupModify.this, GetMemberList.class);
 					startActivity(intent);

@@ -23,7 +23,6 @@ public class GetMemberList extends ListActivity {
 
 	private String myPhoneNum = "01077778888";
 	private List<TbMember> tbMemberList = null;
-	private NewArrayAdapter newArrayAdapter = null;
 	private UserGson userGson = new UserGson();
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -34,8 +33,7 @@ public class GetMemberList extends ListActivity {
 		tbMemberList = userGson.getMemeberList(5L, myPhoneNum);
 
 		// 리스트뷰에 리스트 적용
-		newArrayAdapter = new NewArrayAdapter(this);
-		setListAdapter(newArrayAdapter);
+		setListAdapter(new NewArrayAdapter(this));
 
 		// 편집완료 버튼 클릭 했을때
 		Button complete = (Button) findViewById(R.id.complete);
@@ -62,11 +60,11 @@ public class GetMemberList extends ListActivity {
 		}
 
 		public View getView(int position, View convertView, ViewGroup parent) {
+			final int pos = position;
 			// 멤버 정보
-			TbMember tbMember = tbMemberList.get(position);
+			TbMember tbMember = tbMemberList.get(pos);
 
 			LayoutInflater inflater = context.getLayoutInflater();
-
 			View row = inflater.inflate(R.layout.edit_get_member_list_row, null);
 
 			EditText edit1 = (EditText) row.findViewById(R.id.name);
