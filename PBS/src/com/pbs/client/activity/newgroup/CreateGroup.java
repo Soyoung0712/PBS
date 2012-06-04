@@ -16,6 +16,7 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 
@@ -24,6 +25,7 @@ import com.android.R.id;
 import com.android.R.layout;
 import com.pbs.client.activity.edit.GetMemberList;
 import com.pbs.client.activity.edit.GetAddressList;
+import com.pbs.client.activity.mygroup.GroupList;
 import com.pbs.client.model.AddressUser;
 import com.pbs.client.util.UserGson;
 
@@ -38,13 +40,13 @@ public class CreateGroup extends Activity {
 	private UserGson userGson = new UserGson();
 	
 	// 그룹명
-	private EditText groupname;	
+	private EditText etGroupName;	
 	// 비밀번호	
-	private EditText password;
+	private EditText etPassword;
 	// 비밀번호 확인
-	private EditText passwordConfirm;
+	private EditText etPasswordConfirm;
 	// 그룹 공지사항	
-	private EditText groupNotice;
+	private EditText etGroupNotice;
 	
 	// 그룹원 관리	
 	private ArrayList<AddressUser> groupMemberList; // 그룹원 리스트	
@@ -68,15 +70,15 @@ public class CreateGroup extends Activity {
 		setContentView(R.layout.new_create_group);
 		
 		// 그룹명
-		groupname = (EditText) findViewById(R.id.etGroupName);				
+		etGroupName = (EditText) findViewById(R.id.etGroupName);				
 		
 		// 비밀번호
-		password = (EditText) findViewById(R.id.etPassword);
+		etPassword = (EditText) findViewById(R.id.etPassword);
 		// 비밀번호 확인
-		passwordConfirm = (EditText) findViewById(R.id.etPasswordConfirm);
+		etPasswordConfirm = (EditText) findViewById(R.id.etPasswordConfirm);
 		
 		// 그룹 공지사항 
-		groupNotice = (EditText) findViewById(R.id.etGroupNotice);
+		etGroupNotice = (EditText) findViewById(R.id.etGroupNotice);
 		
 		// 그룹원 관리
 		groupMemberList = new ArrayList<AddressUser>();
@@ -155,31 +157,61 @@ public class CreateGroup extends Activity {
 		// "생성완료" 버튼 클릭
 		bGroupResult.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				Intent intent = new Intent(CreateGroup.this,CreateGroupComplete.class);
-				intent.putExtra("groupname", groupname.getText().toString());				
 				
-				// 그룹원 정보를 "송영석:010123456" 형태로 배열로 저장
-				String[] users  = new String[groupMemberList.size()];				
-				for( int i=0; i<groupMemberList.size(); i++ ) {
-					String tmpData = groupMemberList.get(i).getName() + ":" + groupMemberList.get(i).getDial();
-					users[i] = tmpData;
+				//-- 입력값 유효성 체크
+				String groupName 		= etGroupName.getText().toString();
+				String password 		= etPassword.getText().toString();
+				String passwordConfirm 	= etPasswordConfirm.getText().toString();
+				String groupNotice 		= etGroupNotice.getText().toString();
+				
+				boolean bCheckInput = true;
+				String checkErrorMsg = "";
+				if( bCheckInput && groupName.length() <= 0 ) {
+					bCheckInput = false;
+					checkErrorMsg = "그룹명을 입력해 주세요.";
+				}
+				if( bCheckInput && password.length() <= 0 ) {
+					bCheckInput = false;
+					checkErrorMsg = "비밀번호를 입력해 주세요.";
+				}				
+				if( bCheckInput && !password.equals(passwordConfirm) ) {
+					bCheckInput = false;				
+					checkErrorMsg = "비밀번호을 확인해 주세요";
 				}
 				
-				// 관리자 정보를  "송영석:010123456" 형태로 배열로 저장
-				String[] admins = new String[adminMemberList.size()];
-				for( int i=0; i<adminMemberList.size(); i++ ) {
-					String tmpData = adminMemberList.get(i).getName() + ":" + adminMemberList.get(i).getDial();
-					admins[i] = tmpData;
+				// 입력값 유효성 오류
+				if( bCheckInput == false ) {
+					Toast.makeText(CreateGroup.this, checkErrorMsg,Toast.LENGTH_LONG).show();
+					
+				// 입력값 요효성 체크 통과
+				}else {
+					Intent intent = new Intent(CreateGroup.this,CreateGroupComplete.class);
+					intent.putExtra("groupname", etGroupName.getText().toString());				
+					
+					// 그룹원 정보를 "송영석:010123456" 형태로 배열로 저장
+					String[] users  = new String[groupMemberList.size()];				
+					for( int i=0; i<groupMemberList.size(); i++ ) {
+						String tmpData = groupMemberList.get(i).getName() + ":" + groupMemberList.get(i).getDial();
+						users[i] = tmpData;
+					}
+					
+					// 관리자 정보를  "송영석:010123456" 형태로 배열로 저장
+					String[] admins = new String[adminMemberList.size()];
+					for( int i=0; i<adminMemberList.size(); i++ ) {
+						String tmpData = adminMemberList.get(i).getName() + ":" + adminMemberList.get(i).getDial();
+						admins[i] = tmpData;
+					}
+					
+					Log.d("CreateGroup users: " , users.toString());
+					Log.d("CreateGroup admins: " , admins.toString());
+					
+					userGson.createGroup(	etGroupName.getText().toString(), 
+											etPassword.getText().toString(), 
+											etGroupNotice.getText().toString(), 
+											myPhoneNum, users, admins);
+					startActivity(intent);
 				}
 				
-				Log.d("CreateGroup users: " , users.toString());
-				Log.d("CreateGroup admins: " , admins.toString());
-				
-				userGson.createGroup(	groupname.getText().toString(), 
-										password.getText().toString(), 
-										groupNotice.getText().toString(), 
-										myPhoneNum, users, admins);
-				startActivity(intent);
 			}
 		});
 
