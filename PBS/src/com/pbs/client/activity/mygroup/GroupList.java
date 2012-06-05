@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.android.R;
 import com.android.R.id;
 import com.android.R.layout;
+import com.pbs.client.activity.newgroup.CreateGroup;
 import com.pbs.client.model.TbGroup;
 import com.pbs.client.util.UserGson;
 
@@ -63,6 +64,17 @@ public class GroupList extends ListActivity {
 				showGroupAdd();
 			}
 		});		
+		
+		
+		Button newGroup = (Button)findViewById(R.id.button2);
+		newGroup.setOnClickListener(new View.OnClickListener()
+		{
+			public void onClick(View arg0)
+			{
+				Intent intent = new Intent(GroupList.this, CreateGroup.class);
+				startActivity(intent);
+			}
+		});
 
 	}
 	

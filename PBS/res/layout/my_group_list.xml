@@ -4,23 +4,37 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	    android:layout_width="fill_parent"
-	    android:layout_height="360dp"
-	    android:orientation="vertical" >
-	    
-	    <ListView
-	        android:id="@android:id/list"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content" />
-    
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="360dp"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="그룹 추가" />
+        android:gravity="center"
+         >
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           
+            android:text="그룹 추가" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+       
+            android:text="새 그룹 만들기" />
+    </LinearLayout>
 
 </LinearLayout>
