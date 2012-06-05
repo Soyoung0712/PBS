@@ -2,13 +2,15 @@ package com.pbs.client.model;
 
 import java.sql.Timestamp;
 
-public class TbAccessUser {
+public class TbAccessUser extends VoBase {
 
 	//-- properties --//
 	// 그룹 일련번호
 	private long fk_group;
 	// 접속 가능 번호
 	private String fd_access_phone;
+	// 사용자 이름
+	private String fd_member_name;
 	// 관리자 권한 유무
 	private String fd_admin_yn;
 	// 등록일
@@ -20,6 +22,9 @@ public class TbAccessUser {
 	}
 	public String getFd_access_phone() {
 		return fd_access_phone;
+	}
+	public String getFd_member_name() {
+		return fd_member_name;
 	}
 	public String getFd_admin_yn() {
 		return fd_admin_yn;
@@ -35,6 +40,9 @@ public class TbAccessUser {
 	public void setFd_access_phone(String fd_access_phone) {
 		this.fd_access_phone = fd_access_phone;
 	}
+	public void setFd_member_name(String fd_member_name) {
+		this.fd_member_name = fd_member_name;
+	}
 	public void setFd_admin_yn(String fd_admin_yn) {
 		this.fd_admin_yn = fd_admin_yn;
 	}
@@ -48,6 +56,7 @@ public class TbAccessUser {
 		sb.append("=== [" + this.getClass().getSimpleName() +  "] ===\n");
 		sb.append("[fk_group       ] : " + fk_group       + "\n");
 		sb.append("[fd_access_phone] : " + fd_access_phone+ "\n");
+		sb.append("[fd_member_name ] : " + fd_member_name + "\n");
 		sb.append("[fd_admin_yn    ] : " + fd_admin_yn    + "\n");
 		sb.append("[fd_reg_date    ] : " + fd_reg_date    + "\n");
 		return sb.toString();
@@ -66,6 +75,12 @@ public class TbAccessUser {
 			if (other.fd_access_phone != null)			
 				return false;				
 		} else if (!fd_access_phone.equals(other.fd_access_phone))	
+			return false;							
+
+		if (fd_member_name == null) {							
+			if (other.fd_member_name != null)			
+				return false;				
+		} else if (!fd_member_name.equals(other.fd_member_name))	
 			return false;							
 
 		if (fd_admin_yn == null) {							

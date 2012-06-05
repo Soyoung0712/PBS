@@ -65,6 +65,15 @@ public class GroupList extends ListActivity {
 		});		
 
 	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		// 그룹 리스트 갱신
+		tbGroupList.clear();
+		tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));					
+		newArrayAdapter.notifyDataSetChanged();		
+	}
 
 	// 그룹 추가 버튼 클릭 이벤트	
 	private void showGroupAdd() {
@@ -136,7 +145,7 @@ public class GroupList extends ListActivity {
 		 * 리스트를 한 row씩 출력해준다
 		 */
 		public View getView(int position, View convertView, ViewGroup parent) {			
-			
+			final int pos = position;			
 			LayoutInflater inflater = context.getLayoutInflater();
 			View row = inflater.inflate(R.layout.my_group_list_row, null);
 			
@@ -154,8 +163,9 @@ public class GroupList extends ListActivity {
 			// "설정" 버튼
 			Button mGroupSetting = (Button) row.findViewById(R.id.groupSetting);
 			mGroupSetting.setOnClickListener(new View.OnClickListener() {
-				public void onClick(View v) {
-					Intent intent = new Intent(GroupList.this, GroupModify.class);
+				public void onClick(View v) {					
+					Intent intent = new Intent(GroupList.this, GroupModify.class);		
+					intent.putExtra("pk_group", tbGroupList.get(pos).getPk_group());					
 					startActivity(intent);
 				}
 

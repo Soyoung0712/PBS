@@ -168,10 +168,12 @@ public class UserGson {
 				
 				// 관리자 데이타 저장
 				for( int i=0; i<jsonArray.length(); i++ ) {					
-					long   fk_group 		= jsonArray.getJSONObject(i).getLong("fk_group");					 
+					long   fk_group 		= jsonArray.getJSONObject(i).getLong("fk_group");			
+					String fd_member_name 	= jsonArray.getJSONObject(i).getString("fd_member_name");
 					String fd_access_phone 	= jsonArray.getJSONObject(i).getString("fd_access_phone");					
 					TbAccessUser tbAccessUser = new TbAccessUser();
 					tbAccessUser.setFk_group(fk_group);
+					tbAccessUser.setFd_member_name(fd_member_name);
 					tbAccessUser.setFd_access_phone(fd_access_phone);
 					tbAccessUserList.add(tbAccessUser);				
 				}				
@@ -377,20 +379,137 @@ public class UserGson {
 		return result;
 	}
 	
-//	http://14.63.223.82:8080/pbs/group/update.json?pk_group=100007&fd_group_name=Update Tester Group
+//	http://14.63.223.82:8080/pbs/group/update.json
+//  ?pk_group=100007
+//	&fd_group_name=Update Tester Group
 //	&fd_group_password=1234
 //	&fd_group_notice=Test Group Update Success
 //	&fd_group_creator=01022232802
 //	&users=Tester:010122802,Tester2:01033332802,Tester3:01077772802,Tester4:01099992802
 //	&admins=Tester3:01077772802,Tester4:01099992802
-	public boolean updateGroup(String groupName, 
-			String groupPassword,
-			String groupNotice, String groupCreatorPhone, String[] users,
-			String[] admins) {
-		return true;
+	public TbGroup updateGroup(	long groupKey,
+								String groupName, 
+								String groupPassword,
+								String groupNotice, 
+								String groupCreatorPhone, 
+								String[] users,
+								String[] admins) {
+		
+		TbGroup tbGroup = null;
+		
+		// 인자값 체크
+		if( 	groupName != null 		  && groupName.length() > 0						
+			&&  groupCreatorPhone != null && groupCreatorPhone.length() > 0	) {
+						
+			// 전화번호에 "-" 제거
+			groupCreatorPhone = groupCreatorPhone.replaceAll("-", "");
+			
+			// users와 admins전화번호를 아래 형식으로 변환
+			// "Tester:010123456,Tester2:01033335555,Tester3:01077778888,Tester4:01099995555"
+			String strUsers = "";
+			if( users != null ) {
+				for (String user : users) {
+					strUsers +=  user + ",";
+				}				
+			}
+			
+			String strAdmins = "";
+			if( admins != null ) {
+				for (String admin : admins) {
+					strAdmins +=  admin + ",";
+				}				
+			}
+			
+			try {
+				
+				// 웹서버에서 그룹정보를 Json형식으로 가져온다.
+				String url = urlGroupUpdate
+						+ "?pk_group="			+ groupKey
+						+ "&fd_group_name="		+ URLEncoder.encode(groupName, "UTF-8") 
+						+ "&fd_group_password=" + URLEncoder.encode(groupPassword, "UTF-8")
+						+ "&fd_group_notice=" 	+ URLEncoder.encode(groupNotice, "UTF-8")
+						+ "&fd_group_creator=" 	+ URLEncoder.encode(groupCreatorPhone, "UTF-8")
+						+ "&users=" 			+ URLEncoder.encode(strUsers, "UTF-8")
+						+ "&admins=" 			+ URLEncoder.encode(strAdmins, "UTF-8");
+				
+				Log.d("url >> ",url);
+				
+				JSONObject item = new JSONObject(getStringFromUrl(url));
+				JSONObject resultJson  = item.getJSONObject("commonResult");				
+				
+				// 정상적으로 등록되었음
+				String result = resultJson.getString("result");
+				if( CommonResult.SUCCESS.equals(result) ) {
+					
+					// 생성된 그룹 상세정보 저장
+					JSONObject tbGroupJson = item.getJSONObject("tbGroup");
+					if( item != null ) {					
+						tbGroup = new TbGroup();					
+						long pk_group 		 	 = tbGroupJson.getLong("pk_group");
+						String fd_group_name     = tbGroupJson.getString("fd_group_name");
+						String fd_group_password = tbGroupJson.getString("fd_group_password");
+						String fd_group_notice   = tbGroupJson.getString("fd_group_notice");					
+						String fd_group_creator  = tbGroupJson.getString("fd_group_creator");					
+						tbGroup.setPk_group(pk_group);
+						tbGroup.setFd_group_password(fd_group_password);
+						tbGroup.setFd_group_name(fd_group_name);					
+						tbGroup.setFd_group_notice(fd_group_notice);
+						tbGroup.setFd_group_creator(fd_group_creator);					
+					}
+					
+				}								
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			
+		}
+		
+		return tbGroup;
 	}
 	
-	public boolean deleteGroup() { return true;}
+	
+	/**
+	 * 그룹 삭제
+	 * @param groupKey
+	 * @param accessPhone
+	 * @return
+	 */
+	public boolean deleteGroup(long groupKey, String accessPhone) { 
+		boolean result = false;		
+		
+		// 인자값 체크
+		if( 	groupKey > 0L
+			&& accessPhone   != null && accessPhone.length()   > 0 ) {
+						
+			// 전화번호에 "-" 제거
+			accessPhone = accessPhone.replaceAll("-", "");
+			
+			// 웹서버에서 그룹정보를 Json형식으로 가져온다.
+			String url = urlGroupDelete + "?pk_group=" + groupKey + "&fd_access_phone=" + accessPhone;									
+			try {				
+				
+				JSONObject item = new JSONObject(getStringFromUrl(url));
+				JSONObject groupJson = item.getJSONObject("commonResult");
+				
+				// 삭제 결과 저장
+				if( item != null ) {
+					String jsonResult     = groupJson.getString("result");
+					if( jsonResult != null && jsonResult.equals(BoardResult.SUCCESS) ) {
+						result =  true;
+					}
+				}								
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			
+		}
+		
+		return result;
+	}
 	
 	
 	/**
