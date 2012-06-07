@@ -15,9 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.R;
-import com.android.R.drawable;
-import com.android.R.id;
-import com.android.R.layout;
 import com.pbs.client.model.TbMember;
 import com.pbs.client.util.IntentsUtil;
 import com.pbs.client.util.UserGson;
@@ -53,6 +50,9 @@ public class MemberList extends ListActivity {
 				startActivity(intent);
 			}
 		});
+		if( tbMemberList.size() <= 0 ) {
+			mPhoneMove.setVisibility(View.GONE);
+		}
 		
 		// "문자 보내기" 버튼
 		Button mSMSMove = (Button) findViewById(R.id.button2);
@@ -63,6 +63,9 @@ public class MemberList extends ListActivity {
 				startActivity(intent);
 			}
 		});
+		if( tbMemberList.size() <= 0 ) {
+			mSMSMove.setVisibility(View.GONE);
+		}
 		
 		// "취소" 버튼
 		Button mCancel = (Button) findViewById(R.id.button3);
@@ -70,7 +73,7 @@ public class MemberList extends ListActivity {
 			public void onClick(View arg0) {
 				finish();
 			}
-		});
+		});		
 
 	}
 

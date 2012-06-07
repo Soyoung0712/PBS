@@ -1,5 +1,6 @@
 package com.pbs.client.activity.mygroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -23,8 +24,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.R;
-import com.android.R.id;
-import com.android.R.layout;
 import com.pbs.client.activity.newgroup.CreateGroup;
 import com.pbs.client.model.TbGroup;
 import com.pbs.client.util.UserGson;

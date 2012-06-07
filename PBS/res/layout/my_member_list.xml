@@ -4,6 +4,14 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <TextView 
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent" 
+		android:text="등록된 멤버가 없습니다." 
+		android:layout_gravity="center" 
+		android:id="@+id/android:empty"
+	/>
+     
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"

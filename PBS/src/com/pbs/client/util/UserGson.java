@@ -46,7 +46,7 @@ public class UserGson {
 	 */
 	public List<TbGroup> getMyGroupList(String accessPhone) {
 				
-		List<TbGroup> tbGroupList = null;
+		List<TbGroup> tbGroupList = new ArrayList<TbGroup>();
 		
 		// 인자값 체크
 		if( accessPhone != null && accessPhone.length() > 0) {
@@ -60,11 +60,6 @@ public class UserGson {
 				
 				JSONObject item = new JSONObject(getStringFromUrl(url));
 				JSONArray jsonArray = item.getJSONArray("list");
-				
-				// 그룹 데이타가 있으면 ArrayList를 생성
-				if( jsonArray != null && jsonArray.length() > 0 ) {
-					tbGroupList = new ArrayList<TbGroup>();
-				}
 				
 				// 그룹 데이타 저장
 				for( int i=0; i<jsonArray.length(); i++ ) {					
@@ -198,7 +193,7 @@ public class UserGson {
 	 */
 	public List<TbMember> getMemeberList(long groupKey, String accessPhone) {
 		
-		List<TbMember> tbMemberList = null;
+		List<TbMember> tbMemberList = new ArrayList<TbMember>();
 		
 		// 인자값 체크
 		if( groupKey > 0L && accessPhone != null && accessPhone.length() > 0) {
@@ -213,11 +208,6 @@ public class UserGson {
 				JSONObject item = new JSONObject(getStringFromUrl(url));
 				JSONArray jsonArray = item.getJSONArray("list");
 				
-				// 그룹원 데이타가 있으면 ArrayList를 생성
-				if( jsonArray != null && jsonArray.length() > 0 ) {
-					tbMemberList = new ArrayList<TbMember>();
-				}
-				
 				// 그룹원 데이타 저장
 				for( int i=0; i<jsonArray.length(); i++ ) {					
 					long   fk_group 		= jsonArray.getJSONObject(i).getLong("fk_group");					 
@@ -231,8 +221,7 @@ public class UserGson {
 				}				
 				
 			} catch (Exception e) {
-				e.printStackTrace();
-				throw new RuntimeException(e);
+				e.printStackTrace();				
 			}
 			
 		}
