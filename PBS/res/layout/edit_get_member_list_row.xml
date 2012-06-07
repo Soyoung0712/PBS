@@ -5,16 +5,16 @@
     android:orientation="horizontal" >
 
     <EditText 
-        android:id="@+id/name"
+        android:id="@+id/etName"
         android:layout_width="120dp"
         android:layout_height="wrap_content"/>
     <EditText
-        android:id="@+id/number"
+        android:id="@+id/etNumber"
         android:layout_width="140dp"
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/deleteone"
+        android:id="@+id/bDeleteOne"
         android:layout_width="60dp"
         android:layout_height="wrap_content" 
         android:text="-"/>

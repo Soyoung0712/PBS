@@ -25,7 +25,9 @@ import com.android.R.id;
 import com.android.R.layout;
 import com.pbs.client.activity.edit.GetMemberList;
 import com.pbs.client.activity.edit.GetAddressList;
+import com.pbs.client.activity.mygroup.AddressDownload;
 import com.pbs.client.activity.mygroup.GroupList;
+import com.pbs.client.activity.mygroup.MemberList;
 import com.pbs.client.model.AddressUser;
 import com.pbs.client.util.UserGson;
 
@@ -105,9 +107,10 @@ public class CreateGroup extends Activity {
 		// "그룹원 관리" > "그룹원 추가" 텍스트 박스 클릭
 		etGroupMemberListInfo.setOnTouchListener(new OnTouchListener() {
 			public boolean onTouch(View arg0, MotionEvent event) {			
-				if (event.getAction() == KeyEvent.ACTION_UP) {
+				if (event.getAction() == KeyEvent.ACTION_UP) {					
 					Intent intent = new Intent(CreateGroup.this, GetMemberList.class);
-					startActivity(intent);
+					intent.putExtra("memberList", groupMemberList);
+					startActivityForResult(intent, MEMBER_GET_MEMBER_LIST_ACTIVITY);					
 				}
 				return false;
 			}
@@ -138,9 +141,9 @@ public class CreateGroup extends Activity {
 		etAdminMemberListInfo.setOnTouchListener(new OnTouchListener() {
 			public boolean onTouch(View arg0, MotionEvent event) {
 				if (event.getAction() == KeyEvent.ACTION_UP) {					
-					// 일단 EditMember 클래스 로 해둠.;;
-					Intent intent = new Intent(CreateGroup.this, GetMemberList.class); 
-					startActivity(intent);
+					Intent intent = new Intent(CreateGroup.this, GetMemberList.class);
+					intent.putExtra("memberList", adminMemberList);
+					startActivityForResult(intent, ADMIN_GET_MEMBER_LIST_ACTIVITY);
 				}
 				return false;
 			}
@@ -225,6 +228,24 @@ public class CreateGroup extends Activity {
 		
 		switch (requestCode) {
 		
+			// "그룹원 관리" > "그룹원 추가" 응답
+			case MEMBER_GET_MEMBER_LIST_ACTIVITY:				
+				if (resultCode == RESULT_OK) {           	
+	            	
+					// 수정된 그룹원 정보 가져오기
+	            	ArrayList<AddressUser> addressUserList = (ArrayList<AddressUser>)intent.getSerializableExtra("addressUserList");
+	            	// 수정된 그룹원 정보 저장
+	            	groupMemberList = addressUserList;
+	            	// 텍스트 문구 수정
+	            	if( groupMemberList != null && groupMemberList.size() > 0 ) {	            		
+	            		String headerMemberName = groupMemberList.get(0).getName();
+	            		etGroupMemberListInfo.setText(headerMemberName + " 외 " + (groupMemberList.size()-1) + "명");
+	            	}
+	            	
+	            }
+				break;
+				
+		
 			// "그룹원 관리" > "가져오기" 응답
 			case MEMBER_GET_ADDRESS_LIST_ACTIVITY:				
 				if (resultCode == RESULT_OK) {           	
@@ -237,6 +258,23 @@ public class CreateGroup extends Activity {
 	            	if( groupMemberList != null && groupMemberList.size() > 0 ) {	            		
 	            		String headerMemberName = groupMemberList.get(0).getName();
 	            		etGroupMemberListInfo.setText(headerMemberName + " 외 " + (groupMemberList.size()-1) + "명");
+	            	}
+	            	
+	            }
+				break;
+				
+			// "관리자 관리" > "관리자 추가" 응답
+			case ADMIN_GET_MEMBER_LIST_ACTIVITY:				
+				if (resultCode == RESULT_OK) {           	
+	            	
+					// 수정된 그룹원 정보 가져오기
+	            	ArrayList<AddressUser> addressUserList = (ArrayList<AddressUser>)intent.getSerializableExtra("addressUserList");
+	            	// 수정된 그룹원 정보 저장
+	            	adminMemberList = addressUserList;
+	            	// 텍스트 문구 수정
+	            	if( adminMemberList != null && adminMemberList.size() > 0 ) {	            		
+	            		String headerMemberName = adminMemberList.get(0).getName();
+	            		etAdminMemberListInfo.setText(headerMemberName + " 외 " + (adminMemberList.size()-1) + "명");
 	            	}
 	            	
 	            }
