@@ -3,10 +3,8 @@ package com.pbs.client.activity.newgroup;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -16,19 +14,15 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.R;
-import com.android.R.id;
-import com.android.R.layout;
-import com.pbs.client.activity.edit.GetMemberList;
 import com.pbs.client.activity.edit.GetAddressList;
-import com.pbs.client.activity.mygroup.AddressDownload;
-import com.pbs.client.activity.mygroup.GroupList;
-import com.pbs.client.activity.mygroup.MemberList;
+import com.pbs.client.activity.edit.GetMemberList;
 import com.pbs.client.model.AddressUser;
+import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.UserGson;
 
 public class CreateGroup extends Activity {
@@ -38,7 +32,7 @@ public class CreateGroup extends Activity {
 	private final int ADMIN_GET_MEMBER_LIST_ACTIVITY 	= 3;
 	private final int ADMIN_GET_ADDRESS_LIST_ACTIVITY 	= 4;
 	
-	private String myPhoneNum = "01077778888";
+	private String myPhoneNum = null;
 	private UserGson userGson = new UserGson();
 	
 	// 그룹명
@@ -70,6 +64,9 @@ public class CreateGroup extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_create_group);
+		
+		// 내 전화번호 가져오기
+		myPhoneNum = DeviceManager.getMyPhoneNumber(this);
 		
 		// 그룹명
 		etGroupName = (EditText) findViewById(R.id.etGroupName);				

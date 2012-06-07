@@ -1,6 +1,5 @@
 package com.pbs.client.activity.mygroup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -26,6 +25,7 @@ import android.widget.Toast;
 import com.android.R;
 import com.pbs.client.activity.newgroup.CreateGroup;
 import com.pbs.client.model.TbGroup;
+import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.UserGson;
 
 /**
@@ -35,7 +35,7 @@ import com.pbs.client.util.UserGson;
  */
 public class GroupList extends ListActivity {
 
-	private String myPhoneNum = "01077778888";
+	private String myPhoneNum = null;
 	private List<TbGroup> tbGroupList = null;
 	private NewArrayAdapter newArrayAdapter = null;
 	private UserGson userGson = new UserGson();	
@@ -46,6 +46,9 @@ public class GroupList extends ListActivity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.my_group_list);
+		
+		// 내 전화번호 가져오기
+		myPhoneNum = DeviceManager.getMyPhoneNumber(this);
 		
 		// 내그룹 리스트 가져오기		
 		tbGroupList = userGson.getMyGroupList(myPhoneNum);

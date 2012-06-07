@@ -6,13 +6,19 @@ import android.telephony.TelephonyManager;
 
 public class DeviceManager {
 	
+	static private String myPhoneNumber = null; 
 	/**
 	 *  내 폰 전화번호 가져오기
 	 * @param activity
 	 * @return
 	 */
 	static public String getMyPhoneNumber(Activity activity) {
-		TelephonyManager tmg = (TelephonyManager) activity.getSystemService(Context.TELEPHONY_SERVICE);
-		return tmg.getLine1Number();
+		if( myPhoneNumber != null ) {
+			return myPhoneNumber;
+		}else {
+			TelephonyManager tmg = (TelephonyManager) activity.getSystemService(Context.TELEPHONY_SERVICE);
+			myPhoneNumber = tmg.getLine1Number();
+			return myPhoneNumber;
+		}			
 	}
 }

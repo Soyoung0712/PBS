@@ -24,11 +24,12 @@ import com.android.R.id;
 import com.android.R.layout;
 import com.pbs.client.model.TbMember;
 import com.pbs.client.util.AddressUtil;
+import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.UserGson;
 
 public class AddressDownload extends ListActivity {
 
-	private String myPhoneNum = "01077778888";
+	private String myPhoneNum = null;
 	private List<TbMember> tbMemberList = null;
 	private NewArrayAdapter newArrayAdapter = null;
 	private UserGson userGson = new UserGson();
@@ -40,6 +41,9 @@ public class AddressDownload extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.my_address_download);
 
+		// 내 전화번호 가져오기
+		myPhoneNum = DeviceManager.getMyPhoneNumber(this);
+		
 		// 선택한 그룹의 맴버 리스트 가져오기
 		Intent intent = getIntent();
 		long pk_group = intent.getExtras().getLong("pk_group");

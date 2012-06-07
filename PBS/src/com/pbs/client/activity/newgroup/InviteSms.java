@@ -2,15 +2,7 @@ package com.pbs.client.activity.newgroup;
 
 import java.util.List;
 
-import com.android.R;
-import com.android.R.id;
-import com.android.R.layout;
-import com.pbs.client.model.TbGroup;
-import com.pbs.client.model.TbMember;
-import com.pbs.client.util.UserGson;
-
 import android.app.Activity;
-import android.app.LauncherActivity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,16 +13,21 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+
+import com.android.R;
+import com.pbs.client.model.TbMember;
+import com.pbs.client.util.DeviceManager;
+import com.pbs.client.util.UserGson;
 
 public class InviteSms extends ListActivity {
 
 	private List<TbMember> tbMemberList = null;
 	private UserGson userGson = new UserGson();
 	private NewArrayAdapter newArrayAdapter = null;
-	private String myPhoneNum = "01077778888";
+	private String myPhoneNum = null;
 	// 모두선택 Flag (초기 설정은 모두선택이 해지된 상태)
 	boolean allClickStatuFlag = false;
 
@@ -39,6 +36,9 @@ public class InviteSms extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_invite_sms);
 
+		// 내 전화번호 가져오기
+		myPhoneNum = DeviceManager.getMyPhoneNumber(this);
+		
 		// 선택한 그룹의 맴버 리스트 가져오기
 		tbMemberList = userGson.getMemeberList(5L, myPhoneNum);
 

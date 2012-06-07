@@ -16,12 +16,13 @@ import android.widget.TextView;
 
 import com.android.R;
 import com.pbs.client.model.TbMember;
+import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.IntentsUtil;
 import com.pbs.client.util.UserGson;
 
 public class MemberList extends ListActivity {
 
-	private String myPhoneNum = "01077778888";
+	private String myPhoneNum = null;
 	private List<TbMember> tbMemberList = null;	
 	private UserGson userGson = new UserGson();
 
@@ -31,6 +32,9 @@ public class MemberList extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.my_member_list);
 
+		// 내 전화번호 가져오기
+		myPhoneNum = DeviceManager.getMyPhoneNumber(this);
+		
 		// 선택한 그룹의 맴버 리스트 가져오기
 		Intent intent = getIntent();
 		final long pk_group = intent.getExtras().getLong("pk_group");

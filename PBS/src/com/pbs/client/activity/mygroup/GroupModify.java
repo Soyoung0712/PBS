@@ -23,11 +23,11 @@ import android.widget.Toast;
 import com.android.R;
 import com.pbs.client.activity.edit.GetAddressList;
 import com.pbs.client.activity.edit.GetMemberList;
-import com.pbs.client.activity.newgroup.CreateGroup;
 import com.pbs.client.model.AddressUser;
 import com.pbs.client.model.TbAccessUser;
 import com.pbs.client.model.TbGroup;
 import com.pbs.client.model.TbMember;
+import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.UserGson;
 
 public class GroupModify extends Activity {
@@ -37,7 +37,7 @@ public class GroupModify extends Activity {
 	private final int ADMIN_GET_MEMBER_LIST_ACTIVITY 	= 3;
 	private final int ADMIN_GET_ADDRESS_LIST_ACTIVITY 	= 4;
 	
-	private String myPhoneNum = "01077778888";
+	private String myPhoneNum = null;
 	private UserGson userGson = new UserGson();
 	
 	// 그룹명
@@ -78,6 +78,9 @@ public class GroupModify extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.my_group_modify);
+		
+		// 내 전화번호 가져오기
+		myPhoneNum = DeviceManager.getMyPhoneNumber(this);
 		
 		Intent intent = getIntent();
 		final long pk_group = intent.getExtras().getLong("pk_group");
