@@ -18,7 +18,7 @@
 
         <!-- 내 그룹 Activity -->
         <activity
-            android:name="com.pbs.client.activity.main.PbsStart"
+            android:name="com.pbs.client.activity.mygroup.GroupList"
             android:label="@string/title" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,8 +28,7 @@
         </activity>
 
         <!-- mygroup -->
-        <activity android:name="com.pbs.client.activity.mygroup.GroupList" android:screenOrientation="portrait">
-        </activity>
+ 
         <activity android:name="com.pbs.client.activity.mygroup.GroupModify" android:screenOrientation="portrait">
         </activity>
         <activity android:name="com.pbs.client.activity.mygroup.MemberList" android:screenOrientation="portrait">
