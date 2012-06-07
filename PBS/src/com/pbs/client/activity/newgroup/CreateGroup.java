@@ -22,6 +22,7 @@ import com.android.R;
 import com.pbs.client.activity.edit.GetAddressList;
 import com.pbs.client.activity.edit.GetMemberList;
 import com.pbs.client.model.AddressUser;
+import com.pbs.client.model.TbGroup;
 import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.UserGson;
 
@@ -186,7 +187,7 @@ public class CreateGroup extends Activity {
 				// 입력값 요효성 체크 통과
 				}else {
 					Intent intent = new Intent(CreateGroup.this,CreateGroupComplete.class);
-					intent.putExtra("groupname", etGroupName.getText().toString());				
+					intent.putExtra("groupMame", etGroupName.getText().toString());								
 					
 					// 그룹원 정보를 "송영석:010123456" 형태로 배열로 저장
 					String[] users  = new String[groupMemberList.size()];				
@@ -205,10 +206,15 @@ public class CreateGroup extends Activity {
 					Log.d("CreateGroup users: " , users.toString());
 					Log.d("CreateGroup admins: " , admins.toString());
 					
-					userGson.createGroup(	etGroupName.getText().toString(), 
-											etPassword.getText().toString(), 
-											etGroupNotice.getText().toString(), 
-											myPhoneNum, users, admins);
+					TbGroup tbGroupResult =  userGson.createGroup(	etGroupName.getText().toString(), 
+																	etPassword.getText().toString(), 
+																	etGroupNotice.getText().toString(), 
+																	myPhoneNum, users, admins);
+					
+					intent.putExtra("groupName", groupName);
+					intent.putExtra("groupKey", tbGroupResult.getPk_group());
+					intent.putExtra("groupPassword", password);
+					
 					startActivity(intent);
 				}
 				
