@@ -279,7 +279,7 @@ public class GroupModify extends Activity {
 					Log.d("GroupModify admins: " , admins.toString());					
 					
 					// 비밀번호를 변경하지 않으면, 비밀번호는 공백으로 치환
-					if( chPassword.isChecked() ) {
+					if( !chPassword.isChecked() ) {
 						etPassword.setText("");
 					}
 					// 그룹 업데이트
