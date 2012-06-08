@@ -113,8 +113,7 @@ public class InviteSms extends ListActivity {
 		
 		final SmsManager sms = SmsManager.getDefault();
 	
-		smsSend = false;
-		
+		 
 		 
 		// 문자 내용 입력
 		final String smsBody = "Phone Book Share\n그룹 초대 알림\n==\nKEY:1234\nPASSWORD:123\n==\n다운로드:http://~~";
@@ -143,7 +142,7 @@ public class InviteSms extends ListActivity {
 		{
 			public void onClick(DialogInterface arg0, int arg1)
 			{
-				smsSend=true;
+				 
 				sms.sendTextMessage(phone, null, smsBody, sentIntent, deliveryIntent);			
 				Toast.makeText(InviteSms.this, "그룹 초대하기 SMS 발송 완료", Toast.LENGTH_SHORT).show();
 	 
@@ -166,10 +165,7 @@ public class InviteSms extends ListActivity {
  
 	}
 	
-	private void getMessage()
-	{
-		
-	}
+ 
 	
 
 	class NewArrayAdapter extends ArrayAdapter {
