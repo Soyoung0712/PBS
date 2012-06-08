@@ -4,18 +4,17 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView 
-		android:layout_height="wrap_content"
-		android:layout_width="fill_parent" 
-		android:text="등록된 멤버가 없습니다." 
-		android:layout_gravity="center" 
-		android:id="@+id/android:empty"
-	/>
-     
+    <TextView
+        android:id="@+id/android:empty"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="등록된 멤버가 없습니다." />
+
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
-        android:layout_height="370dp" />
+        android:layout_height="450dp" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -24,20 +23,29 @@
 
         <Button
             android:id="@+id/button1"
+            style="@style/button_white"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/button"
             android:text="내 폰으로 이동" />
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="120dp"
+            style="@style/button_white"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/button"
             android:text="문자 보내기" />
 
         <Button
             android:id="@+id/button3"
-            android:layout_width="80dp"
+            style="@style/button_white"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
             android:text="취소" />
     </LinearLayout>
 

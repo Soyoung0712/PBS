@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android"
     android:versionCode="1"
-    android:versionName="1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="7" />
 
@@ -10,9 +11,9 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.SEND_SMS"/>
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -21,7 +22,8 @@
         <!-- 내 그룹 Activity -->
         <activity
             android:name="com.pbs.client.activity.main.PbsStart"
-            android:label="@string/title" android:screenOrientation="portrait">
+            android:label="@string/title"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,30 +32,52 @@
         </activity>
 
         <!-- mygroup -->
- 
- 		  <activity android:name="com.pbs.client.activity.mygroup.GroupList" android:screenOrientation="portrait">
+
+        <activity
+            android:name="com.pbs.client.activity.mygroup.GroupList"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light" >
         </activity>
-        <activity android:name="com.pbs.client.activity.mygroup.GroupModify" android:screenOrientation="portrait">
+        <activity
+            android:name="com.pbs.client.activity.mygroup.GroupModify"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.pbs.client.activity.mygroup.MemberList" android:screenOrientation="portrait">
+        <activity
+            android:name="com.pbs.client.activity.mygroup.MemberList"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light" >
         </activity>
-        <activity android:name="com.pbs.client.activity.mygroup.AddressDownload" android:screenOrientation="portrait">
+        <activity
+            android:name="com.pbs.client.activity.mygroup.AddressDownload"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.pbs.client.activity.mygroup.SendSms" android:screenOrientation="portrait">
+        <activity
+            android:name="com.pbs.client.activity.mygroup.SendSms"
+            android:screenOrientation="portrait" >
         </activity>
 
         <!-- newgroup -->
-        <activity android:name="com.pbs.client.activity.newgroup.CreateGroup" android:screenOrientation="portrait">
+        <activity
+            android:name="com.pbs.client.activity.newgroup.CreateGroup"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.pbs.client.activity.newgroup.CreateGroupComplete" android:screenOrientation="portrait">
+        <activity
+            android:name="com.pbs.client.activity.newgroup.CreateGroupComplete"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.pbs.client.activity.newgroup.InviteSms" android:screenOrientation="portrait">
+        <activity
+            android:name="com.pbs.client.activity.newgroup.InviteSms"
+            android:screenOrientation="portrait" >
         </activity>
 
         <!-- edit -->
-        <activity android:name="com.pbs.client.activity.edit.GetMemberList" android:screenOrientation="portrait">
+        <activity
+            android:name="com.pbs.client.activity.edit.GetMemberList"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:name="com.pbs.client.activity.edit.GetAddressList" android:screenOrientation="portrait">
+        <activity
+            android:name="com.pbs.client.activity.edit.GetAddressList"
+            android:screenOrientation="portrait" >
         </activity>
 
         <!-- sample -->

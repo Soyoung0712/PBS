@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,6 +31,10 @@ public class MemberList extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
+		
+		// 타이틀바 없애기
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
 		setContentView(R.layout.my_member_list);
 
 		// 내 전화번호 가져오기
@@ -109,8 +114,7 @@ public class MemberList extends ListActivity {
 			TextView textView2 = (TextView) row.findViewById(R.id.number);
 			textView2.setText(tbMember.getFd_member_phone());
 			// 전화걸기 이미지
-			ImageView imageView = (ImageView) row.findViewById(R.id.phone);
-			imageView.setImageResource(R.drawable.phone);			
+			Button imageView = (Button) row.findViewById(R.id.phone);	
 			imageView.setOnClickListener(new View.OnClickListener() {
 				// 클릭시 전화걸기
 				public void onClick(View arg0) {

@@ -1,7 +1,6 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/name"
@@ -13,13 +12,15 @@
         android:id="@+id/number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp" />
+        android:textSize="20dp" 
+        android:layout_toRightOf="@id/name"/>
 
-    <ImageButton
+    <Button
         android:id="@+id/phone"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="right"
-        android:src="@drawable/phone" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/phone"
+        android:layout_alignParentRight="true"
+        android:focusable="false" />
 
-</LinearLayout>
+</RelativeLayout>

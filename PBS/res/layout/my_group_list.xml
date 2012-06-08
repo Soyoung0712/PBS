@@ -7,15 +7,24 @@
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="360dp"
+        android:layout_height="460dp"
         android:orientation="vertical" >
-        <TextView 
-		  android:layout_height="fill_parent"
-		  android:layout_width="fill_parent" 
-		  android:text="등록된 그룹이 없습니다." 
-		  android:layout_gravity="center" 
-		  android:id="@+id/android:empty"
-		  />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/title_white"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/title"
+            android:gravity="center"
+            android:text="My Group List" />
+
+        <TextView
+            android:id="@+id/android:empty"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:text="등록된 그룹이 없습니다." />
 
         <ListView
             android:id="@android:id/list"
@@ -26,22 +35,24 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-         >
+        android:gravity="center" >
 
         <Button
             android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-           
-            android:text="그룹 추가" />
+            style="@style/button_white"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:background="@drawable/button"
+            android:layout_marginRight="10dp"
+            android:text="ADD" />
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-       
-            android:text="새 그룹 만들기" />
+            style="@style/button_white"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:background="@drawable/button"
+            android:text="NEW" />
     </LinearLayout>
 
 </LinearLayout>
