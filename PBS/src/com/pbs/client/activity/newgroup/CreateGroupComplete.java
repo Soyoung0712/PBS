@@ -22,7 +22,7 @@ public class CreateGroupComplete extends Activity {
 		
 		Intent intent = getIntent();		
 		String groupName 	 = intent.getExtras().get("groupName").toString();
-		String groupKey 	 = intent.getExtras().get("groupKey").toString();
+		final String groupKey 	 = intent.getExtras().get("groupKey").toString();
 		String groupPassword = intent.getExtras().get("groupPassword").toString();		
 		 
 		// 생성 그룹명
@@ -51,6 +51,7 @@ public class CreateGroupComplete extends Activity {
 		mMemberInvite.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
 				Intent intent1 = new Intent(CreateGroupComplete.this, InviteSms.class);
+				intent1.putExtra("pk_group", groupKey);				
 				startActivity(intent1);
 			}
 		});

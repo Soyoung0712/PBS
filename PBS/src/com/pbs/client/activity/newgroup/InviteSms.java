@@ -2,10 +2,12 @@ package com.pbs.client.activity.newgroup;
 
 import java.util.List;
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.PendingIntent;
+import android.bluetooth.BluetoothClass.Device;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import android.widget.Toast;
 
 import com.android.R;
 import com.pbs.client.model.TbMember;
+import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.UserGson;
 
 public class InviteSms extends ListActivity {
@@ -30,7 +33,7 @@ public class InviteSms extends ListActivity {
 	private List<TbMember> tbMemberList = null;
 	private UserGson userGson = new UserGson();
 	private NewArrayAdapter newArrayAdapter = null;
-	private String myPhoneNum = "01077778888";
+	private String myPhoneNum = null;
 
 	final static String ACTION_SENT = "ACTION_MESSAGE_SENT";
 	final static String ACTION_DELIVERY = "ACTION_MESSAGE_DELIVERY";
@@ -42,9 +45,17 @@ public class InviteSms extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_invite_sms);
+		
+		// CreateGroupComplete에서 넘겨준 그룹키를 가져온다.
+		Intent intent = getIntent();
+		String tmpGroupKey = intent.getStringExtra("pk_group");
+		long groupKey = Long.parseLong(tmpGroupKey);	
 
+		//내 전화번호 가져오기		
+		myPhoneNum = DeviceManager.getMyPhoneNumber(this);
+		
 		// 선택한 그룹의 맴버 리스트 가져오기
-		tbMemberList = userGson.getMemeberList(5L, myPhoneNum);
+		tbMemberList = userGson.getMemeberList(groupKey, myPhoneNum);
 
 		// 리스트뷰에 리스트 적용
 		newArrayAdapter = new NewArrayAdapter(this);
