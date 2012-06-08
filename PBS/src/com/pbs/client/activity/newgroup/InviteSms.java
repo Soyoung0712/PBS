@@ -40,7 +40,8 @@ public class InviteSms extends ListActivity {
 	
 	// 모두선택 Flag (초기 설정은 모두선택이 해지된 상태)
 	boolean allClickStatuFlag = false;
-	boolean smsSend = false;
+	boolean smsSend;
+	String phone = "";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -110,12 +111,13 @@ public class InviteSms extends ListActivity {
 	@SuppressWarnings("deprecation")
 	public void SendMessage() {
 		
-		SmsManager sms = SmsManager.getDefault();
-		String phone = "";
+		final SmsManager sms = SmsManager.getDefault();
+	
+		smsSend = false;
 		
-		
+		 
 		// 문자 내용 입력
-		String smsBody = "Phone Book Share\n그룹 초대 알림\n==\nKEY:1234\nPASSWORD:123\n==\n다운로드:http://~~";
+		final String smsBody = "Phone Book Share\n그룹 초대 알림\n==\nKEY:1234\nPASSWORD:123\n==\n다운로드:http://~~";
  
 		// 문자 받을 사람 추리기
 		for (int i = 0; i < tbMemberList.size(); i++) {
@@ -128,9 +130,9 @@ public class InviteSms extends ListActivity {
 			phone = phone.substring(1);
 	 
 
-		PendingIntent sentIntent = PendingIntent.getBroadcast
+		final PendingIntent sentIntent = PendingIntent.getBroadcast
 				(InviteSms.this, 0, new Intent(ACTION_SENT), 0);
-		PendingIntent deliveryIntent = PendingIntent.getBroadcast
+		final PendingIntent deliveryIntent = PendingIntent.getBroadcast
 				(InviteSms.this, 0, new Intent(ACTION_DELIVERY), 0);
 		
 		
@@ -141,28 +143,34 @@ public class InviteSms extends ListActivity {
 		{
 			public void onClick(DialogInterface arg0, int arg1)
 			{
-				smsSend = true;
+				smsSend=true;
+				sms.sendTextMessage(phone, null, smsBody, sentIntent, deliveryIntent);			
+				Toast.makeText(InviteSms.this, "그룹 초대하기 SMS 발송 완료", Toast.LENGTH_SHORT).show();
+	 
 			}
 		})
 		.setNegativeButton("취소", new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface arg0, int arg1)
 			{
-				
+				Toast.makeText(InviteSms.this, "SMS 전송 취소", Toast.LENGTH_SHORT).show();
 			}
 		})
 		.show();
 		
-		if(smsSend)
-		{
-			sms.sendTextMessage(phone, null, smsBody, sentIntent, deliveryIntent);
-			smsSend = false;
-			Toast.makeText(InviteSms.this, "그룹 초대하기 SMS 발송 완료", Toast.LENGTH_SHORT).show();
-			
-		}
+		 
+		 
+			 
 		
-//		startActivity(sendIntent);
+		
+ 
 	}
+	
+	private void getMessage()
+	{
+		
+	}
+	
 
 	class NewArrayAdapter extends ArrayAdapter {
 		Activity context;
