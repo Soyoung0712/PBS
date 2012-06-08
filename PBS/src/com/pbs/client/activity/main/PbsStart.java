@@ -51,6 +51,14 @@ public class PbsStart extends TabActivity {
         
 	}
 
+    public void onPause()
+    {
+    	super.onPause();
+    	
+    	finish();
+    	
+    }
+    
 	public boolean Network_State()
 	{
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

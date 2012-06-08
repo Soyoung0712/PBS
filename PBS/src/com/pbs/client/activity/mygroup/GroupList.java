@@ -225,6 +225,6 @@ public class GroupList extends ListActivity {
 		intent.putExtra("fd_group_name", tbGroupList.get(position).getFd_group_name());
 		startActivity(intent);		
     }
-
+	
 
 }
