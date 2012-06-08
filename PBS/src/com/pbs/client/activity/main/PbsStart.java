@@ -38,10 +38,8 @@ public class PbsStart extends TabActivity {
 
         if(state)
         {
-	        TabHost tabHost = getTabHost();
-	        tabHost.addTab(tabHost.newTabSpec("Tab1")
-	        		.setIndicator("내 그룹")
-	        		.setContent(new Intent(this, GroupList.class)));
+	         Intent intent = new Intent(PbsStart.this, GroupList.class);
+	         startActivity(intent);
         }
         else
         	AlertShow("Wifi 혹은 3G망이 연결되지 않았거나 원활하지 않습니다.네트워크 확인후 다시 접속해 주세요!");

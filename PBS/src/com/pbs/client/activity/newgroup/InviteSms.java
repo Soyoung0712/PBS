@@ -3,9 +3,13 @@ package com.pbs.client.activity.newgroup;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.gsm.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +23,6 @@ import android.widget.Toast;
 
 import com.android.R;
 import com.pbs.client.model.TbMember;
-import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.UserGson;
 
 public class InviteSms extends ListActivity {
@@ -27,18 +30,19 @@ public class InviteSms extends ListActivity {
 	private List<TbMember> tbMemberList = null;
 	private UserGson userGson = new UserGson();
 	private NewArrayAdapter newArrayAdapter = null;
-	private String myPhoneNum = null;
+	private String myPhoneNum = "01077778888";
+
+	final static String ACTION_SENT = "ACTION_MESSAGE_SENT";
+	final static String ACTION_DELIVERY = "ACTION_MESSAGE_DELIVERY";
+	
 	// 모두선택 Flag (초기 설정은 모두선택이 해지된 상태)
 	boolean allClickStatuFlag = false;
-
+	boolean smsSend = false;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_invite_sms);
 
-		// 내 전화번호 가져오기
-		myPhoneNum = DeviceManager.getMyPhoneNumber(this);
-		
 		// 선택한 그룹의 맴버 리스트 가져오기
 		tbMemberList = userGson.getMemeberList(5L, myPhoneNum);
 
@@ -92,12 +96,16 @@ public class InviteSms extends ListActivity {
 	}
 
 	// 문자 보내기 버튼 클릭 이벤트
+	@SuppressWarnings("deprecation")
 	public void SendMessage() {
+		
+		SmsManager sms = SmsManager.getDefault();
 		String phone = "";
-		Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+		
+		
 		// 문자 내용 입력
 		String smsBody = "Phone Book Share\n그룹 초대 알림\n==\nKEY:1234\nPASSWORD:123\n==\n다운로드:http://~~";
-		sendIntent.putExtra("sms_body", smsBody);
+ 
 		// 문자 받을 사람 추리기
 		for (int i = 0; i < tbMemberList.size(); i++) {
 			if (tbMemberList.get(i).isChecked()) {
@@ -105,15 +113,44 @@ public class InviteSms extends ListActivity {
 			}
 		}
 		// 문자 받는 사람들 번호 입력
-		if (phone.length() > 0) {
+		if (phone.length() > 0) 
 			phone = phone.substring(1);
-			sendIntent.putExtra("address", phone);
-		} else {
-			sendIntent.putExtra("address", phone);
-		}
-		sendIntent.setType("vnd.android-dir/mms-sms");
+	 
 
-		startActivity(sendIntent);
+		PendingIntent sentIntent = PendingIntent.getBroadcast
+				(InviteSms.this, 0, new Intent(ACTION_SENT), 0);
+		PendingIntent deliveryIntent = PendingIntent.getBroadcast
+				(InviteSms.this, 0, new Intent(ACTION_DELIVERY), 0);
+		
+		
+		new AlertDialog.Builder(InviteSms.this)
+		.setTitle("그룹 초대 SMS 발송")
+		.setMessage("선택된 그룹원에게 SMS를 이용하여 초대 합니다")
+		.setPositiveButton("확인", new DialogInterface.OnClickListener()
+		{
+			public void onClick(DialogInterface arg0, int arg1)
+			{
+				smsSend = true;
+			}
+		})
+		.setNegativeButton("취소", new DialogInterface.OnClickListener()
+		{
+			public void onClick(DialogInterface arg0, int arg1)
+			{
+				
+			}
+		})
+		.show();
+		
+		if(smsSend)
+		{
+			sms.sendTextMessage(phone, null, smsBody, sentIntent, deliveryIntent);
+			smsSend = false;
+			Toast.makeText(InviteSms.this, "그룹 초대하기 SMS 발송 완료", Toast.LENGTH_SHORT).show();
+			
+		}
+		
+//		startActivity(sendIntent);
 	}
 
 	class NewArrayAdapter extends ArrayAdapter {
