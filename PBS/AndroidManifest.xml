@@ -36,11 +36,13 @@
         <activity
             android:name="com.pbs.client.activity.mygroup.GroupList"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light" >
+            android:theme="@android:style/Theme.Light" 
+            >
         </activity>
         <activity
             android:name="com.pbs.client.activity.mygroup.GroupModify"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+             android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
             android:name="com.pbs.client.activity.mygroup.MemberList"
@@ -59,7 +61,8 @@
         <!-- newgroup -->
         <activity
             android:name="com.pbs.client.activity.newgroup.CreateGroup"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name="com.pbs.client.activity.newgroup.CreateGroupComplete"
