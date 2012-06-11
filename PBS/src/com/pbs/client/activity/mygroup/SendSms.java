@@ -4,7 +4,11 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.R;
+import com.pbs.client.activity.newgroup.InviteSms;
 import com.pbs.client.model.TbMember;
 import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.UserGson;
@@ -31,6 +36,13 @@ public class SendSms extends ListActivity {
 	// 모두선택 Flag (초기 설정은 모두선택이 해지된 상태)
 	boolean allClickStatuFlag = false;
 
+	final static String ACTION_SENT = "ACTION_MESSAGE_SENT";
+	final static String ACTION_DELIVERY = "ACTION_MESSAGE_DELIVERY";
+	
+//	PendingIntent sentIntent;
+//	PendingIntent deliveryIntent;
+	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -76,6 +88,9 @@ public class SendSms extends ListActivity {
 		Button mSave = (Button) findViewById(R.id.sendmessage);
 		Button mCancle = (Button) findViewById(R.id.cancle);
 
+//		sentIntent = PendingIntent.getBroadcast(SendSms.this, 0, new Intent(ACTION_SENT), 0);
+//		deliveryIntent = PendingIntent.getBroadcast(SendSms.this, 0, new Intent(ACTION_DELIVERY), 0);
+		
 		// 문자 보내기 버튼을 눌렸을때
 		mSave.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
@@ -115,6 +130,31 @@ public class SendSms extends ListActivity {
 		startActivity(sendIntent);
 	}
 
+//	public void onResume()
+//	{
+//		super.onResume();
+//
+//		registerReceiver(mSentBr, new IntentFilter(ACTION_SENT));
+//	}
+//
+//	// 메세지 수신에 대한 여부 확인
+//		BroadcastReceiver mSentBr = new BroadcastReceiver()
+//		{
+//			@Override
+//			public void onReceive(Context context, Intent intent)
+//			{
+//				// Activity.RESULT_OK 수신 성공
+//				if (getResultCode() == Activity.RESULT_OK)
+//				{
+//					Toast.makeText(SendSms.this, "SMS 전송 완료", Toast.LENGTH_SHORT).show();
+//				}
+//				else
+//				{
+//					Toast.makeText(SendSms.this, "SMS 전송 실패", Toast.LENGTH_SHORT).show();
+//				}
+//			}
+//		};
+	
 	class NewArrayAdapter extends ArrayAdapter {
 		Activity context;
 

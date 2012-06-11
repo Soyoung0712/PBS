@@ -1,6 +1,7 @@
 package com.pbs.client.activity.mygroup;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import android.app.Activity;
@@ -23,12 +24,14 @@ import android.widget.Toast;
 import com.android.R;
 import com.pbs.client.activity.edit.GetAddressList;
 import com.pbs.client.activity.edit.GetMemberList;
+import com.pbs.client.activity.newgroup.InviteSms;
 import com.pbs.client.model.AddressUser;
 import com.pbs.client.model.TbAccessUser;
 import com.pbs.client.model.TbGroup;
 import com.pbs.client.model.TbMember;
 import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.UserGson;
+ 
 
 public class GroupModify extends Activity {
 
@@ -300,6 +303,11 @@ public class GroupModify extends Activity {
 		// "SMS 알림" 버튼 클릭
 		bSmsNoti.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
+				
+				Intent intent = new Intent(GroupModify.this,InviteSms.class);
+				//intent.putExtra("groupMemberList", groupMemberList);
+				intent.putExtra("pk_group", String.valueOf(pk_group));
+				startActivity(intent);
 				
 			}
 		});
