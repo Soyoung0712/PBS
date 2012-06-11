@@ -7,17 +7,39 @@
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="460dp"
+        android:layout_height="435dp"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/title"
-            style="@style/title_white"
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/title"
-            android:gravity="center"
-            android:text="My Group List" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/button1"
+                style="@style/title_button_white"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/button_background_right"
+                android:text="+"/>
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/title_white"
+                android:layout_width="220dp"
+                android:layout_height="50dp"
+                android:background="@drawable/tab_background_2"
+                android:gravity="center"
+                android:text="내 그룹 리스트" />
+
+            <Button
+                android:id="@+id/button2"
+                style="@style/title_button_white"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/button_background_left"
+                android:text="new"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/android:empty"
@@ -30,29 +52,6 @@
             android:id="@android:id/list"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center" >
-
-        <Button
-            android:id="@+id/button1"
-            style="@style/button_white"
-            android:layout_width="50dp"
-            android:layout_height="30dp"
-            android:background="@drawable/button"
-            android:layout_marginRight="10dp"
-            android:text="ADD" />
-
-        <Button
-            android:id="@+id/button2"
-            style="@style/button_white"
-            android:layout_width="50dp"
-            android:layout_height="30dp"
-            android:background="@drawable/button"
-            android:text="NEW" />
     </LinearLayout>
 
 </LinearLayout>
