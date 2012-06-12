@@ -220,6 +220,18 @@ public class CreateGroup extends Activity {
 				
 			}
 		});
+		
+		// 그룹생성 취소버튼 
+		bGroupCancel.setOnClickListener(new View.OnClickListener()
+		{
+			public void onClick(View arg0)
+			{
+				Toast.makeText(CreateGroup.this, "그룹생성을 취소합니다.", Toast.LENGTH_SHORT).show();
+				finish();
+				
+			}
+		});
+		
 
 	}
 	
