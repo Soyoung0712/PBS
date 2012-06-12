@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -38,23 +39,26 @@ public class SendSms extends ListActivity {
 
 	final static String ACTION_SENT = "ACTION_MESSAGE_SENT";
 	final static String ACTION_DELIVERY = "ACTION_MESSAGE_DELIVERY";
-	
-//	PendingIntent sentIntent;
-//	PendingIntent deliveryIntent;
-	
-	
+
+	// PendingIntent sentIntent;
+	// PendingIntent deliveryIntent;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		// 타이틀바 없애기
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+
 		setContentView(R.layout.my_send_sms);
-		
+
 		// 내 전화번호 가져오기
 		myPhoneNum = DeviceManager.getMyPhoneNumber(this);
 
 		// 선택한 그룹의 맴버 리스트 가져오기
 		Intent intent = getIntent();
 		long pk_group = intent.getExtras().getLong("pk_group");
-		tbMemberList = userGson.getMemeberList(pk_group, myPhoneNum);	
+		tbMemberList = userGson.getMemeberList(pk_group, myPhoneNum);
 
 		// 리스트뷰에 리스트 적용
 		newArrayAdapter = new NewArrayAdapter(this);
@@ -88,9 +92,11 @@ public class SendSms extends ListActivity {
 		Button mSave = (Button) findViewById(R.id.sendmessage);
 		Button mCancle = (Button) findViewById(R.id.cancle);
 
-//		sentIntent = PendingIntent.getBroadcast(SendSms.this, 0, new Intent(ACTION_SENT), 0);
-//		deliveryIntent = PendingIntent.getBroadcast(SendSms.this, 0, new Intent(ACTION_DELIVERY), 0);
-		
+		// sentIntent = PendingIntent.getBroadcast(SendSms.this, 0, new
+		// Intent(ACTION_SENT), 0);
+		// deliveryIntent = PendingIntent.getBroadcast(SendSms.this, 0, new
+		// Intent(ACTION_DELIVERY), 0);
+
 		// 문자 보내기 버튼을 눌렸을때
 		mSave.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
@@ -101,8 +107,7 @@ public class SendSms extends ListActivity {
 		// 취소 버튼을 눌렸을때
 		mCancle.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
-				Toast.makeText(SendSms.this, "취소", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(SendSms.this, "취소", Toast.LENGTH_SHORT).show();
 				finish();
 			}
 		});
@@ -130,31 +135,31 @@ public class SendSms extends ListActivity {
 		startActivity(sendIntent);
 	}
 
-//	public void onResume()
-//	{
-//		super.onResume();
-//
-//		registerReceiver(mSentBr, new IntentFilter(ACTION_SENT));
-//	}
-//
-//	// 메세지 수신에 대한 여부 확인
-//		BroadcastReceiver mSentBr = new BroadcastReceiver()
-//		{
-//			@Override
-//			public void onReceive(Context context, Intent intent)
-//			{
-//				// Activity.RESULT_OK 수신 성공
-//				if (getResultCode() == Activity.RESULT_OK)
-//				{
-//					Toast.makeText(SendSms.this, "SMS 전송 완료", Toast.LENGTH_SHORT).show();
-//				}
-//				else
-//				{
-//					Toast.makeText(SendSms.this, "SMS 전송 실패", Toast.LENGTH_SHORT).show();
-//				}
-//			}
-//		};
-	
+	// public void onResume()
+	// {
+	// super.onResume();
+	//
+	// registerReceiver(mSentBr, new IntentFilter(ACTION_SENT));
+	// }
+	//
+	// // 메세지 수신에 대한 여부 확인
+	// BroadcastReceiver mSentBr = new BroadcastReceiver()
+	// {
+	// @Override
+	// public void onReceive(Context context, Intent intent)
+	// {
+	// // Activity.RESULT_OK 수신 성공
+	// if (getResultCode() == Activity.RESULT_OK)
+	// {
+	// Toast.makeText(SendSms.this, "SMS 전송 완료", Toast.LENGTH_SHORT).show();
+	// }
+	// else
+	// {
+	// Toast.makeText(SendSms.this, "SMS 전송 실패", Toast.LENGTH_SHORT).show();
+	// }
+	// }
+	// };
+
 	class NewArrayAdapter extends ArrayAdapter {
 		Activity context;
 

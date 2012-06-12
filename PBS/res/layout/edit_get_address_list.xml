@@ -43,13 +43,17 @@
         
         <Button 
             android:id="@+id/sendmessage"
+            style="@style/button_white"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_background_2"
             android:text="확인"/>
         <Button 
             android:id="@+id/cancle"
+            style="@style/button_white"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_background_2"
             android:text="취소"/>
     </LinearLayout>
 

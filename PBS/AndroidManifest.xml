@@ -36,13 +36,13 @@
         <activity
             android:name="com.pbs.client.activity.mygroup.GroupList"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light" 
-            >
+            android:theme="@android:style/Theme.Light" >
         </activity>
         <activity
             android:name="com.pbs.client.activity.mygroup.GroupModify"
-            android:screenOrientation="portrait" 
-             android:windowSoftInputMode="stateAlwaysHidden">
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name="com.pbs.client.activity.mygroup.MemberList"
@@ -51,36 +51,43 @@
         </activity>
         <activity
             android:name="com.pbs.client.activity.mygroup.AddressDownload"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light" >
         </activity>
         <activity
             android:name="com.pbs.client.activity.mygroup.SendSms"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light" >
         </activity>
 
         <!-- newgroup -->
         <activity
             android:name="com.pbs.client.activity.newgroup.CreateGroup"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" >
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@android:style/Theme.Light" >
         </activity>
         <activity
             android:name="com.pbs.client.activity.newgroup.CreateGroupComplete"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light" >
         </activity>
         <activity
             android:name="com.pbs.client.activity.newgroup.InviteSms"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light" >
         </activity>
 
         <!-- edit -->
         <activity
             android:name="com.pbs.client.activity.edit.GetMemberList"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light" >
         </activity>
         <activity
             android:name="com.pbs.client.activity.edit.GetAddressList"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light" >
         </activity>
 
         <!-- sample -->
