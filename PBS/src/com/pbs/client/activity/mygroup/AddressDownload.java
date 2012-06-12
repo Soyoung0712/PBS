@@ -11,6 +11,7 @@ import android.provider.Contacts.People;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -39,19 +40,23 @@ public class AddressDownload extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		// 타이틀바 없애기
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+
 		setContentView(R.layout.my_address_download);
 
 		// 내 전화번호 가져오기
 		myPhoneNum = DeviceManager.getMyPhoneNumber(this);
-		
+
 		// 선택한 그룹의 맴버 리스트 가져오기
 		Intent intent = getIntent();
 		long pk_group = intent.getExtras().getLong("pk_group");
-		String fd_group_name = intent.getExtras().getString("fd_group_name");		
+		String fd_group_name = intent.getExtras().getString("fd_group_name");
 		tbMemberList = userGson.getMemeberList(pk_group, myPhoneNum);
-		
+
 		// 그룹명
-		TextView editgroupnameTextView = (TextView)findViewById(R.id.editgroupname);
+		TextView editgroupnameTextView = (TextView) findViewById(R.id.editgroupname);
 		editgroupnameTextView.setText(fd_group_name);
 
 		// 리스트뷰에 리스트 적용
@@ -91,7 +96,8 @@ public class AddressDownload extends ListActivity {
 		Button mCancle = (Button) findViewById(R.id.cancle);
 		mCancle.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
-				Toast.makeText(AddressDownload.this, "취소", Toast.LENGTH_SHORT).show();
+				Toast.makeText(AddressDownload.this, "취소", Toast.LENGTH_SHORT)
+						.show();
 				finish();
 			}
 		});
@@ -99,28 +105,30 @@ public class AddressDownload extends ListActivity {
 	}
 
 	// 저장 버튼 클릭했을 때
-	private void StroeButton(final Activity activity, Button mSave, final String fd_group_name) {
+	private void StroeButton(final Activity activity, Button mSave,
+			final String fd_group_name) {
 		mSave.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
 				int cntSave = 0;
 				AddressUtil addressUtil = new AddressUtil();
-				
+
 				// 선택한 사용자를 주소록에 저장
 				for (int i = 0; i < tbMemberList.size(); i++) {
 					if (tbMemberList.get(i).isChecked()) {
-						addressUtil.addContact(	activity, 
-												fd_group_name, 
-												tbMemberList.get(i).getFd_member_name(), 
-												tbMemberList.get(i).getFd_member_phone());
+						addressUtil.addContact(activity, fd_group_name,
+								tbMemberList.get(i).getFd_member_name(),
+								tbMemberList.get(i).getFd_member_phone());
 						cntSave++;
 					}
 				}
-				
+
 				if (cntSave > 0) {
-					Toast.makeText(AddressDownload.this, "정상적으로 저장되었습니다..", Toast.LENGTH_SHORT).show();
+					Toast.makeText(AddressDownload.this, "정상적으로 저장되었습니다..",
+							Toast.LENGTH_SHORT).show();
 					finish();
-				}else {
-					Toast.makeText(AddressDownload.this, "저장할 멤버가 없습니다.", Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(AddressDownload.this, "저장할 멤버가 없습니다.",
+							Toast.LENGTH_SHORT).show();
 				}
 			}
 		});
