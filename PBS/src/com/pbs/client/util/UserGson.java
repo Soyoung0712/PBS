@@ -26,7 +26,7 @@ import com.pbs.client.model.TbMember;
 
 public class UserGson {	
 	
-	private String pbsDomain = "http://14.63.223.82:8080/pbs";
+	private String pbsDomain = "http://14.63.223.123";
 	
 	private String urlMyGroupList = pbsDomain + "/accessUser/listGroup.json"	;
 	private String urlGroupAdd    = pbsDomain + "/accessUser/insertByPwd.json"	;
