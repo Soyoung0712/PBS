@@ -31,7 +31,7 @@ public class GetAddressList extends ListActivity {
 	private NewArrayAdapter newArrayAdapter = null;
 	// 모두선택 Flag (초기 설정은 모두선택이 해지된 상태)
 	boolean allClickStatuFlag = false;
-	Intent intent = getIntent();
+	
 	
 	// 전화번호부 리스트
 	private List<AddressUser> addressUserList;
@@ -159,7 +159,7 @@ public class GetAddressList extends ListActivity {
 				}
 
 				// 호출한 액티비티
-				
+				Intent intent = getIntent();
 				intent.putExtra("addressUserList", resultAddressUserList);
 				setResult(RESULT_OK, intent);
 				finish();
@@ -172,7 +172,7 @@ public class GetAddressList extends ListActivity {
 			public void onClick(View arg0) {
 				Toast.makeText(GetAddressList.this, "취소", Toast.LENGTH_SHORT)
 						.show();
-				
+				Intent intent = getIntent();
 				intent = getIntent();
 		    	setResult(RESULT_OK, intent);
 				
@@ -186,7 +186,7 @@ public class GetAddressList extends ListActivity {
 	 @Override
 	 public boolean onKeyDown(int keyCode, KeyEvent event)  {
 	     if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-	    	 
+	    	 Intent intent = getIntent();
 			intent = getIntent();
 			setResult(RESULT_OK, intent);
 			finish();
