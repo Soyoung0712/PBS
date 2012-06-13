@@ -205,7 +205,7 @@ public class GetAddressList extends ListActivity {
 			super(context, R.layout.edit_get_address_list_row, addressUserList);
 			this.context = context;
 		}
-
+ 
 		public View getView(int position, View convertView, ViewGroup parent) {
 
 			final int pos = position;

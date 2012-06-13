@@ -65,7 +65,7 @@ public class CreateGroup extends Activity
 	private Button bGroupCancel;
 
 	WaitDlg dlg;
-	boolean dlg_state;
+	 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
