@@ -9,9 +9,9 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -22,10 +22,12 @@ import android.widget.Toast;
 import com.android.R;
 import com.pbs.client.activity.edit.GetAddressList;
 import com.pbs.client.activity.edit.GetMemberList;
+import com.pbs.client.activity.main.WaitDlg;
 import com.pbs.client.model.AddressUser;
 import com.pbs.client.model.TbGroup;
 import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.UserGson;
+
 
 public class CreateGroup extends Activity {
 
@@ -62,6 +64,10 @@ public class CreateGroup extends Activity {
 	// 취소
 	private Button bGroupCancel;
 
+	
+	WaitDlg dlg;  
+	boolean dlg_state;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -102,6 +108,8 @@ public class CreateGroup extends Activity {
 		bGroupResult = (Button) findViewById(R.id.bGroupResult);
 		bGroupCancel = (Button) findViewById(R.id.bGroupCancel);
 
+		
+		
 	}
 
 	@Override
@@ -125,9 +133,18 @@ public class CreateGroup extends Activity {
 		// "그룹원 관리" > "가져오기" 버튼
 		bGroupGetAddressList.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
+			 
+				
+				dlg = new WaitDlg(CreateGroup.this, "전화번호 목록 가져오기", "요청하신 작업을 처리중입니다");
+				
+				
+				dlg.start();
+				 
 				Intent intent = new Intent(CreateGroup.this,
 						GetAddressList.class);
+				
 				startActivityForResult(intent, MEMBER_GET_ADDRESS_LIST_ACTIVITY);
+				
 			}
 		});
 
@@ -164,6 +181,8 @@ public class CreateGroup extends Activity {
 				Intent intent = new Intent(CreateGroup.this,
 						GetAddressList.class);
 				startActivityForResult(intent, ADMIN_GET_ADDRESS_LIST_ACTIVITY);
+				
+				
 			}
 		});
 
@@ -274,7 +293,9 @@ public class CreateGroup extends Activity {
 					etGroupMemberListInfo.setText(headerMemberName + " 외 "
 							+ (groupMemberList.size() - 1) + "명");
 				}
-
+				
+				
+				
 			}
 			break;
 
@@ -293,7 +314,7 @@ public class CreateGroup extends Activity {
 					etGroupMemberListInfo.setText(headerMemberName + " 외 "
 							+ (groupMemberList.size() - 1) + "명");
 				}
-
+				WaitDlg.stop(dlg);
 			}
 			break;
 
@@ -312,7 +333,7 @@ public class CreateGroup extends Activity {
 					etAdminMemberListInfo.setText(headerMemberName + " 외 "
 							+ (adminMemberList.size() - 1) + "명");
 				}
-
+				 
 			}
 			break;
 
@@ -331,7 +352,7 @@ public class CreateGroup extends Activity {
 					etAdminMemberListInfo.setText(headerMemberName + " 외 "
 							+ (adminMemberList.size() - 1) + "명");
 				}
-
+				WaitDlg.stop(dlg);
 			}
 			break;
 
@@ -340,6 +361,8 @@ public class CreateGroup extends Activity {
 		}
 
 	}
+	
+ 
 
 	/**
 	 * userList1에 userList2을 저장한다. 단 중복 전화번호는 저장 하지 않는다.

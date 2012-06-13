@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,6 +85,40 @@ public class GroupList extends ListActivity {
 		});
 
 	}
+	
+	
+	//백버튼 종료 
+	@Override
+	 public boolean onKeyDown(int keyCode,KeyEvent event)
+	 {
+	   if(keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0)
+	   {
+	    // 팝업을 띄움
+	   
+	    AlertDialog dialog;
+	       dialog = new AlertDialog.Builder(this).setTitle("종료확인")
+	          // .setIcon(R.drawable.warning)
+	           .setMessage("종료하시겠습니까?")
+	        .setPositiveButton("예", new DialogInterface.OnClickListener() {   
+	           public void onClick(DialogInterface dialog, int which) {
+	            // TODO Auto-generated method stub
+	            //dialog.dismiss(); 
+	            finish();
+	           }
+	          })
+	           .setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+	         
+	         public void onClick(DialogInterface dialog, int which) {
+	          // TODO Auto-generated method stub
+	          dialog.cancel();
+	         }
+	        }) 
+	        .show();    
+	    return true;
+	   }
+	   return super.onKeyDown(keyCode, event);
+	 }
+	
 	
 	@Override
 	public void onResume() {

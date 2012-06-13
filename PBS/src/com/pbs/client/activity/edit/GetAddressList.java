@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +24,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.R;
-import com.android.R.id;
-import com.android.R.layout;
 import com.pbs.client.model.AddressUser;
 
 public class GetAddressList extends ListActivity {
@@ -41,6 +40,9 @@ public class GetAddressList extends ListActivity {
 
 		super.onCreate(savedInstanceState);
 
+		  
+		 
+		
 		// 타이틀바 없애기
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -169,11 +171,28 @@ public class GetAddressList extends ListActivity {
 			public void onClick(View arg0) {
 				Toast.makeText(GetAddressList.this, "취소", Toast.LENGTH_SHORT)
 						.show();
+				
+				Intent intent = getIntent();
+		    	setResult(RESULT_OK, intent);
+				
 				finish();
 			}
 		});
 
 	}
+	
+	
+	//Back 버튼 처리
+	@Override   
+	public boolean onKeyDown(int keyCode, KeyEvent event) {    
+	    if(keyCode == KeyEvent.KEYCODE_BACK) {
+	     
+	    	Intent intent = getIntent();
+	    	setResult(RESULT_OK, intent);
+	    }
+	    return false;    
+	}
+	
 
 	class NewArrayAdapter extends ArrayAdapter {
 
