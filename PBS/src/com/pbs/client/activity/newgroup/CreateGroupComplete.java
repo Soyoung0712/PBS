@@ -47,15 +47,22 @@ public class CreateGroupComplete extends Activity {
 		// 그룹생성후 완료버튼 누를시 메인페이지로
 		mNewGroupComplete.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
+				
+				finish();
 				Intent intent = new Intent(CreateGroupComplete.this,
 						PbsStart.class);
 				startActivity(intent);
+				
+				
 			}
 		});
 
 		// 그룹생성후 초대하기 버튼 누를떄
 		mMemberInvite.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
+				
+				finish();
+								
 				Intent intent1 = new Intent(CreateGroupComplete.this,
 						InviteSms.class);
 				intent1.putExtra("pk_group", groupKey);

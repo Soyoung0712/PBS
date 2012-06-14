@@ -270,9 +270,12 @@ public class CreateGroup extends Activity
 
 					startActivity(intent);
 					
+					
 					WaitDlg.stop(dlg);
 				}
 
+				finish();
+				
 			}
 		});
 
