@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.R;
+import com.pbs.client.activity.main.WaitDlg;
 import com.pbs.client.activity.newgroup.CreateGroup;
 import com.pbs.client.model.TbGroup;
 import com.pbs.client.util.DeviceManager;
@@ -43,7 +44,7 @@ public class GroupList extends ListActivity
 	private List<TbGroup> tbGroupList = null;
 	private NewArrayAdapter newArrayAdapter = null;
 	private UserGson userGson = new UserGson();
-
+	WaitDlg dlg;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -58,10 +59,18 @@ public class GroupList extends ListActivity
 
 		// 내 전화번호 가져오기
 		myPhoneNum = DeviceManager.getMyPhoneNumber(this);
-
+		
+		//내그룹 리스트 가져오기 전 프로그래스바 작업대기 사용자에게 보여줌
+		dlg = new WaitDlg(GroupList.this, "서버 요청", "그룹 리스트를 불러오고 있습니다");
+		dlg.start();
+		
 		// 내그룹 리스트 가져오기
 		tbGroupList = userGson.getMyGroupList(myPhoneNum);
-
+		
+		// 내그룹 리스트 가져오기 완료후 프로그래스바 종료
+		WaitDlg.stop(dlg);
+		
+		
 		// 리스트뷰에 리스트 적용
 		newArrayAdapter = new NewArrayAdapter(this);
 		setListAdapter(newArrayAdapter);
@@ -71,7 +80,6 @@ public class GroupList extends ListActivity
 		Button addgroup = (Button) findViewById(R.id.button1);
 		addgroup.setOnClickListener(new View.OnClickListener()
 		{
-
 			public void onClick(View v)
 			{
 				showGroupAdd();
@@ -122,16 +130,21 @@ public class GroupList extends ListActivity
 	public void onResume()
 	{
 		super.onResume();
+		
+		 
+		
 		// 그룹 리스트 갱신
 		tbGroupList.clear();
 		tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));
 		newArrayAdapter.notifyDataSetChanged();
+		
+		 
+		
 	}
 
 	// 그룹 추가 버튼 클릭 이벤트
 	private void showGroupAdd()
 	{
-
 		LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		LinearLayout addgrouplayout = (LinearLayout) vi.inflate(R.layout.dialog_add_group, null);
 
@@ -171,16 +184,26 @@ public class GroupList extends ListActivity
 				// 그룹키 추가 성공
 				if (addGroupResult)
 				{
+					dlg = new WaitDlg(GroupList.this, "서버 요청", "그룹을 추가하고 있습니다");
+					dlg.start();
+					
 					tbGroupList.clear();
 					tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));
 					newArrayAdapter.notifyDataSetChanged();
+					
+					WaitDlg.stop(dlg);
+					
 					Toast.makeText(GroupList.this, "그룹이 추가 되었습니다.", Toast.LENGTH_LONG).show();
 
 					// 그룹키 추가 실패
 				}
 				else
 				{
+				 
+					
 					Toast.makeText(GroupList.this, "잘못된 그룹입니다.", Toast.LENGTH_LONG).show();
+					
+					 
 				}
 
 			}
@@ -230,9 +253,13 @@ public class GroupList extends ListActivity
 			{
 				public void onClick(View v)
 				{
+					 
+					
 					Intent intent = new Intent(GroupList.this, GroupModify.class);
 					intent.putExtra("pk_group", tbGroupList.get(pos).getPk_group());
 					startActivity(intent);
+					
+					 
 				}
 
 			});
@@ -250,9 +277,16 @@ public class GroupList extends ListActivity
 					// 그룹 리스트 Refresh
 					if (hiddenGroupResult)
 					{
+						
+						dlg = new WaitDlg(GroupList.this, "그룹 삭제", "그룹을 삭제하고 있습니다");
+						dlg.start();
+						
 						tbGroupList.clear();
 						tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));
 						newArrayAdapter.notifyDataSetChanged();
+						
+						WaitDlg.stop(dlg);
+						
 						Toast.makeText(GroupList.this, "그룹이 삭제 되었습니다.", Toast.LENGTH_LONG).show();
 					}
 

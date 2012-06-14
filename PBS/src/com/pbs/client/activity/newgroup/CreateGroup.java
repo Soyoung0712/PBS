@@ -23,6 +23,7 @@ import com.android.R;
 import com.pbs.client.activity.edit.GetAddressList;
 import com.pbs.client.activity.edit.GetMemberList;
 import com.pbs.client.activity.main.WaitDlg;
+import com.pbs.client.activity.mygroup.GroupList;
 import com.pbs.client.model.AddressUser;
 import com.pbs.client.model.TbGroup;
 import com.pbs.client.util.DeviceManager;
@@ -235,6 +236,10 @@ public class CreateGroup extends Activity
 				}
 				else
 				{
+					
+					dlg = new WaitDlg(CreateGroup.this, "그룹 생성", "그룹을 생성하고 있습니다");
+					dlg.start();
+					
 					Intent intent = new Intent(CreateGroup.this, CreateGroupComplete.class);
 					intent.putExtra("groupMame", etGroupName.getText().toString());
 
@@ -264,6 +269,8 @@ public class CreateGroup extends Activity
 					intent.putExtra("groupPassword", password);
 
 					startActivity(intent);
+					
+					WaitDlg.stop(dlg);
 				}
 
 			}
