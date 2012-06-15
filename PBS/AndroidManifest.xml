@@ -52,7 +52,9 @@
         <activity
             android:name="com.pbs.client.activity.mygroup.AddressDownload"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light" >
+            android:theme="@android:style/Theme.Light"
+            
+             >
         </activity>
         <activity
             android:name="com.pbs.client.activity.mygroup.SendSms"

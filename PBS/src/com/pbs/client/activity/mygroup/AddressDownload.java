@@ -5,9 +5,8 @@ import java.util.List;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
-import android.provider.Contacts;
-import android.provider.Contacts.People;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.R;
-import com.android.R.id;
-import com.android.R.layout;
 import com.pbs.client.model.TbMember;
 import com.pbs.client.util.AddressUtil;
 import com.pbs.client.util.DeviceManager;
@@ -53,7 +50,7 @@ public class AddressDownload extends ListActivity {
 		Intent intent = getIntent();
 		long pk_group = intent.getExtras().getLong("pk_group");
 		String fd_group_name = intent.getExtras().getString("fd_group_name");
-		tbMemberList = userGson.getMemeberList(pk_group, myPhoneNum);
+		tbMemberList = userGson.getMemeberList(pk_group, myPhoneNum);		
 
 		// 그룹명
 		TextView editgroupnameTextView = (TextView) findViewById(R.id.editgroupname);
@@ -89,18 +86,31 @@ public class AddressDownload extends ListActivity {
 		});
 
 		// "저장" 버튼
-		Button mSave = (Button) findViewById(R.id.sendmessage);
+		Button mSave = (Button) findViewById(R.id.bSave);
+		mSave.setPaintFlags(mSave.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		StroeButton(this, mSave, fd_group_name);
 
 		// "취소" 버튼 설정
-		Button mCancle = (Button) findViewById(R.id.cancle);
+		Button mCancle = (Button) findViewById(R.id.bCancle);
+		mCancle.setPaintFlags(mCancle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		mCancle.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
-				Toast.makeText(AddressDownload.this, "취소", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(AddressDownload.this, "취소", Toast.LENGTH_SHORT)	.show();
 				finish();
 			}
 		});
+		
+		
+		// bold 처리
+		// 제목
+		TextView tvTitle = (TextView) findViewById(R.id.tvTitle);		
+		tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 그룹명
+		TextView tvGroupname = (TextView) findViewById(R.id.tvGroupname);		
+		tvGroupname.setPaintFlags(tvGroupname.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 전체선책
+		TextView tvAllchoice = (TextView) findViewById(R.id.tvAllchoice);		
+		tvAllchoice.setPaintFlags(tvAllchoice.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);		
 
 	}
 
@@ -164,6 +174,7 @@ public class AddressDownload extends ListActivity {
 			// / 이름
 			TextView textView = (TextView) row.findViewById(R.id.name);
 			textView.setText(tbMember.getFd_member_name());
+			textView.setPaintFlags(textView.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);		
 			// 전화번호
 			TextView textView2 = (TextView) row.findViewById(R.id.number);
 			textView2.setText(tbMember.getFd_member_phone());
