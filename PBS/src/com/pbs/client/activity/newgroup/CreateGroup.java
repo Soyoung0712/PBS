@@ -272,9 +272,12 @@ public class CreateGroup extends Activity
 					
 					
 					WaitDlg.stop(dlg);
+					
+					finish();
+					
 				}
 
-				finish();
+				
 				
 			}
 		});

@@ -1,8 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/group_list_row"
-    android:orientation="horizontal" >
+    android:background="@drawable/listview_one"
+    android:orientation="horizontal" 
+     android:paddingRight="20dp"
+     >
 
     <TextView
         android:id="@+id/groupName"
@@ -24,21 +26,28 @@
         android:textSize="15dp" />
 
     <Button
-        android:id="@+id/groupHidden"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:focusable="false"
-        android:text="삭제" />
-
-    <Button
         android:id="@+id/groupSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/group_setting_2"
-        android:focusable="false" />
+        android:layout_centerVertical="true"
+        android:background="@drawable/listview_button"
+        android:focusable="false"         
+        android:text="설정"
+       
+         android:textColor="#ffffff" 
+         
+        />
+
+    <Button
+        android:id="@+id/groupHidden"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/groupNotice"
+        android:background="@drawable/listview_button"
+        android:focusable="false"
+        android:text="삭제"
+       android:textColor="#7e7e7e" />
 
 </RelativeLayout>
