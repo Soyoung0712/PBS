@@ -7,7 +7,9 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -169,9 +171,9 @@ public class AddressDownload extends ListActivity {
 			TbMember tbMember = tbMemberList.get(position);
 
 			LayoutInflater inflater = context.getLayoutInflater();
-			View row = inflater.inflate(R.layout.my_address_download_row, null);
+			View row = inflater.inflate(R.layout.my_address_download_row, null);			
 
-			// / 이름
+			// 이름
 			TextView textView = (TextView) row.findViewById(R.id.name);
 			textView.setText(tbMember.getFd_member_name());
 			textView.setPaintFlags(textView.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);		
@@ -180,8 +182,10 @@ public class AddressDownload extends ListActivity {
 			textView2.setText(tbMember.getFd_member_phone());
 			// 체크박스 상태
 			final int pos = position;
-			CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkBox);
-			checkBox.setChecked(tbMember.isChecked());
+			CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkBox);			
+			checkBox.setChecked(tbMember.isChecked());			
+
+			/*
 			checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				// 클릭할때 마다 상태 저장
 				public void onCheckedChanged(CompoundButton buttonView,
@@ -190,6 +194,15 @@ public class AddressDownload extends ListActivity {
 				}
 
 			});
+			*/
+			
+			final CheckBox tmpCheckBox = (CheckBox) row.findViewById(R.id.checkBox);
+			row.setOnTouchListener(new View.OnTouchListener() {				
+				public boolean onTouch(View v, MotionEvent event) {
+					tmpCheckBox.setChecked(tbMemberList.get(pos).check());
+					return false;
+				}
+			});			
 
 			return row;
 		}

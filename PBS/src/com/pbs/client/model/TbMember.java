@@ -93,6 +93,13 @@ public class TbMember {
 	public void setChecked(boolean checked) {
 		this.checked = checked;
 	}
-	
+	public boolean check() {
+		if( checked ) {
+			checked = false;
+		}else {
+			checked = true;
+		}
+		return checked;
+	}	
 
 }
