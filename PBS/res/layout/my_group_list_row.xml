@@ -12,9 +12,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentTop="true"        
         android:layout_marginLeft="40dp"
-        android:textSize="15dp" />
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+      />
 
     <TextView
         android:id="@+id/groupNotice"
@@ -22,8 +25,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/groupName"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="40dp"
-        android:textSize="15dp" />
+        android:textStyle="bold"
+        android:textSize="20dp"
+          />
 
     <Button
         android:id="@+id/groupSetting"
@@ -34,9 +40,10 @@
         android:background="@drawable/listview_button"
         android:focusable="false"         
         android:text="설정"
-       
+        android:textStyle="bold"
+        android:textSize="16dp" 
          android:textColor="#ffffff" 
-         
+          
         />
 
     <Button
@@ -44,10 +51,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:layout_alignTop="@+id/groupNotice"
         android:background="@drawable/listview_button"
         android:focusable="false"
         android:text="삭제"
+        android:textStyle="bold"
+        android:textSize="16dp" 
        android:textColor="#7e7e7e" />
 
 </RelativeLayout>
