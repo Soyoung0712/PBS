@@ -183,9 +183,7 @@ public class AddressDownload extends ListActivity {
 			// 체크박스 상태
 			final int pos = position;
 			CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkBox);			
-			checkBox.setChecked(tbMember.isChecked());			
-
-			/*
+			checkBox.setChecked(tbMember.isChecked());
 			checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				// 클릭할때 마다 상태 저장
 				public void onCheckedChanged(CompoundButton buttonView,
@@ -193,16 +191,17 @@ public class AddressDownload extends ListActivity {
 					tbMemberList.get(pos).setChecked(isChecked);
 				}
 
-			});
-			*/
+			});			
 			
+			/*
 			final CheckBox tmpCheckBox = (CheckBox) row.findViewById(R.id.checkBox);
 			row.setOnTouchListener(new View.OnTouchListener() {				
 				public boolean onTouch(View v, MotionEvent event) {
 					tmpCheckBox.setChecked(tbMemberList.get(pos).check());
 					return false;
 				}
-			});			
+			});
+			*/			
 
 			return row;
 		}
