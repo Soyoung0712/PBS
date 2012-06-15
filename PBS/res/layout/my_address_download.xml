@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#EEEEEEEE"
+    android:background="@drawable/background_grey"    
     android:orientation="vertical" >    
      
     <TextView
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:textSize="16dp"
-            android:textStyle="bold"
+            android:textStyle="bold"             
             android:text="그룹명" />
 
         <EditText
@@ -60,7 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="15dp"
-                        
+            android:paddingLeft="10dp"
+            android:background="@drawable/edit_text_bg"                        
             android:text="안드로이드 3기" />
     </LinearLayout>
 
@@ -87,13 +88,12 @@
             android:layout_height="wrap_content"            
             android:text="전체 선택"
             android:textStyle="bold"
-            android:textSize="16dp" />
-        
-    </LinearLayout>
-
+            android:textSize="16dp" />        
+    </LinearLayout>
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
-        android:layout_height="250dp" />
-   
+        android:layout_height="280dp"        
+        android:background="#ffffffff" />
+
 </LinearLayout>
