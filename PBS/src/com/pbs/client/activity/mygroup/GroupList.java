@@ -9,6 +9,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -78,6 +79,8 @@ public class GroupList extends ListActivity
 
 		// 그룹 추가 버튼
 		Button addgroup = (Button) findViewById(R.id.button1);
+		addgroup.setPaintFlags(addgroup.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);		
+		
 		addgroup.setOnClickListener(new View.OnClickListener()
 		{
 			public void onClick(View v)
@@ -86,7 +89,9 @@ public class GroupList extends ListActivity
 			}
 		});
 
+		// 새 그룹 만들기 버튼
 		Button newGroup = (Button) findViewById(R.id.button2);
+		newGroup.setPaintFlags(newGroup.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		newGroup.setOnClickListener(new View.OnClickListener()
 		{
 			public void onClick(View arg0)
@@ -254,9 +259,10 @@ public class GroupList extends ListActivity
 				public void onClick(View v)
 				{
 					 
-					
+			 
 					Intent intent = new Intent(GroupList.this, GroupModify.class);
 					intent.putExtra("pk_group", tbGroupList.get(pos).getPk_group());
+					 
 					startActivity(intent);
 					
 					 

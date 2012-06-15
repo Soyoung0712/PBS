@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.R;
+import com.pbs.client.activity.main.WaitDlg;
 import com.pbs.client.model.TbMember;
 import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.UserGson;
@@ -51,6 +52,8 @@ public class InviteSms extends ListActivity {
 	PendingIntent sentIntent;
 	PendingIntent deliveryIntent;
 
+	WaitDlg dlg;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -118,7 +121,17 @@ public class InviteSms extends ListActivity {
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface arg0,
 											int arg1) {
+										
+										dlg = new WaitDlg(InviteSms.this, "문자메시지 전송", "그룹원에게 문자메시지 전송중입니다");
+										
+										dlg.start();
+										
 										SendMessage();
+								
+									
+									
+										
+										
 									}
 								})
 						.setNegativeButton("취소",
@@ -159,7 +172,7 @@ public class InviteSms extends ListActivity {
 			}
 		}
 
-	}
+	}/////
 
 	@SuppressWarnings("deprecation")
 	public void sendSMS(String phoneNumber) {
@@ -180,6 +193,9 @@ public class InviteSms extends ListActivity {
 		public void onReceive(Context context, Intent intent) {
 			// Activity.RESULT_OK 수신 성공
 			if (getResultCode() == Activity.RESULT_OK) {
+				
+				WaitDlg.stop(dlg);
+				
 				Toast.makeText(InviteSms.this, "SMS 전송 완료", Toast.LENGTH_SHORT)
 						.show();
 			} else {
