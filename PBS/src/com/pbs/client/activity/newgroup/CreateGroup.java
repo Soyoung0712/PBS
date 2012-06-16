@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -15,6 +16,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -108,6 +110,15 @@ public class CreateGroup extends Activity
 		// 积己肯丰
 		bGroupResult = (Button) findViewById(R.id.bGroupResult);
 		bGroupCancel = (Button) findViewById(R.id.bGroupCancel);
+		
+		// bold 贸府
+		// 力格
+		TextView tvTitle = (TextView) findViewById(R.id.tvTitle);		
+		tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 积己肯丰				
+		bGroupResult.setPaintFlags(bGroupResult.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 秒家				
+		bGroupCancel.setPaintFlags(bGroupCancel.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);		
 
 	}
 

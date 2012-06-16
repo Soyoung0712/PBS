@@ -8,6 +8,7 @@ import android.app.ListActivity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.KeyEvent;
@@ -40,9 +41,6 @@ public class GetAddressList extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-
-		  
-		 
 		
 		// 타이틀바 없애기
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -179,6 +177,18 @@ public class GetAddressList extends ListActivity {
 				finish();
 			}
 		});
+		
+		// bold 처리
+		// 제목
+		TextView tvTitle = (TextView) findViewById(R.id.tvTitle);		
+		tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 문자보내기				
+		mGroupRestul.setPaintFlags(mGroupRestul.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 취소				
+		mGroupCancel.setPaintFlags(mGroupCancel.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 전체선택
+		TextView tvAllchoice = (TextView) findViewById(R.id.tvAllchoice);		
+		tvAllchoice.setPaintFlags(tvAllchoice.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 
 	}
  
@@ -219,10 +229,12 @@ public class GetAddressList extends ListActivity {
 			// 이름
 			TextView nameTextView = (TextView) row.findViewById(R.id.name);
 			nameTextView.setText(addressUser.getName());
+			nameTextView.setPaintFlags(nameTextView.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 
 			// 전화번호
 			TextView dialTextView = (TextView) row.findViewById(R.id.dial);
 			dialTextView.setText(addressUser.getDial());
+			dialTextView.setPaintFlags(dialTextView.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 
 			// 체크박스 상태
 			CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkBox);

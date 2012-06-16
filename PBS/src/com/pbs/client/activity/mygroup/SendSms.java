@@ -9,6 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -111,6 +112,18 @@ public class SendSms extends ListActivity {
 				finish();
 			}
 		});
+		
+		// bold 처리
+		// 제목
+		TextView tvTitle = (TextView) findViewById(R.id.tvTitle);		
+		tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 문자보내기				
+		mSave.setPaintFlags(mSave.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 취소				
+		mCancle.setPaintFlags(mCancle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 전체선택
+		TextView tvAllchoice = (TextView) findViewById(R.id.tvAllchoice);		
+		tvAllchoice.setPaintFlags(tvAllchoice.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 	}
 
 	// 문자 보내기 버튼 클릭 이벤트
@@ -180,9 +193,11 @@ public class SendSms extends ListActivity {
 			// / 이름
 			TextView textView = (TextView) row.findViewById(R.id.name);
 			textView.setText(tbMember.getFd_member_name());
+			textView.setPaintFlags(textView.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 			// 전화번호
 			TextView textView2 = (TextView) row.findViewById(R.id.number);
 			textView2.setText(tbMember.getFd_member_phone());
+			textView2.setPaintFlags(textView2.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 			// 체크박스 상태
 			final int pos = position;
 			CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkBox);

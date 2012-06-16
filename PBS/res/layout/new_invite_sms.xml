@@ -2,59 +2,76 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@drawable/background_grey"    
     android:orientation="vertical" >
 
     <TextView
+        android:id="@+id/tvTitle"
+        style="@style/title_white"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:background="@drawable/title_bg"
+        android:gravity="center"        
         android:text="초대하기" />
-
+    
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <CheckBox
-            android:id="@+id/checkBoxAll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:focusable="false" />
-
-        <TextView
-            android:id="@+id/allchoice"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="모두 선택"
-            android:textSize="20dp" />
-    </LinearLayout>
-    
-    <ListView 
-        android:id="@android:id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="370dp"/>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:gravity="center"        
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:orientation="horizontal" >
         
         <Button 
             android:id="@+id/sendmessage"
             style="@style/button_white"
-            android:layout_width="150dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_background_2"
+            android:background="@drawable/button_bg"
             android:text="문자 보내기"/>
+        
         <Button 
             android:id="@+id/cancle"
             style="@style/button_white"
-            android:layout_width="70dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_background_2"
-            android:text="취소"/>
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/button_bg"
+            android:text="취소"/>      
+        
     </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <CheckBox
+            android:id="@+id/checkBoxAll"
+            android:layout_width="20dp"
+            android:layout_height="23dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20dp"
+            android:button="@drawable/checkbox_on_off"
+            android:focusable="false" />
+
+        <TextView
+            android:id="@+id/tvAllchoice"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"            
+            android:text="전체 선택"
+            android:textStyle="bold"
+            android:textSize="16dp" />
+    </LinearLayout>
+    
+    <ListView 
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"      
+        android:background="#ffffffff" />    
 
 </LinearLayout>

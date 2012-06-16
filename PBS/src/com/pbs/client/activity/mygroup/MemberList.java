@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,7 +84,17 @@ public class MemberList extends ListActivity {
 				finish();
 			}
 		});		
-
+		
+		// bold 처리
+		// 제목
+		TextView tvTitle = (TextView) findViewById(R.id.tvTitle);
+		tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 내 폰으로 이동
+		mPhoneMove.setPaintFlags(mPhoneMove.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 문자보내기
+		mSMSMove.setPaintFlags(mSMSMove.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 취소
+		mCancel.setPaintFlags(mCancel.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 	}
 
 	
@@ -110,9 +121,11 @@ public class MemberList extends ListActivity {
 			// 이름
 			TextView textView = (TextView) row.findViewById(R.id.name);
 			textView.setText(tbMember.getFd_member_name());
+			textView.setPaintFlags(textView.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 			// 전화번호
 			TextView textView2 = (TextView) row.findViewById(R.id.number);
 			textView2.setText(tbMember.getFd_member_phone());
+			textView2.setPaintFlags(textView2.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 			// 전화걸기 이미지
 			Button imageView = (Button) row.findViewById(R.id.phone);	
 			imageView.setOnClickListener(new View.OnClickListener() {

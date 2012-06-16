@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.telephony.gsm.SmsManager;
 import android.util.Log;
@@ -119,27 +120,16 @@ public class InviteSms extends ListActivity {
 						.setMessage("SMS를 이용하여 그룹원을 초대하시겠습니까?")
 						.setPositiveButton("확인",
 								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface arg0,
-											int arg1) {
-										
-										dlg = new WaitDlg(InviteSms.this, "문자메시지 전송", "그룹원에게 문자메시지 전송중입니다");
-										
-										dlg.start();
-										
-										SendMessage();
-								
-									
-									
-										
-										
+									public void onClick(DialogInterface arg0, int arg1) {										
+										dlg = new WaitDlg(InviteSms.this, "문자메시지 전송", "그룹원에게 문자메시지 전송중입니다");										
+										dlg.start();										
+										SendMessage();	
 									}
 								})
 						.setNegativeButton("취소",
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface arg0,
+								new DialogInterface.OnClickListener() {						public void onClick(DialogInterface arg0,
 											int arg1) {
-										Toast.makeText(InviteSms.this,
-												"SMS 초대를 취소하였습니다.",
+										Toast.makeText(InviteSms.this,"SMS 초대를 취소하였습니다.",
 												Toast.LENGTH_SHORT).show();
 									}
 								}).show();
@@ -154,10 +144,22 @@ public class InviteSms extends ListActivity {
 				finish();
 			}
 		});
+		
+		// bold 처리
+		// 제목
+		TextView tvTitle = (TextView) findViewById(R.id.tvTitle);		
+		tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 문자보내기				
+		mSave.setPaintFlags(mSave.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 취소				
+		mCancle.setPaintFlags(mCancle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 전체선택
+		TextView tvAllchoice = (TextView) findViewById(R.id.tvAllchoice);		
+		tvAllchoice.setPaintFlags(tvAllchoice.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		
 	}
 
 	// 문자 보내기 버튼 클릭 이벤트
-
 	public void SendMessage() {
 		// 문자 내용 입력
 		// 문자 받을 사람 추리기
@@ -177,8 +179,7 @@ public class InviteSms extends ListActivity {
 	@SuppressWarnings("deprecation")
 	public void sendSMS(String phoneNumber) {
 		final SmsManager sms = SmsManager.getDefault();
-		sms.sendTextMessage(phoneNumber, null, smsBody, sentIntent,
-				deliveryIntent);
+		sms.sendTextMessage(phoneNumber, null, smsBody, sentIntent, deliveryIntent);
 	}
 
 	public void onResume() {
@@ -225,9 +226,11 @@ public class InviteSms extends ListActivity {
 			// / 이름
 			TextView textView = (TextView) row.findViewById(R.id.name);
 			textView.setText(tbMember.getFd_member_name());
+			textView.setPaintFlags(textView.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 			// 전화번호
 			TextView textView2 = (TextView) row.findViewById(R.id.number);
 			textView2.setText(tbMember.getFd_member_phone());
+			textView2.setPaintFlags(textView2.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 			// 체크박스 상태
 			final int pos = position;
 			CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkBox);

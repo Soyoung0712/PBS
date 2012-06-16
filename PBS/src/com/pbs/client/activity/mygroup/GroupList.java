@@ -55,7 +55,7 @@ public class GroupList extends ListActivity
 
 		// 타이틀바 없애기
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-
+		
 		setContentView(R.layout.my_group_list);
 
 		// 내 전화번호 가져오기
@@ -78,7 +78,7 @@ public class GroupList extends ListActivity
 		// newArrayAdapter.notifyDataSetChanged();
 
 		// 그룹 추가 버튼
-		Button addgroup = (Button) findViewById(R.id.button1);
+		Button addgroup = (Button) findViewById(R.id.bAddGroup);
 		addgroup.setPaintFlags(addgroup.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);		
 		
 		addgroup.setOnClickListener(new View.OnClickListener()
@@ -90,7 +90,7 @@ public class GroupList extends ListActivity
 		});
 
 		// 새 그룹 만들기 버튼
-		Button newGroup = (Button) findViewById(R.id.button2);
+		Button newGroup = (Button) findViewById(R.id.bCreateGroup);
 		newGroup.setPaintFlags(newGroup.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		newGroup.setOnClickListener(new View.OnClickListener()
 		{
@@ -100,6 +100,11 @@ public class GroupList extends ListActivity
 				startActivity(intent);
 			}
 		});
+		
+		// bold 처리
+		// 제목
+		TextView tvTitle = (TextView) findViewById(R.id.tvTitle);		
+		tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 
 	}
 
@@ -247,10 +252,12 @@ public class GroupList extends ListActivity
 			// 그룹명
 			TextView textView = (TextView) row.findViewById(R.id.groupName);
 			textView.setText(tbGroupList.get(position).getFd_group_name());
+			textView.setPaintFlags(textView.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 
 			// 그룹 공지사항
 			TextView textView2 = (TextView) row.findViewById(R.id.groupNotice);
 			textView2.setText(tbGroupList.get(position).getFd_group_notice());
+			textView2.setPaintFlags(textView2.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 
 			// "설정" 버튼
 			Button mGroupSetting = (Button) row.findViewById(R.id.groupSetting);
@@ -302,11 +309,11 @@ public class GroupList extends ListActivity
 			// (관리자는 "설정", 일반사용자는 "삭제" 버튼이 노출)
 			if (!curTbGroup.getFd_admin_yn().equals("Y"))
 			{
-				mGroupSetting.setVisibility(View.INVISIBLE);
+				mGroupSetting.setVisibility(View.GONE);
 			}
 			else
 			{
-				mGroupHidden.setVisibility(View.INVISIBLE);
+				mGroupHidden.setVisibility(View.GONE);
 			}
 
 			return row;

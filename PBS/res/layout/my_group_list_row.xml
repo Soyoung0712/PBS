@@ -1,63 +1,64 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/listview_one"
-    android:orientation="horizontal" 
-     android:paddingRight="20dp"
-     >
+    android:gravity="center_vertical"
+    android:paddingTop="7dp"
+    android:paddingBottom="7dp"
+    android:orientation="horizontal" >
 
-    <TextView
-        android:id="@+id/groupName"
-        style="@style/big_red_font"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"        
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="10dp"
-        android:textStyle="bold"
-        android:textSize="20dp"
-      />
+        android:gravity="left"        
+        android:layout_marginLeft="15dp"
+        android:orientation="vertical" >
+                
+	    <TextView
+	        android:id="@+id/groupName"        
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="18dp"
+	        android:textStyle="bold" />
+	
+	    <TextView
+	        android:id="@+id/groupNotice"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="#949191"            
+            android:textSize="15dp" />
+	</LinearLayout>
 
-    <TextView
-        android:id="@+id/groupNotice"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/groupName"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="40dp"
-        android:textStyle="bold"
-        android:textSize="20dp"
-          />
+        android:gravity="right"        
+        android:orientation="horizontal" >
+	    
+	    <Button
+	        android:id="@+id/groupSetting"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"	        
+	        style="@style/button_white"        
+	        android:background="@drawable/listview_button"        
+	        android:focusable="false"        
+	        android:textSize="13dp" 
+	        android:text="설정"
+	        android:textColor="#ffffff" />
+	
+	    <Button
+	        android:id="@+id/groupHidden"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"	        
+	        style="@style/button_white"        
+	        android:background="@drawable/listview_button"        
+	        android:focusable="false"
+	        android:text="삭제"
+	        android:textStyle="bold"
+	        android:textSize="13dp" 
+	       	android:textColor="#7e7e7e" />
+	    
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/groupSetting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/listview_button"
-        android:focusable="false"         
-        android:text="설정"
-        android:textStyle="bold"
-        android:textSize="16dp" 
-         android:textColor="#ffffff" 
-          
-        />
-
-    <Button
-        android:id="@+id/groupHidden"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_alignTop="@+id/groupNotice"
-        android:background="@drawable/listview_button"
-        android:focusable="false"
-        android:text="삭제"
-        android:textStyle="bold"
-        android:textSize="16dp" 
-       android:textColor="#7e7e7e" />
-
-</RelativeLayout>
+</LinearLayout>

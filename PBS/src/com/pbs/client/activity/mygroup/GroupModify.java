@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -326,7 +327,7 @@ public class GroupModify extends Activity {
 			}
 		});
 
-		// "SMS 알림" 버튼 클릭
+		// "초대하기" 버튼 클릭
 		bSmsNoti.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
 
@@ -353,6 +354,19 @@ public class GroupModify extends Activity {
 				finish();
 			}
 		});
+		
+		// bold 처리
+		// 제목
+		TextView tvTitle = (TextView) findViewById(R.id.tvTitle);		
+		tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 생성완료				
+		bGroupUpdate.setPaintFlags(bGroupUpdate.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 초대하기				
+		bSmsNoti.setPaintFlags(bSmsNoti.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 취소
+		bCancel.setPaintFlags(bCancel.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 삭제
+		bGroupDelete.setPaintFlags(bGroupDelete.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 	}
 
 	@Override
