@@ -124,7 +124,7 @@ public class MemberList extends ListActivity {
 			textView.setPaintFlags(textView.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 			// 전화번호
 			TextView textView2 = (TextView) row.findViewById(R.id.number);
-			textView2.setText(tbMember.getFd_member_phone());
+			textView2.setText(tbMember.getFd_member_phone_view());
 			textView2.setPaintFlags(textView2.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 			// 전화걸기 이미지
 			Button imageView = (Button) row.findViewById(R.id.phone);	
@@ -132,7 +132,7 @@ public class MemberList extends ListActivity {
 				// 클릭시 전화걸기
 				public void onClick(View arg0) {
 					TbMember tbMember = tbMemberList.get(pos);										
-					IntentsUtil.phoneCall(context, tbMember.getFd_member_phone());
+					IntentsUtil.phoneCall(context, tbMember.getFd_member_phone_view());
 				}
 			});
 			

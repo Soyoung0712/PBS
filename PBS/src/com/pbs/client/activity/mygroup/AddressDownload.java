@@ -189,7 +189,8 @@ public class AddressDownload extends ListActivity {
 			textView.setPaintFlags(textView.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);		
 			// 전화번호
 			TextView textView2 = (TextView) row.findViewById(R.id.number);
-			textView2.setText(tbMember.getFd_member_phone());
+			textView2.setText(tbMember.getFd_member_phone_view());
+			textView2.setPaintFlags(textView2.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 			// 체크박스 상태
 			final int pos = position;
 			CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkBox);			

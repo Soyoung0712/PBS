@@ -2,6 +2,8 @@ package com.pbs.client.model;
 
 import java.sql.Timestamp;
 
+import android.telephony.PhoneNumberUtils;
+
 public class TbMember {
 
 	//-- properties --//
@@ -51,7 +53,7 @@ public class TbMember {
 		sb.append("[fk_group       ] : " + fk_group       + "\n");
 		sb.append("[fd_member_phone] : " + fd_member_phone+ "\n");
 		sb.append("[fd_member_name ] : " + fd_member_name + "\n");
-		sb.append("[fd_reg_date    ] : " + fd_reg_date    + "\n");
+		sb.append("[fd_reg_date    ] : " + fd_reg_date    + "\n");		
 		return sb.toString();
 	}
 
@@ -100,6 +102,13 @@ public class TbMember {
 			checked = true;
 		}
 		return checked;
-	}	
+	}
+	
+	public String getFd_member_phone_view() {
+		if( fd_member_phone != null ) {
+			fd_member_phone = PhoneNumberUtils.formatNumber(fd_member_phone); 
+		}		
+		return fd_member_phone;
+	}
 
 }
