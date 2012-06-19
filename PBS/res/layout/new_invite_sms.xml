@@ -60,10 +60,11 @@
         <TextView
             android:id="@+id/tvAllchoice"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"            
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:text="전체 선택"
-            android:textStyle="bold"
-            android:textSize="16dp" />
+            android:textSize="18dp"
+            android:textStyle="bold" />
     </LinearLayout>
     
     <ListView 

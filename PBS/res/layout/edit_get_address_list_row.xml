@@ -8,9 +8,8 @@
 
     <CheckBox
         android:id="@+id/checkBox"
-        android:layout_width="24dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
         android:button="@drawable/checkbox_on_off"
         android:focusable="false" />
 
@@ -19,6 +18,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
+        android:layout_marginLeft="5dp"     
         android:orientation="vertical" >
 
         <TextView
