@@ -31,8 +31,7 @@ public class GetAddressList extends ListActivity {
 
 	private NewArrayAdapter newArrayAdapter = null;
 	// 모두선택 Flag (초기 설정은 모두선택이 해지된 상태)
-	boolean allClickStatuFlag = false;
-	
+	boolean allClickStatuFlag = false;	
 	
 	// 전화번호부 리스트
 	private List<AddressUser> addressUserList;
@@ -49,8 +48,7 @@ public class GetAddressList extends ListActivity {
 
 		// 전화번호 주소록 가져오기
 		ContentResolver cr = getContentResolver();
-		Cursor c = this.managedQuery(ContactsContract.Contacts.CONTENT_URI,
-				null, null, null, null);
+		Cursor c = this.managedQuery(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
 		startManagingCursor(c);
 
 		// 전화번호 주소록 사용자 저장
@@ -233,7 +231,7 @@ public class GetAddressList extends ListActivity {
 
 			// 전화번호
 			TextView dialTextView = (TextView) row.findViewById(R.id.dial);
-			dialTextView.setText(addressUser.getDial());
+			dialTextView.setText(addressUser.getDial_view());
 			dialTextView.setPaintFlags(dialTextView.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 
 			// 체크박스 상태

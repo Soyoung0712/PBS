@@ -106,7 +106,7 @@ public class TbMember {
 	
 	public String getFd_member_phone_view() {
 		if( fd_member_phone != null ) {
-			fd_member_phone = PhoneNumberUtils.formatNumber(fd_member_phone); 
+			return PhoneNumberUtils.formatNumber(fd_member_phone); 
 		}		
 		return fd_member_phone;
 	}

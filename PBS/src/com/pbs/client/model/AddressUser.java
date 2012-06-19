@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.graphics.Bitmap;
+import android.telephony.PhoneNumberUtils;
 
 public class AddressUser implements Serializable {
 	
@@ -50,6 +51,13 @@ public class AddressUser implements Serializable {
 	}
 	public void setChecked(boolean checked) {
 		this.checked = checked;
+	}
+	
+	public String getDial_view() {		
+		if( dial != null ) {
+			return PhoneNumberUtils.formatNumber(dial); 
+		}	
+		return dial;
 	}
 	
 }
