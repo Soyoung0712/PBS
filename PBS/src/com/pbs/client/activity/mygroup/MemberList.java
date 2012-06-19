@@ -50,7 +50,7 @@ public class MemberList extends ListActivity {
 		// 리스트뷰에 리스트 적용
 		setListAdapter(new NewArrayAdapter(this));
 
-		// "내폰으로 이동" 버튼
+		// "내폰으로 저장" 버튼
 		Button mPhoneMove = (Button) findViewById(R.id.button1);
 		mPhoneMove.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
