@@ -66,8 +66,9 @@ public class InviteSms extends ListActivity {
 
 		// CreateGroupComplete에서 넘겨준 그룹키를 가져온다.
 		Intent intent = getIntent();
-		String tmpGroupKey = intent.getStringExtra("pk_group");
-		long groupKey = Long.parseLong(tmpGroupKey);
+		String tmpGroupKey = intent.getStringExtra("pk_group");				
+		final long groupKey = Long.parseLong(tmpGroupKey);
+		final String groupPassword = intent.getStringExtra("fd_group_password");
 
 		// 내 전화번호 가져오기
 		myPhoneNum = DeviceManager.getMyPhoneNumber(this);
@@ -104,10 +105,8 @@ public class InviteSms extends ListActivity {
 			}
 		});
 
-		sentIntent = PendingIntent.getBroadcast(InviteSms.this, 0, new Intent(
-				ACTION_SENT), 0);
-		deliveryIntent = PendingIntent.getBroadcast(InviteSms.this, 0,
-				new Intent(ACTION_DELIVERY), 0);
+		sentIntent = PendingIntent.getBroadcast(InviteSms.this, 0, new Intent(ACTION_SENT), 0);
+		deliveryIntent = PendingIntent.getBroadcast(InviteSms.this, 0,new Intent(ACTION_DELIVERY), 0);
 
 		Button mSave = (Button) findViewById(R.id.sendmessage);
 		Button mCancle = (Button) findViewById(R.id.cancle);
@@ -123,7 +122,7 @@ public class InviteSms extends ListActivity {
 									public void onClick(DialogInterface arg0, int arg1) {										
 										dlg = new WaitDlg(InviteSms.this, "문자메시지 전송", "그룹원에게 문자메시지 전송중입니다");										
 										dlg.start();										
-										SendMessage();	
+										sendMessage(groupKey, groupPassword);	
 									}
 								})
 						.setNegativeButton("취소",
@@ -160,16 +159,18 @@ public class InviteSms extends ListActivity {
 	}
 
 	// 문자 보내기 버튼 클릭 이벤트
-	public void SendMessage() {
+	public void sendMessage(Long groupKey, String groupPassword) {
 		// 문자 내용 입력
-		// 문자 받을 사람 추리기
-		phone = "";
+		// 문자 받을 사람 추리기		
 		for (int i = 0; i < tbMemberList.size(); i++) {
-			if (tbMemberList.get(i).isChecked()) {
-				phone = tbMemberList.get(i).getFd_member_phone();
+			if (tbMemberList.get(i).isChecked()) {				
+				
+				String phone = tbMemberList.get(i).getFd_member_phone();
+				String body = "PBS초대\n그룹등록:http://pbsm.co.kr/i.do?a="+groupKey+"&b="+groupPassword+"&c="+phone;
+				
 				// phone = phone.replace(";",""); //문자열 변환
 				if (phone.length() > 0) {
-					sendSMS(phone);
+					sendSMS(body, phone);
 				}
 			}
 		}
@@ -177,7 +178,7 @@ public class InviteSms extends ListActivity {
 	}/////
 
 	@SuppressWarnings("deprecation")
-	public void sendSMS(String phoneNumber) {
+	public void sendSMS(String smsBody, String phoneNumber) {
 		final SmsManager sms = SmsManager.getDefault();
 		sms.sendTextMessage(phoneNumber, null, smsBody, sentIntent, deliveryIntent);
 	}

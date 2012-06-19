@@ -28,8 +28,7 @@ public class CreateGroupComplete extends Activity {
 		Intent intent = getIntent();
 		String groupName = intent.getExtras().get("groupName").toString();
 		final String groupKey = intent.getExtras().get("groupKey").toString();
-		String groupPassword = intent.getExtras().get("groupPassword")
-				.toString();
+		final String groupPassword = intent.getExtras().get("groupPassword").toString();
 
 		// 생성 그룹명
 		TextView tvGroupName = (TextView) findViewById(R.id.tvGroupName);
@@ -63,9 +62,9 @@ public class CreateGroupComplete extends Activity {
 				
 				finish();
 								
-				Intent intent1 = new Intent(CreateGroupComplete.this,
-						InviteSms.class);
+				Intent intent1 = new Intent(CreateGroupComplete.this, InviteSms.class);
 				intent1.putExtra("pk_group", groupKey);
+				intent1.putExtra("fd_group_password", groupPassword);				
 				startActivity(intent1);
 			}
 		});
