@@ -1,6 +1,7 @@
 package com.pbs.client.activity.edit;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.app.Activity;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 
 import com.android.R;
 import com.pbs.client.model.AddressUser;
+import com.pbs.client.util.AddressUserSort;
 
 public class GetAddressList extends ListActivity {
 
@@ -56,24 +58,15 @@ public class GetAddressList extends ListActivity {
 		while (c.moveToNext()) {
 
 			// ID 저장
-			String id = c.getString(c
-					.getColumnIndex(ContactsContract.Contacts._ID));
+			String id = c.getString(c.getColumnIndex(ContactsContract.Contacts._ID));
 			// 이름 저장
-			String name = c.getString(c
-					.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+			String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
 			// 전화번호 저장
-			if (Integer
-					.parseInt(c.getString(c
-							.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
-				Cursor cp = cr.query(
-						ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-						null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID
-								+ " = ? ", new String[] { id }, null);
+			if (Integer.parseInt(c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
+				Cursor cp = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ? ", new String[] { id }, null);
 				while (cp.moveToNext()) {
-					String dial = cp
-							.getString(cp
-									.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA1));
+					String dial = cp.getString(cp.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA1));
 					// 전화번호가 있는 경우만 전화번호부에 보여준다.
 					if (dial != null && dial.length() > 0) {
 						// 사용자 정보 저장
@@ -109,6 +102,9 @@ public class GetAddressList extends ListActivity {
 			 */
 		}
 		c.close();
+		
+		// 이름 오름차순 정렬
+		Collections.sort(addressUserList, new AddressUserSort());		
 
 		// 리스트뷰에 리스트 저장
 		newArrayAdapter = new NewArrayAdapter(this);
@@ -218,8 +214,7 @@ public class GetAddressList extends ListActivity {
 
 			final int pos = position;
 			LayoutInflater inflater = context.getLayoutInflater();
-			View row = inflater.inflate(R.layout.edit_get_address_list_row,
-					null);
+			View row = inflater.inflate(R.layout.edit_get_address_list_row, null);
 
 			// 전화번호부
 			AddressUser addressUser = addressUserList.get(pos);
