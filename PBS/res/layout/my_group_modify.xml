@@ -14,7 +14,7 @@
         android:background="@drawable/title_bg"
         android:gravity="center"
         android:text="그룹 설정" />
-    
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
         <Button
             android:id="@+id/bGroupUpdate"
             style="@style/button_white"
-            android:layout_width="80dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_bg"
             android:text="설정완료" />
@@ -34,31 +34,31 @@
         <Button
             android:id="@+id/bSmsNoti"
             style="@style/button_white"
-            android:layout_width="80dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:background="@drawable/button_bg"
             android:text="초대하기" />
 
         <Button
             android:id="@+id/bCancel"
             style="@style/button_white"
-            android:layout_width="60dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:background="@drawable/button_bg"
             android:text="취소" />
 
         <Button
             android:id="@+id/bGroupDelete"
             style="@style/button_white"
-            android:layout_width="60dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:background="@drawable/button_bg"
             android:text="삭제" />
     </LinearLayout>
-    
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -76,28 +76,25 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:orientation="vertical"
-                android:padding="30dp" >
+                android:padding="5dp" >
 
                 <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="그룹명" />
-
-                    <LinearLayout
-                        android:layout_width="90dp"
-                        android:layout_height="fill_parent"
-                        android:orientation="vertical" >
-                    </LinearLayout>
+                        android:text="    그룹명" />
 
                     <EditText
                         android:id="@+id/etGroupName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="300dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
                         android:layout_weight="1"
+                        android:background="@drawable/edit_text_bg"
                         android:ems="10" >
 
                         <requestFocus />
@@ -106,111 +103,129 @@
 
                 <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="그룹key" />
+                        android:text="그룹 KEY" />
 
-                    <LinearLayout
-                        android:layout_width="90dp"
-                        android:layout_height="fill_parent"
-                        android:orientation="vertical" >
-                    </LinearLayout>
-
-                    <TextView
+                    <EditText
                         android:id="@+id/tvGroupKey"
-                        android:layout_width="wrap_content"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/edit_text_bg"
                         android:text="4153678" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="그룹 공지사항" />
+                        android:text="공지사항" />
 
                     <EditText
                         android:id="@+id/etGroupNotice"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/edit_text_bg"
                         android:ems="10" />
                 </LinearLayout>
 
-                <CheckBox
-                    android:id="@+id/chPassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:text="비밀번호를 수정합니다" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal" >
+
+                    <CheckBox
+                        android:id="@+id/chPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:button="@drawable/checkbox_on_off"
+                        android:focusable="false" />
+
+                    <TextView
+                        android:id="@+id/seleteAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="17dp"
+                        android:text="비밀번호 수정" />
+>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="새 비밀번호" />
-
-                    <LinearLayout
-                        android:layout_width="75dp"
-                        android:layout_height="fill_parent"
-                        android:orientation="vertical" >
-                    </LinearLayout>
+                        android:text="         새 비밀번호" />
 
                     <EditText
                         android:id="@+id/etPassword"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
                         android:layout_weight="1"
+                        android:background="@drawable/edit_text_bg"
                         android:ems="10"
                         android:inputType="textPassword" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="새 비밀번호 확인" />
 
-                    <LinearLayout
-                        android:layout_width="44dp"
-                        android:layout_height="fill_parent"
-                        android:orientation="vertical" >
-                    </LinearLayout>
-
                     <EditText
                         android:id="@+id/etPasswordConfirm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
                         android:layout_weight="1"
+                        android:background="@drawable/edit_text_bg"
                         android:ems="10"
                         android:inputType="textPassword" />
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="그룹원 관리" />
-
                 <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="그룹원 관리" />
 
                     <EditText
                         android:id="@+id/etGroupMemberListInfo"
-                        android:layout_width="119dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
                         android:layout_weight="0.58"
+                        android:background="@drawable/edit_text_bg"
                         android:ems="10"
                         android:hint="그룹원 추가"
                         android:inputType="phone"
@@ -218,44 +233,72 @@
 
                     <Button
                         android:id="@+id/bGroupGetAddressList"
+                        style="@style/button_white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="가져오기" />
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/listview_button"
+                        android:text="가져오기"
+                        android:textSize="12dp" />
                 </LinearLayout>
-
-                <CheckBox
-                    android:id="@+id/chAdmin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:text="관리자 번호 입력" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal" >
+
+                    <CheckBox
+                        android:id="@+id/chAdmin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:button="@drawable/checkbox_on_off"
+                        android:focusable="false"/>
+                    <TextView 
+                        android:id="@+id/managerCheck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="관리자 편집"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+                    
+                    <TextView 
+                        android:id="@+id/manager"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="관리자  관리"/>
 
                     <EditText
                         android:id="@+id/etAdminMemberListInfo"
-                        android:layout_width="119dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.58"
                         android:ems="10"
                         android:hint="관리자 추가"
                         android:inputType="phone"
+                        android:background="@drawable/edit_text_bg"
                         android:textSize="16dp" />
 
                     <Button
                         android:id="@+id/bAdminGetAddressList"
+                        android:layout_marginLeft="5dp"
+                        style="@style/button_white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="가져오기" />
+                        android:background="@drawable/listview_button"
+                        android:text="가져오기" 
+                        android:textSize="12dp"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal" >
-
-                    
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
