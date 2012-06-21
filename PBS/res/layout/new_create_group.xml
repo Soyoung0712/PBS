@@ -175,7 +175,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:background="@drawable/listview_button"
+                        android:background="@drawable/listview_button_default_click"
                         android:text="가져오기"
                         android:textSize="12dp" />
                 </LinearLayout>
@@ -227,7 +227,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:background="@drawable/listview_button"
+                        android:background="@drawable/listview_button_default_click"
                         android:text="가져오기"
                         android:textSize="12dp" />
                 </LinearLayout>
