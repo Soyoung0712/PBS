@@ -98,6 +98,7 @@ public class GroupList extends ListActivity
 			{
 				Intent intent = new Intent(GroupList.this, CreateGroup.class);
 				startActivity(intent);
+				
 			}
 		});
 		
