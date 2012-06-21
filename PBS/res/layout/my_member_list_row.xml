@@ -41,7 +41,7 @@
 	        android:id="@+id/phone"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"	        
-	        android:background="@drawable/phone"
+	        android:background="@drawable/phone_default_click"
 	        android:focusable="false" />
 	    
 	</LinearLayout>

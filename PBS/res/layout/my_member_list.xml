@@ -48,15 +48,14 @@
             android:background="@drawable/button_default_click"
             android:text="취소" />
 	</LinearLayout>
-
-    <!--
+    
     <TextView
         android:id="@+id/android:empty"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_height="fill_parent"
+        android:gravity="center"
         android:text="등록된 멤버가 없습니다." />
-    -->
+    
 
     <ListView
         android:id="@android:id/list"
