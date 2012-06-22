@@ -102,8 +102,8 @@ public class CreateGroup extends Activity
 		// 包府磊 包府
 		adminMemberList = new ArrayList<AddressUser>();
 		chAdmin = (CheckBox) findViewById(R.id.chAdmin);
-		etAdminMemberListInfo = (EditText) findViewById(R.id.etAdminMemberListInfo);
-		etAdminMemberListInfo.setEnabled(false);
+		etAdminMemberListInfo = (EditText) findViewById(R.id.etAdminMemberListInfo);		
+		etAdminMemberListInfo.setEnabled(false);		
 		bAdminGetAddressList = (Button) findViewById(R.id.bAdminGetAddressList);
 		bAdminGetAddressList.setEnabled(false);
 
@@ -118,8 +118,21 @@ public class CreateGroup extends Activity
 		// 积己肯丰				
 		bGroupResult.setPaintFlags(bGroupResult.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		// 秒家				
-		bGroupCancel.setPaintFlags(bGroupCancel.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);		
-
+		bGroupCancel.setPaintFlags(bGroupCancel.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		TextView tvGroupName = (TextView) findViewById(R.id.tvGroupName);
+		tvGroupName.setPaintFlags(tvGroupName.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		TextView tvGroupNotice = (TextView) findViewById(R.id.tvGroupNotice);
+		tvGroupNotice.setPaintFlags(tvGroupNotice.getPaintFlags()| Paint.FAKE_BOLD_TEXT_FLAG);
+		TextView tbPassword = (TextView) findViewById(R.id.tbPassword);
+		tbPassword.setPaintFlags(tbPassword.getPaintFlags()| Paint.FAKE_BOLD_TEXT_FLAG);
+		TextView tvPasswordConfirm = (TextView) findViewById(R.id.tvPasswordConfirm);
+		tvPasswordConfirm.setPaintFlags(tvPasswordConfirm.getPaintFlags()| Paint.FAKE_BOLD_TEXT_FLAG);
+		TextView tvGroupMemberListInfo = (TextView) findViewById(R.id.tvGroupMemberListInfo);
+		tvGroupMemberListInfo.setPaintFlags(tvGroupMemberListInfo.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		TextView chText = (TextView) findViewById(R.id.chText);
+		chText.setPaintFlags(chText.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		TextView managerText = (TextView) findViewById(R.id.managerText);
+		managerText.setPaintFlags(managerText.getPaintFlags()| Paint.FAKE_BOLD_TEXT_FLAG);
 	}
 
 	@Override
@@ -164,14 +177,13 @@ public class CreateGroup extends Activity
 		{
 			public void onCheckedChanged(CompoundButton arg0, boolean arg1)
 			{
-				if (chAdmin.isChecked())
-				{
+				if (chAdmin.isChecked()) {
 					etAdminMemberListInfo.setEnabled(true);
+					etAdminMemberListInfo.setBackgroundResource(R.drawable.edit_text_bg);
 					bAdminGetAddressList.setEnabled(true);
-				}
-				else
-				{
+				}else{
 					etAdminMemberListInfo.setEnabled(false);
+					etAdminMemberListInfo.setBackgroundResource(R.drawable.edit_text_bg_grey);
 					bAdminGetAddressList.setEnabled(false);
 				}
 			}
