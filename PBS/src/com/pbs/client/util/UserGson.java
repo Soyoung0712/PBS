@@ -115,9 +115,11 @@ public class UserGson {
 				if( item != null ) {					
 					tbGroup = new TbGroup();					
 					long pk_group 		 	 = groupJson.getLong("pk_group");
+					String fd_group_password = groupJson.getString("fd_group_password");
 					String fd_group_name     = groupJson.getString("fd_group_name");					
 					String fd_group_notice   = groupJson.getString("fd_group_notice");					
-					String fd_group_creator  = groupJson.getString("fd_group_creator");					
+					String fd_group_creator  = groupJson.getString("fd_group_creator");
+					tbGroup.setFd_group_password(fd_group_password);
 					tbGroup.setPk_group(pk_group);
 					tbGroup.setFd_group_name(fd_group_name);					
 					tbGroup.setFd_group_notice(fd_group_notice);

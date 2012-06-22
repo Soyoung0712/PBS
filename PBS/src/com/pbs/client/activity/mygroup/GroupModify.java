@@ -49,6 +49,8 @@ public class GroupModify extends Activity {
 	private EditText etGroupName;
 	// 그룹키
 	private TextView tvGroupKey;
+	// 그룹패스워드
+	private TextView tvGroupPassword;
 
 	// 비밀번호 관리 체크 박스
 	private CheckBox chPassword;
@@ -105,6 +107,9 @@ public class GroupModify extends Activity {
 		// 그룹키
 		tvGroupKey = (TextView) findViewById(R.id.tvGroupKey);
 		tvGroupKey.setText(tbGroup.getPk_group() + "");
+		// 그룹패스워드
+		tvGroupPassword = (TextView) findViewById(R.id.tvGroupPassword);
+		tvGroupPassword.setText(tbGroup.getFd_group_password() + "");
 
 		// 비밀번호 체크박스
 		chPassword = (CheckBox) findViewById(R.id.chPassword);
@@ -177,10 +182,14 @@ public class GroupModify extends Activity {
 		// "비밀번호 수정" 체크박스
 		chPassword.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-				if (chPassword.isChecked()) {
+				if (chPassword.isChecked()) {					
+					etPassword.setBackgroundResource(R.drawable.edit_text_bg);					
+					etPasswordConfirm.setBackgroundResource(R.drawable.edit_text_bg);
 					etPassword.setEnabled(true);
 					etPasswordConfirm.setEnabled(true);
-				} else {
+				} else {					
+					etPassword.setBackgroundResource(R.drawable.edit_text_bg_grey);					
+					etPasswordConfirm.setBackgroundResource(R.drawable.edit_text_bg_grey);
 					etPassword.setEnabled(false);
 					etPasswordConfirm.setEnabled(false);
 				}
@@ -210,8 +219,7 @@ public class GroupModify extends Activity {
 
 				dlg.start();
 				
-				Intent intent = new Intent(GroupModify.this,
-						GetAddressList.class);
+				Intent intent = new Intent(GroupModify.this, GetAddressList.class);
 				startActivityForResult(intent, MEMBER_GET_ADDRESS_LIST_ACTIVITY);
 			}
 		});
@@ -221,9 +229,11 @@ public class GroupModify extends Activity {
 			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
 				if (chAdmin.isChecked()) {
 					etAdminMemberListInfo.setEnabled(true);
+					etAdminMemberListInfo.setBackgroundResource(R.drawable.edit_text_bg);
 					bAdminGetAddressList.setEnabled(true);
 				} else {
 					etAdminMemberListInfo.setEnabled(false);
+					etAdminMemberListInfo.setBackgroundResource(R.drawable.edit_text_bg_grey);
 					bAdminGetAddressList.setEnabled(false);
 				}
 			}
@@ -233,11 +243,9 @@ public class GroupModify extends Activity {
 		etAdminMemberListInfo.setOnTouchListener(new OnTouchListener() {
 			public boolean onTouch(View arg0, MotionEvent event) {
 				if (event.getAction() == KeyEvent.ACTION_UP) {
-					Intent intent = new Intent(GroupModify.this,
-							GetMemberList.class);
+					Intent intent = new Intent(GroupModify.this, GetMemberList.class);
 					intent.putExtra("memberList", adminMemberList);
-					startActivityForResult(intent,
-							ADMIN_GET_MEMBER_LIST_ACTIVITY);
+					startActivityForResult(intent, ADMIN_GET_MEMBER_LIST_ACTIVITY);
 				}
 				return false;
 			}
@@ -251,8 +259,7 @@ public class GroupModify extends Activity {
 
 				dlg.start();
 				
-				Intent intent = new Intent(GroupModify.this,
-						GetAddressList.class);
+				Intent intent = new Intent(GroupModify.this, GetAddressList.class);
 				startActivityForResult(intent, ADMIN_GET_ADDRESS_LIST_ACTIVITY);
 			}
 		});
@@ -367,6 +374,24 @@ public class GroupModify extends Activity {
 		bCancel.setPaintFlags(bCancel.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		// 삭제
 		bGroupDelete.setPaintFlags(bGroupDelete.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		
+		TextView tvGroupName = (TextView) findViewById(R.id.tvGroupName);
+		tvGroupName.setPaintFlags(tvGroupName.getPaintFlags()| Paint.FAKE_BOLD_TEXT_FLAG);
+		TextView tvGroupNotice = (TextView) findViewById(R.id.tvGroupNotice);
+		tvGroupNotice.setPaintFlags(tvGroupNotice.getPaintFlags()| Paint.FAKE_BOLD_TEXT_FLAG);
+		TextView seleteAll = (TextView) findViewById(R.id.seleteAll);
+		seleteAll.setPaintFlags(seleteAll.getPaintFlags()| Paint.FAKE_BOLD_TEXT_FLAG);
+		TextView tvPassword = (TextView) findViewById(R.id.tvPassword);
+		tvPassword.setPaintFlags(tvPassword.getPaintFlags()| Paint.FAKE_BOLD_TEXT_FLAG);
+		TextView tvPasswordConfirm = (TextView) findViewById(R.id.tvPasswordConfirm);
+		tvPasswordConfirm.setPaintFlags(tvPasswordConfirm.getPaintFlags()| Paint.FAKE_BOLD_TEXT_FLAG);
+		TextView tvGroupMemberListInfo = (TextView) findViewById(R.id.tvGroupMemberListInfo);
+		tvGroupMemberListInfo.setPaintFlags(tvGroupMemberListInfo.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		TextView managerCheck = (TextView) findViewById(R.id.managerCheck);
+		managerCheck.setPaintFlags(managerCheck.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		TextView manager = (TextView) findViewById(R.id.manager);
+		manager.setPaintFlags(manager.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+
 	}
 
 	@Override
