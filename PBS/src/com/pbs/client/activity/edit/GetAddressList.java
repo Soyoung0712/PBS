@@ -158,28 +158,20 @@ public class GetAddressList extends ListActivity {
 			}
 		});
 
-		// "취소" 버튼
-		Button mGroupCancel = (Button) findViewById(R.id.cancle);
-		mGroupCancel.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View arg0) {
-				Toast.makeText(GetAddressList.this, "취소", Toast.LENGTH_SHORT)
-						.show();
-				Intent intent = getIntent();
-				intent = getIntent();
-		    	setResult(RESULT_OK, intent);
-				
-				finish();
+		// 뒤로가기 버튼
+		Button bBack = (Button) findViewById(R.id.bBack);
+		bBack.setOnClickListener(new View.OnClickListener()	{
+			public void onClick(View arg0)	{
+				finish();				
 			}
-		});
+		});	
 		
 		// bold 처리
 		// 제목
 		TextView tvTitle = (TextView) findViewById(R.id.tvTitle);		
 		tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		// 문자보내기				
-		mGroupRestul.setPaintFlags(mGroupRestul.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
-		// 취소				
-		mGroupCancel.setPaintFlags(mGroupCancel.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		mGroupRestul.setPaintFlags(mGroupRestul.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);		
 		// 전체선택
 		TextView tvAllchoice = (TextView) findViewById(R.id.tvAllchoice);		
 		tvAllchoice.setPaintFlags(tvAllchoice.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);

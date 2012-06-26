@@ -39,27 +39,26 @@ public class CreateGroupComplete extends Activity {
 		TextView tvGroupPassword = (TextView) findViewById(R.id.tvGroupPassword);
 		tvGroupPassword.setText(groupPassword);
 		
-		Button mMemberInvite = (Button) findViewById(R.id.button2);
 		// 그룹생성후 초대하기 버튼 누를떄
-		mMemberInvite.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View arg0) {
-				
-				finish();
-								
+		Button bInvite = (Button) findViewById(R.id.bInvite);		
+		bInvite.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View arg0) {				
+												
 				Intent intent1 = new Intent(CreateGroupComplete.this, InviteSms.class);
 				intent1.putExtra("pk_group", groupKey);
 				intent1.putExtra("fd_group_password", groupPassword);				
 				startActivity(intent1);
+				
 			}
-		});
+		});		
 		
-		// 뒤로가기 버튼
-		Button bBack = (Button) findViewById(R.id.bBack);
-		bBack.setOnClickListener(new View.OnClickListener()	{
-			public void onClick(View arg0)	{
-				finish();				
+		// "확인" 버튼 누를떄		
+		Button bOk = (Button) findViewById(R.id.bOk);		
+		bOk.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View arg0) {	
+				finish();
 			}
-		});	
-
+		});		
+		
 	}
 }
