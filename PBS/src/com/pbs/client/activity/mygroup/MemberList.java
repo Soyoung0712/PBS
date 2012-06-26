@@ -109,17 +109,18 @@ public class MemberList extends ListActivity {
 			bInfo.setVisibility(View.VISIBLE);
 			
 		// 그룹원 일때
-		}else {
+		}else {		
 			
 			// "삭제" 버튼			
 			bDelete.setOnClickListener(new View.OnClickListener() {
-				public void onClick(View arg0) {
-					Intent intent = new Intent(MemberList.this, GroupModify.class);
-					intent.putExtra("pk_group", pk_group);
-					startActivity(intent);
+				public void onClick(View v) {
+					// 그룹 감추기
+					userGson.hiddenGroup(pk_group, myPhoneNum);
+					finish();
 				}
-			});			
+			});
 			bDelete.setVisibility(View.VISIBLE);
+			
 		}
 		
 		// 뒤로가기 버튼
