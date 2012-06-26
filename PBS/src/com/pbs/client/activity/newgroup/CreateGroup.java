@@ -16,29 +16,23 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.R;
 import com.pbs.client.activity.edit.GetAddressList;
 import com.pbs.client.activity.edit.GetMemberList;
 import com.pbs.client.activity.main.WaitDlg;
-import com.pbs.client.activity.mygroup.GroupList;
+import com.pbs.client.model.ActivityMap;
 import com.pbs.client.model.AddressUser;
 import com.pbs.client.model.TbGroup;
 import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.UserGson;
 
 public class CreateGroup extends Activity
-{
-
-	private final int MEMBER_GET_MEMBER_LIST_ACTIVITY = 1;
-	private final int MEMBER_GET_ADDRESS_LIST_ACTIVITY = 2;
-	private final int ADMIN_GET_MEMBER_LIST_ACTIVITY = 3;
-	private final int ADMIN_GET_ADDRESS_LIST_ACTIVITY = 4;
-
+{	
 	private String myPhoneNum = null;
 	private UserGson userGson = new UserGson();
 
@@ -145,7 +139,7 @@ public class CreateGroup extends Activity
 				{
 					Intent intent = new Intent(CreateGroup.this, GetMemberList.class);
 					intent.putExtra("memberList", groupMemberList);
-					startActivityForResult(intent, MEMBER_GET_MEMBER_LIST_ACTIVITY);
+					startActivityForResult(intent, ActivityMap.MEMBER_GET_MEMBER_LIST);
 				}
 				return false;
 			}
@@ -157,7 +151,7 @@ public class CreateGroup extends Activity
 			public void onClick(View arg0) {
 				
 				Intent intent = new Intent(CreateGroup.this, GetAddressList.class);
-				startActivityForResult(intent, MEMBER_GET_ADDRESS_LIST_ACTIVITY);				
+				startActivityForResult(intent, ActivityMap.MEMBER_GET_ADDRESS_LIST);				
 
 			}
 		});
@@ -188,7 +182,7 @@ public class CreateGroup extends Activity
 				{
 					Intent intent = new Intent(CreateGroup.this, GetMemberList.class);
 					intent.putExtra("memberList", adminMemberList);
-					startActivityForResult(intent, ADMIN_GET_MEMBER_LIST_ACTIVITY);
+					startActivityForResult(intent, ActivityMap.ADMIN_GET_MEMBER_LIST);
 				}
 				return false;
 			}
@@ -200,7 +194,7 @@ public class CreateGroup extends Activity
 			public void onClick(View arg0) {
 				
 				Intent intent = new Intent(CreateGroup.this, GetAddressList.class);
-				startActivityForResult(intent, ADMIN_GET_ADDRESS_LIST_ACTIVITY);
+				startActivityForResult(intent, ActivityMap.ADMIN_GET_ADDRESS_LIST);
 
 			}
 		});
@@ -300,7 +294,7 @@ public class CreateGroup extends Activity
 		switch (requestCode) {
 
 			// "그룹원 관리" > "그룹원 추가" 응답
-			case MEMBER_GET_MEMBER_LIST_ACTIVITY:
+			case ActivityMap.MEMBER_GET_MEMBER_LIST:
 				if (resultCode == RESULT_OK) {
 
 					// 수정된 그룹원 정보 가져오기
@@ -319,7 +313,7 @@ public class CreateGroup extends Activity
 				break;
 
 			// "그룹원 관리" > "가져오기" 응답
-			case MEMBER_GET_ADDRESS_LIST_ACTIVITY:
+			case ActivityMap.MEMBER_GET_ADDRESS_LIST:
 				if (resultCode == RESULT_OK) {
 
 					// 선택한 그룹원 추가
@@ -335,7 +329,7 @@ public class CreateGroup extends Activity
 				break;
 
 			// "관리자 관리" > "관리자 추가" 응답
-			case ADMIN_GET_MEMBER_LIST_ACTIVITY:
+			case ActivityMap.ADMIN_GET_MEMBER_LIST:
 				if (resultCode == RESULT_OK) {
 
 					// 수정된 그룹원 정보 가져오기
@@ -354,7 +348,7 @@ public class CreateGroup extends Activity
 				break;
 
 			// "관리자 관리" > "가져오기" 응답
-			case ADMIN_GET_ADDRESS_LIST_ACTIVITY:
+			case ActivityMap.ADMIN_GET_ADDRESS_LIST:
 				if (resultCode == RESULT_OK) {
 
 					// 선택한 관리자 추가

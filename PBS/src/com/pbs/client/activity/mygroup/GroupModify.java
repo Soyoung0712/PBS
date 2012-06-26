@@ -25,9 +25,8 @@ import android.widget.Toast;
 import com.android.R;
 import com.pbs.client.activity.edit.GetAddressList;
 import com.pbs.client.activity.edit.GetMemberList;
-import com.pbs.client.activity.edit.InviteSms;
 import com.pbs.client.activity.main.WaitDlg;
-import com.pbs.client.activity.newgroup.CreateGroup;
+import com.pbs.client.model.ActivityMap;
 import com.pbs.client.model.AddressUser;
 import com.pbs.client.model.TbAccessUser;
 import com.pbs.client.model.TbGroup;
@@ -36,11 +35,6 @@ import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.UserGson;
 
 public class GroupModify extends Activity {
-
-	private final int MEMBER_GET_MEMBER_LIST_ACTIVITY = 1;
-	private final int MEMBER_GET_ADDRESS_LIST_ACTIVITY = 2;
-	private final int ADMIN_GET_MEMBER_LIST_ACTIVITY = 3;
-	private final int ADMIN_GET_ADDRESS_LIST_ACTIVITY = 4;
 
 	private String myPhoneNum = null;
 	private UserGson userGson = new UserGson();
@@ -193,8 +187,7 @@ public class GroupModify extends Activity {
 					Intent intent = new Intent(GroupModify.this,
 							GetMemberList.class);
 					intent.putExtra("memberList", groupMemberList);
-					startActivityForResult(intent,
-							MEMBER_GET_MEMBER_LIST_ACTIVITY);
+					startActivityForResult(intent, ActivityMap.MEMBER_GET_MEMBER_LIST);
 				}
 				return false;
 			}
@@ -208,7 +201,7 @@ public class GroupModify extends Activity {
 				dlg = new WaitDlg(GroupModify.this, "전화번호 목록 가져오기", "요청하신 작업을 처리중입니다");
 				dlg.start();				
 				Intent intent = new Intent(GroupModify.this, GetAddressList.class);
-				startActivityForResult(intent, MEMBER_GET_ADDRESS_LIST_ACTIVITY);
+				startActivityForResult(intent, ActivityMap.MEMBER_GET_ADDRESS_LIST);
 			}
 		});
 
@@ -233,7 +226,7 @@ public class GroupModify extends Activity {
 				if (event.getAction() == KeyEvent.ACTION_UP) {
 					Intent intent = new Intent(GroupModify.this, GetMemberList.class);
 					intent.putExtra("memberList", adminMemberList);
-					startActivityForResult(intent, ADMIN_GET_MEMBER_LIST_ACTIVITY);
+					startActivityForResult(intent, ActivityMap.ADMIN_GET_MEMBER_LIST);
 				}
 				return false;
 			}
@@ -247,7 +240,7 @@ public class GroupModify extends Activity {
 				dlg.start();
 				
 				Intent intent = new Intent(GroupModify.this, GetAddressList.class);
-				startActivityForResult(intent, ADMIN_GET_ADDRESS_LIST_ACTIVITY);
+				startActivityForResult(intent, ActivityMap.ADMIN_GET_ADDRESS_LIST);
 			}
 		});
 
@@ -381,7 +374,7 @@ public class GroupModify extends Activity {
 		switch (requestCode) {
 
 		// "그룹원 관리" > "그룹원 추가" 응답
-		case MEMBER_GET_MEMBER_LIST_ACTIVITY:
+		case ActivityMap.MEMBER_GET_MEMBER_LIST:
 			if (resultCode == RESULT_OK) {
 
 				// 수정된 그룹원 정보 가져오기
@@ -401,7 +394,7 @@ public class GroupModify extends Activity {
 			break;
 
 		// "그룹원 관리" > "가져오기" 응답
-		case MEMBER_GET_ADDRESS_LIST_ACTIVITY:
+		case ActivityMap.MEMBER_GET_ADDRESS_LIST:
 			if (resultCode == RESULT_OK) {
 
 				// 선택한 그룹원 추가
@@ -418,7 +411,7 @@ public class GroupModify extends Activity {
 			break;
 
 		// "관리자 관리" > "관리자 추가" 응답
-		case ADMIN_GET_MEMBER_LIST_ACTIVITY:
+		case ActivityMap.ADMIN_GET_MEMBER_LIST:
 			if (resultCode == RESULT_OK) {
 
 				// 수정된 그룹원 정보 가져오기
@@ -437,7 +430,7 @@ public class GroupModify extends Activity {
 			break;
 
 		// "관리자 관리" > "가져오기" 응답
-		case ADMIN_GET_ADDRESS_LIST_ACTIVITY:
+		case ActivityMap.ADMIN_GET_ADDRESS_LIST:
 			if (resultCode == RESULT_OK) {
 
 				// 선택한 관리자 추가
