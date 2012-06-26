@@ -13,10 +13,10 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.R;
+import com.pbs.client.model.ActivityMap;
 import com.pbs.client.model.TbAccessUser;
 import com.pbs.client.model.TbMember;
 import com.pbs.client.util.DeviceManager;
@@ -102,8 +102,8 @@ public class MemberList extends ListActivity {
 			bInfo.setOnClickListener(new View.OnClickListener() {
 				public void onClick(View arg0) {
 					Intent intent = new Intent(MemberList.this, GroupInfo.class);
-					intent.putExtra("pk_group", pk_group);
-					startActivity(intent);
+					intent.putExtra("pk_group", pk_group);					
+					startActivityForResult(intent, ActivityMap.GROUP_INFO);
 				}
 			});
 			bInfo.setVisibility(View.VISIBLE);
@@ -187,4 +187,20 @@ public class MemberList extends ListActivity {
 			
 		}
 	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+		switch (requestCode) {
+			// "그룹정보" 응답
+			case ActivityMap.GROUP_INFO:
+				// "그룹설정"에서 "삭제", "설정완료" 버튼 클릭했을때
+				// "그룹정보"에서 종료하고 넘어옴
+				if (resultCode == RESULT_OK) {
+					finish();
+					break;
+				}
+		}
+	}
+	
 }

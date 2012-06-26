@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.android.R;
 import com.pbs.client.activity.main.WaitDlg;
 import com.pbs.client.activity.newgroup.CreateGroup;
+import com.pbs.client.model.ActivityMap;
 import com.pbs.client.model.TbGroup;
 import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.UserGson;
@@ -245,65 +246,7 @@ public class GroupList extends ListActivity {
 			TextView textView2 = (TextView) row.findViewById(R.id.groupNotice);
 			textView2.setText(tbGroupList.get(position).getFd_group_notice());
 			textView2.setPaintFlags(textView2.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
-
-			// "설정" 버튼
-			/*
-			Button mGroupSetting = (Button) row.findViewById(R.id.groupSetting);
-			mGroupSetting.setOnClickListener(new View.OnClickListener()
-			{
-				public void onClick(View v)
-				{
-					 
-			 
-					Intent intent = new Intent(GroupList.this, GroupModify.class);
-					intent.putExtra("pk_group", tbGroupList.get(pos).getPk_group());
-					 
-					startActivity(intent);
-					
-					 
-				}
-
-			});
-
-			// "삭제" 버튼
-			Button mGroupHidden = (Button) row.findViewById(R.id.groupHidden);
-			mGroupHidden.setOnClickListener(new View.OnClickListener()
-			{
-				public void onClick(View v)
-				{
-
-					// 그룹 감추기
-					boolean hiddenGroupResult = userGson.hiddenGroup(curTbGroup.getPk_group(), myPhoneNum);
-
-					// 그룹 리스트 Refresh
-					if (hiddenGroupResult)
-					{
-						
-						dlg = new WaitDlg(GroupList.this, "그룹 삭제", "그룹을 삭제하고 있습니다");
-						dlg.start();
-						
-						tbGroupList.clear();
-						tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));
-						newArrayAdapter.notifyDataSetChanged();
-						
-						WaitDlg.stop(dlg);
-						
-						Toast.makeText(GroupList.this, "그룹이 삭제 되었습니다.", Toast.LENGTH_LONG).show();
-					}
-
-				}
-			});
-
-			// (관리자는 "설정", 일반사용자는 "삭제" 버튼이 노출)
-			if (!curTbGroup.getFd_admin_yn().equals("Y"))
-			{
-				mGroupSetting.setVisibility(View.GONE);
-			}
-			else
-			{
-				mGroupHidden.setVisibility(View.GONE);
-			}
-			*/
+			
 			return row;
 		}
 
@@ -312,15 +255,12 @@ public class GroupList extends ListActivity {
 	/**
 	 * 리스트에서 "그룹" 클릭
 	 */
-	public void onListItemClick(ListView parent, View v, int position, long id) {
-		
+	public void onListItemClick(ListView parent, View v, int position, long id) {		
 		Intent intent = new Intent(GroupList.this, MemberList.class);
 		intent.putExtra("pk_group", tbGroupList.get(position).getPk_group());		
 		intent.putExtra("fd_admin_yn", tbGroupList.get(position).getFd_admin_yn());		
-		intent.putExtra("fd_group_name", tbGroupList.get(position).getFd_group_name());
-		
-		startActivity(intent);
-		
-	}
+		intent.putExtra("fd_group_name", tbGroupList.get(position).getFd_group_name());		
+		startActivity(intent);		
+	}	
 
 }

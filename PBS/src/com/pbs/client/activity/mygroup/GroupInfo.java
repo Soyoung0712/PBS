@@ -1,37 +1,20 @@
 package com.pbs.client.activity.mygroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.R;
-import com.pbs.client.activity.edit.GetAddressList;
-import com.pbs.client.activity.edit.GetMemberList;
 import com.pbs.client.activity.edit.InviteSms;
-import com.pbs.client.activity.main.WaitDlg;
-import com.pbs.client.activity.newgroup.CreateGroup;
-import com.pbs.client.model.AddressUser;
-import com.pbs.client.model.TbAccessUser;
+import com.pbs.client.model.ActivityMap;
 import com.pbs.client.model.TbGroup;
-import com.pbs.client.model.TbMember;
 import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.UserGson;
 
@@ -109,8 +92,7 @@ public class GroupInfo extends Activity {
 
 				Intent intent = new Intent(GroupInfo.this, GroupModify.class);
 				intent.putExtra("pk_group", pk_group);
-				startActivity(intent);
-
+				startActivityForResult(intent, ActivityMap.GROUP_MODIFY);
 			}
 		});	
 		
@@ -151,6 +133,22 @@ public class GroupInfo extends Activity {
 	public void onResume() {
 		super.onResume();
 	}
-
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		
+		switch (requestCode) {		
+			// "그룹설정" 응답		
+			case ActivityMap.GROUP_MODIFY:
+				// "그룹설정"에서 "삭제", "설정완료" 버튼 클릭했을때
+				if (resultCode == RESULT_OK) {	
+					// 호출한 액티비티
+					Intent groupInfoIntent = getIntent();					
+					setResult(RESULT_OK, groupInfoIntent);
+					finish();
+					break;
+				}
+		}
+		
+	}
 }

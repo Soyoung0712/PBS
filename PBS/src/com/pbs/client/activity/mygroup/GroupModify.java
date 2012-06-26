@@ -184,8 +184,7 @@ public class GroupModify extends Activity {
 		etGroupMemberListInfo.setOnTouchListener(new OnTouchListener() {
 			public boolean onTouch(View arg0, MotionEvent event) {
 				if (event.getAction() == KeyEvent.ACTION_UP) {
-					Intent intent = new Intent(GroupModify.this,
-							GetMemberList.class);
+					Intent intent = new Intent(GroupModify.this,GetMemberList.class);
 					intent.putExtra("memberList", groupMemberList);
 					startActivityForResult(intent, ActivityMap.MEMBER_GET_MEMBER_LIST);
 				}
@@ -303,12 +302,18 @@ public class GroupModify extends Activity {
 						etPassword.setText("");
 					}
 					// 그룹 업데이트
-					userGson.updateGroup(pk_group, etGroupName.getText()
-							.toString(), etPassword.getText().toString(),
-							etGroupNotice.getText().toString(), myPhoneNum,
-							users, admins);
+					userGson.updateGroup(pk_group, 
+							etGroupName.getText().toString(), 
+							etPassword.getText().toString(),
+							etGroupNotice.getText().toString(), 
+							myPhoneNum,
+							users, 
+							admins);
 
+					Intent intent = getIntent();					
+					setResult(RESULT_OK, intent);
 					finish();
+					
 				}
 
 			}
@@ -319,6 +324,8 @@ public class GroupModify extends Activity {
 			public void onClick(View arg0) {
 				// 그룹 삭제
 				userGson.deleteGroup(pk_group, myPhoneNum);
+				Intent intent = getIntent();					
+				setResult(RESULT_OK, intent);
 				finish();
 			}
 		});
