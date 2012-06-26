@@ -25,9 +25,9 @@ import android.widget.Toast;
 import com.android.R;
 import com.pbs.client.activity.edit.GetAddressList;
 import com.pbs.client.activity.edit.GetMemberList;
+import com.pbs.client.activity.edit.InviteSms;
 import com.pbs.client.activity.main.WaitDlg;
 import com.pbs.client.activity.newgroup.CreateGroup;
-import com.pbs.client.activity.newgroup.InviteSms;
 import com.pbs.client.model.AddressUser;
 import com.pbs.client.model.TbAccessUser;
 import com.pbs.client.model.TbGroup;
@@ -73,11 +73,7 @@ public class GroupModify extends Activity {
 	private Button bAdminGetAddressList; // "가져오기" 버튼
 
 	// 설정완료
-	private Button bGroupUpdate;
-	// SMS알림
-	private Button bSmsNoti;
-	// 취소
-	private Button bCancel;
+	private Button bGroupUpdate;	
 	// 삭제
 	private Button bGroupDelete;
 
@@ -145,8 +141,7 @@ public class GroupModify extends Activity {
 		}
 
 		// 관리자 관리
-		List<TbAccessUser> tmpAccessUserList = userGson.getAdminList(pk_group,
-				myPhoneNum); // 관리자 정보 가져오기
+		List<TbAccessUser> tmpAccessUserList = userGson.getAdminList(pk_group, myPhoneNum); // 관리자 정보 가져오기
 		adminMemberList = new ArrayList<AddressUser>();
 		for (int i = 0; i < tmpAccessUserList.size(); i++) {
 			TbAccessUser tbAccessUser = tmpAccessUserList.get(i);
@@ -169,11 +164,7 @@ public class GroupModify extends Activity {
 		bAdminGetAddressList.setEnabled(false);
 
 		// 생성완료 버튼
-		bGroupUpdate = (Button) findViewById(R.id.bGroupUpdate);
-		// Sms알림 버튼
-		bSmsNoti = (Button) findViewById(R.id.bSmsNoti);
-		// 취소 버튼
-		bCancel = (Button) findViewById(R.id.bCancel);
+		bGroupUpdate = (Button) findViewById(R.id.bGroupUpdate);		
 		// 삭제 버튼
 		bGroupDelete = (Button) findViewById(R.id.bGroupDelete);
 
@@ -333,26 +324,7 @@ public class GroupModify extends Activity {
 
 			}
 		});
-
-		// "초대하기" 버튼 클릭
-		bSmsNoti.setOnClickListener(new OnClickListener() {
-			public void onClick(View arg0) {
-
-				Intent intent = new Intent(GroupModify.this, InviteSms.class);
-				// intent.putExtra("groupMemberList", groupMemberList);
-				intent.putExtra("pk_group", String.valueOf(pk_group));
-				startActivity(intent);
-
-			}
-		});
-
-		// "취소" 버튼 클릭
-		bCancel.setOnClickListener(new OnClickListener() {
-			public void onClick(View arg0) {
-				finish();
-			}
-		});
-
+		
 		// "삭제 " 버튼 클릭
 		bGroupDelete.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
@@ -362,16 +334,20 @@ public class GroupModify extends Activity {
 			}
 		});
 		
+		// 뒤로가기 버튼
+		Button bBack = (Button) findViewById(R.id.bBack);
+		bBack.setOnClickListener(new View.OnClickListener()	{
+			public void onClick(View arg0)	{
+				finish();				
+			}
+		});	
+		
 		// bold 처리
 		// 제목
 		TextView tvTitle = (TextView) findViewById(R.id.tvTitle);		
 		tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		// 생성완료				
 		bGroupUpdate.setPaintFlags(bGroupUpdate.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
-		// 초대하기				
-		bSmsNoti.setPaintFlags(bSmsNoti.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
-		// 취소
-		bCancel.setPaintFlags(bCancel.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		// 삭제
 		bGroupDelete.setPaintFlags(bGroupDelete.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		

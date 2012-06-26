@@ -29,36 +29,4 @@
             android:textSize="15dp" />
 	</LinearLayout>
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:gravity="right"        
-        android:orientation="horizontal" >
-	    
-	    <Button
-	        android:id="@+id/groupSetting"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"	        
-	        style="@style/button_white"        
-	        android:background="@drawable/listview_button_default_click"        
-	        android:focusable="false"        
-	        android:textSize="13dp" 
-	        android:text="설정"
-	        android:textColor="#ffffff" />
-	
-	    <Button
-	        android:id="@+id/groupHidden"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"	        
-	        style="@style/button_white"        
-	        android:background="@drawable/listview_button_default_click"        
-	        android:focusable="false"
-	        android:text="삭제"
-	        android:textStyle="bold"
-	        android:textSize="13dp" 
-	       	android:textColor="#7e7e7e" />
-    </LinearLayout>
-
 </LinearLayout>

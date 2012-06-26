@@ -38,18 +38,17 @@ import com.pbs.client.util.UserGson;
  * @author Administrator
  * 
  */
-public class GroupList extends ListActivity
-{
+public class GroupList extends ListActivity {
 
 	private String myPhoneNum = null;
 	private List<TbGroup> tbGroupList = null;
 	private NewArrayAdapter newArrayAdapter = null;
 	private UserGson userGson = new UserGson();
 	WaitDlg dlg;
+	
 	/** Called when the activity is first created. */
 	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
+	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
 
@@ -71,7 +70,6 @@ public class GroupList extends ListActivity
 		// 내그룹 리스트 가져오기 완료후 프로그래스바 종료
 		WaitDlg.stop(dlg);
 		
-		
 		// 리스트뷰에 리스트 적용
 		newArrayAdapter = new NewArrayAdapter(this);
 		setListAdapter(newArrayAdapter);
@@ -79,12 +77,9 @@ public class GroupList extends ListActivity
 
 		// 그룹 추가 버튼
 		Button addgroup = (Button) findViewById(R.id.bAddGroup);
-		addgroup.setPaintFlags(addgroup.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);		
-		
-		addgroup.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View v)
-			{
+		addgroup.setPaintFlags(addgroup.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		addgroup.setOnClickListener(new View.OnClickListener()	{
+			public void onClick(View v)	{
 				showGroupAdd();
 			}
 		});
@@ -92,15 +87,21 @@ public class GroupList extends ListActivity
 		// 새 그룹 만들기 버튼
 		Button newGroup = (Button) findViewById(R.id.bCreateGroup);
 		newGroup.setPaintFlags(newGroup.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
-		newGroup.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View arg0)
-			{
+		newGroup.setOnClickListener(new View.OnClickListener()	{
+			public void onClick(View arg0)	{
 				Intent intent = new Intent(GroupList.this, CreateGroup.class);
 				startActivity(intent);
 				
 			}
 		});
+		
+		// 뒤로가기 버튼
+		Button bBack = (Button) findViewById(R.id.bBack);
+		bBack.setOnClickListener(new View.OnClickListener()	{
+			public void onClick(View arg0)	{
+				dialogFinish();				
+			}
+		});		
 		
 		// bold 처리
 		// 제목
@@ -111,51 +112,49 @@ public class GroupList extends ListActivity
 
 	// 백버튼 종료 하기
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event)
-	{
-		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0)
-		{
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
 			// 팝업을 띄움
-
-			AlertDialog dialog;
-			dialog = new AlertDialog.Builder(this).setTitle("종료확인").setMessage("종료하시겠습니까?").setPositiveButton("예", new DialogInterface.OnClickListener()
-			{
-				public void onClick(DialogInterface dialog, int which)
-				{
-					finish();
-				}
-			}).setNegativeButton("아니요", new DialogInterface.OnClickListener()
-			{
-
-				public void onClick(DialogInterface dialog, int which)
-				{
-					dialog.cancel();
-				}
-			}).show();
+			dialogFinish();			
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
 	}
-
-	@Override
-	public void onResume()
-	{
-		super.onResume();
+	
+	/**
+	 * 종료 확인 다이알로그
+	 */
+	private void dialogFinish() {
 		
-		 
+		AlertDialog dialog;
+		dialog = new AlertDialog.Builder(this)
+				.setTitle("종료확인")
+				.setMessage("종료하시겠습니까?")
+				.setPositiveButton("예", new DialogInterface.OnClickListener()	{
+					public void onClick(DialogInterface dialog, int which)	{
+						finish();
+					}})
+				.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+					}})
+				.show();		
+	}
+
+	
+	@Override
+	public void onResume() {
+		super.onResume();	 
 		
 		// 그룹 리스트 갱신
 		tbGroupList.clear();
 		tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));
 		newArrayAdapter.notifyDataSetChanged();
-		
-		 
-		
 	}
 
 	// 그룹 추가 버튼 클릭 이벤트
-	private void showGroupAdd()
-	{
+	private void showGroupAdd()	{
+		
 		LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		LinearLayout addgrouplayout = (LinearLayout) vi.inflate(R.layout.dialog_add_group, null);
 
@@ -166,12 +165,10 @@ public class GroupList extends ListActivity
 		Builder builder = new AlertDialog.Builder(this).setTitle("그룹 추가").setView(addgrouplayout);
 
 		// "추가" 버튼 리슨너 생성
-		DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener()
-		{
+		DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
 
 			// 레이어 팝업의 "추가" 버큰 클릭시 이벤트
-			public void onClick(DialogInterface dialog, int which)
-			{
+			public void onClick(DialogInterface dialog, int which) {
 
 				// 그룹키, 패스워드, 내폰번호
 				Long groupKey = 0L;
@@ -179,22 +176,19 @@ public class GroupList extends ListActivity
 				String accessPhone = myPhoneNum;
 
 				// 그룹키 Long형으로 변환
-				try
-				{
+				try {
 					groupKey = Long.parseLong(key.getText().toString());
-				}
-				catch (Exception e)
-				{
+				} catch (Exception e) {
 					Log.d("MyGroupList", "groupKey Input Error [groupKey]:" + groupKey);
-					Toast.makeText(GroupList.this, "그룹키를 잘못 입력하셨습니다", Toast.LENGTH_LONG).show();
+					Toast.makeText(GroupList.this, "그룹키를 잘못 입력하셨습니다", 	Toast.LENGTH_LONG).show();
 				}
 
 				// 그룹키 추가
 				boolean addGroupResult = userGson.addGroup(groupKey, groupPassword, myPhoneNum);
 
 				// 그룹키 추가 성공
-				if (addGroupResult)
-				{
+				if (addGroupResult) {
+					
 					dlg = new WaitDlg(GroupList.this, "서버 요청", "그룹을 추가하고 있습니다");
 					dlg.start();
 					
@@ -206,15 +200,9 @@ public class GroupList extends ListActivity
 					
 					Toast.makeText(GroupList.this, "그룹이 추가 되었습니다.", Toast.LENGTH_LONG).show();
 
-					// 그룹키 추가 실패
-				}
-				else
-				{
-				 
-					
+				// 그룹키 추가 실패
+				}else {			 					
 					Toast.makeText(GroupList.this, "잘못된 그룹입니다.", Toast.LENGTH_LONG).show();
-					
-					 
 				}
 
 			}
@@ -226,14 +214,12 @@ public class GroupList extends ListActivity
 
 	}
 
-	class NewArrayAdapter extends ArrayAdapter
-	{
+	class NewArrayAdapter extends ArrayAdapter {
 
 		Activity context;
 
 		@SuppressWarnings("unchecked")
-		NewArrayAdapter(Activity context)
-		{
+		NewArrayAdapter(Activity context) {
 			super(context, R.layout.my_group_list_row, tbGroupList);
 			this.context = context;
 		}
@@ -241,8 +227,8 @@ public class GroupList extends ListActivity
 		/**
 		 * 리스트를 한 row씩 출력해준다
 		 */
-		public View getView(int position, View convertView, ViewGroup parent)
-		{
+		public View getView(int position, View convertView, ViewGroup parent) {
+			
 			final int pos = position;
 			LayoutInflater inflater = context.getLayoutInflater();
 			View row = inflater.inflate(R.layout.my_group_list_row, null);
@@ -261,6 +247,7 @@ public class GroupList extends ListActivity
 			textView2.setPaintFlags(textView2.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 
 			// "설정" 버튼
+			/*
 			Button mGroupSetting = (Button) row.findViewById(R.id.groupSetting);
 			mGroupSetting.setOnClickListener(new View.OnClickListener()
 			{
@@ -316,7 +303,7 @@ public class GroupList extends ListActivity
 			{
 				mGroupHidden.setVisibility(View.GONE);
 			}
-
+			*/
 			return row;
 		}
 
@@ -325,12 +312,15 @@ public class GroupList extends ListActivity
 	/**
 	 * 리스트에서 "그룹" 클릭
 	 */
-	public void onListItemClick(ListView parent, View v, int position, long id)
-	{
+	public void onListItemClick(ListView parent, View v, int position, long id) {
+		
 		Intent intent = new Intent(GroupList.this, MemberList.class);
-		intent.putExtra("pk_group", tbGroupList.get(position).getPk_group());
+		intent.putExtra("pk_group", tbGroupList.get(position).getPk_group());		
+		intent.putExtra("fd_admin_yn", tbGroupList.get(position).getFd_admin_yn());		
 		intent.putExtra("fd_group_name", tbGroupList.get(position).getFd_group_name());
+		
 		startActivity(intent);
+		
 	}
 
 }

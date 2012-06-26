@@ -21,29 +21,30 @@
 
         <!-- 내 그룹 Activity -->
         <activity
-            android:name="com.pbs.client.activity.main.PbsStart"
+            android:name="com.pbs.client.activity.mygroup.GroupList"
             android:label="@string/title"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light"
+            android:windowSoftInputMode="stateAlwaysHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <!-- mygroup -->
-
         <activity
-            android:name="com.pbs.client.activity.mygroup.GroupList"
+            android:name="com.pbs.client.activity.mygroup.GroupInfo"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light" >
+            android:theme="@android:style/Theme.Light"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name="com.pbs.client.activity.mygroup.GroupModify"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light"
             android:windowSoftInputMode="stateAlwaysHidden" >
-        </activity>
+        </activity>        
         <activity
             android:name="com.pbs.client.activity.mygroup.MemberList"
             android:screenOrientation="portrait"
@@ -75,7 +76,7 @@
             android:theme="@android:style/Theme.Light" >
         </activity>
         <activity
-            android:name="com.pbs.client.activity.newgroup.InviteSms"
+            android:name="com.pbs.client.activity.edit.InviteSms"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light" >
         </activity>

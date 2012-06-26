@@ -64,8 +64,6 @@ public class CreateGroup extends Activity
 
 	// 생성완료
 	private Button bGroupResult;
-	// 취소
-	private Button bGroupCancel;
 
 	WaitDlg dlg;
 	 
@@ -108,17 +106,15 @@ public class CreateGroup extends Activity
 		bAdminGetAddressList.setEnabled(false);
 
 		// 생성완료
-		bGroupResult = (Button) findViewById(R.id.bGroupResult);
-		bGroupCancel = (Button) findViewById(R.id.bGroupCancel);
+		bGroupResult = (Button) findViewById(R.id.bGroupResult);		
 		
 		// bold 처리
 		// 제목
 		TextView tvTitle = (TextView) findViewById(R.id.tvTitle);		
 		tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		// 생성완료				
-		bGroupResult.setPaintFlags(bGroupResult.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
-		// 취소				
-		bGroupCancel.setPaintFlags(bGroupCancel.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		bGroupResult.setPaintFlags(bGroupResult.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);			
+		
 		TextView tvGroupName = (TextView) findViewById(R.id.tvGroupName);
 		tvGroupName.setPaintFlags(tvGroupName.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		TextView tvGroupNotice = (TextView) findViewById(R.id.tvGroupNotice);
@@ -304,17 +300,14 @@ public class CreateGroup extends Activity
 				
 			}
 		});
-
-		// 그룹생성 취소버튼
-		bGroupCancel.setOnClickListener(new View.OnClickListener()
-		{
-			public void onClick(View arg0)
-			{
-				Toast.makeText(CreateGroup.this, "그룹생성을 취소합니다.", Toast.LENGTH_SHORT).show();
-				finish();
-
+		
+		// 뒤로가기 버튼
+		Button bBack = (Button) findViewById(R.id.bBack);
+		bBack.setOnClickListener(new View.OnClickListener()	{
+			public void onClick(View arg0)	{
+				finish();				
 			}
-		});
+		});	
 
 	}
 

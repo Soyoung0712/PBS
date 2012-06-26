@@ -1,4 +1,4 @@
-package com.pbs.client.activity.newgroup;
+package com.pbs.client.activity.edit;
 
 import java.util.List;
 
@@ -61,7 +61,7 @@ public class InviteSms extends ListActivity {
 		// 타이틀바 없애기
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-		setContentView(R.layout.new_invite_sms);
+		setContentView(R.layout.edit_invite_sms);
 
 		// CreateGroupComplete에서 넘겨준 그룹키를 가져온다.
 		Intent intent = getIntent();
@@ -107,8 +107,7 @@ public class InviteSms extends ListActivity {
 		sentIntent = PendingIntent.getBroadcast(InviteSms.this, 0, new Intent(ACTION_SENT), 0);
 		deliveryIntent = PendingIntent.getBroadcast(InviteSms.this, 0,new Intent(ACTION_DELIVERY), 0);
 
-		Button mSave = (Button) findViewById(R.id.sendmessage);
-		Button mCancle = (Button) findViewById(R.id.cancle);
+		Button mSave = (Button) findViewById(R.id.sendmessage);		
 
 		// 문자 보내기 버튼을 눌렸을때
 		mSave.setOnClickListener(new View.OnClickListener() {
@@ -136,13 +135,13 @@ public class InviteSms extends ListActivity {
 			}
 		});
 
-		// 취소 버튼을 눌렸을때
-		mCancle.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View arg0) {
-				Toast.makeText(InviteSms.this, "취소", Toast.LENGTH_SHORT).show();
-				finish();
+		// 뒤로가기 버튼
+		Button bBack = (Button) findViewById(R.id.bBack);
+		bBack.setOnClickListener(new View.OnClickListener()	{
+			public void onClick(View arg0)	{
+				finish();				
 			}
-		});
+		});	
 		
 		// bold 처리
 		// 제목
@@ -150,8 +149,6 @@ public class InviteSms extends ListActivity {
 		tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		// 문자보내기				
 		mSave.setPaintFlags(mSave.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
-		// 취소				
-		mCancle.setPaintFlags(mCancle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		// 전체선택
 		TextView tvAllchoice = (TextView) findViewById(R.id.tvAllchoice);		
 		tvAllchoice.setPaintFlags(tvAllchoice.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
@@ -220,7 +217,7 @@ public class InviteSms extends ListActivity {
 
 		@SuppressWarnings("unchecked")
 		NewArrayAdapter(Activity context) {
-			super(context, R.layout.new_invite_sms_row, tbMemberList);
+			super(context, R.layout.edit_invite_sms_row, tbMemberList);
 
 			this.context = context;
 		}
@@ -230,7 +227,7 @@ public class InviteSms extends ListActivity {
 			TbMember tbMember = tbMemberList.get(position);
 
 			LayoutInflater inflater = context.getLayoutInflater();
-			View row = inflater.inflate(R.layout.new_invite_sms_row, null);
+			View row = inflater.inflate(R.layout.edit_invite_sms_row, null);
 
 			// / 이름
 			TextView textView = (TextView) row.findViewById(R.id.name);

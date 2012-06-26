@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.R;
+import com.pbs.client.model.TbAccessUser;
 import com.pbs.client.model.TbMember;
 import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.IntentsUtil;
@@ -44,46 +45,90 @@ public class MemberList extends ListActivity {
 		// 선택한 그룹의 맴버 리스트 가져오기
 		Intent intent = getIntent();
 		final long pk_group = intent.getExtras().getLong("pk_group");
+		final String fd_admin_yn = intent.getExtras().getString("fd_admin_yn");
 		final String fd_group_name = intent.getExtras().getString("fd_group_name");		
 		tbMemberList = userGson.getMemeberList(pk_group, myPhoneNum);
+		
+		// 관리자 가져오기
+		List<TbAccessUser> tbAccessUserList = userGson.getAdminList(pk_group, myPhoneNum);
+		for (int i = tbAccessUserList.size()-1; 0 <= i ; i--) {			
+			TbMember tbMember = new TbMember();
+			tbMember.setFd_member_name(tbAccessUserList.get(i).getFd_member_name());
+			tbMember.setFd_member_phone(tbAccessUserList.get(i).getFd_access_phone());
+			tbMember.setAdmin(true);
+			tbMemberList.add(0, tbMember);
+		}
 
 		// 리스트뷰에 리스트 적용
 		setListAdapter(new NewArrayAdapter(this));
-
-		// "내폰으로 저장" 버튼
-		Button mPhoneMove = (Button) findViewById(R.id.button1);
-		mPhoneMove.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View arg0) {
-				Intent intent = new Intent(MemberList.this, AddressDownload.class);
-				intent.putExtra("pk_group", pk_group);
-				intent.putExtra("fd_group_name", fd_group_name);
-				startActivity(intent);
-			}
-		});
-		if( tbMemberList.size() <= 0 ) {
+		
+		// 문자보내기/그룹 저장
+		Button mSMSMove = (Button) findViewById(R.id.bSmsSend);
+		Button mPhoneMove = (Button) findViewById(R.id.bAddressSave);
+		
+		if( tbMemberList.size() > 0 ) {
+			
+			// "문자 보내기" 버튼
+			mSMSMove.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View arg0) {
+					Intent intent = new Intent(MemberList.this, SendSms.class);
+					intent.putExtra("pk_group", pk_group);
+					startActivity(intent);
+				}
+			});
+			
+			// "그룹저장" 버튼			
+			mPhoneMove.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View arg0) {
+					Intent intent = new Intent(MemberList.this, AddressDownload.class);
+					intent.putExtra("pk_group", pk_group);
+					intent.putExtra("fd_group_name", fd_group_name);
+					startActivity(intent);
+				}
+			});
+			
+		}else {
+			mSMSMove.setVisibility(View.GONE);
 			mPhoneMove.setVisibility(View.GONE);
 		}
 		
-		// "문자 보내기" 버튼
-		Button mSMSMove = (Button) findViewById(R.id.button2);
-		mSMSMove.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View arg0) {
-				Intent intent = new Intent(MemberList.this, SendSms.class);
-				intent.putExtra("pk_group", pk_group);
-				startActivity(intent);
-			}
-		});
-		if( tbMemberList.size() <= 0 ) {
-			mSMSMove.setVisibility(View.GONE);
+		Button bInfo = (Button) findViewById(R.id.bInfo);
+		Button bDelete = (Button) findViewById(R.id.bDelete);
+		
+		// 관리자 일때 
+		if( "Y".equals(fd_admin_yn) ) {
+			
+			// "그룹정보" 버튼
+			bInfo.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View arg0) {
+					Intent intent = new Intent(MemberList.this, GroupInfo.class);
+					intent.putExtra("pk_group", pk_group);
+					startActivity(intent);
+				}
+			});
+			bInfo.setVisibility(View.VISIBLE);
+			
+		// 그룹원 일때
+		}else {
+			
+			// "삭제" 버튼			
+			bDelete.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View arg0) {
+					Intent intent = new Intent(MemberList.this, GroupModify.class);
+					intent.putExtra("pk_group", pk_group);
+					startActivity(intent);
+				}
+			});			
+			bDelete.setVisibility(View.VISIBLE);
 		}
 		
-		// "취소" 버튼
-		Button mCancel = (Button) findViewById(R.id.button3);
-		mCancel.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View arg0) {
-				finish();
+		// 뒤로가기 버튼
+		Button bBack = (Button) findViewById(R.id.bBack);
+		bBack.setOnClickListener(new View.OnClickListener()	{
+			public void onClick(View arg0)	{
+				finish();				
 			}
-		});		
+		});	
 		
 		// bold 처리
 		// 제목
@@ -93,8 +138,10 @@ public class MemberList extends ListActivity {
 		mPhoneMove.setPaintFlags(mPhoneMove.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		// 문자보내기
 		mSMSMove.setPaintFlags(mSMSMove.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
-		// 취소
-		mCancel.setPaintFlags(mCancel.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 그룹정보
+		bInfo.setPaintFlags(bInfo.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		// 삭제
+		bDelete.setPaintFlags(bDelete.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 	}
 
 	

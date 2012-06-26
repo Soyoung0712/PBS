@@ -1,10 +1,5 @@
 package com.pbs.client.activity.newgroup;
 
-import com.android.R;
-import com.android.R.id;
-import com.android.R.layout;
-import com.pbs.client.activity.main.PbsStart;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +7,10 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.android.R;
+import com.pbs.client.activity.edit.InviteSms;
+import com.pbs.client.activity.mygroup.GroupList;
 
 public class CreateGroupComplete extends Activity {
 	/** Called when the activity is first created. */
@@ -39,23 +38,8 @@ public class CreateGroupComplete extends Activity {
 		// 생성 그룹 패스워드
 		TextView tvGroupPassword = (TextView) findViewById(R.id.tvGroupPassword);
 		tvGroupPassword.setText(groupPassword);
-
-		Button mNewGroupComplete = (Button) findViewById(R.id.button1);
+		
 		Button mMemberInvite = (Button) findViewById(R.id.button2);
-
-		// 그룹생성후 완료버튼 누를시 메인페이지로
-		mNewGroupComplete.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View arg0) {
-				
-				finish();
-				Intent intent = new Intent(CreateGroupComplete.this,
-						PbsStart.class);
-				startActivity(intent);
-				
-				
-			}
-		});
-
 		// 그룹생성후 초대하기 버튼 누를떄
 		mMemberInvite.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
@@ -68,6 +52,14 @@ public class CreateGroupComplete extends Activity {
 				startActivity(intent1);
 			}
 		});
+		
+		// 뒤로가기 버튼
+		Button bBack = (Button) findViewById(R.id.bBack);
+		bBack.setOnClickListener(new View.OnClickListener()	{
+			public void onClick(View arg0)	{
+				finish();				
+			}
+		});	
 
 	}
 }

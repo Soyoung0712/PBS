@@ -5,22 +5,37 @@
     android:background="@drawable/background_grey"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/tvTitle"
-        style="@style/title_white"
+    <LinearLayout        
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/title_bg"
-        android:gravity="center"
-        android:text="내 그룹 리스트" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+        
+        <Button
+	        android:id="@+id/bBack"	        
+	        android:layout_width="wrap_content"
+	        android:layout_marginLeft="10dp"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/button_back" />
+        
+        <TextView
+	        android:id="@+id/tvTitle"
+	        style="@style/title_white"
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_marginLeft="60dp"	        
+	        android:gravity="center"
+	        android:text="내 그룹 리스트" />        
+    </LinearLayout>    
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp" >
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp" >
 
         <Button
             android:id="@+id/bAddGroup"
@@ -28,7 +43,7 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_default_click"
-            android:text="그룹 추가"
+            android:text="그룹 공유"
             android:textStyle="bold" />
 
         <Button
@@ -38,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:background="@drawable/button_default_click"
-            android:text="새 그룹 만들기"
+            android:text="그룹 생성"
             android:textStyle="bold" />
     </LinearLayout>
      
@@ -52,8 +67,6 @@
         android:id="@android:id/list"
         android:layout_width="fill_parent"        
         android:layout_height="wrap_content"
-        android:background="#ffffffff"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
+        android:background="#ffffffff" />
 
 </LinearLayout>

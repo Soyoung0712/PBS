@@ -94,16 +94,13 @@ public class AddressDownload extends ListActivity {
 		mSave.setPaintFlags(mSave.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		StroeButton(this, mSave, fd_group_name);
 
-		// "취소" 버튼 설정
-		Button mCancle = (Button) findViewById(R.id.bCancle);
-		mCancle.setPaintFlags(mCancle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
-		mCancle.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View arg0) {
-				Toast.makeText(AddressDownload.this, "취소", Toast.LENGTH_SHORT)	.show();
-				finish();
+		// 뒤로가기 버튼
+		Button bBack = (Button) findViewById(R.id.bBack);
+		bBack.setOnClickListener(new View.OnClickListener()	{
+			public void onClick(View arg0)	{
+				finish();				
 			}
-		});
-		
+		});	
 		
 		// bold 처리
 		// 제목

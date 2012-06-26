@@ -6,22 +6,37 @@
     android:focusable="true"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/tvTitle"
-        style="@style/title_white"
+    <LinearLayout        
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/title_bg"
-        android:gravity="center"
-        android:text="새 그룹 만들기" />
-
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+        
+        <Button
+	        android:id="@+id/bBack"	        
+	        android:layout_width="wrap_content"
+	        android:layout_marginLeft="10dp"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/button_back" />
+        
+        <TextView
+	        android:id="@+id/tvTitle"
+	        style="@style/title_white"
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_marginLeft="60dp"	        
+	        android:gravity="center"
+	        android:text="새 그룹 만들기" />        
+    </LinearLayout>  
+    
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp" >
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" >
 
         <Button
             android:id="@+id/bGroupResult"
@@ -29,16 +44,7 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_default_click"
-            android:text="생성완료" />
-
-        <Button
-            android:id="@+id/bGroupCancel"
-            style="@style/button_white"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/button_default_click"
-            android:text="취소" />
+            android:text="생성완료" />       
     </LinearLayout>
 
     <LinearLayout
@@ -62,8 +68,7 @@
 
                 <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_height="wrap_content"                    
                     android:gravity="right" >
 
                     <TextView

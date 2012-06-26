@@ -25,7 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.R;
-import com.pbs.client.activity.newgroup.InviteSms;
+import com.pbs.client.activity.edit.InviteSms;
 import com.pbs.client.model.TbMember;
 import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.UserGson;
@@ -91,8 +91,7 @@ public class SendSms extends ListActivity {
 			}
 		});
 
-		Button mSave = (Button) findViewById(R.id.sendmessage);
-		Button mCancle = (Button) findViewById(R.id.cancle);
+		Button mSave = (Button) findViewById(R.id.sendmessage);		
 
 		// sentIntent = PendingIntent.getBroadcast(SendSms.this, 0, new
 		// Intent(ACTION_SENT), 0);
@@ -104,15 +103,15 @@ public class SendSms extends ListActivity {
 			public void onClick(View arg0) {
 				SendMessage();
 			}
-		});
-
-		// 취소 버튼을 눌렸을때
-		mCancle.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View arg0) {
-				Toast.makeText(SendSms.this, "취소", Toast.LENGTH_SHORT).show();
-				finish();
+		});		
+		
+		// 뒤로가기 버튼
+		Button bBack = (Button) findViewById(R.id.bBack);
+		bBack.setOnClickListener(new View.OnClickListener()	{
+			public void onClick(View arg0)	{
+				finish();				
 			}
-		});
+		});			
 		
 		// bold 처리
 		// 제목
@@ -120,8 +119,6 @@ public class SendSms extends ListActivity {
 		tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		// 문자보내기				
 		mSave.setPaintFlags(mSave.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
-		// 취소				
-		mCancle.setPaintFlags(mCancle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		// 전체선택
 		TextView tvAllchoice = (TextView) findViewById(R.id.tvAllchoice);		
 		tvAllchoice.setPaintFlags(tvAllchoice.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);

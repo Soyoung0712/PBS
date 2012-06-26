@@ -89,6 +89,7 @@ public class TbMember {
 	
 	//-- USER TODO --//
 	private boolean checked = false;
+	private boolean admin   = false;
 	public boolean isChecked() {
 		return checked;
 	}
@@ -109,6 +110,12 @@ public class TbMember {
 			return PhoneNumberUtils.formatNumber(fd_member_phone); 
 		}		
 		return fd_member_phone;
+	}
+	public boolean isAdmin() {
+		return admin;
+	}
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 
 }

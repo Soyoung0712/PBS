@@ -5,48 +5,74 @@
     android:background="@drawable/background_grey"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/tvTitle"
-        style="@style/title_white"
+    <LinearLayout        
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/title_bg"
-        android:gravity="center"
-        android:text="그룹 리스트" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+        
+        <Button
+	        android:id="@+id/bBack"	        
+	        android:layout_width="wrap_content"
+	        android:layout_marginLeft="10dp"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/button_back" />
+        
+        <TextView
+	        android:id="@+id/tvTitle"
+	        style="@style/title_white"
+	        android:layout_width="wrap_content"
+	        android:layout_height="fill_parent"
+	        android:layout_marginLeft="60dp"	        
+	        android:gravity="center"
+	        android:text="그룹원 리스트" />        
+    </LinearLayout>  
     
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"        
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:orientation="horizontal" >
         
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/bSmsSend"
             style="@style/button_white"
             android:layout_width="95dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_default_click"
-            android:text="내 폰에 저장" />
-
-        <Button
-            android:id="@+id/button2"
-            style="@style/button_white"
-            android:layout_width="95dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content"            
             android:background="@drawable/button_default_click"
             android:text="문자 보내기" />
-
+        
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/bAddressSave"
             style="@style/button_white"
             android:layout_width="95dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:background="@drawable/button_default_click"
-            android:text="취소" />
+            android:text="그룹저장" />        
+
+        <Button
+            android:id="@+id/bInfo"
+            style="@style/button_white"
+            android:layout_width="95dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/button_default_click"
+            android:visibility="gone"
+            android:text="그룹정보" />
+        
+        <Button
+            android:id="@+id/bDelete"
+            style="@style/button_white"
+            android:layout_width="95dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/button_default_click"
+            android:visibility="gone"
+            android:text="삭제" />
 	</LinearLayout>
     
     <TextView
@@ -56,13 +82,9 @@
         android:gravity="center"
         android:text="등록된 멤버가 없습니다." />
     
-
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        android:background="#ffffffff"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
-
+        android:background="#ffffffff" />
 </LinearLayout>
