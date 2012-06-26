@@ -9,6 +9,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.R;
@@ -52,9 +54,7 @@ public class GetMemberList extends ListActivity {
 		// 편집완료 버튼 클릭 했을때
 		Button complete = (Button) findViewById(R.id.complete);
 		complete.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				Toast.makeText(GetMemberList.this, "편집 완료", Toast.LENGTH_SHORT)
-						.show();
+			public void onClick(View v) {				
 
 				// 호출한 액티비티
 				Intent intent = getIntent();
@@ -73,6 +73,21 @@ public class GetMemberList extends ListActivity {
 				showMemberAdd();
 			}
 		});
+		
+		// 뒤로가기 버튼
+		Button bBack = (Button) findViewById(R.id.bBack);
+		bBack.setOnClickListener(new View.OnClickListener()	{
+			public void onClick(View arg0)	{
+				finish();				
+			}
+		});	
+		
+		// bold 처리
+		TextView tvTitle = (TextView) findViewById(R.id.tvTitle);		
+		tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		complete.setPaintFlags(complete.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		bAddMember.setPaintFlags(bAddMember.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		
 	}
 
 	// 멤버 추가 버튼 클릭 이벤트
@@ -119,8 +134,7 @@ public class GetMemberList extends ListActivity {
 					}
 
 					if (bDuplication) {
-						Toast.makeText(GetMemberList.this,
-								"이미 등록된 사용자 번호 입니다.", Toast.LENGTH_LONG).show();
+						Toast.makeText(GetMemberList.this, "이미 등록된 사용자 번호 입니다.", Toast.LENGTH_LONG).show();
 					} else {
 						memberList.add(0, addressUser);
 						newArrayAdapter.notifyDataSetChanged();
@@ -128,8 +142,7 @@ public class GetMemberList extends ListActivity {
 
 					// 그룹키 추가 실패
 				} else {
-					Toast.makeText(GetMemberList.this, "잘못된 정보 입니다.",
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(GetMemberList.this, "잘못된 정보 입니다.",	Toast.LENGTH_LONG).show();
 				}
 
 			}
@@ -170,9 +183,7 @@ public class GetMemberList extends ListActivity {
 			// 편집완료 버튼 클릭 했을때
 			Button bDeleteOne = (Button) row.findViewById(R.id.bDeleteOne);
 			bDeleteOne.setOnClickListener(new View.OnClickListener() {
-				public void onClick(View v) {
-					Toast.makeText(GetMemberList.this, "삭제", Toast.LENGTH_SHORT)
-							.show();
+				public void onClick(View v) {					
 					memberList.remove(pos);
 					notifyDataSetChanged();
 				}

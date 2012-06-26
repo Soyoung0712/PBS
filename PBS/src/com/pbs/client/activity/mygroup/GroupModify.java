@@ -156,8 +156,7 @@ public class GroupModify extends Activity {
 		// 관리자이 있는경우 "관리자 추가" 텍스트 수정
 		if (adminMemberList != null && adminMemberList.size() > 0) {
 			String headerMemberName = adminMemberList.get(0).getName();
-			etAdminMemberListInfo.setText(headerMemberName + " 외 "
-					+ (adminMemberList.size() - 1) + "명");
+			etAdminMemberListInfo.setText(headerMemberName + " 외 " + (adminMemberList.size() - 1) + "명");
 		}
 		etAdminMemberListInfo.setEnabled(false);
 		bAdminGetAddressList = (Button) findViewById(R.id.bAdminGetAddressList);
@@ -207,9 +206,7 @@ public class GroupModify extends Activity {
 			public void onClick(View arg0) {
 				
 				dlg = new WaitDlg(GroupModify.this, "전화번호 목록 가져오기", "요청하신 작업을 처리중입니다");
-
-				dlg.start();
-				
+				dlg.start();				
 				Intent intent = new Intent(GroupModify.this, GetAddressList.class);
 				startActivityForResult(intent, MEMBER_GET_ADDRESS_LIST_ACTIVITY);
 			}
@@ -247,7 +244,6 @@ public class GroupModify extends Activity {
 			public void onClick(View arg0) {
 				
 				dlg = new WaitDlg(GroupModify.this, "전화번호 목록 가져오기", "요청하신 작업을 처리중입니다");
-
 				dlg.start();
 				
 				Intent intent = new Intent(GroupModify.this, GetAddressList.class);
@@ -396,8 +392,9 @@ public class GroupModify extends Activity {
 				// 텍스트 문구 수정
 				if (groupMemberList != null && groupMemberList.size() > 0) {
 					String headerMemberName = groupMemberList.get(0).getName();
-					etGroupMemberListInfo.setText(headerMemberName + " 외 "
-							+ (groupMemberList.size() - 1) + "명");
+					etGroupMemberListInfo.setText(headerMemberName + " 외 "	+ (groupMemberList.size() - 1) + "명");
+				}else {
+					etGroupMemberListInfo.setText("그룹원 추가");
 				}
 
 			}
@@ -408,15 +405,13 @@ public class GroupModify extends Activity {
 			if (resultCode == RESULT_OK) {
 
 				// 선택한 그룹원 추가
-				ArrayList<AddressUser> addressUserList = (ArrayList<AddressUser>) intent
-						.getSerializableExtra("addressUserList");
+				ArrayList<AddressUser> addressUserList = (ArrayList<AddressUser>) intent.getSerializableExtra("addressUserList");
 				// 중복 번호를 제외하고 추가한다
 				addAllListSubDuplication(groupMemberList, addressUserList);
 				// 텍스트 문구 수정
 				if (groupMemberList != null && groupMemberList.size() > 0) {
 					String headerMemberName = groupMemberList.get(0).getName();
-					etGroupMemberListInfo.setText(headerMemberName + " 외 "
-							+ (groupMemberList.size() - 1) + "명");
+					etGroupMemberListInfo.setText(headerMemberName + " 외 " + (groupMemberList.size() - 1) + "명");
 				}
 				WaitDlg.stop(dlg);
 			}
@@ -427,15 +422,15 @@ public class GroupModify extends Activity {
 			if (resultCode == RESULT_OK) {
 
 				// 수정된 그룹원 정보 가져오기
-				ArrayList<AddressUser> addressUserList = (ArrayList<AddressUser>) intent
-						.getSerializableExtra("addressUserList");
+				ArrayList<AddressUser> addressUserList = (ArrayList<AddressUser>) intent.getSerializableExtra("addressUserList");
 				// 수정된 그룹원 정보 저장
 				adminMemberList = addressUserList;
 				// 텍스트 문구 수정
 				if (adminMemberList != null && adminMemberList.size() > 0) {
 					String headerMemberName = adminMemberList.get(0).getName();
-					etAdminMemberListInfo.setText(headerMemberName + " 외 "
-							+ (adminMemberList.size() - 1) + "명");
+					etAdminMemberListInfo.setText(headerMemberName + " 외 " + (adminMemberList.size() - 1) + "명");
+				}else {
+					etAdminMemberListInfo.setText("관리자 추가");
 				}
 
 			}

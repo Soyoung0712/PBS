@@ -154,16 +154,10 @@ public class CreateGroup extends Activity
 		// "그룹원 관리" > "가져오기" 버튼
 		bGroupGetAddressList.setOnClickListener(new OnClickListener()
 		{
-			public void onClick(View arg0)
-			{
-
-				dlg = new WaitDlg(CreateGroup.this, "전화번호 목록 가져오기", "요청하신 작업을 처리중입니다");
-
-				dlg.start();
-
+			public void onClick(View arg0) {
+				
 				Intent intent = new Intent(CreateGroup.this, GetAddressList.class);
-
-				startActivityForResult(intent, MEMBER_GET_ADDRESS_LIST_ACTIVITY);
+				startActivityForResult(intent, MEMBER_GET_ADDRESS_LIST_ACTIVITY);				
 
 			}
 		});
@@ -203,13 +197,8 @@ public class CreateGroup extends Activity
 		// 관리자 번호 "가져오기" 버튼
 		bAdminGetAddressList.setOnClickListener(new OnClickListener()
 		{
-			public void onClick(View arg0)
-			{
-
-				dlg = new WaitDlg(CreateGroup.this, "전화번호 목록 가져오기", "요청하신 작업을 처리중입니다");
-
-				dlg.start();
-
+			public void onClick(View arg0) {
+				
 				Intent intent = new Intent(CreateGroup.this, GetAddressList.class);
 				startActivityForResult(intent, ADMIN_GET_ADDRESS_LIST_ACTIVITY);
 
@@ -217,10 +206,9 @@ public class CreateGroup extends Activity
 		});
 
 		// "생성완료" 버튼 클릭
-		bGroupResult.setOnClickListener(new OnClickListener()
-		{
-			public void onClick(View arg0)
-			{
+		bGroupResult.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View arg0) {
 
 				// -- 입력값 유효성 체크
 				String groupName = etGroupName.getText().toString();
@@ -230,31 +218,27 @@ public class CreateGroup extends Activity
 
 				boolean bCheckInput = true;
 				String checkErrorMsg = "";
-				if (bCheckInput && groupName.length() <= 0)
-				{
+				if (bCheckInput && groupName.length() <= 0)	{
 					bCheckInput = false;
 					checkErrorMsg = "그룹명을 입력해 주세요.";
 				}
-				if (bCheckInput && password.length() <= 0)
-				{
+				
+				if (bCheckInput && password.length() <= 0) {
 					bCheckInput = false;
 					checkErrorMsg = "비밀번호를 입력해 주세요.";
 				}
-				if (bCheckInput && !password.equals(passwordConfirm))
-				{
+				
+				if (bCheckInput && !password.equals(passwordConfirm)) {
 					bCheckInput = false;
 					checkErrorMsg = "비밀번호을 확인해 주세요";
 				}
 
 				// 입력값 유효성 오류
-				if (bCheckInput == false)
-				{
+				if (bCheckInput == false) {
 					Toast.makeText(CreateGroup.this, checkErrorMsg, Toast.LENGTH_LONG).show();
 
-					// 입력값 요효성 체크 통과
-				}
-				else
-				{
+				// 입력값 요효성 체크 통과
+				}else {
 					
 					dlg = new WaitDlg(CreateGroup.this, "그룹 생성", "그룹을 생성하고 있습니다");
 					dlg.start();
@@ -264,16 +248,14 @@ public class CreateGroup extends Activity
 
 					// 그룹원 정보를 "송영석:010123456" 형태로 배열로 저장
 					String[] users = new String[groupMemberList.size()];
-					for (int i = 0; i < groupMemberList.size(); i++)
-					{
+					for (int i = 0; i < groupMemberList.size(); i++) {
 						String tmpData = groupMemberList.get(i).getName() + ":" + groupMemberList.get(i).getDial();
 						users[i] = tmpData;
 					}
 
 					// 관리자 정보를 "송영석:010123456" 형태로 배열로 저장
 					String[] admins = new String[adminMemberList.size()];
-					for (int i = 0; i < adminMemberList.size(); i++)
-					{
+					for (int i = 0; i < adminMemberList.size(); i++) {
 						String tmpData = adminMemberList.get(i).getName() + ":" + adminMemberList.get(i).getDial();
 						admins[i] = tmpData;
 					}
@@ -288,8 +270,6 @@ public class CreateGroup extends Activity
 					intent.putExtra("groupPassword", password);
 
 					startActivity(intent);
-					
-					
 					WaitDlg.stop(dlg);
 					
 					finish();
@@ -315,26 +295,24 @@ public class CreateGroup extends Activity
 	 * Intent결과
 	 */
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent intent)
-	{
+	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
-		switch (requestCode)
-		{
+		switch (requestCode) {
 
-		// "그룹원 관리" > "그룹원 추가" 응답
+			// "그룹원 관리" > "그룹원 추가" 응답
 			case MEMBER_GET_MEMBER_LIST_ACTIVITY:
-				if (resultCode == RESULT_OK)
-				{
+				if (resultCode == RESULT_OK) {
 
 					// 수정된 그룹원 정보 가져오기
 					ArrayList<AddressUser> addressUserList = (ArrayList<AddressUser>) intent.getSerializableExtra("addressUserList");
 					// 수정된 그룹원 정보 저장
 					groupMemberList = addressUserList;
 					// 텍스트 문구 수정
-					if (groupMemberList != null && groupMemberList.size() > 0)
-					{
+					if (groupMemberList != null && groupMemberList.size() > 0) {
 						String headerMemberName = groupMemberList.get(0).getName();
 						etGroupMemberListInfo.setText(headerMemberName + " 외 " + (groupMemberList.size() - 1) + "명");
+					}else {
+						etGroupMemberListInfo.setText("그룹원 추가");
 					}
 
 				}
@@ -342,37 +320,34 @@ public class CreateGroup extends Activity
 
 			// "그룹원 관리" > "가져오기" 응답
 			case MEMBER_GET_ADDRESS_LIST_ACTIVITY:
-				if (resultCode == RESULT_OK)
-				{
+				if (resultCode == RESULT_OK) {
 
 					// 선택한 그룹원 추가
 					ArrayList<AddressUser> addressUserList = (ArrayList<AddressUser>) intent.getSerializableExtra("addressUserList");
 					// 중복 번호를 제외하고 추가한다
 					addAllListSubDuplication(groupMemberList, addressUserList);
 					// 텍스트 문구 수정
-					if (groupMemberList != null && groupMemberList.size() > 0)
-					{
+					if (groupMemberList != null && groupMemberList.size() > 0) {
 						String headerMemberName = groupMemberList.get(0).getName();
 						etGroupMemberListInfo.setText(headerMemberName + " 외 " + (groupMemberList.size() - 1) + "명");
-					}
-					WaitDlg.stop(dlg);
+					}					
 				}
 				break;
 
 			// "관리자 관리" > "관리자 추가" 응답
 			case ADMIN_GET_MEMBER_LIST_ACTIVITY:
-				if (resultCode == RESULT_OK)
-				{
+				if (resultCode == RESULT_OK) {
 
 					// 수정된 그룹원 정보 가져오기
 					ArrayList<AddressUser> addressUserList = (ArrayList<AddressUser>) intent.getSerializableExtra("addressUserList");
 					// 수정된 그룹원 정보 저장
 					adminMemberList = addressUserList;
 					// 텍스트 문구 수정
-					if (adminMemberList != null && adminMemberList.size() > 0)
-					{
+					if (adminMemberList != null && adminMemberList.size() > 0) {
 						String headerMemberName = adminMemberList.get(0).getName();
 						etAdminMemberListInfo.setText(headerMemberName + " 외 " + (adminMemberList.size() - 1) + "명");
+					}else {						
+						etAdminMemberListInfo.setText("관리자 추가");
 					}
 
 				}
@@ -380,20 +355,17 @@ public class CreateGroup extends Activity
 
 			// "관리자 관리" > "가져오기" 응답
 			case ADMIN_GET_ADDRESS_LIST_ACTIVITY:
-				if (resultCode == RESULT_OK)
-				{
+				if (resultCode == RESULT_OK) {
 
 					// 선택한 관리자 추가
 					ArrayList<AddressUser> addressUserList = (ArrayList<AddressUser>) intent.getSerializableExtra("addressUserList");
 					// 중복 번호를 제외하고 추가한다
 					addAllListSubDuplication(adminMemberList, addressUserList);
 					// 텍스트 문구 수정
-					if (adminMemberList != null && adminMemberList.size() > 0)
-					{
+					if (adminMemberList != null && adminMemberList.size() > 0) {
 						String headerMemberName = adminMemberList.get(0).getName();
 						etAdminMemberListInfo.setText(headerMemberName + " 외 " + (adminMemberList.size() - 1) + "명");
-					}
-					WaitDlg.stop(dlg);
+					}					
 				}
 				break;
 
