@@ -19,7 +19,7 @@
             android:id="@+id/etName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:maxLength="10" />
+            android:maxLength="10" android:inputType="text"/>
     </LinearLayout>
 
     <LinearLayout
@@ -38,7 +38,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" 
             android:maxLength="16"
-            android:inputType="numberSigned"/>
+            android:inputType="number"/>
     </LinearLayout>
 
 </LinearLayout>
