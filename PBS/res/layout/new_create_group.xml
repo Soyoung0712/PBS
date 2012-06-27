@@ -85,8 +85,9 @@
                         android:layout_height="wrap_content"                        
                         android:background="@drawable/edit_text_bg"
                         android:paddingLeft="10dp"
-                        android:layout_marginLeft="5dp" >
-
+                        android:layout_marginLeft="5dp"
+                        android:maxLength="11" >
+						
                         <requestFocus />
                     </EditText>
                 </LinearLayout>
@@ -112,7 +113,8 @@
                         android:background="@drawable/edit_text_bg"
                         android:paddingLeft="10dp"
                         android:layout_marginLeft="5dp"
-                        android:ems="10" />
+                        android:ems="10"
+                        android:maxLength="11" />
                 </LinearLayout>                
 
                 <LinearLayout
@@ -136,7 +138,8 @@
                         android:background="@drawable/edit_text_bg"
                         android:paddingLeft="10dp"                        
                         android:layout_marginLeft="5dp"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        android:maxLength="12" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -160,7 +163,8 @@
                         android:background="@drawable/edit_text_bg"
                         android:paddingLeft="10dp"                        
                         android:layout_marginLeft="5dp"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        android:maxLength="12" />
                 </LinearLayout>                
 
                 <LinearLayout

@@ -115,6 +115,8 @@ public class GetMemberList extends ListActivity {
 				// 이름, 전화번호 추가
 				String name = etName.getText().toString();
 				String phone = etPhone.getText().toString();
+				
+				 phone.replace("-", "");
 
 				// 그룹키 추가 성공
 				if (name.length() > 0 && phone.length() > 0) {

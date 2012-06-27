@@ -18,7 +18,8 @@
         <EditText
             android:id="@+id/etName"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:maxLength="10" />
     </LinearLayout>
 
     <LinearLayout
@@ -35,7 +36,9 @@
         <EditText
             android:id="@+id/etPhone"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" 
+            android:maxLength="16"
+            android:inputType="numberSigned"/>
     </LinearLayout>
 
 </LinearLayout>
