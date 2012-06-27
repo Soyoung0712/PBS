@@ -20,6 +20,7 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -236,15 +237,20 @@ public class GroupList extends ListActivity {
 
 			// 현재 출력중인 Group 정보
 			final TbGroup curTbGroup = tbGroupList.get(position);
+			
+			if("Y".equals(curTbGroup.getFd_admin_yn()) ) {
+				ImageView ivAdminCheck = (ImageView) row.findViewById(R.id.ivAdminCheck);
+				ivAdminCheck.setVisibility(View.VISIBLE);
+			}			
 
 			// 그룹명
 			TextView textView = (TextView) row.findViewById(R.id.groupName);
-			textView.setText(tbGroupList.get(position).getFd_group_name());
+			textView.setText(curTbGroup.getFd_group_name());
 			textView.setPaintFlags(textView.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 
 			// 그룹 공지사항
 			TextView textView2 = (TextView) row.findViewById(R.id.groupNotice);
-			textView2.setText(tbGroupList.get(position).getFd_group_notice());
+			textView2.setText(curTbGroup.getFd_group_notice());
 			textView2.setPaintFlags(textView2.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 			
 			return row;
