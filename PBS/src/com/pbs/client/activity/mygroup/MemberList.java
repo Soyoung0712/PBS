@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.R;
@@ -165,6 +166,12 @@ public class MemberList extends ListActivity {
 
 			LayoutInflater inflater = context.getLayoutInflater();
 			View row = inflater.inflate(R.layout.my_member_list_row, null);
+			
+			// 관리자 ">" 표시
+			if( tbMember.isAdmin() ) {
+				ImageView ivAdminCheck = (ImageView) row.findViewById(R.id.ivAdminCheck);
+				ivAdminCheck.setVisibility(View.VISIBLE);
+			}	
 
 			// 이름
 			TextView textView = (TextView) row.findViewById(R.id.name);
