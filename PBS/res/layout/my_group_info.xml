@@ -68,8 +68,7 @@
             android:layout_marginTop="10dp" 
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"            
-            android:background="@drawable/listview_empty">
+            android:layout_marginBottom="20dp" >
 
             <LinearLayout
                 android:id="@+id/tab2"
@@ -82,10 +81,11 @@
                                
                 <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:gravity="right"
-                    android:orientation="horizontal" >
+                    android:layout_height="wrap_content"                    
+                    android:gravity="left|center_vertical"
+                    android:background="@drawable/info_bg" 
+                    android:padding="10dp"                   
+                    android:orientation="vertical" >
 
                     <TextView
                         android:id="@+id/tvGroupKey"
@@ -93,26 +93,28 @@
                         android:layout_height="wrap_content"                        
                         android:textStyle="bold"
                         android:textSize="15sp"
-                        android:text="그룹 KEY : " />
+                        android:text="그룹 KEY" />  
 
                     <TextView
                         android:id="@+id/tvGroupKeyVal"
-                        android:layout_width="180dp"
+                        android:layout_width="240dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
-                        android:paddingLeft="10dp"
+                        android:paddingLeft="15dp"
                         android:textColor="#ff0000"
                         android:textStyle="bold"
-                        android:text="12131654" >
+                        android:text=">> 12131654" >
                     </TextView>
                 </LinearLayout>
                 
                 <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:gravity="right"
-                    android:orientation="horizontal" >
+                    android:layout_height="wrap_content"                    
+                    android:gravity="left|center_vertical"
+                    android:background="@drawable/info_bg" 
+                    android:padding="10dp"                   
+                    android:orientation="vertical" >
 
                     <TextView
                         android:id="@+id/tvGroupPassword"
@@ -124,22 +126,24 @@
 
                     <TextView
                         android:id="@+id/tvGroupPasswordVal"
-                        android:layout_width="180dp"
+                        android:layout_width="240dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
-                        android:paddingLeft="10dp"
+                        android:paddingLeft="15dp"
                         android:textColor="#ff0000"
                         android:textStyle="bold"
-                        android:text="sdf12345" >
+                        android:text=">> sdf12345" >
                     </TextView>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:gravity="right"
-                    android:orientation="horizontal" >
+                    android:layout_height="wrap_content"                    
+                    android:gravity="left|center_vertical"
+                    android:background="@drawable/info_bg" 
+                    android:padding="10dp"                   
+                    android:orientation="vertical" >
 
                     <TextView
                         android:id="@+id/tvGroupName"
@@ -151,22 +155,24 @@
 
                     <TextView
                         android:id="@+id/tvGroupNameVal"
-                        android:layout_width="180dp"
+                        android:layout_width="240dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
-                        android:paddingLeft="10dp"
+                        android:paddingLeft="15dp"
                         android:textColor="#ff0000"
                         android:textStyle="bold"
-                        android:text="나이스 그룹" >
+                        android:text=">> 나이스 그룹" >
                     </TextView>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:gravity="right"
-                    android:orientation="horizontal" >
+                    android:layout_height="wrap_content"                    
+                    android:gravity="left|center_vertical"
+                    android:background="@drawable/info_bg" 
+                    android:padding="10dp"                   
+                    android:orientation="vertical" >
 
                     <TextView
                         android:id="@+id/tvGroupNotice"
@@ -178,13 +184,14 @@
 
                     <TextView
                         android:id="@+id/tvGroupNoticeVal"
-                        android:layout_width="180dp"
+                        android:layout_width="240dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
-                        android:paddingLeft="10dp"
+                        android:paddingLeft="15dp"
                         android:textColor="#ff0000"
                         android:textStyle="bold"
-                        android:text="나이스 그룹의 공지사항" />
+                        android:text=">> 나이스 그룹의 공지사항" />
                 </LinearLayout>               
             </LinearLayout>
         </ScrollView>

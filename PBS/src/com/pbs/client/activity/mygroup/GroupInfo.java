@@ -58,16 +58,16 @@ public class GroupInfo extends Activity {
 
 		// 그룹명
 		tvGroupNameVal = (TextView) findViewById(R.id.tvGroupNameVal);
-		tvGroupNameVal.setText(tbGroup.getFd_group_name());
+		tvGroupNameVal.setText(">> " + tbGroup.getFd_group_name());
 		// 그룹키
 		tvGroupKeyVal = (TextView) findViewById(R.id.tvGroupKeyVal);
-		tvGroupKeyVal.setText(tbGroup.getPk_group() + "");
+		tvGroupKeyVal.setText(">> " + tbGroup.getPk_group() + "");
 		// 그룹패스워드
 		tvGroupPasswordVal = (TextView) findViewById(R.id.tvGroupPasswordVal);
-		tvGroupPasswordVal.setText(tbGroup.getFd_group_password() + "");		
+		tvGroupPasswordVal.setText(">> " + tbGroup.getFd_group_password() + "");		
 		// 그룹 공지사항
 		tvGroupNoticeVal = (TextView) findViewById(R.id.tvGroupNoticeVal);
-		tvGroupNoticeVal.setText(tbGroup.getFd_group_notice());
+		tvGroupNoticeVal.setText(">> " + tbGroup.getFd_group_notice());
 
 		// 초대하기 버튼
 		bInvite = (Button) findViewById(R.id.bInvite);
