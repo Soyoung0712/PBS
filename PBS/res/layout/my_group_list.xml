@@ -17,7 +17,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_marginLeft="10dp"
 	        android:layout_height="wrap_content"
-	        android:background="@drawable/button_back" />
+	        android:background="@drawable/backbutton_default_click" />
         
         <TextView
 	        android:id="@+id/tvTitle"
