@@ -18,16 +18,16 @@
 	        android:layout_width="wrap_content"
 	        android:layout_marginLeft="10dp"
 	        android:layout_height="wrap_content"
-	        android:background="@drawable/button_back" />
+	        android:background="@drawable/backbutton_default_click" />
         
         <TextView
 	        android:id="@+id/tvTitle"
 	        style="@style/title_white"
 	        android:layout_width="wrap_content"
 	        android:layout_height="fill_parent"
-	        android:layout_marginLeft="60dp"	        
+	        android:layout_marginLeft="36dp"	        
 	        android:gravity="center"
-	        android:text="그룹 설정" />        
+	        android:text="그룹 정보" />        
     </LinearLayout>
 
     <LinearLayout
