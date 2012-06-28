@@ -106,6 +106,12 @@ public class GroupList extends ListActivity {
 		// Á¦¸ñ
 		TextView tvTitle = (TextView) findViewById(R.id.tvTitle);		
 		tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		
+		TextView tvEmplyText1 = (TextView) findViewById(R.id.tvEmplyText1);		
+		tvEmplyText1.setPaintFlags(tvEmplyText1.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		
+		TextView tvEmplyText2 = (TextView) findViewById(R.id.tvEmplyText2);		
+		tvEmplyText2.setPaintFlags(tvEmplyText2.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 
 	}
 

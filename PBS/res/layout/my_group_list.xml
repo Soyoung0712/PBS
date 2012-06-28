@@ -56,13 +56,38 @@
             android:text="그룹 생성"
             android:textStyle="bold" />
     </LinearLayout>
-     
-    <TextView
+    
+    <LinearLayout
         android:id="@+id/android:empty"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:text="등록된 그룹이 없습니다." />
-
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@drawable/empty_list_bg"
+        android:layout_marginTop="65dp" >
+        
+        <TextView        
+            android:id="@+id/tvEmplyText1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="35dp"
+	        android:textSize="15sp"
+	        android:textStyle="bold"
+	        android:textColor="#949191"	        
+	        android:text="등록된 그룹이 없습니다." />
+        
+        <TextView      
+            android:id="@+id/tvEmplyText2"  
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="5dp"
+	        android:textSize="15sp"	
+	        android:textStyle="bold"   
+	        android:textColor="#949191"     
+	        android:text="그룹 공유, 생성을 통해 그룹을 추가 해주세요" />
+        
+    </LinearLayout>
+    
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"        
