@@ -1,5 +1,6 @@
 package com.pbs.client.activity.mygroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -61,16 +62,12 @@ public class GroupList extends ListActivity {
 
 		// 내 전화번호 가져오기
 		myPhoneNum = DeviceManager.getMyPhoneNumber(this);
-		
-		//내그룹 리스트 가져오기 전 프로그래스바 작업대기 사용자에게 보여줌
-		dlg = new WaitDlg(GroupList.this, "서버 요청", "그룹 리스트를 불러오고 있습니다");
-		dlg.start();
-		
-		// 내그룹 리스트 가져오기
-		tbGroupList = userGson.getMyGroupList(myPhoneNum);
+				
+		// 내그룹 리스트 가져오기		
+		tbGroupList = new ArrayList<TbGroup>();
 		
 		// 내그룹 리스트 가져오기 완료후 프로그래스바 종료
-		WaitDlg.stop(dlg);
+		//WaitDlg.stop(dlg);
 		
 		// 리스트뷰에 리스트 적용
 		newArrayAdapter = new NewArrayAdapter(this);
@@ -146,12 +143,43 @@ public class GroupList extends ListActivity {
 	
 	@Override
 	public void onResume() {
-		super.onResume();	 
-		
-		// 그룹 리스트 갱신
-		tbGroupList.clear();
-		tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));
-		newArrayAdapter.notifyDataSetChanged();
+		super.onResume();		
+		// 시간이 걸리는 작업 처리
+		dlg = new WaitDlg(GroupList.this, "서버 요청", "그룹 리스트를 불러오고 있습니다");
+		dlg.start();
+		initialize();
+	}
+	
+	/**
+	 * 시간이 걸리는 작업 처리
+	 */
+	private void initialize() {
+		InitializationRunnable init = new InitializationRunnable();
+		new Thread(init).start();
+	}
+
+	/**
+	 * 시간이 걸리는 작업 처리 : 스레드 처리
+	 * @author Administrator
+	 *
+	 */
+	class InitializationRunnable implements Runnable {
+
+		public void run() {
+			
+			// 그룹 리스트 갱신
+			tbGroupList.clear();
+			tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));
+			
+			// notifyDataSetChanged() 사용시 반드시 runOnUiThread를 이용
+			runOnUiThread(new Runnable() {                  
+                  public void run() {
+                	  newArrayAdapter.notifyDataSetChanged();
+                	  WaitDlg.stop(dlg);  // 처리중 로딩바 없애기
+                  }
+            });			
+		}
+
 	}
 
 	// 그룹 추가 버튼 클릭 이벤트
