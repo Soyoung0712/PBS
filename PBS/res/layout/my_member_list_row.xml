@@ -11,8 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:src="@drawable/manager_group"
-        android:visibility="invisible"
+        android:src="@drawable/apple_red"
+        android:visibility="visible"
     />
     
     <LinearLayout
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"        
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="15dp"
         android:orientation="vertical" >
         
 	    <TextView

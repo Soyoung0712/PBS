@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -167,11 +168,17 @@ public class MemberList extends ListActivity {
 			LayoutInflater inflater = context.getLayoutInflater();
 			View row = inflater.inflate(R.layout.my_member_list_row, null);
 			
-			// 관리자 ">" 표시
-			if( tbMember.isAdmin() ) {
+			// 관리자는 황금사과 표시
+			if( tbMember.isAdmin() ) {				
+				Drawable apple_gold = (Drawable) getResources().getDrawable(R.drawable.apple_gold);
 				ImageView ivAdminCheck = (ImageView) row.findViewById(R.id.ivAdminCheck);
-				ivAdminCheck.setVisibility(View.VISIBLE);
-			}	
+				ivAdminCheck.setImageDrawable(apple_gold);
+			// 그룹원은 빨간사과 표시
+			}else {
+				Drawable apple_red = (Drawable) getResources().getDrawable(R.drawable.apple_red);
+				ImageView ivAdminCheck = (ImageView) row.findViewById(R.id.ivAdminCheck);
+				ivAdminCheck.setImageDrawable(apple_red);
+			}
 
 			// 이름
 			TextView textView = (TextView) row.findViewById(R.id.name);

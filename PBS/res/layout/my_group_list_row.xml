@@ -11,8 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:src="@drawable/manager_group"
-        android:visibility="invisible"
+        android:src="@drawable/apple_box"
+        android:visibility="visible"
     />
 
     <LinearLayout

@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -29,7 +30,6 @@ import android.widget.Toast;
 import com.android.R;
 import com.pbs.client.activity.main.WaitDlg;
 import com.pbs.client.activity.newgroup.CreateGroup;
-import com.pbs.client.model.ActivityMap;
 import com.pbs.client.model.TbGroup;
 import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.UserGson;
@@ -238,10 +238,15 @@ public class GroupList extends ListActivity {
 			// 현재 출력중인 Group 정보
 			final TbGroup curTbGroup = tbGroupList.get(position);
 			
-			if("Y".equals(curTbGroup.getFd_admin_yn()) ) {
+			if("Y".equals(curTbGroup.getFd_admin_yn()) ) {				
+				Drawable apple_tree = (Drawable) getResources().getDrawable(R.drawable.apple_tree);
 				ImageView ivAdminCheck = (ImageView) row.findViewById(R.id.ivAdminCheck);
-				ivAdminCheck.setVisibility(View.VISIBLE);
-			}			
+				ivAdminCheck.setImageDrawable(apple_tree);				
+			}else {
+				Drawable apple_box = (Drawable) getResources().getDrawable(R.drawable.apple_box);
+				ImageView ivAdminCheck = (ImageView) row.findViewById(R.id.ivAdminCheck);
+				ivAdminCheck.setImageDrawable(apple_box);				
+			}
 
 			// 그룹명
 			TextView textView = (TextView) row.findViewById(R.id.groupName);
