@@ -21,10 +21,9 @@
 
         <!-- 내 그룹 Activity -->
         <activity
-            android:name="com.pbs.client.activity.mygroup.GroupList"
+            android:name="com.pbs.client.activity.main.Intro"
             android:label="@string/title"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light"
+            android:screenOrientation="portrait"            
             android:windowSoftInputMode="stateAlwaysHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,6 +32,12 @@
         </activity>
 
         <!-- mygroup -->
+        <activity
+            android:name="com.pbs.client.activity.mygroup.GroupList"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>        
         <activity
             android:name="com.pbs.client.activity.mygroup.GroupInfo"
             android:screenOrientation="portrait"
