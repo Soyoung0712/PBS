@@ -64,7 +64,11 @@
         <ScrollView
             android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" 
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" 
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"            
             android:background="@drawable/listview_empty">
 
             <LinearLayout
@@ -116,7 +120,7 @@
                         android:layout_height="wrap_content"                        
                         android:textStyle="bold"
                         android:textSize="15sp"
-                        android:text="그룹 비밀번호 : " />
+                        android:text="비밀번호 : " />
 
                     <TextView
                         android:id="@+id/tvGroupPasswordVal"
