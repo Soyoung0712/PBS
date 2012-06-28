@@ -3,8 +3,8 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingBottom="7dp"
-    android:paddingTop="7dp" >
+    android:paddingBottom="3dp"
+    android:paddingTop="3dp" >
     
     <CheckBox
         android:id="@+id/checkBox"
