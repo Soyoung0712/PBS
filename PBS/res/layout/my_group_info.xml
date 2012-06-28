@@ -34,7 +34,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal"
+        android:orientation="horizontal"        
         android:paddingBottom="5dp"
         android:paddingTop="5dp" >
 
@@ -64,7 +64,8 @@
         <ScrollView
             android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+            android:background="@drawable/listview_empty">
 
             <LinearLayout
                 android:id="@+id/tab2"
