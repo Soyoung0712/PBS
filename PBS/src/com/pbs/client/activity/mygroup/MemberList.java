@@ -130,10 +130,9 @@ public class MemberList extends ListActivity {
 			
 			public void run() {
 
-				// 시간 많이 걸리는 처리				
-				dlg.start();
-				
+				// 시간 많이 걸리는 처리
 				try{
+					dlg.start();
 	          		tbMemberList.clear();          		
 	          		tbMemberList.addAll(userGson.getMemeberList(pk_group, myPhoneNum));
 	          		
@@ -146,11 +145,9 @@ public class MemberList extends ListActivity {
 	          			tbMember.setAdmin(true);
 	          			tbMemberList.add(0, tbMember);
 	          		}
-				}catch(Exception ex) {
-					Log.d("MemberList", ex.toString());
-				} 
-				
-				dlg.stopLocal();
+				}finally{
+					dlg.stopLocal();
+				}				
           		
 				runOnUiThread(new Runnable() {
 					public void run() {	
