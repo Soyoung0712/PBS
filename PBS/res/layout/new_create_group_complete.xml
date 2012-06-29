@@ -6,22 +6,22 @@
     android:focusable="true"
     android:orientation="vertical" >
 
-    <LinearLayout        
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/title_bg"
         android:gravity="center|center_vertical"
         android:orientation="horizontal" >
-        
+
         <TextView
-	        android:id="@+id/tvTitle"
-	        style="@style/title_white"
-	        android:layout_width="wrap_content"
-	        android:layout_height="fill_parent"	        	        
-	        android:gravity="center"
-	        android:text="새 그룹  생성 완료" />        
-    </LinearLayout>    
-   
+            android:id="@+id/tvTitle"
+            style="@style/title_white"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="새 그룹  생성 완료" />
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_default_click"
             android:text="초대하기" />
-        
+
         <Button
             android:id="@+id/bOk"
             style="@style/button_white"
@@ -46,114 +46,144 @@
             android:layout_marginLeft="5dp"
             android:background="@drawable/button_default_click"
             android:text="확인" />
-        
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/tab2"
+        android:id="@android:id/tabcontent"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical" 
-        android:padding="5dp">
-        
-        <TextView
-            android:id="@+id/tvGroupName"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="20dp"
-            android:text="{그룹명}"
-            android:textSize="25sp" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="그룹이 생성 되었습니다."
-            android:textSize="25sp" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:height="10dp"
-            android:text="" />
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="0dp" >
 
         <LinearLayout
+            android:id="@+id/tab2"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:gravity="left"
-                android:text="그룹 KEY      : "
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/tvGroupKey"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:text=""
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:gravity="left"
-                android:text="PASSWORD : "
-                android:textSize="20sp" />
+            android:layout_height="fill_parent"
+            android:background="@drawable/listview_empty"
+            android:orientation="vertical"
+            android:padding="5dp" >
 
             <TextView
                 android:id="@+id/tvGroupPassword"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:text=""
-                android:textSize="20sp" />
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="그룹이 생성 되었습니다."
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/info_bg"
+                android:gravity="left|center_vertical"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/tvGroupName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="그룹명 : "
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvGroupNameVal"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:paddingLeft="15dp"
+                    android:text=">> sdf12345"
+                    android:textColor="#ff0000"
+                    android:textStyle="bold" >
+                </TextView>
+            </LinearLayout>          
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/info_bg"
+                android:gravity="left|center_vertical"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/tvGroupKey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="그룹 KEY : "
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvGroupKeyVal"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:paddingLeft="15dp"
+                    android:text=">> sdf12345"
+                    android:textColor="#ff0000"
+                    android:textStyle="bold" >
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/info_bg"
+                android:gravity="left|center_vertical"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/tvGroupPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="비밀번호 : "
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvGroupPasswordVal"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:paddingLeft="15dp"
+                    android:text=">> sdf12345"
+                    android:textColor="#ff0000"
+                    android:textStyle="bold" >
+                </TextView>
+            </LinearLayout>
         </LinearLayout>
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:height="120dp"
-            android:text="" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="* 초대하기 : 선택한 그룹원들에게"
-            android:textSize="18sp" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="KEY, PASSWORD가"
-            android:textSize="18sp" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="SMS로 발송됩니다."
-            android:textSize="18sp" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:height="20dp"
-            android:text="" />
     </LinearLayout>
+
+    <TextView        
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"        
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:text="* 초대하기란?"
+        android:textSize="14sp"
+        android:textColor="#949191"
+        android:textStyle="bold" />
+
+    <TextView        
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"        
+        android:gravity="right"
+        android:layout_marginRight="20dp"        
+        android:text="- 그룹 KEY, 비밀번호를 SMS로 발송"        
+        android:textSize="14sp"
+        android:textColor="#949191"
+        android:textStyle="bold" />
 
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.pbs.client.activity.newgroup;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -30,14 +31,14 @@ public class CreateGroupComplete extends Activity {
 		final String groupPassword = intent.getExtras().get("groupPassword").toString();
 
 		// 생성 그룹명
-		TextView tvGroupName = (TextView) findViewById(R.id.tvGroupName);
-		tvGroupName.setText(groupName);
+		TextView tvGroupNameVal = (TextView) findViewById(R.id.tvGroupNameVal);
+		tvGroupNameVal.setText(groupName);
 		// 생성 그룹키
-		TextView tvGroupKey = (TextView) findViewById(R.id.tvGroupKey);
-		tvGroupKey.setText(groupKey);
+		TextView tvGroupKeyVal = (TextView) findViewById(R.id.tvGroupKeyVal);
+		tvGroupKeyVal.setText(groupKey);
 		// 생성 그룹 패스워드
-		TextView tvGroupPassword = (TextView) findViewById(R.id.tvGroupPassword);
-		tvGroupPassword.setText(groupPassword);
+		TextView tvGroupPasswordVal = (TextView) findViewById(R.id.tvGroupPasswordVal);
+		tvGroupPasswordVal.setText(groupPassword);
 		
 		// 그룹생성후 초대하기 버튼 누를떄
 		Button bInvite = (Button) findViewById(R.id.bInvite);		
@@ -59,6 +60,26 @@ public class CreateGroupComplete extends Activity {
 				finish();
 			}
 		});		
+		
+		
+		// bold 처리
+		// 제목
+		TextView tvTitle = (TextView) findViewById(R.id.tvTitle);		
+		tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		
+		tvGroupNameVal.setPaintFlags(tvGroupNameVal.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		tvGroupKeyVal.setPaintFlags(tvGroupKeyVal.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		tvGroupPasswordVal.setPaintFlags(tvGroupPasswordVal.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		
+		bInvite.setPaintFlags(bInvite.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		bOk.setPaintFlags(bOk.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		
+		TextView tvGroupName = (TextView) findViewById(R.id.tvGroupName);		
+		tvGroupName.setPaintFlags(tvGroupName.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		TextView tvGroupKey = (TextView) findViewById(R.id.tvGroupKey);		
+		tvGroupKey.setPaintFlags(tvGroupKey.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		TextView tvGroupPassword = (TextView) findViewById(R.id.tvGroupPassword);		
+		tvGroupPassword.setPaintFlags(tvGroupPassword.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		
 	}
 }
