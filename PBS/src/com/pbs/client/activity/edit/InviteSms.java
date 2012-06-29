@@ -114,11 +114,8 @@ public class InviteSms extends ListActivity {
 						.setMessage("SMS를 이용하여 그룹원을 초대하시겠습니까?")
 						.setPositiveButton("확인",
 								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface arg0, int arg1) {										
-										 						
-										
-										sendMessage(groupKey, groupPassword);	
-										
+									public void onClick(DialogInterface arg0, int arg1) {		
+										sendMessage(groupKey, groupPassword);											
 									}
 								})
 						.setNegativeButton("취소",
@@ -135,7 +132,7 @@ public class InviteSms extends ListActivity {
 		// 뒤로가기 버튼
 		Button bBack = (Button) findViewById(R.id.bBack);
 		bBack.setOnClickListener(new View.OnClickListener()	{
-			public void onClick(View arg0)	{
+			public void onClick(View arg0)	{				
 				finish();				
 			}
 		});	
@@ -190,10 +187,16 @@ public class InviteSms extends ListActivity {
 	}
 	
 	 
-
-	public void onResume() {
+	@Override
+	public void onResume() {		
 		super.onResume();
-		registerReceiver(mSentBr, new IntentFilter(ACTION_SENT));
+		registerReceiver(mSentBr, new IntentFilter(ACTION_SENT));		
+	}
+	
+	@Override
+	public void onStop() {
+		unregisterReceiver(mSentBr);
+		super.onStop();		
 	}
 
 	// 메세지 수신에 대한 여부 확인
