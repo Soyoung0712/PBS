@@ -175,17 +175,14 @@ public class GroupList extends ListActivity {
 		
 		public void run() {			
 			
-			dlg.start();
-			
 			// 그룹 리스트 갱신
 			tbGroupList.clear();
 			try{
+				dlg.start();
 				tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));
-			}catch(Exception ex) {
-				Log.d("InitializationRunnable", ex.toString());
-			}
-			
-			dlg.stopLocal();  // 처리중 로딩바 없애기
+			}finally{
+				dlg.stopLocal();  // 처리중 로딩바 없애기
+			}		
 			
 			// notifyDataSetChanged() 사용시 반드시 runOnUiThread를 이용
 			runOnUiThread(new Runnable() {                  

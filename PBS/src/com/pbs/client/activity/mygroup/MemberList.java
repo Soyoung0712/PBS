@@ -117,23 +117,17 @@ public class MemberList extends ListActivity {
 		// 그룹정보
 		bInfo.setPaintFlags(bInfo.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		// 삭제
-		bDelete.setPaintFlags(bDelete.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);		
-	}
-	
-	@Override
-	public void onResume() {
-	
-		super.onResume();		
+		bDelete.setPaintFlags(bDelete.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		
 		new Thread(new Runnable() {
 			
 			WaitDlg dlg = new WaitDlg(MemberList.this, "서버 요청", "그룹원 리스트를 불러오고 있습니다");
 			
 			public void run() {
 
-				// 시간 많이 걸리는 처리				
-				dlg.start();
-				
+				// 시간 많이 걸리는 처리
 				try{
+					dlg.start();
 	          		tbMemberList.clear();          		
 	          		tbMemberList.addAll(userGson.getMemeberList(pk_group, myPhoneNum));
 	          		
@@ -146,11 +140,9 @@ public class MemberList extends ListActivity {
 	          			tbMember.setAdmin(true);
 	          			tbMemberList.add(0, tbMember);
 	          		}
-				}catch(Exception ex) {
-					Log.d("MemberList", ex.toString());
-				} 
-				
-				dlg.stopLocal();
+				}finally{
+					dlg.stopLocal();
+				}				
           		
 				runOnUiThread(new Runnable() {
 					public void run() {	
@@ -187,6 +179,13 @@ public class MemberList extends ListActivity {
 				
 			}
 		}).start();		
+
+	}
+	
+	@Override
+	public void onResume() {
+	
+		super.onResume();	
 		
 	}
 	

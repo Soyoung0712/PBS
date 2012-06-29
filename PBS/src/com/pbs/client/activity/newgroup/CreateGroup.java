@@ -57,10 +57,7 @@ public class CreateGroup extends Activity
 	private Button bAdminGetAddressList; // "가져오기" 버튼
 
 	// 생성완료
-	private Button bGroupResult;
-
-	WaitDlg dlg;
-	 
+	private Button bGroupResult;	 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -234,39 +231,41 @@ public class CreateGroup extends Activity
 				// 입력값 요효성 체크 통과
 				}else {
 					
-					dlg = new WaitDlg(CreateGroup.this, "그룹 생성", "그룹을 생성하고 있습니다");
+					WaitDlg dlg = new WaitDlg(CreateGroup.this, "그룹 생성", "그룹을 생성하고 있습니다");
 					dlg.start();
 					
-					Intent intent = new Intent(CreateGroup.this, CreateGroupComplete.class);
-					intent.putExtra("groupMame", etGroupName.getText().toString());
-
-					// 그룹원 정보를 "송영석:010123456" 형태로 배열로 저장
-					String[] users = new String[groupMemberList.size()];
-					for (int i = 0; i < groupMemberList.size(); i++) {
-						String tmpData = groupMemberList.get(i).getName() + ":" + groupMemberList.get(i).getDial();
-						users[i] = tmpData;
+					try {
+						Intent intent = new Intent(CreateGroup.this, CreateGroupComplete.class);
+						intent.putExtra("groupMame", etGroupName.getText().toString());
+	
+						// 그룹원 정보를 "송영석:010123456" 형태로 배열로 저장
+						String[] users = new String[groupMemberList.size()];
+						for (int i = 0; i < groupMemberList.size(); i++) {
+							String tmpData = groupMemberList.get(i).getName() + ":" + groupMemberList.get(i).getDial();
+							users[i] = tmpData;
+						}
+	
+						// 관리자 정보를 "송영석:010123456" 형태로 배열로 저장
+						String[] admins = new String[adminMemberList.size()];
+						for (int i = 0; i < adminMemberList.size(); i++) {
+							String tmpData = adminMemberList.get(i).getName() + ":" + adminMemberList.get(i).getDial();
+							admins[i] = tmpData;
+						}
+	
+						Log.d("CreateGroup users: ", users.toString());
+						Log.d("CreateGroup admins: ", admins.toString());
+	
+						TbGroup tbGroupResult = userGson.createGroup(etGroupName.getText().toString(), etPassword.getText().toString(), etGroupNotice.getText().toString(), myPhoneNum, users, admins);
+	
+						intent.putExtra("groupName", groupName);
+						intent.putExtra("groupKey", tbGroupResult.getPk_group());
+						intent.putExtra("groupPassword", password);
+	
+						startActivity(intent);
+					}finally{
+						dlg.stop();
+						finish();
 					}
-
-					// 관리자 정보를 "송영석:010123456" 형태로 배열로 저장
-					String[] admins = new String[adminMemberList.size()];
-					for (int i = 0; i < adminMemberList.size(); i++) {
-						String tmpData = adminMemberList.get(i).getName() + ":" + adminMemberList.get(i).getDial();
-						admins[i] = tmpData;
-					}
-
-					Log.d("CreateGroup users: ", users.toString());
-					Log.d("CreateGroup admins: ", admins.toString());
-
-					TbGroup tbGroupResult = userGson.createGroup(etGroupName.getText().toString(), etPassword.getText().toString(), etGroupNotice.getText().toString(), myPhoneNum, users, admins);
-
-					intent.putExtra("groupName", groupName);
-					intent.putExtra("groupKey", tbGroupResult.getPk_group());
-					intent.putExtra("groupPassword", password);
-
-					startActivity(intent);
-					WaitDlg.stop(dlg);
-					
-					finish();
 					
 				}
 

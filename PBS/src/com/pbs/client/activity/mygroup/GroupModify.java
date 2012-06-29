@@ -70,8 +70,6 @@ public class GroupModify extends Activity {
 	private Button bGroupUpdate;	
 	// 삭제
 	private Button bGroupDelete;
-
-	WaitDlg dlg;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -195,10 +193,7 @@ public class GroupModify extends Activity {
 
 		// "그룹원 관리" > "가져오기" 버튼
 		bGroupGetAddressList.setOnClickListener(new OnClickListener() {
-			public void onClick(View arg0) {
-				
-				dlg = new WaitDlg(GroupModify.this, "전화번호 목록 가져오기", "요청하신 작업을 처리중입니다");
-				dlg.start();				
+			public void onClick(View arg0) {								
 				Intent intent = new Intent(GroupModify.this, GetAddressList.class);
 				startActivityForResult(intent, ActivityMap.MEMBER_GET_ADDRESS_LIST);
 			}
@@ -233,11 +228,7 @@ public class GroupModify extends Activity {
 
 		// 관리자 번호 "가져오기" 버튼
 		bAdminGetAddressList.setOnClickListener(new OnClickListener() {
-			public void onClick(View arg0) {
-				
-				dlg = new WaitDlg(GroupModify.this, "전화번호 목록 가져오기", "요청하신 작업을 처리중입니다");
-				dlg.start();
-				
+			public void onClick(View arg0) {				
 				Intent intent = new Intent(GroupModify.this, GetAddressList.class);
 				startActivityForResult(intent, ActivityMap.ADMIN_GET_ADDRESS_LIST);
 			}
@@ -413,7 +404,6 @@ public class GroupModify extends Activity {
 					String headerMemberName = groupMemberList.get(0).getName();
 					etGroupMemberListInfo.setText(headerMemberName + " 외 " + (groupMemberList.size() - 1) + "명");
 				}
-				WaitDlg.stop(dlg);
 			}
 			break;
 
@@ -451,7 +441,6 @@ public class GroupModify extends Activity {
 					etAdminMemberListInfo.setText(headerMemberName + " 외 "
 							+ (adminMemberList.size() - 1) + "명");
 				}
-				WaitDlg.stop(dlg);
 			}
 			break;
 
