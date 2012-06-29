@@ -28,7 +28,6 @@ import android.widget.Toast;
 
 import com.android.R;
 import com.pbs.client.activity.main.WaitDlg;
-import com.pbs.client.activity.mygroup.GroupList;
 import com.pbs.client.model.TbMember;
 import com.pbs.client.util.DeviceManager;
 import com.pbs.client.util.UserGson;
@@ -50,9 +49,7 @@ public class InviteSms extends ListActivity {
 	final String smsBody = "Phone Book Share\n그룹 초대 알림\n==\nKEY:1234\nPASSWORD:123\n==\n다운로드:http://~~";
 
 	PendingIntent sentIntent;
-	PendingIntent deliveryIntent;
-
-	WaitDlg dlg;
+	PendingIntent deliveryIntent;	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -157,27 +154,32 @@ public class InviteSms extends ListActivity {
 
 	// 문자 보내기 버튼 클릭 이벤트
 	public void sendMessage(Long groupKey, String groupPassword) {
-		// 문자 내용 입력
 		
+		WaitDlg dlg = new WaitDlg(InviteSms.this, "초대하기 발송", "SMS 문자 발송중입니다.");
 		
-		 
-		// 문자 받을 사람 추리기		
-		for (int i = 0; i < tbMemberList.size(); i++) {
-			if (tbMemberList.get(i).isChecked()) {				
-				
-				String phone = tbMemberList.get(i).getFd_member_phone();
-				String body = "PBS초대\n그룹등록:http://pbsm.co.kr/i.do?a="+groupKey+"&b="+groupPassword+"&c="+phone;
-				
-				// phone = phone.replace(";",""); //문자열 변환
-				if (phone.length() > 0) {
-					sendSMS(body, phone);
-				}					
+		try {
+			
+			dlg.start();
+			
+			// 문자 받을 사람 추리기		
+			for (int i = 0; i < tbMemberList.size(); i++) {
+				if (tbMemberList.get(i).isChecked()) {				
+					
+					String phone = tbMemberList.get(i).getFd_member_phone();
+					String body = "PBS초대\n그룹등록:http://pbsm.co.kr/i.do?a="+groupKey+"&b="+groupPassword+"&c="+phone;
+					
+					// phone = phone.replace(";",""); //문자열 변환
+					if (phone.length() > 0) {
+						sendSMS(body, phone);
+					}					
+					
+				}			
 				
 			}
 			
-			
-		}
-		 
+		}finally{
+			dlg.start();
+		} 
 
 	}/////
 
@@ -191,7 +193,6 @@ public class InviteSms extends ListActivity {
 
 	public void onResume() {
 		super.onResume();
-
 		registerReceiver(mSentBr, new IntentFilter(ACTION_SENT));
 	}
 
@@ -200,14 +201,10 @@ public class InviteSms extends ListActivity {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			// Activity.RESULT_OK 수신 성공
-			if (getResultCode() == Activity.RESULT_OK) {				
-				
-				
-				Toast.makeText(InviteSms.this, "SMS 전송 완료", Toast.LENGTH_SHORT)
-						.show();
+			if (getResultCode() == Activity.RESULT_OK) {
+				Toast.makeText(InviteSms.this, "SMS 전송 완료", Toast.LENGTH_SHORT).show();
 			} else {
-				Toast.makeText(InviteSms.this, "SMS 전송 실패", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(InviteSms.this, "SMS 전송 실패", Toast.LENGTH_SHORT).show();
 			}
 		}
 	};
