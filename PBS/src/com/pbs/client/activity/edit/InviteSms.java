@@ -178,7 +178,7 @@ public class InviteSms extends ListActivity {
 			}
 			
 		}finally{
-			dlg.start();
+			dlg.stopLocal();
 		} 
 
 	}/////

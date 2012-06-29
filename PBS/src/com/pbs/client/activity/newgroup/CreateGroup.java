@@ -263,7 +263,7 @@ public class CreateGroup extends Activity
 	
 						startActivity(intent);
 					}finally{
-						dlg.stop();
+						dlg.stopLocal();
 						finish();
 					}
 					
