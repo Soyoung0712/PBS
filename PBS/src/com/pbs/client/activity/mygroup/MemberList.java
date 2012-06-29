@@ -19,7 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.R;
+import com.pbs.R;
 import com.pbs.client.activity.main.WaitDlg;
 import com.pbs.client.model.ActivityMap;
 import com.pbs.client.model.TbAccessUser;

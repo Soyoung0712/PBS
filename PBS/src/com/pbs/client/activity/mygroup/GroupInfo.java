@@ -10,7 +10,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.R;
+import com.pbs.R;
 import com.pbs.client.activity.edit.InviteSms;
 import com.pbs.client.model.ActivityMap;
 import com.pbs.client.model.TbGroup;

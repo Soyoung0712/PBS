@@ -22,7 +22,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.R;
+import com.pbs.R;
 import com.pbs.client.activity.edit.GetAddressList;
 import com.pbs.client.activity.edit.GetMemberList;
 import com.pbs.client.activity.main.WaitDlg;

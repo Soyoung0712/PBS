@@ -22,7 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.R;
+import com.pbs.R;
 import com.pbs.client.activity.newgroup.CreateGroup;
 import com.pbs.client.model.AddressUser;
 

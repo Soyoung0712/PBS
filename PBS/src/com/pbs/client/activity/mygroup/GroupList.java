@@ -28,7 +28,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.R;
+import com.pbs.R;
 import com.pbs.client.activity.main.WaitDlg;
 import com.pbs.client.activity.newgroup.CreateGroup;
 import com.pbs.client.model.TbGroup;
@@ -159,7 +159,7 @@ public class GroupList extends ListActivity {
 	 */
 	private void initialize() {
 		InitializationRunnable init = new InitializationRunnable();
-		new Thread(init).start();
+		new Thread(init).start();		
 	}
 
 	/**

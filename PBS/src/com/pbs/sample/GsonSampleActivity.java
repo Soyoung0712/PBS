@@ -7,11 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.android.R;
-import com.android.R.id;
-import com.android.R.layout;
-import com.pbs.client.model.TbAccessUser;
-import com.pbs.client.model.TbGroup;
+import com.pbs.R;
 import com.pbs.client.model.TbMember;
 import com.pbs.client.util.UserGson;
 

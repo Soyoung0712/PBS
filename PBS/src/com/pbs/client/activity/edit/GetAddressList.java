@@ -25,14 +25,9 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.R;
+import com.pbs.R;
 import com.pbs.client.activity.main.WaitDlg;
-import com.pbs.client.activity.mygroup.AddressDownload;
-import com.pbs.client.activity.mygroup.MemberList;
-import com.pbs.client.activity.mygroup.SendSms;
 import com.pbs.client.model.AddressUser;
-import com.pbs.client.model.TbAccessUser;
-import com.pbs.client.model.TbMember;
 import com.pbs.client.util.AddressUserSort;
 
 public class GetAddressList extends ListActivity {

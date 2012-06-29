@@ -4,7 +4,7 @@
 
 package com.pbs.client.activity.main;
 
-import com.android.R;
+import com.pbs.R;
 import com.pbs.client.activity.mygroup.GroupList;
 import com.pbs.client.activity.newgroup.CreateGroup;
 
