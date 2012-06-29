@@ -93,8 +93,6 @@ public class GroupList extends ListActivity {
 			}
 		});
 		
-		
-		
 		// 뒤로가기 버튼
 		Button bBack = (Button) findViewById(R.id.bBack);
 		bBack.setOnClickListener(new View.OnClickListener()	{

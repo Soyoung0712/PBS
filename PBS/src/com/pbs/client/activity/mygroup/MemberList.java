@@ -121,8 +121,7 @@ public class MemberList extends ListActivity {
 		
 		new Thread(new Runnable() {
 			
-			WaitDlg dlg = new WaitDlg(MemberList.this, "서버 요청", "그룹원 리스트를 불러오고 있습니다");
-			
+			WaitDlg dlg = new WaitDlg(MemberList.this, "서버 요청", "그룹원 리스트를 불러오고 있습니다");			
 			public void run() {
 
 				// 시간 많이 걸리는 처리

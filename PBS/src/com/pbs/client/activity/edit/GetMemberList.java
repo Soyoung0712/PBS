@@ -41,8 +41,7 @@ public class GetMemberList extends ListActivity {
 
 		// 선택한 그룹의 맴버 리스트 가져오기
 		Intent intent = getIntent();
-		memberList = (ArrayList<AddressUser>) intent
-				.getSerializableExtra("memberList");
+		memberList = (ArrayList<AddressUser>) intent.getSerializableExtra("memberList");
 		if (memberList == null) {
 			memberList = new ArrayList<AddressUser>();
 		}
