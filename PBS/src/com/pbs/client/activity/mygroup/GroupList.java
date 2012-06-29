@@ -73,7 +73,7 @@ public class GroupList extends ListActivity {
 		setListAdapter(newArrayAdapter);
 		// newArrayAdapter.notifyDataSetChanged();
 
-		// 그룹 추가 버튼
+		// 그룹 공유 버튼
 		Button addgroup = (Button) findViewById(R.id.bAddGroup);
 		addgroup.setPaintFlags(addgroup.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		addgroup.setOnClickListener(new View.OnClickListener()	{
@@ -82,7 +82,7 @@ public class GroupList extends ListActivity {
 			}
 		});
 
-		// 새 그룹 만들기 버튼
+		// 그룹 생성 버튼
 		Button newGroup = (Button) findViewById(R.id.bCreateGroup);
 		newGroup.setPaintFlags(newGroup.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		newGroup.setOnClickListener(new View.OnClickListener()	{
@@ -92,6 +92,8 @@ public class GroupList extends ListActivity {
 				
 			}
 		});
+		
+		
 		
 		// 뒤로가기 버튼
 		Button bBack = (Button) findViewById(R.id.bBack);
@@ -133,6 +135,7 @@ public class GroupList extends ListActivity {
 		AlertDialog dialog;
 		dialog = new AlertDialog.Builder(this)
 				.setTitle("종료확인")
+	 
 				.setMessage("종료하시겠습니까?")
 				.setPositiveButton("예", new DialogInterface.OnClickListener()	{
 					public void onClick(DialogInterface dialog, int which)	{
@@ -194,7 +197,7 @@ public class GroupList extends ListActivity {
 
 	}
 
-	// 그룹 추가 버튼 클릭 이벤트
+	// 그룹 추가 버튼 클릭 이벤트   
 	private void showGroupAdd()	{
 		
 		LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -203,7 +206,7 @@ public class GroupList extends ListActivity {
 		final EditText key = (EditText) addgrouplayout.findViewById(R.id.key);
 		final EditText pwd = (EditText) addgrouplayout.findViewById(R.id.pwd);
 
-		// "그룹추가" 다이얼로그 생성
+		// "그룹추가" 다이얼로그 생성 //
 		Builder builder = new AlertDialog.Builder(this).setTitle("그룹 추가").setView(addgrouplayout);
 
 		// "추가" 버튼 리슨너 생성

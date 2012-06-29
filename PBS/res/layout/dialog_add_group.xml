@@ -19,7 +19,10 @@
             android:id="@+id/key"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-             android:inputType="number"/>
+            android:inputType="number" >
+
+            <requestFocus />
+        </EditText>
     </LinearLayout>
 
     <LinearLayout
@@ -37,8 +40,8 @@
             android:id="@+id/pwd"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:password="true" 
-            android:maxLength="12"/>
+            android:maxLength="12"
+            android:password="true" />
     </LinearLayout>
 
 </LinearLayout>
