@@ -1,7 +1,6 @@
 package com.pbs.client.util;
 
 import java.io.BufferedReader;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -10,9 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -55,7 +57,7 @@ public class UserGson {
 			accessPhone = accessPhone.replaceAll("-", "");
 			
 			// 웹서버에서 그룹 리스트를 Json형식으로 가져온다.
-			String url = urlMyGroupList + "?&fd_access_phone=" + accessPhone;									
+			String url = urlMyGroupList + "?fd_access_phone=" + accessPhone;									
 			try {				
 				
 				JSONObject item = new JSONObject(getStringFromUrl(url));
@@ -280,12 +282,12 @@ public class UserGson {
 				
 				// 웹서버에서 그룹정보를 Json형식으로 가져온다.
 				String url = urlGroupCreate 
-						+ "?fd_group_name="		+ URLEncoder.encode(groupName, "UTF-8") 
-						+ "&fd_group_password=" + URLEncoder.encode(groupPassword, "UTF-8")
-						+ "&fd_group_notice=" 	+ URLEncoder.encode(groupNotice, "UTF-8")
-						+ "&fd_group_creator=" 	+ URLEncoder.encode(groupCreatorPhone, "UTF-8")
-						+ "&users=" 			+ URLEncoder.encode(strUsers, "UTF-8")
-						+ "&admins=" 			+ URLEncoder.encode(strAdmins, "UTF-8");
+						+ "?fd_group_name="		+ groupName 
+						+ "&fd_group_password=" + groupPassword
+						+ "&fd_group_notice=" 	+ groupNotice
+						+ "&fd_group_creator=" 	+ groupCreatorPhone
+						+ "&users=" 			+ strUsers
+						+ "&admins=" 			+ strAdmins;
 				
 				Log.d("url >> ",url);
 				
@@ -417,12 +419,12 @@ public class UserGson {
 				// 웹서버에서 그룹정보를 Json형식으로 가져온다.
 				String url = urlGroupUpdate
 						+ "?pk_group="			+ groupKey
-						+ "&fd_group_name="		+ URLEncoder.encode(groupName, "UTF-8") 
-						+ "&fd_group_password=" + URLEncoder.encode(groupPassword, "UTF-8")
-						+ "&fd_group_notice=" 	+ URLEncoder.encode(groupNotice, "UTF-8")
-						+ "&fd_group_creator=" 	+ URLEncoder.encode(groupCreatorPhone, "UTF-8")
-						+ "&users=" 			+ URLEncoder.encode(strUsers, "UTF-8")
-						+ "&admins=" 			+ URLEncoder.encode(strAdmins, "UTF-8");
+						+ "&fd_group_name="		+ groupName 
+						+ "&fd_group_password=" + groupPassword
+						+ "&fd_group_notice=" 	+ groupNotice
+						+ "&fd_group_creator=" 	+ groupCreatorPhone
+						+ "&users=" 			+ strUsers
+						+ "&admins=" 			+ strAdmins;
 				
 				Log.d("url >> ",url);
 				
@@ -582,11 +584,50 @@ public class UserGson {
 	private InputStream getInputStreamFromUrl(String url) {
 		InputStream contentStream = null;
 		
-		try {
+		try {			
+			
+			int paramIndex = -1;
+			if( url != null && url.length() > 0 ) {
+				paramIndex = url.indexOf("?");
+			}
+			
+			String domain = "";		
+			String params = "";
+			if ( paramIndex >= 0 ) {
+				domain = url.substring(0, paramIndex);
+				params = url.substring(paramIndex+1, url.length());				
+			}			
+			HttpPost httpPost = new HttpPost(domain);
+			
+			// 파라미터가 있는 경우	
+			List<NameValuePair> paramList = new ArrayList<NameValuePair>();
+			if( params.length() > 0 ) {
+				String[] arrParams = params.split("&");
+				
+				for(int i=0; i<arrParams.length; i++ ) {				
+					String[] arrParam = arrParams[i].split("=");
+					
+					String paramName = "";
+					String paramValue = "";
+
+					if( arrParam.length == 1) {
+						paramName = arrParam[0];
+					}else if( arrParam.length == 2) {
+						paramName = arrParam[0];
+						paramValue = arrParam[1];
+					}
+			        paramList.add(new BasicNameValuePair(paramName, paramValue));			        
+				}
+			}
+			
+			httpPost.setEntity(new UrlEncodedFormEntity(paramList, "UTF-8"));
+			httpPost.addHeader("Connection", "close");	
+			
 			// HttpClient를 사용해서 주어진 URL에 대한 입력 스트림을 얻는다.			
-			HttpClient httpclient = new DefaultHttpClient();					
-			HttpResponse response = httpclient.execute(new HttpPost(url));
+			HttpClient httpclient = new DefaultHttpClient();			
+			HttpResponse response = httpclient.execute(httpPost);
 			contentStream = response.getEntity().getContent();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
