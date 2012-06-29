@@ -35,8 +35,7 @@ public class AddressDownload extends ListActivity {
 	private NewArrayAdapter newArrayAdapter = null;
 	private UserGson userGson = new UserGson();
 	// 모두선택 Flag (초기 설정은 모두선택이 해지된 상태)
-	boolean allClickStatuFlag = false;
-	WaitDlg dlg;
+	boolean allClickStatuFlag = false;	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -116,38 +115,39 @@ public class AddressDownload extends ListActivity {
 	}
 
 	// 저장 버튼 클릭했을 때
-	private void StroeButton(final Activity activity, Button mSave,
-			final String fd_group_name) {
+	private void StroeButton(final Activity activity, Button mSave, final String fd_group_name) {
+		
 		mSave.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View arg0) {
 				int cntSave = 0;
 				AddressUtil addressUtil = new AddressUtil();
-				dlg = new WaitDlg(AddressDownload.this, "그룹원 저장중", "요청하신 작업을 처리중입니다");
+				WaitDlg dlg = new WaitDlg(AddressDownload.this, "그룹원 저장중", "요청하신 작업을 처리중입니다");
 			
 				dlg.start();
-				 
-				// 선택한 사용자를 주소록에 저장
-				for (int i = 0; i < tbMemberList.size(); i++) {
-					
-					 
-					if (tbMemberList.get(i).isChecked()) {
+				try{
+					// 선택한 사용자를 주소록에 저장
+					for (int i = 0; i < tbMemberList.size(); i++) {
+						
 						 
-						addressUtil.addContact(activity, fd_group_name,
-								tbMemberList.get(i).getFd_member_name(),
-								tbMemberList.get(i).getFd_member_phone());
-						cntSave++;
-					}					 
-				}
+						if (tbMemberList.get(i).isChecked()) {
+							 
+							addressUtil.addContact(activity, fd_group_name,
+									tbMemberList.get(i).getFd_member_name(),
+									tbMemberList.get(i).getFd_member_phone());
+							cntSave++;
+						}					 
+					}
 
-				if (cntSave > 0) {
-					Toast.makeText(AddressDownload.this, "정상적으로 저장되었습니다..",
-							Toast.LENGTH_SHORT).show();
-					WaitDlg.stop(dlg);
-					finish();
-				} else {
-					Toast.makeText(AddressDownload.this, "저장할 멤버가 없습니다.",
-							Toast.LENGTH_SHORT).show();
-					WaitDlg.stop(dlg);
+					if (cntSave > 0) {
+						Toast.makeText(AddressDownload.this, "정상적으로 저장되었습니다..", Toast.LENGTH_SHORT).show();
+						
+						finish();
+					} else {
+						Toast.makeText(AddressDownload.this, "저장할 멤버가 없습니다.", Toast.LENGTH_SHORT).show();
+						
+					}					
+				}finally{
+					dlg.stopLocal();
 				}
 			}
 		});

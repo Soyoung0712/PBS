@@ -117,13 +117,8 @@ public class MemberList extends ListActivity {
 		// 그룹정보
 		bInfo.setPaintFlags(bInfo.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		// 삭제
-		bDelete.setPaintFlags(bDelete.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);		
-	}
-	
-	@Override
-	public void onResume() {
-	
-		super.onResume();		
+		bDelete.setPaintFlags(bDelete.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		
 		new Thread(new Runnable() {
 			
 			WaitDlg dlg = new WaitDlg(MemberList.this, "서버 요청", "그룹원 리스트를 불러오고 있습니다");
@@ -184,6 +179,13 @@ public class MemberList extends ListActivity {
 				
 			}
 		}).start();		
+
+	}
+	
+	@Override
+	public void onResume() {
+	
+		super.onResume();	
 		
 	}
 	
