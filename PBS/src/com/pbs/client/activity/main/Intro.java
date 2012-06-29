@@ -30,6 +30,6 @@ public class Intro extends Activity {
 			}
 		};
 
-		handler.sendEmptyMessageDelayed(0, 3000); // ms, 3초후 종료시킴
+		handler.sendEmptyMessageDelayed(0, 1500); // ms, 3초후 종료시킴
 	}
 }
