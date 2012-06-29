@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"    
     android:orientation="horizontal"
-    android:background="#eeeeeeee"            
+    android:background="#eeeeeeee"      
     android:gravity="center|top" >
 
     <EditText
@@ -26,7 +26,7 @@
         android:layout_height="35dp"
         android:layout_marginLeft="5dp"
         android:background="@drawable/listview_button_default_click"
-        android:textSize="13dp" 
+        android:textSize="13sp" 
         android:textColor="#ffffff" 
         android:textStyle="bold"
         android:text="삭제" />

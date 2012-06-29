@@ -192,7 +192,7 @@
                         android:inputType="phone"
                         android:layout_marginLeft="5dp"
                         android:paddingLeft="10dp"
-                        android:textSize="16dp" />
+                        android:textSize="16sp" />
 
                     <Button
                         android:id="@+id/bGroupGetAddressList"
@@ -202,7 +202,7 @@
                         android:layout_marginLeft="5dp"
                         android:background="@drawable/listview_button_default_click"
                         android:text="가져오기"
-                        android:textSize="12dp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -250,7 +250,7 @@
                         android:inputType="phone"
                         android:layout_marginLeft="5dp"
                         android:paddingLeft="10dp"
-                        android:textSize="16dp" />
+                        android:textSize="16sp" />
 
                     <Button
                         android:id="@+id/bAdminGetAddressList"
@@ -260,7 +260,7 @@
                         android:layout_marginLeft="5dp"
                         android:background="@drawable/listview_button_default_click"
                         android:text="가져오기"
-                        android:textSize="12dp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
