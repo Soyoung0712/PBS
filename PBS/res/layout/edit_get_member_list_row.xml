@@ -17,7 +17,7 @@
         android:layout_width="145dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="3dp"
-        android:background="@drawable/edit_text_bg" />
+        android:background="@drawable/edit_text_bg" android:inputType="number"/>
 
     <Button
         android:id="@+id/bDeleteOne"
