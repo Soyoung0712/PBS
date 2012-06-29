@@ -135,7 +135,7 @@ public class GroupList extends ListActivity {
 		AlertDialog dialog;
 		dialog = new AlertDialog.Builder(this)
 				.setTitle("종료확인")
-	 
+				.setIcon(R.drawable.icon3)
 				.setMessage("종료하시겠습니까?")
 				.setPositiveButton("예", new DialogInterface.OnClickListener()	{
 					public void onClick(DialogInterface dialog, int which)	{

@@ -13,7 +13,9 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="이름" />
+            android:text="이름"
+             android:textSize="24dp"
+             android:textColor="#7cfc00"/>
 
         <EditText
             android:id="@+id/etName"
@@ -31,7 +33,9 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="전화번호" />
+            android:text="전화번호" 
+            android:textSize="24dp"
+             android:textColor="#7cfc00"/>
 
         <EditText
             android:id="@+id/etPhone"

@@ -13,13 +13,16 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="그룹 KEY" />
+            android:text="그룹 KEY" 
+            android:textSize="24dp"
+            android:textColor="#7cfc00"/>
 
         <EditText
             android:id="@+id/key"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:inputType="number" >
+            android:inputType="number" 
+            >
 
             <requestFocus />
         </EditText>
@@ -34,7 +37,9 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="PASSWORD" />
+            android:text="비밀번호" 
+            android:textSize="24dp"
+             android:textColor="#7cfc00"/>
 
         <EditText
             android:id="@+id/pwd"
