@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.pbs.R;
+import com.pbs.client.R;
 import com.pbs.client.model.TbMember;
 import com.pbs.client.util.UserGson;
 

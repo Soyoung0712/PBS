@@ -7,7 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.Window;
 
-import com.pbs.R;
+import com.pbs.client.R;
 import com.pbs.client.activity.mygroup.GroupList;
 
 public class Intro extends Activity {

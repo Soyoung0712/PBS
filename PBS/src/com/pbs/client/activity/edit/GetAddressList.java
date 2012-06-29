@@ -25,7 +25,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.pbs.R;
+import com.pbs.client.R;
 import com.pbs.client.activity.main.WaitDlg;
 import com.pbs.client.model.AddressUser;
 import com.pbs.client.util.AddressUserSort;
