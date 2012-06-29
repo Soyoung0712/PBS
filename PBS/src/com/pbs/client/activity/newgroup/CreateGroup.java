@@ -57,10 +57,7 @@ public class CreateGroup extends Activity
 	private Button bAdminGetAddressList; // "가져오기" 버튼
 
 	// 생성완료
-	private Button bGroupResult;
-
-	WaitDlg dlg;
-	 
+	private Button bGroupResult;	 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -234,7 +231,7 @@ public class CreateGroup extends Activity
 				// 입력값 요효성 체크 통과
 				}else {
 					
-					dlg = new WaitDlg(CreateGroup.this, "그룹 생성", "그룹을 생성하고 있습니다");
+					WaitDlg dlg = new WaitDlg(CreateGroup.this, "그룹 생성", "그룹을 생성하고 있습니다");
 					dlg.start();
 					
 					Intent intent = new Intent(CreateGroup.this, CreateGroupComplete.class);
@@ -264,7 +261,7 @@ public class CreateGroup extends Activity
 					intent.putExtra("groupPassword", password);
 
 					startActivity(intent);
-					WaitDlg.stop(dlg);
+					dlg.stop();
 					
 					finish();
 					
