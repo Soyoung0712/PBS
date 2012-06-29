@@ -1,5 +1,6 @@
 package com.pbs.client.activity.mygroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.R;
+import com.pbs.client.activity.main.WaitDlg;
 import com.pbs.client.model.ActivityMap;
 import com.pbs.client.model.TbAccessUser;
 import com.pbs.client.model.TbMember;
@@ -28,8 +31,16 @@ import com.pbs.client.util.UserGson;
 public class MemberList extends ListActivity {
 
 	private String myPhoneNum = null;
-	private List<TbMember> tbMemberList = null;	
-	private UserGson userGson = new UserGson();
+	private List<TbMember> tbMemberList = new ArrayList<TbMember>();	
+	private UserGson userGson = new UserGson();	
+	private NewArrayAdapter newArrayAdapter = null;
+	
+	private long pk_group = 0L;
+	private String fd_admin_yn = null;
+	private String fd_group_name = null;
+	
+	private Button mPhoneMove;
+	private Button mSMSMove;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -46,54 +57,14 @@ public class MemberList extends ListActivity {
 		
 		// 선택한 그룹의 맴버 리스트 가져오기
 		Intent intent = getIntent();
-		final long pk_group = intent.getExtras().getLong("pk_group");
-		final String fd_admin_yn = intent.getExtras().getString("fd_admin_yn");
-		final String fd_group_name = intent.getExtras().getString("fd_group_name");		
-		tbMemberList = userGson.getMemeberList(pk_group, myPhoneNum);
+		pk_group = intent.getExtras().getLong("pk_group");
+		fd_admin_yn = intent.getExtras().getString("fd_admin_yn");
+		fd_group_name = intent.getExtras().getString("fd_group_name");
 		
-		// 관리자 가져오기
-		List<TbAccessUser> tbAccessUserList = userGson.getAdminList(pk_group, myPhoneNum);
-		for (int i = tbAccessUserList.size()-1; 0 <= i ; i--) {			
-			TbMember tbMember = new TbMember();
-			tbMember.setFd_member_name(tbAccessUserList.get(i).getFd_member_name());
-			tbMember.setFd_member_phone(tbAccessUserList.get(i).getFd_access_phone());
-			tbMember.setAdmin(true);
-			tbMemberList.add(0, tbMember);
-		}
-
 		// 리스트뷰에 리스트 적용
-		setListAdapter(new NewArrayAdapter(this));
-		
-		// 문자보내기/그룹 저장
-		Button mSMSMove = (Button) findViewById(R.id.bSmsSend);
-		Button mPhoneMove = (Button) findViewById(R.id.bAddressSave);
-		
-		if( tbMemberList.size() > 0 ) {
-			
-			// "문자 보내기" 버튼
-			mSMSMove.setOnClickListener(new View.OnClickListener() {
-				public void onClick(View arg0) {
-					Intent intent = new Intent(MemberList.this, SendSms.class);
-					intent.putExtra("pk_group", pk_group);
-					startActivity(intent);
-				}
-			});
-			
-			// "그룹저장" 버튼			
-			mPhoneMove.setOnClickListener(new View.OnClickListener() {
-				public void onClick(View arg0) {
-					Intent intent = new Intent(MemberList.this, AddressDownload.class);
-					intent.putExtra("pk_group", pk_group);
-					intent.putExtra("fd_group_name", fd_group_name);
-					startActivity(intent);
-				}
-			});
-			
-		}else {
-			mSMSMove.setVisibility(View.GONE);
-			mPhoneMove.setVisibility(View.GONE);
-		}
-		
+		newArrayAdapter = new NewArrayAdapter(this);
+		setListAdapter(newArrayAdapter);
+				
 		Button bInfo = (Button) findViewById(R.id.bInfo);
 		Button bDelete = (Button) findViewById(R.id.bDelete);
 		
@@ -137,16 +108,87 @@ public class MemberList extends ListActivity {
 		// 제목
 		TextView tvTitle = (TextView) findViewById(R.id.tvTitle);
 		tvTitle.setPaintFlags(tvTitle.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
-		// 내 폰으로 이동
+		// 내 폰으로 이동		
+		mPhoneMove = (Button) findViewById(R.id.bAddressSave);
 		mPhoneMove.setPaintFlags(mPhoneMove.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		// 문자보내기
+		mSMSMove = (Button) findViewById(R.id.bSmsSend);
 		mSMSMove.setPaintFlags(mSMSMove.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		// 그룹정보
 		bInfo.setPaintFlags(bInfo.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		// 삭제
-		bDelete.setPaintFlags(bDelete.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+		bDelete.setPaintFlags(bDelete.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);		
 	}
+	
+	@Override
+	public void onResume() {
+	
+		super.onResume();		
+		new Thread(new Runnable() {
+			
+			WaitDlg dlg = new WaitDlg(MemberList.this, "서버 요청", "그룹원 리스트를 불러오고 있습니다");
+			
+			public void run() {
 
+				// 시간 많이 걸리는 처리				
+				dlg.start();
+				
+				try{
+	          		tbMemberList.clear();          		
+	          		tbMemberList.addAll(userGson.getMemeberList(pk_group, myPhoneNum));
+	          		
+	          		// 관리자 가져오기
+	          		List<TbAccessUser> tbAccessUserList = userGson.getAdminList(pk_group, myPhoneNum);
+	          		for (int i = tbAccessUserList.size()-1; 0 <= i ; i--) {			
+	          			TbMember tbMember = new TbMember();
+	          			tbMember.setFd_member_name(tbAccessUserList.get(i).getFd_member_name());
+	          			tbMember.setFd_member_phone(tbAccessUserList.get(i).getFd_access_phone());
+	          			tbMember.setAdmin(true);
+	          			tbMemberList.add(0, tbMember);
+	          		}
+				}catch(Exception ex) {
+					Log.d("MemberList", ex.toString());
+				} 
+				
+				dlg.stopLocal();
+          		
+				runOnUiThread(new Runnable() {
+					public void run() {	
+						
+						if( tbMemberList.size() > 0 ) {
+		          			
+		          			// "문자 보내기" 버튼
+		          			mSMSMove.setOnClickListener(new View.OnClickListener() {
+		          				public void onClick(View arg0) {
+		          					Intent intent = new Intent(MemberList.this, SendSms.class);
+		          					intent.putExtra("pk_group", pk_group);
+		          					startActivity(intent);
+		          				}
+		          			});
+		          			
+		          			// "그룹저장" 버튼			
+		          			mPhoneMove.setOnClickListener(new View.OnClickListener() {
+		          				public void onClick(View arg0) {
+		          					Intent intent = new Intent(MemberList.this, AddressDownload.class);
+		          					intent.putExtra("pk_group", pk_group);
+		          					intent.putExtra("fd_group_name", fd_group_name);
+		          					startActivity(intent);
+		          				}
+		          			});
+		          			
+		          		}else {
+		          			mSMSMove.setVisibility(View.GONE);
+		          			mPhoneMove.setVisibility(View.GONE);
+		          		}
+						
+		            	newArrayAdapter.notifyDataSetChanged();
+		            }
+		        });
+				
+			}
+		}).start();		
+		
+	}
 	
 	class NewArrayAdapter extends ArrayAdapter {
 		Activity context;

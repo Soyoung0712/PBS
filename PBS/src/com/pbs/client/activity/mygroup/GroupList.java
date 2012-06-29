@@ -46,8 +46,7 @@ public class GroupList extends ListActivity {
 	private String myPhoneNum = null;
 	private List<TbGroup> tbGroupList = null;
 	private NewArrayAdapter newArrayAdapter = null;
-	private UserGson userGson = new UserGson();
-	WaitDlg dlg;
+	private UserGson userGson = new UserGson();	
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -150,9 +149,7 @@ public class GroupList extends ListActivity {
 	@Override
 	public void onResume() {
 		super.onResume();		
-		// 시간이 걸리는 작업 처리
-		dlg = new WaitDlg(GroupList.this, "서버 요청", "그룹 리스트를 불러오고 있습니다");
-		dlg.start();
+		// 시간이 걸리는 작업 처리		
 		initialize();
 	}
 	
@@ -171,17 +168,26 @@ public class GroupList extends ListActivity {
 	 */
 	class InitializationRunnable implements Runnable {
 
-		public void run() {
+		WaitDlg dlg = new WaitDlg(GroupList.this, "서버 요청1", "그룹 리스트를 불러오고 있습니다");
+		
+		public void run() {			
+			
+			dlg.start();
 			
 			// 그룹 리스트 갱신
 			tbGroupList.clear();
-			tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));
+			try{
+				tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));
+			}catch(Exception ex) {
+				Log.d("InitializationRunnable", ex.toString());
+			}
+			
+			dlg.stopLocal();  // 처리중 로딩바 없애기
 			
 			// notifyDataSetChanged() 사용시 반드시 runOnUiThread를 이용
 			runOnUiThread(new Runnable() {                  
                   public void run() {
-                	  newArrayAdapter.notifyDataSetChanged();
-                	  WaitDlg.stop(dlg);  // 처리중 로딩바 없애기
+                	  newArrayAdapter.notifyDataSetChanged();                	 
                   }
             });			
 		}
@@ -225,14 +231,14 @@ public class GroupList extends ListActivity {
 				// 그룹키 추가 성공
 				if (addGroupResult) {
 					
-					dlg = new WaitDlg(GroupList.this, "서버 요청", "그룹을 추가하고 있습니다");
+					WaitDlg dlg = new WaitDlg(GroupList.this, "서버 요청", "그룹을 추가하고 있습니다");
 					dlg.start();
 					
 					tbGroupList.clear();
 					tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));
 					newArrayAdapter.notifyDataSetChanged();
 					
-					WaitDlg.stop(dlg);
+					dlg.stopLocal();
 					
 					Toast.makeText(GroupList.this, "그룹이 추가 되었습니다.", Toast.LENGTH_LONG).show();
 

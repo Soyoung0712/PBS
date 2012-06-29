@@ -33,6 +33,20 @@ public class WaitDlg extends HandlerThread {
 		mProgress.show();
 	}
 	
+	
+	public void stopLocal() {
+			mProgress.dismiss();
+			// 대화상자가 사라지기 전까지 대기해 줘야 함
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				
+			};
+			// 메시지 루프 종료해야 함
+			getLooper().quit();
+	}
+		
+	
 	// 스레드 외부에서 종료를 위해 호출된다.
 	public static void stop(WaitDlg dlg) {
 		dlg.mProgress.dismiss();
