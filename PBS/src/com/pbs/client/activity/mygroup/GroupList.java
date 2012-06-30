@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.pbs.client.R;
 import com.pbs.client.activity.main.WaitDlg;
+import com.pbs.client.activity.main.WaitDlg1;
 import com.pbs.client.activity.newgroup.CreateGroup;
 import com.pbs.client.model.TbGroup;
 import com.pbs.client.util.DeviceManager;
@@ -150,8 +151,20 @@ public class GroupList extends ListActivity {
 	@Override
 	public void onResume() {
 		super.onResume();		
-		// 시간이 걸리는 작업 처리		
-		initialize();
+		// 시간이 걸리는 작업 처리	
+		runOnUiThread(new Runnable() {                  
+            public void run() {
+          	  WaitDlg dlg = new WaitDlg(GroupList.this, "서버 요청1", "그룹 리스트를 불러오고 있습니다");
+          	  dlg.start();
+          	  // 그룹 리스트 갱신
+    		  tbGroupList.clear();
+			  tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));
+          	  newArrayAdapter.notifyDataSetChanged(); 
+          	  dlg.stopLocal();  // 처리중 로딩바 없애기
+            }
+        });		
+		
+		//initialize();
 	}
 	
 	/**
@@ -168,28 +181,9 @@ public class GroupList extends ListActivity {
 	 *
 	 */
 	class InitializationRunnable implements Runnable {
-
-		WaitDlg dlg = new WaitDlg(GroupList.this, "서버 요청1", "그룹 리스트를 불러오고 있습니다");
-		
 		public void run() {			
-			
-			// 그룹 리스트 갱신
-			tbGroupList.clear();
-			try{
-				dlg.start();
-				tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));
-			}finally{
-				dlg.stopLocal();  // 처리중 로딩바 없애기
-			}		
-			
-			// notifyDataSetChanged() 사용시 반드시 runOnUiThread를 이용
-			runOnUiThread(new Runnable() {                  
-                  public void run() {
-                	  newArrayAdapter.notifyDataSetChanged();                	 
-                  }
-            });			
+			// notifyDataSetChanged() 사용시 반드시 runOnUiThread를 이용				
 		}
-
 	}
 
 	// 그룹 추가 버튼 클릭 이벤트   
