@@ -30,7 +30,6 @@ import android.widget.Toast;
 
 import com.pbs.client.R;
 import com.pbs.client.activity.main.WaitDlg;
-import com.pbs.client.activity.main.WaitDlg1;
 import com.pbs.client.activity.newgroup.CreateGroup;
 import com.pbs.client.model.TbGroup;
 import com.pbs.client.util.DeviceManager;
