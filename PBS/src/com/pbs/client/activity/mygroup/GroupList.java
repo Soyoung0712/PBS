@@ -63,15 +63,12 @@ public class GroupList extends ListActivity {
 		myPhoneNum = DeviceManager.getMyPhoneNumber(this);
 				
 		// 내그룹 리스트 가져오기		
-		tbGroupList = new ArrayList<TbGroup>();
+		
 		
 		// 내그룹 리스트 가져오기 완료후 프로그래스바 종료
 		//WaitDlg.stop(dlg);
 		
-		// 리스트뷰에 리스트 적용
-		newArrayAdapter = new NewArrayAdapter(this);
-		setListAdapter(newArrayAdapter);
-		// newArrayAdapter.notifyDataSetChanged();
+		
 
 		// 그룹 공유 버튼
 		Button addgroup = (Button) findViewById(R.id.bAddGroup);
@@ -112,6 +109,7 @@ public class GroupList extends ListActivity {
 		TextView tvEmplyText2 = (TextView) findViewById(R.id.tvEmplyText2);		
 		tvEmplyText2.setPaintFlags(tvEmplyText2.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 
+		
 	}
 
 	// 백버튼 종료 하기
@@ -130,8 +128,7 @@ public class GroupList extends ListActivity {
 	 */
 	private void dialogFinish() {
 		
-		AlertDialog dialog;
-		dialog = new AlertDialog.Builder(this)
+		AlertDialog dialog = new AlertDialog.Builder(this)
 				.setTitle("종료확인")
 				.setIcon(R.drawable.icon3)
 				.setMessage("종료하시겠습니까?")
@@ -145,44 +142,26 @@ public class GroupList extends ListActivity {
 					}})
 				.show();		
 	}
-
 	
 	@Override
 	public void onResume() {
-		super.onResume();		
-		// 시간이 걸리는 작업 처리	
-		runOnUiThread(new Runnable() {                  
-            public void run() {
-          	  WaitDlg dlg = new WaitDlg(GroupList.this, "서버 요청1", "그룹 리스트를 불러오고 있습니다");
-          	  dlg.start();
-          	  // 그룹 리스트 갱신
-    		  tbGroupList.clear();
-			  tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));
-          	  newArrayAdapter.notifyDataSetChanged(); 
-          	  dlg.stopLocal();  // 처리중 로딩바 없애기
-            }
-        });		
-		
-		//initialize();
-	}
-	
-	/**
-	 * 시간이 걸리는 작업 처리
-	 */
-	private void initialize() {
-		InitializationRunnable init = new InitializationRunnable();
-		new Thread(init).start();		
-	}
+		super.onResume();
 
-	/**
-	 * 시간이 걸리는 작업 처리 : 스레드 처리
-	 * @author Administrator
-	 *
-	 */
-	class InitializationRunnable implements Runnable {
-		public void run() {			
-			// notifyDataSetChanged() 사용시 반드시 runOnUiThread를 이용				
-		}
+		// 그룹 리스트 갱신
+		WaitDlg dlg = new WaitDlg(GroupList.this, "서버 요청", "그룹 리스트를 불러오고 있습니다");
+		tbGroupList = new ArrayList<TbGroup>();
+		try {
+			dlg.start();
+			tbGroupList.addAll(userGson.getMyGroupList(myPhoneNum));			
+		} finally {
+			dlg.stopLocal(); // 처리중 로딩바 없애기
+		}	
+
+		// 리스트뷰에 리스트 적용
+		newArrayAdapter = new NewArrayAdapter(this);
+		setListAdapter(newArrayAdapter);
+		// newArrayAdapter.notifyDataSetChanged();
+
 	}
 
 	// 그룹 추가 버튼 클릭 이벤트   
