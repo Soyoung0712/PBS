@@ -74,12 +74,13 @@ public class GroupInfo extends Activity {
 		bGroupUpdate = (Button) findViewById(R.id.bGroupUpdate);
 		
 		// "초대하기" 버튼 클릭
+		final String groupPassword = tbGroup.getFd_group_password();
 		bInvite.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
 
 				Intent intent = new Intent(GroupInfo.this, InviteSms.class);
-				// intent.putExtra("groupMemberList", groupMemberList);
 				intent.putExtra("pk_group", String.valueOf(pk_group));
+				intent.putExtra("fd_group_password", groupPassword);
 				startActivity(intent);
 
 			}
