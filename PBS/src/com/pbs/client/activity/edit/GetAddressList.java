@@ -124,6 +124,45 @@ public class GetAddressList extends ListActivity {
 		TextView tvAllchoice = (TextView) findViewById(R.id.tvAllchoice);		
 		tvAllchoice.setPaintFlags(tvAllchoice.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 		
+		// 전화번호 주소록 가져오기
+		ContentResolver cr = getContentResolver();
+		Cursor c = managedQuery(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+		startManagingCursor(c);
+
+		// 전화번호 주소록 사용자 저장		
+		while (c.moveToNext()) {
+
+			// ID 저장
+			String id = c.getString(c.getColumnIndex(ContactsContract.Contacts._ID));
+			// 이름 저장
+			String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+
+			// 전화번호 저장
+			if (Integer.parseInt(c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
+				Cursor cp = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ? ", new String[] { id }, null);
+				while (cp.moveToNext()) {
+					String dial = cp.getString(cp.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA1));
+					// 전화번호가 있는 경우만 전화번호부에 보여준다.
+					if (dial != null && dial.length() > 0) {
+						// 사용자 정보 저장
+						AddressUser addressUser = new AddressUser();
+						addressUser.setId(id);
+						addressUser.setName(name);
+						addressUser.setDial(dial);
+						// 주소록 명단에 추가
+						addressUserList.add(addressUser);
+					}
+
+				}
+				cp.close();
+			}
+			
+		}
+		c.close();
+		
+		newArrayAdapter.notifyDataSetChanged();
+		
+		/*
 		new Thread(new Runnable() {
 			
 			WaitDlg dlg = new WaitDlg(GetAddressList.this, "주소록 가져오기", "그룹원 리스트를 불러오고 있습니다");			
@@ -132,43 +171,6 @@ public class GetAddressList extends ListActivity {
 				// 시간 많이 걸리는 처리
 				try{
 					dlg.start();
-					
-	          		
-	          		// 전화번호 주소록 가져오기
-	        		ContentResolver cr = getContentResolver();
-	        		Cursor c = managedQuery(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-	        		startManagingCursor(c);
-
-	        		// 전화번호 주소록 사용자 저장		
-	        		while (c.moveToNext()) {
-
-	        			// ID 저장
-	        			String id = c.getString(c.getColumnIndex(ContactsContract.Contacts._ID));
-	        			// 이름 저장
-	        			String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-
-	        			// 전화번호 저장
-	        			if (Integer.parseInt(c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
-	        				Cursor cp = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ? ", new String[] { id }, null);
-	        				while (cp.moveToNext()) {
-	        					String dial = cp.getString(cp.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA1));
-	        					// 전화번호가 있는 경우만 전화번호부에 보여준다.
-	        					if (dial != null && dial.length() > 0) {
-	        						// 사용자 정보 저장
-	        						AddressUser addressUser = new AddressUser();
-	        						addressUser.setId(id);
-	        						addressUser.setName(name);
-	        						addressUser.setDial(dial);
-	        						// 주소록 명단에 추가
-	        						addressUserList.add(addressUser);
-	        					}
-
-	        				}
-	        				cp.close();
-	        			}
-	        			
-	        		}
-	        		c.close();
 	        		
 				}finally{
 					dlg.stopLocal();
@@ -176,13 +178,13 @@ public class GetAddressList extends ListActivity {
           		
 				runOnUiThread(new Runnable() {
 					public void run() {
-		            	newArrayAdapter.notifyDataSetChanged();
+		            	
 		            }
 		        });
 				
 			}
-		}).start();		
-
+		}).start();
+		*/
 
 	}
  
