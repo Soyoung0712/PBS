@@ -13,10 +13,13 @@
         android:orientation="horizontal" >
         
         <Button
-	        android:id="@+id/bBack"	        
+	        android:id="@+id/bBack"	       
+	        style="@style/button_white"  
 	        android:layout_width="wrap_content"
 	        android:layout_marginLeft="10dp"
 	        android:layout_height="wrap_content"
+	        android:text="뒤로"
+	        android:textSize="12sp"
 	        android:background="@drawable/backbutton_default_click" />
         
         <TextView
@@ -33,7 +36,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"        
-        android:paddingTop="10dp"
+        android:paddingTop="5dp"
         android:paddingBottom="10dp"
         android:orientation="horizontal" >
         
@@ -66,7 +69,6 @@
             android:id="@+id/tvAllchoice"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
             android:text="전체 선택"
             android:textSize="18sp"
             android:textStyle="bold" />

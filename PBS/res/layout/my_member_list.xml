@@ -13,10 +13,13 @@
         android:orientation="horizontal" >
         
         <Button
-	        android:id="@+id/bBack"	        
+	        android:id="@+id/bBack"	  
+	        style="@style/button_white"       
 	        android:layout_width="wrap_content"
-	        android:layout_marginLeft="10dp"
+	        android:layout_marginLeft="5dp"
 	        android:layout_height="wrap_content"
+	        android:text="뒤로"
+	        android:textSize="12sp"
 	        android:background="@drawable/backbutton_default_click" />
         
         <TextView
@@ -33,14 +36,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"        
-        android:paddingTop="10dp"
+        android:paddingTop="5dp"
         android:paddingBottom="10dp"
         android:orientation="horizontal" >
         
         <Button
             android:id="@+id/bSmsSend"
             style="@style/button_white"
-            android:layout_width="95dp"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"            
             android:background="@drawable/button_default_click"
             android:text="문자 보내기" />
@@ -50,7 +53,6 @@
             style="@style/button_white"
             android:layout_width="95dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
             android:background="@drawable/button_default_click"
             android:text="그룹저장" />        
 
@@ -59,7 +61,6 @@
             style="@style/button_white"
             android:layout_width="95dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
             android:background="@drawable/button_default_click"
             android:visibility="gone"
             android:text="그룹정보" />
@@ -69,7 +70,6 @@
             style="@style/button_white"
             android:layout_width="95dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
             android:background="@drawable/button_default_click"
             android:visibility="gone"
             android:text="삭제" />

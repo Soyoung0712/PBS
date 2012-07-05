@@ -14,9 +14,12 @@
         
         <Button
 	        android:id="@+id/bBack"	        
+	        style="@style/button_white" 
 	        android:layout_width="wrap_content"
 	        android:layout_marginLeft="10dp"
 	        android:layout_height="wrap_content"
+	        android:text="뒤로"
+	        android:textSize="12sp"
 	        android:background="@drawable/backbutton_default_click" />
         
         <TextView
@@ -35,7 +38,7 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp" >
+        android:paddingTop="5dp" >
 
         <Button
             android:id="@+id/bSave"
@@ -65,7 +68,7 @@
             android:id="@+id/editgroupname"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginRight="15dp"
             android:background="@drawable/edit_text_bg"
             android:paddingLeft="10dp"
@@ -92,7 +95,6 @@
             android:id="@+id/tvAllchoice"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
             android:text="전체 선택"
             android:textSize="18sp"
             android:textStyle="bold" />
