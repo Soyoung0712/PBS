@@ -18,6 +18,12 @@ public class DeviceManager {
 		}else {
 			TelephonyManager tmg = (TelephonyManager) activity.getSystemService(Context.TELEPHONY_SERVICE);
 			myPhoneNumber = tmg.getLine1Number();
+			
+			if (myPhoneNumber != null) {
+				if (myPhoneNumber.startsWith("+82"))
+					myPhoneNumber =  "0" + myPhoneNumber.substring(3);				
+			}
+			
 			return myPhoneNumber;
 		}			
 	}
