@@ -154,29 +154,36 @@ public class InviteSms extends ListActivity {
 		
 		WaitDlg dlg = new WaitDlg(InviteSms.this, "초대하기 발송", "SMS 문자 발송중입니다.");
 		
-		try {
-			
-			dlg.start();
-			
-			// 문자 받을 사람 추리기		
-			for (int i = 0; i < tbMemberList.size(); i++) {
-				if (tbMemberList.get(i).isChecked()) {				
-					
-					String phone = tbMemberList.get(i).getFd_member_phone();
-					String body = "PBS초대\n그룹등록:http://pbsm.co.kr/i.do?a="+groupKey+"&b="+groupPassword+"&c="+phone;
-					
-					// phone = phone.replace(";",""); //문자열 변환
-					if (phone.length() > 0) {
-						sendSMS(body, phone);
-					}					
-					
-				}			
+		if(tbMemberList.size() > 0 )
+		{
+				try {
 				
-			}
-			
-		}finally{
-			dlg.stopLocal();
-		} 
+				dlg.start();
+				
+				// 문자 받을 사람 추리기		
+				for (int i = 0; i < tbMemberList.size(); i++) {
+					if (tbMemberList.get(i).isChecked()) {				
+						
+						String phone = tbMemberList.get(i).getFd_member_phone();
+						String body = "PBS초대\n그룹등록:http://pbsm.co.kr/i.do?a="+groupKey+"&b="+groupPassword+"&c="+phone;
+						
+						// phone = phone.replace(";",""); //문자열 변환
+						if (phone.length() > 0) {
+							sendSMS(body, phone);
+						}					
+						
+					}			
+					
+				}
+				
+			}finally{
+				dlg.stopLocal();
+			} 
+		}
+		else
+		{
+			Toast.makeText(InviteSms.this, "초대할 그룹원을 선택해주세요", Toast.LENGTH_SHORT).show();
+		}
 
 	}/////
 
