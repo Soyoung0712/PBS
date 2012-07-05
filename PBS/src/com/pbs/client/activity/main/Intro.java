@@ -87,10 +87,7 @@ public class Intro extends Activity {
 		isMobileAvail = ni.isAvailable(); // 사용여부 확인
 		isMobileConn = ni.isConnected(); // 접속여부 확인
 		
-		ni = cm.getNetworkInfo(ConnectivityManager.TYPE_WIMAX);
-		isMobileAvail = ni.isAvailable();
-		isMobileConn = ni.isConnected();
-
+ 
 		// ** 연결 상태를 즉시 확인 할수 있도록 메시지를 띄워 줍니다. **//
 
 		if (!isWifiConn && !isMobileConn) //
