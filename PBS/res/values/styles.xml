@@ -10,17 +10,29 @@
         <item name="android:textColor">#ffffff</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">#a29f9f</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1.0</item>
     </style>
 
     <style name="title_button_white">
         <item name="android:textColor">#ffffff</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:shadowColor">#a29f9f</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1.0</item>
     </style>
 
     <style name="button_white">
         <item name="android:textColor">#ffffff</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">#a29f9f</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1.0</item>
     </style>
 
 </resources>
