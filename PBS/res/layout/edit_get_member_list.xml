@@ -27,7 +27,7 @@
 	        style="@style/title_white"
 	        android:layout_width="wrap_content"
 	        android:layout_height="fill_parent"
-	        android:layout_marginLeft="34dp"	        
+	        android:layout_marginLeft="49dp"	        
 	        android:gravity="center"
 	        android:text="그룹원 편집" />        
     </LinearLayout>   

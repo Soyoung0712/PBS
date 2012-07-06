@@ -27,7 +27,7 @@
 	        style="@style/title_white"
 	        android:layout_width="wrap_content"
 	        android:layout_height="fill_parent"
-	        android:layout_marginLeft="28dp"	        
+	        android:layout_marginLeft="43dp"	        
 	        android:gravity="center"
 	        android:text="내 그룹 리스트" />        
     </LinearLayout>    
