@@ -126,7 +126,8 @@ public class GetAddressList extends ListActivity {
 		
 		// 전화번호 주소록 가져오기
 		ContentResolver cr = getContentResolver();
-		Cursor c = managedQuery(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+		String sortOrder = ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
+		Cursor c = managedQuery(ContactsContract.Contacts.CONTENT_URI, null, null, null, sortOrder);
 		startManagingCursor(c);
 
 		// 전화번호 주소록 사용자 저장		
@@ -137,8 +138,8 @@ public class GetAddressList extends ListActivity {
 			// 이름 저장
 			String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
-			// 전화번호 저장
-			if (Integer.parseInt(c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
+			// 전화번호 저장			
+			if (Integer.parseInt(c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {				
 				Cursor cp = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ? ", new String[] { id }, null);
 				while (cp.moveToNext()) {
 					String dial = cp.getString(cp.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DATA1));
